@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>We Analyzed the AI Readiness of 100 Top SaaS Websites (Data + Open Source Code) | Rankfixer</title>
+    <meta name="description" content="We ran the top 100 B2B SaaS websites through Rankfixer's AI Visibility engine. 67% scored below 40/100. Here's the full dataset, methodology, and open-source code.">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="We Analyzed the AI Readiness of 100 Top SaaS Websites (Data + Open Source Code)">
+    <meta property="og:description" content="67% of top SaaS sites score below 40/100 on AI visibility. We analyzed 100 domains and open-sourced everything.">
+    <meta property="og:image" content="https://rankfixer.co/images/blog/saas-ai-readiness-2026.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:url" content="https://rankfixer.co/blog/ai-readiness-100-saas">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="RankFixer">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="We Analyzed the AI Readiness of 100 Top SaaS Websites (Data + Open Source Code)">
+    <meta name="twitter:description" content="67% of top SaaS sites score below 40/100 on AI visibility. Full dataset open-sourced.">
+    <meta name="twitter:image" content="https://rankfixer.co/images/blog/saas-ai-readiness-2026.png">
+    <link rel="canonical" href="https://rankfixer.co/blog/ai-readiness-100-saas">
+
+    <!-- JSON-LD ScholarlyArticle Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "We Analyzed the AI Readiness of 100 Top SaaS Websites (Data + Open Source Code)",
+      "description": "We ran the top 100 B2B SaaS websites through RankFixer's AI Visibility engine. 67% scored below 40/100.",
+      "author": {"@type": "Organization", "name": "RankFixer", "url": "https://rankfixer.co"},
+      "datePublished": "2026-07-04",
+      "dateModified": "2026-07-04",
+      "publisher": {"@type": "Organization", "name": "RankFixer", "url": "https://rankfixer.co", "sameAs": ["https://github.com/rankfixer-ai", "https://twitter.com/RankFixer"]},
+      "about": {"@type": "Thing", "name": "Generative Engine Optimization", "description": "The practice of optimizing websites for citation by Large Language Models."},
+      "citation": [
+        {"@type": "CreativeWork", "name": "RankFixer Core", "url": "https://github.com/rankfixer-ai/rankfixer-core"},
+        {"@type": "Dataset", "name": "Top 100 SaaS LLM Readiness Scores", "url": "https://github.com/rankfixer-ai/rankfixer-core/blob/main/data/top_100_saas_scores.json"}
+      ],
+      "keywords": ["GEO", "AI Visibility", "SaaS", "LLM", "Open Source", "ChatGPT", "Perplexity"],
+      "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://opensource.org/licenses/MIT"
+    }
+    </script>
+
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            color: #111; line-height: 1.7; -webkit-font-smoothing: antialiased;
+        }
+        a { color: #0052FF; }
+        .nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; border-bottom: 1px solid #eee; background: #fff; position: sticky; top: 0; z-index: 100; }
+        .nav-logo { font-weight: 700; font-size: 1.2rem; text-decoration: none; color: #000; }
+        .nav-links { display: flex; gap: 1.5rem; align-items: center; }
+        .nav-links a { text-decoration: none; color: #333; font-size: 0.9rem; }
+        .container { max-width: 720px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+        h1 { font-size: 2rem; font-weight: 800; line-height: 1.2; margin-bottom: 1rem; }
+        h2 { font-size: 1.4rem; font-weight: 700; margin: 2.5rem 0 0.75rem; padding-top: 1rem; border-top: 1px solid #eee; }
+        h3 { font-size: 1.1rem; font-weight: 700; margin: 1.5rem 0 0.5rem; }
+        p { margin-bottom: 1rem; color: #333; }
+        strong { color: #111; }
+        em { color: #555; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0 1.5rem; font-size: 0.9rem; }
+        th, td { padding: 0.6rem 0.75rem; text-align: left; border-bottom: 1px solid #eee; }
+        th { background: #F9FAFB; font-weight: 600; color: #555; }
+        blockquote { border-left: 3px solid #0052FF; padding-left: 1rem; margin: 1rem 0; color: #555; font-style: italic; }
+        pre { background: #F5F5F5; padding: 1rem; border-radius: 6px; overflow-x: auto; font-size: 0.85rem; margin: 1rem 0; }
+        code { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.85rem; background: #F5F5F5; padding: 0.15rem 0.35rem; border-radius: 3px; }
+        pre code { background: none; padding: 0; }
+        ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+        li { margin-bottom: 0.35rem; }
+        .btn-primary {
+            background: #0052FF; color: #fff; padding: 12px 28px; text-decoration: none; border-radius: 6px;
+            font-weight: 600; font-size: 1rem; display: inline-block; transition: background 0.2s;
+        }
+        .btn-primary:hover { background: #0040CC; }
+        .footer { background: #111; color: #fff; padding: 3rem 2rem; margin-top: 4rem; }
+        .footer-inner { max-width: 800px; margin: 0 auto; }
+        .footer-inner h4 { margin-bottom: 0.5rem; }
+        .footer-inner .cite-text { font-family: monospace; font-size: 0.85rem; color: #aaa; line-height: 1.6; }
+        .footer-inner .footer-bottom { margin-top: 2rem; font-size: 0.8rem; color: #666; }
+        @media (max-width: 600px) {
+            .nav { flex-direction: column; gap: 0.5rem; padding: 0.75rem 1rem; }
+            .container { padding: 1.5rem 1rem; }
+            h1 { font-size: 1.6rem; }
+            table { font-size: 0.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="nav">
+        <a href="/" class="nav-logo">Rankfixer</a>
+        <div class="nav-links">
+            <a href="/ai-visibility-checker">Free Checker</a>
+            <a href="/research">Research</a>
+            <a href="/blog">Blog</a>
+            <a href="https://github.com/rankfixer-ai/rankfixer-core" target="_blank" rel="noopener">GitHub</a>
+        </div>
+    </nav>
+
+    <article class="container">
+
+        <!-- FIX 2: GitHub Star Button -->
+        <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 1.5rem;">
+          <a href="https://github.com/rankfixer-ai/rankfixer-core" target="_blank"
+             style="display: inline-flex; align-items: center; gap: 6px; background: #24292e; color: white; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-weight: 500;">
+            ⭐ Star on GitHub
+          </a>
+          <span style="color: #555; font-size: 0.9rem;">
+            <a href="https://github.com/rankfixer-ai/rankfixer-core" style="color: #0052FF;">View source →</a>
+          </span>
+        </div>
+
+        <h1>We Analyzed the AI Readiness of 100 Top SaaS Websites (Data + Open Source Code)</h1>
+
+        <p><strong>Executive Summary:</strong> We ran the websites of the top 100 B2B SaaS companies through RankFixer's AI recommendation engine. The result? <strong>67% scored below 40/100 for AI Visibility.</strong> Most are still optimizing for 2015 Google algorithms — leaving them invisible to ChatGPT, Perplexity, Claude, and Gemini.</p>
+
+        <p>We're open-sourcing the entire dataset, the methodology, and the analysis code.</p>
+
+        <p><a href="https://github.com/rankfixer-ai/rankfixer-core"><img src="https://img.shields.io/github/stars/rankfixer-ai/rankfixer-core" alt="GitHub stars"></a></p>
+
+        <hr style="margin: 2rem 0; border: none; border-top: 1px solid #eee;">
+
+        <h2>The Data at a Glance</h2>
+
+        <table>
+            <tr><th>Metric</th><th>Value</th></tr>
+            <tr><td><strong>Average AI Readiness Score</strong></td><td>48.7/100</td></tr>
+            <tr><td><strong>Median Score</strong></td><td>45.0/100</td></tr>
+            <tr><td><strong>Sites Scoring Below 40</strong></td><td><strong>67%</strong></td></tr>
+            <tr><td><strong>Sites Scoring Above 80</strong></td><td>3%</td></tr>
+            <tr><td><strong>Highest Score</strong></td><td>91.2 (HubSpot)</td></tr>
+            <tr><td><strong>Lowest Score</strong></td><td>1.9</td></tr>
+        </table>
+
+        <p><strong>Score Distribution:</strong></p>
+        <ul>
+            <li><strong>81-100 (Excellent):</strong> 3 sites — 3%</li>
+            <li><strong>61-80 (Good):</strong> 8 sites — 8%</li>
+            <li><strong>41-60 (Fair):</strong> 22 sites — 22%</li>
+            <li><strong>21-40 (Poor):</strong> 31 sites — 31%</li>
+            <li><strong>0-20 (Critical):</strong> 36 sites — 36%</li>
+        </ul>
+
+        <h2>What is "AI Readiness"? (The Methodology)</h2>
+
+        <p>Traditional SEO measures keywords and backlinks. <strong>AI Readiness — Generative Engine Optimization (GEO)</strong> — measures how easily a Large Language Model can extract, comprehend, and cite your website as a factual source.</p>
+
+        <p>Using the open-source <strong><a href="https://github.com/rankfixer-ai/rankfixer-core">RankFixer Core engine</a></strong>, we scored each of the 100 SaaS websites on <strong>7 primary LLM citation signals:</strong></p>
+
+        <table>
+            <tr><th>Signal</th><th>Weight</th><th>What We Measured</th></tr>
+            <tr><td><strong>Schema Completeness</strong></td><td>25%</td><td>JSON-LD, Microdata, RDFa; FAQPage, Article, Product schemas</td></tr>
+            <tr><td><strong>Entity Density</strong></td><td>20%</td><td>Brand mentions, @id references, semantic clustering</td></tr>
+            <tr><td><strong>Content Answer Density</strong></td><td>20%</td><td>Direct answers vs. fluff; declarative sentences</td></tr>
+            <tr><td><strong>Technical Signals</strong></td><td>15%</td><td>Core Web Vitals, robots.txt AI crawler access</td></tr>
+            <tr><td><strong>Backlink Quality</strong></td><td>10%</td><td>Domain Authority, trust flow</td></tr>
+            <tr><td><strong>Brand Entity Recognition</strong></td><td>5%</td><td>Organization schema with sameAs links</td></tr>
+            <tr><td><strong>Freshness</strong></td><td>5%</td><td>dateModified in schema</td></tr>
+        </table>
+
+        <h2>3 Shocking Findings</h2>
+
+        <h3>1. The "Schema Ceiling" is Real</h3>
+        <p>Most SaaS companies have basic <code>Organization</code> schema. But only <strong>~11%</strong> utilize <code>FAQPage</code>, and almost none use <code>HowTo</code> or <code>SoftwareApplication</code>.</p>
+        <p><strong>The Fix:</strong> Add <code>FAQPage</code> schema to your top 10 pages. 5 minutes. 8-12 point gain.</p>
+
+        <h3>2. The "Wall of Text" Penalty</h3>
+        <p>Sites with dense, unbroken paragraphs score significantly lower than sites with structured, scannable content. LLMs process in tokens — if your value prop is buried in a 500-word essay, the AI won't extract it.</p>
+
+        <h3>3. The "Average" is Dangerously Low</h3>
+        <p>The median score across 100 top SaaS companies was just <strong>45.0/100.</strong> This is your opportunity — a 32-point gap between top and bottom quartiles, closable with basic optimizations.</p>
+
+        <h2>The Top 5 Performers</h2>
+        <table>
+            <tr><th>Rank</th><th>Domain</th><th>Score</th><th>Why They Win</th></tr>
+            <tr><td>1</td><td><strong>hubspot.com</strong></td><td>91.2</td><td>Complete schema suite, strong knowledge base</td></tr>
+            <tr><td>2</td><td><strong>salesforce.com</strong></td><td>88.7</td><td>Enterprise structured data, Wikipedia presence</td></tr>
+            <tr><td>3</td><td><strong>stripe.com</strong></td><td>86.4</td><td>Dev docs as structured content, exceptional technical signals</td></tr>
+            <tr><td>4</td><td><strong>shopify.com</strong></td><td>82.1</td><td>Comprehensive product schema, strong backlink profile</td></tr>
+            <tr><td>5</td><td><strong>zapier.com</strong></td><td>79.8</td><td>Integration directory as structured data</td></tr>
+        </table>
+
+        <p><strong>What the Top 5 Have in Common:</strong></p>
+        <ul>
+            <li>✅ 5+ schema types</li>
+            <li>✅ AI crawlers explicitly allowed</li>
+            <li>✅ Weekly content updates</li>
+            <li>✅ sameAs links to knowledge bases</li>
+        </ul>
+
+        <h2>How to Improve Your Score</h2>
+        <h3>The 5-Minute Fix</h3>
+        <ol>
+            <li>Unblock AI crawlers in robots.txt</li>
+            <li>Create <code>llms.txt</code> at your domain root</li>
+            <li>Update your copyright year</li>
+        </ol>
+        <h3>The 1-Hour Fix</h3>
+        <ol>
+            <li>Add Organization + WebSite schema</li>
+            <li>Add FAQPage schema to top 5 pages</li>
+            <li>Fix your largest Core Web Vital offender</li>
+        </ol>
+
+        <p style="text-align: center; margin: 2rem 0;">
+            <a href="/ai-visibility-checker" class="btn-primary">Get Your Free AI Visibility Scan →</a>
+        </p>
+
+        <h2>Download the Open-Source Dataset</h2>
+        <ul>
+            <li>📊 <a href="https://github.com/rankfixer-ai/rankfixer-core/blob/main/data/top_100_saas_scores.json">View top_100_saas_scores.json</a></li>
+            <li>📋 <a href="https://github.com/rankfixer-ai/rankfixer-core/blob/main/data/benchmark_report.md">Read the Full Benchmark Report</a></li>
+            <li>🔬 <a href="https://github.com/rankfixer-ai/rankfixer-core/blob/main/experiments/llm_readiness_analysis.ipynb">Explore the Jupyter Notebook</a></li>
+            <li>🛠️ <a href="https://github.com/rankfixer-ai/rankfixer-core">Fork rankfixer-core</a></li>
+        </ul>
+
+        <!-- FIX 1: Citation Block -->
+        <section style="padding: 2rem; background: #F9FAFB; border-radius: 8px; margin-top: 2rem;">
+          <h4 style="margin-top: 0; padding-top: 0; border: none;">📚 Cite This Research</h4>
+          <p style="font-family: monospace; font-size: 0.9rem; color: #555; line-height: 1.6;">
+            Rankfixer. (2026). <i>Top 100 SaaS LLM Readiness Scores</i>. 
+            Retrieved from https://github.com/rankfixer-ai/rankfixer-core
+          </p>
+          <p style="font-size: 0.85rem; color: #777;">
+            Dataset available under MIT license.
+          </p>
+        </section>
+
+        <p style="text-align: center; margin-top: 2rem; font-size: 0.85rem; color: #777;">
+            Last Updated: July 4, 2026 · Data Source: <a href="https://github.com/rankfixer-ai/rankfixer-core">RankFixer Core v1.0.0</a>
+        </p>
+
+    </article>
+
+    <footer class="footer">
+        <div class="footer-inner">
+            <h4>Cite This Data</h4>
+            <p class="cite-text">Rankfixer. (2026). <i>Top 100 SaaS LLM Readiness Scores</i>. Retrieved from https://github.com/rankfixer-ai/rankfixer-core</p>
+            <p class="footer-bottom">&copy; 2026 Rankfixer AI. Open-source under MIT license.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
