@@ -1,0 +1,19 @@
+{
+  "actionId": "arn:aws:rds:us-east-1:123456789012:db/main-db-sync-tags-1783087865797",
+  "currentState": "skipped",
+  "stateHistory": [
+    {
+      "from": "initial",
+      "to": "pending",
+      "timestamp": "2026-07-03T14:11:05.858Z",
+      "metadata": {}
+    },
+    {
+      "from": "pending",
+      "to": "skipped",
+      "timestamp": "2026-07-03T14:11:05.985Z",
+      "metadata": {}
+    }
+  ],
+  "lastUpdated": "2026-07-03T14:11:05.985Z"
+}

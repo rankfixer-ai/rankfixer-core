@@ -1,0 +1,694 @@
+{
+  "timestamp": "2026-07-03T14:10:29.434Z",
+  "environment": "prod",
+  "summary": {
+    "totalResources": 7,
+    "resourcesWithDrift": 7,
+    "criticalActions": 8,
+    "warningActions": 2,
+    "infoActions": 4,
+    "autoApprovedActions": 7,
+    "manualReviewRequired": 7,
+    "estimatedBlastRadius": 0
+  },
+  "actions": [
+    {
+      "id": "arn:aws:ec2:us-east-1:123456789012:instance/i-002-review-1783087829434",
+      "type": "manual_review",
+      "action": "manual_review",
+      "severity": "critical",
+      "resourceId": "arn:aws:ec2:us-east-1:123456789012:instance/i-002",
+      "resourceName": "api-server-prod",
+      "resourceType": "aws_instance",
+      "blastRadius": 0,
+      "autoApprovable": false,
+      "requiresManualReview": true,
+      "driftPath": "networkExposure",
+      "summary": "Manual review required: Network exposure changed from \"vpc\" to \"public\"",
+      "terraformPatch": null,
+      "rollbackAction": null,
+      "evidence": {
+        "before": "\"vpc\"",
+        "after": "\"public\"",
+        "risk": "Network exposure changed from \"vpc\" to \"public\""
+      }
+    },
+    {
+      "id": "arn:aws:ec2:us-east-1:123456789012:instance/i-002-block-public-1783087829434",
+      "type": "immediate",
+      "action": "restrict_bucket_acl",
+      "severity": "critical",
+      "resourceId": "arn:aws:ec2:us-east-1:123456789012:instance/i-002",
+      "resourceName": "api-server-prod",
+      "resourceType": "aws_instance",
+      "blastRadius": 0,
+      "autoApprovable": true,
+      "requiresManualReview": false,
+      "driftPath": "access",
+      "summary": "Block public access for \"api-server-prod\"",
+      "terraformPatch": {
+        "filename": "restrict-access-api-server-prod.tf",
+        "resourceBlock": "# Restrict access for: api-server-prod\n# Remove public ACLs and permissions",
+        "variables": {
+          "public_access": false
+        }
+      },
+      "rollbackAction": "update_tf_resource",
+      "evidence": {
+        "before": "Access: public",
+        "after": "Access: internal",
+        "risk": "Public access detected. Immediate remediation recommended."
+      }
+    },
+    {
+      "id": "arn:aws:ec2:us-east-1:123456789012:instance/i-002-restrict-policy-1783087829434",
+      "type": "immediate",
+      "action": "attach_restrictive_policy",
+      "severity": "critical",
+      "resourceId": "arn:aws:ec2:us-east-1:123456789012:instance/i-002",
+      "resourceName": "api-server-prod",
+      "resourceType": "aws_instance",
+      "blastRadius": 0,
+      "autoApprovable": true,
+      "requiresManualReview": false,
+      "driftPath": "policies.sg-rule-22-22",
+      "summary": "Remove overly-permissive policy from \"api-server-prod\"",
+      "terraformPatch": {
+        "filename": "remove-policy-api-server-prod.tf",
+        "resourceBlock": "# Remove overly-permissive policy: sg-rule-22-22\n# Resource: api-server-prod",
+        "variables": {
+          "policy_to_remove": "sg-rule-22-22"
+        },
+        "command": "aws iam delete-policy --policy-arn arn:aws:iam::ACCOUNT:policy/sg-rule-22-22"
+      },
+      "rollbackAction": "update_tf_resource",
+      "evidence": {
+        "before": "Policy: overly-permissive (0.0.0.0/0 or wildcard)",
+        "after": "Policy: restricted to required access only",
+        "risk": "Overly-permissive policy added outside IaC."
+      }
+    },
+    {
+      "id": "arn:aws:s3:::company-logs-prod-review-1783087829435",
+      "type": "manual_review",
+      "action": "manual_review",
+      "severity": "critical",
+      "resourceId": "arn:aws:s3:::company-logs-prod",
+      "resourceName": "company-logs-prod",
+      "resourceType": "aws_s3_bucket",
+      "blastRadius": 0,
+      "autoApprovable": false,
+      "requiresManualReview": true,
+      "driftPath": "networkExposure",
+      "summary": "Manual review required: Network exposure changed from \"unknown\" to \"public\"",
+      "terraformPatch": null,
+      "rollbackAction": null,
+      "evidence": {
+        "before": "\"unknown\"",
+        "after": "\"public\"",
+        "risk": "Network exposure changed from \"unknown\" to \"public\""
+      }
+    },
+    {
+      "id": "arn:aws:s3:::company-logs-prod-block-public-1783087829435",
+      "type": "immediate",
+      "action": "block_public_access",
+      "severity": "critical",
+      "resourceId": "arn:aws:s3:::company-logs-prod",
+      "resourceName": "company-logs-prod",
+      "resourceType": "aws_s3_bucket",
+      "blastRadius": 0,
+      "autoApprovable": true,
+      "requiresManualReview": false,
+      "driftPath": "access",
+      "summary": "Block public access for \"company-logs-prod\"",
+      "terraformPatch": {
+        "filename": "block-public-company-logs-prod.tf",
+        "resourceBlock": "# Block public access for S3 bucket: company-logs-prod\nresource \"aws_s3_bucket_public_access_block\" \"company-logs-prod\" {\n  bucket = aws_s3_bucket.company-logs-prod.id\n  \n  block_public_acls       = true\n  block_public_policy     = true\n  ignore_public_acls      = true\n  restrict_public_buckets = true\n}"
+      },
+      "rollbackAction": "update_tf_resource",
+      "evidence": {
+        "before": "Access: public",
+        "after": "Access: internal",
+        "risk": "Public access detected. Immediate remediation recommended."
+      }
+    },
+    {
+      "id": "arn:aws:s3:::company-logs-prod-enable-encryption-1783087829435",
+      "type": "terraform_patch",
+      "action": "enable_encryption",
+      "severity": "critical",
+      "resourceId": "arn:aws:s3:::company-logs-prod",
+      "resourceName": "company-logs-prod",
+      "resourceType": "aws_s3_bucket",
+      "blastRadius": 0,
+      "autoApprovable": false,
+      "requiresManualReview": true,
+      "driftPath": "encryption.atRest",
+      "summary": "Enable encryption at rest for \"company-logs-prod\"",
+      "terraformPatch": {
+        "filename": "encrypt-company-logs-prod.tf",
+        "resourceBlock": "# Enable encryption for: company-logs-prod\nresource \"aws_s3_bucket\" \"company-logs-prod\" {\n  # Add encryption configuration\n  encrypt_at_rest = true\n  server_side_encryption_configuration { rule { apply_server_side_encryption_by_default { sse_algorithm = \"AES256\" } } }\n}"
+      },
+      "rollbackAction": "update_tf_resource",
+      "evidence": {
+        "before": "Encryption at rest: disabled",
+        "after": "Encryption at rest: enabled",
+        "risk": "Encryption was disabled or removed."
+      }
+    },
+    {
+      "id": "arn:aws:rds:us-east-1:123456789012:db/main-db-enable-encryption-1783087829435",
+      "type": "terraform_patch",
+      "action": "enable_encryption",
+      "severity": "critical",
+      "resourceId": "arn:aws:rds:us-east-1:123456789012:db/main-db",
+      "resourceName": "main-db",
+      "resourceType": "aws_db_instance",
+      "blastRadius": 0,
+      "autoApprovable": false,
+      "requiresManualReview": true,
+      "driftPath": "encryption.atRest",
+      "summary": "Enable encryption at rest for \"main-db\"",
+      "terraformPatch": {
+        "filename": "encrypt-main-db.tf",
+        "resourceBlock": "# Enable encryption for: main-db\nresource \"aws_db_instance\" \"main-db\" {\n  # Add encryption configuration\n  encrypt_at_rest = true\n  \n}"
+      },
+      "rollbackAction": "update_tf_resource",
+      "evidence": {
+        "before": "Encryption at rest: disabled",
+        "after": "Encryption at rest: enabled",
+        "risk": "Encryption was disabled or removed."
+      }
+    },
+    {
+      "id": "arn:aws:s3:::manual-backup-bucket-import-1783087829435",
+      "type": "terraform_patch",
+      "action": "import_tf_state",
+      "severity": "critical",
+      "resourceId": "arn:aws:s3:::manual-backup-bucket",
+      "resourceName": "manual-backup-bucket",
+      "resourceType": "aws_s3_bucket",
+      "blastRadius": 0,
+      "autoApprovable": false,
+      "requiresManualReview": true,
+      "driftPath": "resource",
+      "summary": "Import aws_s3_bucket \"manual-backup-bucket\" into Terraform state",
+      "terraformCommand": "terraform import aws_s3_bucket.manual-backup-bucket arn:aws:s3:::manual-backup-bucket",
+      "terraformPatch": {
+        "filename": "import-manual-backup-bucket.tf",
+        "resourceBlock": "# Imported resource — previously unmanaged\n# Original ID: arn:aws:s3:::manual-backup-bucket\nresource \"aws_s3_bucket\" \"manual-backup-bucket\" {\n  # TODO: Fill in resource configuration after import\n  # Run: terraform import aws_s3_bucket.manual-backup-bucket arn:aws:s3:::manual-backup-bucket\n  # Then: terraform plan to detect configuration\n}",
+        "command": "terraform import aws_s3_bucket.manual-backup-bucket arn:aws:s3:::manual-backup-bucket"
+      },
+      "rollbackAction": "manual_review",
+      "evidence": {
+        "before": "Resource not managed by IaC",
+        "after": "Resource imported into Terraform as aws_s3_bucket.manual-backup-bucket",
+        "risk": "Manual creation detected. Importing ensures IaC is source of truth."
+      }
+    },
+    {
+      "id": "arn:aws:iam::123456789012:role/app-role-import-policy-1783087829435",
+      "type": "terraform_patch",
+      "action": "import_tf_state",
+      "severity": "warning",
+      "resourceId": "arn:aws:iam::123456789012:role/app-role",
+      "resourceName": "app-role",
+      "resourceType": "aws_iam_role",
+      "blastRadius": 0,
+      "autoApprovable": false,
+      "requiresManualReview": true,
+      "driftPath": "policies.admin-access-manual",
+      "summary": "Import new policy into IaC for \"app-role\"",
+      "terraformPatch": {
+        "filename": "import-policy-app-role.tf",
+        "resourceBlock": "# Import policy into IaC: admin-access-manual\n# Resource: app-role\nresource \"aws_iam_policy\" \"app-role_admin-access-manual\" {\n  name   = \"admin-access-manual\"\n  policy = file(\"policies/admin-access-manual.json\")\n}"
+      },
+      "rollbackAction": "manual_review",
+      "evidence": {
+        "before": "Policy: not in IaC",
+        "after": "Policy: imported into Terraform",
+        "risk": "New policy added outside IaC — importing to maintain single source of truth."
+      }
+    },
+    {
+      "id": "arn:aws:ec2:us-east-1:123456789012:instance/i-099-review-1783087829435",
+      "type": "manual_review",
+      "action": "manual_review",
+      "severity": "warning",
+      "resourceId": "arn:aws:ec2:us-east-1:123456789012:instance/i-099",
+      "resourceName": "bastion-staging",
+      "resourceType": "aws_instance",
+      "blastRadius": 0,
+      "autoApprovable": false,
+      "requiresManualReview": true,
+      "driftPath": "resource",
+      "summary": "Manual review required: Resource defined in IaC but not found in cloud",
+      "terraformPatch": null,
+      "rollbackAction": null,
+      "evidence": {
+        "before": "\"present\"",
+        "after": "\"absent\"",
+        "risk": "Resource defined in IaC but not found in cloud"
+      }
+    },
+    {
+      "id": "arn:aws:ec2:us-east-1:123456789012:instance/i-001-sync-tags-1783087829434",
+      "type": "terraform_patch",
+      "action": "update_tf_resource",
+      "severity": "info",
+      "resourceId": "arn:aws:ec2:us-east-1:123456789012:instance/i-001",
+      "resourceName": "web-server-prod",
+      "resourceType": "aws_instance",
+      "blastRadius": 0,
+      "autoApprovable": true,
+      "requiresManualReview": false,
+      "driftPath": "tags",
+      "summary": "Sync tags for \"web-server-prod\" to match declared state",
+      "terraformPatch": {
+        "filename": "sync-tags-web-server-prod.tf",
+        "resourceBlock": "# Sync tags for: web-server-prod\n# Run: terraform apply -target=aws_instance.web-server-prod\n# To sync tags to declared state"
+      },
+      "rollbackAction": "update_tf_resource",
+      "evidence": {
+        "before": "Tags: modified outside IaC",
+        "after": "Tags: synced to declared state",
+        "risk": "Cosmetic drift — tags modified manually."
+      }
+    },
+    {
+      "id": "arn:aws:s3:::company-logs-prod-sync-tags-1783087829435",
+      "type": "terraform_patch",
+      "action": "update_tf_resource",
+      "severity": "info",
+      "resourceId": "arn:aws:s3:::company-logs-prod",
+      "resourceName": "company-logs-prod",
+      "resourceType": "aws_s3_bucket",
+      "blastRadius": 0,
+      "autoApprovable": true,
+      "requiresManualReview": false,
+      "driftPath": "tags",
+      "summary": "Sync tags for \"company-logs-prod\" to match declared state",
+      "terraformPatch": {
+        "filename": "sync-tags-company-logs-prod.tf",
+        "resourceBlock": "# Sync tags for: company-logs-prod\n# Run: terraform apply -target=aws_s3_bucket.company-logs-prod\n# To sync tags to declared state"
+      },
+      "rollbackAction": "update_tf_resource",
+      "evidence": {
+        "before": "Tags: modified outside IaC",
+        "after": "Tags: synced to declared state",
+        "risk": "Cosmetic drift — tags modified manually."
+      }
+    },
+    {
+      "id": "arn:aws:iam::123456789012:role/app-role-sync-tags-1783087829435",
+      "type": "terraform_patch",
+      "action": "update_tf_resource",
+      "severity": "info",
+      "resourceId": "arn:aws:iam::123456789012:role/app-role",
+      "resourceName": "app-role",
+      "resourceType": "aws_iam_role",
+      "blastRadius": 0,
+      "autoApprovable": true,
+      "requiresManualReview": false,
+      "driftPath": "tags",
+      "summary": "Sync tags for \"app-role\" to match declared state",
+      "terraformPatch": {
+        "filename": "sync-tags-app-role.tf",
+        "resourceBlock": "# Sync tags for: app-role\n# Run: terraform apply -target=aws_iam_role.app-role\n# To sync tags to declared state"
+      },
+      "rollbackAction": "update_tf_resource",
+      "evidence": {
+        "before": "Tags: modified outside IaC",
+        "after": "Tags: synced to declared state",
+        "risk": "Cosmetic drift — tags modified manually."
+      }
+    },
+    {
+      "id": "arn:aws:rds:us-east-1:123456789012:db/main-db-sync-tags-1783087829435",
+      "type": "terraform_patch",
+      "action": "update_tf_resource",
+      "severity": "info",
+      "resourceId": "arn:aws:rds:us-east-1:123456789012:db/main-db",
+      "resourceName": "main-db",
+      "resourceType": "aws_db_instance",
+      "blastRadius": 0,
+      "autoApprovable": true,
+      "requiresManualReview": false,
+      "driftPath": "tags",
+      "summary": "Sync tags for \"main-db\" to match declared state",
+      "terraformPatch": {
+        "filename": "sync-tags-main-db.tf",
+        "resourceBlock": "# Sync tags for: main-db\n# Run: terraform apply -target=aws_db_instance.main-db\n# To sync tags to declared state"
+      },
+      "rollbackAction": "update_tf_resource",
+      "evidence": {
+        "before": "Tags: modified outside IaC",
+        "after": "Tags: synced to declared state",
+        "risk": "Cosmetic drift — tags modified manually."
+      }
+    }
+  ],
+  "terraformPatches": [
+    {
+      "id": "arn:aws:s3:::company-logs-prod-enable-encryption-1783087829435",
+      "type": "terraform_patch",
+      "action": "enable_encryption",
+      "severity": "critical",
+      "resourceId": "arn:aws:s3:::company-logs-prod",
+      "resourceName": "company-logs-prod",
+      "resourceType": "aws_s3_bucket",
+      "blastRadius": 0,
+      "autoApprovable": false,
+      "requiresManualReview": true,
+      "driftPath": "encryption.atRest",
+      "summary": "Enable encryption at rest for \"company-logs-prod\"",
+      "terraformPatch": {
+        "filename": "encrypt-company-logs-prod.tf",
+        "resourceBlock": "# Enable encryption for: company-logs-prod\nresource \"aws_s3_bucket\" \"company-logs-prod\" {\n  # Add encryption configuration\n  encrypt_at_rest = true\n  server_side_encryption_configuration { rule { apply_server_side_encryption_by_default { sse_algorithm = \"AES256\" } } }\n}"
+      },
+      "rollbackAction": "update_tf_resource",
+      "evidence": {
+        "before": "Encryption at rest: disabled",
+        "after": "Encryption at rest: enabled",
+        "risk": "Encryption was disabled or removed."
+      }
+    },
+    {
+      "id": "arn:aws:rds:us-east-1:123456789012:db/main-db-enable-encryption-1783087829435",
+      "type": "terraform_patch",
+      "action": "enable_encryption",
+      "severity": "critical",
+      "resourceId": "arn:aws:rds:us-east-1:123456789012:db/main-db",
+      "resourceName": "main-db",
+      "resourceType": "aws_db_instance",
+      "blastRadius": 0,
+      "autoApprovable": false,
+      "requiresManualReview": true,
+      "driftPath": "encryption.atRest",
+      "summary": "Enable encryption at rest for \"main-db\"",
+      "terraformPatch": {
+        "filename": "encrypt-main-db.tf",
+        "resourceBlock": "# Enable encryption for: main-db\nresource \"aws_db_instance\" \"main-db\" {\n  # Add encryption configuration\n  encrypt_at_rest = true\n  \n}"
+      },
+      "rollbackAction": "update_tf_resource",
+      "evidence": {
+        "before": "Encryption at rest: disabled",
+        "after": "Encryption at rest: enabled",
+        "risk": "Encryption was disabled or removed."
+      }
+    },
+    {
+      "id": "arn:aws:s3:::manual-backup-bucket-import-1783087829435",
+      "type": "terraform_patch",
+      "action": "import_tf_state",
+      "severity": "critical",
+      "resourceId": "arn:aws:s3:::manual-backup-bucket",
+      "resourceName": "manual-backup-bucket",
+      "resourceType": "aws_s3_bucket",
+      "blastRadius": 0,
+      "autoApprovable": false,
+      "requiresManualReview": true,
+      "driftPath": "resource",
+      "summary": "Import aws_s3_bucket \"manual-backup-bucket\" into Terraform state",
+      "terraformCommand": "terraform import aws_s3_bucket.manual-backup-bucket arn:aws:s3:::manual-backup-bucket",
+      "terraformPatch": {
+        "filename": "import-manual-backup-bucket.tf",
+        "resourceBlock": "# Imported resource — previously unmanaged\n# Original ID: arn:aws:s3:::manual-backup-bucket\nresource \"aws_s3_bucket\" \"manual-backup-bucket\" {\n  # TODO: Fill in resource configuration after import\n  # Run: terraform import aws_s3_bucket.manual-backup-bucket arn:aws:s3:::manual-backup-bucket\n  # Then: terraform plan to detect configuration\n}",
+        "command": "terraform import aws_s3_bucket.manual-backup-bucket arn:aws:s3:::manual-backup-bucket"
+      },
+      "rollbackAction": "manual_review",
+      "evidence": {
+        "before": "Resource not managed by IaC",
+        "after": "Resource imported into Terraform as aws_s3_bucket.manual-backup-bucket",
+        "risk": "Manual creation detected. Importing ensures IaC is source of truth."
+      }
+    },
+    {
+      "id": "arn:aws:iam::123456789012:role/app-role-import-policy-1783087829435",
+      "type": "terraform_patch",
+      "action": "import_tf_state",
+      "severity": "warning",
+      "resourceId": "arn:aws:iam::123456789012:role/app-role",
+      "resourceName": "app-role",
+      "resourceType": "aws_iam_role",
+      "blastRadius": 0,
+      "autoApprovable": false,
+      "requiresManualReview": true,
+      "driftPath": "policies.admin-access-manual",
+      "summary": "Import new policy into IaC for \"app-role\"",
+      "terraformPatch": {
+        "filename": "import-policy-app-role.tf",
+        "resourceBlock": "# Import policy into IaC: admin-access-manual\n# Resource: app-role\nresource \"aws_iam_policy\" \"app-role_admin-access-manual\" {\n  name   = \"admin-access-manual\"\n  policy = file(\"policies/admin-access-manual.json\")\n}"
+      },
+      "rollbackAction": "manual_review",
+      "evidence": {
+        "before": "Policy: not in IaC",
+        "after": "Policy: imported into Terraform",
+        "risk": "New policy added outside IaC — importing to maintain single source of truth."
+      }
+    },
+    {
+      "id": "arn:aws:ec2:us-east-1:123456789012:instance/i-001-sync-tags-1783087829434",
+      "type": "terraform_patch",
+      "action": "update_tf_resource",
+      "severity": "info",
+      "resourceId": "arn:aws:ec2:us-east-1:123456789012:instance/i-001",
+      "resourceName": "web-server-prod",
+      "resourceType": "aws_instance",
+      "blastRadius": 0,
+      "autoApprovable": true,
+      "requiresManualReview": false,
+      "driftPath": "tags",
+      "summary": "Sync tags for \"web-server-prod\" to match declared state",
+      "terraformPatch": {
+        "filename": "sync-tags-web-server-prod.tf",
+        "resourceBlock": "# Sync tags for: web-server-prod\n# Run: terraform apply -target=aws_instance.web-server-prod\n# To sync tags to declared state"
+      },
+      "rollbackAction": "update_tf_resource",
+      "evidence": {
+        "before": "Tags: modified outside IaC",
+        "after": "Tags: synced to declared state",
+        "risk": "Cosmetic drift — tags modified manually."
+      }
+    },
+    {
+      "id": "arn:aws:s3:::company-logs-prod-sync-tags-1783087829435",
+      "type": "terraform_patch",
+      "action": "update_tf_resource",
+      "severity": "info",
+      "resourceId": "arn:aws:s3:::company-logs-prod",
+      "resourceName": "company-logs-prod",
+      "resourceType": "aws_s3_bucket",
+      "blastRadius": 0,
+      "autoApprovable": true,
+      "requiresManualReview": false,
+      "driftPath": "tags",
+      "summary": "Sync tags for \"company-logs-prod\" to match declared state",
+      "terraformPatch": {
+        "filename": "sync-tags-company-logs-prod.tf",
+        "resourceBlock": "# Sync tags for: company-logs-prod\n# Run: terraform apply -target=aws_s3_bucket.company-logs-prod\n# To sync tags to declared state"
+      },
+      "rollbackAction": "update_tf_resource",
+      "evidence": {
+        "before": "Tags: modified outside IaC",
+        "after": "Tags: synced to declared state",
+        "risk": "Cosmetic drift — tags modified manually."
+      }
+    },
+    {
+      "id": "arn:aws:iam::123456789012:role/app-role-sync-tags-1783087829435",
+      "type": "terraform_patch",
+      "action": "update_tf_resource",
+      "severity": "info",
+      "resourceId": "arn:aws:iam::123456789012:role/app-role",
+      "resourceName": "app-role",
+      "resourceType": "aws_iam_role",
+      "blastRadius": 0,
+      "autoApprovable": true,
+      "requiresManualReview": false,
+      "driftPath": "tags",
+      "summary": "Sync tags for \"app-role\" to match declared state",
+      "terraformPatch": {
+        "filename": "sync-tags-app-role.tf",
+        "resourceBlock": "# Sync tags for: app-role\n# Run: terraform apply -target=aws_iam_role.app-role\n# To sync tags to declared state"
+      },
+      "rollbackAction": "update_tf_resource",
+      "evidence": {
+        "before": "Tags: modified outside IaC",
+        "after": "Tags: synced to declared state",
+        "risk": "Cosmetic drift — tags modified manually."
+      }
+    },
+    {
+      "id": "arn:aws:rds:us-east-1:123456789012:db/main-db-sync-tags-1783087829435",
+      "type": "terraform_patch",
+      "action": "update_tf_resource",
+      "severity": "info",
+      "resourceId": "arn:aws:rds:us-east-1:123456789012:db/main-db",
+      "resourceName": "main-db",
+      "resourceType": "aws_db_instance",
+      "blastRadius": 0,
+      "autoApprovable": true,
+      "requiresManualReview": false,
+      "driftPath": "tags",
+      "summary": "Sync tags for \"main-db\" to match declared state",
+      "terraformPatch": {
+        "filename": "sync-tags-main-db.tf",
+        "resourceBlock": "# Sync tags for: main-db\n# Run: terraform apply -target=aws_db_instance.main-db\n# To sync tags to declared state"
+      },
+      "rollbackAction": "update_tf_resource",
+      "evidence": {
+        "before": "Tags: modified outside IaC",
+        "after": "Tags: synced to declared state",
+        "risk": "Cosmetic drift — tags modified manually."
+      }
+    }
+  ],
+  "immediateActions": [
+    {
+      "id": "arn:aws:ec2:us-east-1:123456789012:instance/i-002-block-public-1783087829434",
+      "type": "immediate",
+      "action": "restrict_bucket_acl",
+      "severity": "critical",
+      "resourceId": "arn:aws:ec2:us-east-1:123456789012:instance/i-002",
+      "resourceName": "api-server-prod",
+      "resourceType": "aws_instance",
+      "blastRadius": 0,
+      "autoApprovable": true,
+      "requiresManualReview": false,
+      "driftPath": "access",
+      "summary": "Block public access for \"api-server-prod\"",
+      "terraformPatch": {
+        "filename": "restrict-access-api-server-prod.tf",
+        "resourceBlock": "# Restrict access for: api-server-prod\n# Remove public ACLs and permissions",
+        "variables": {
+          "public_access": false
+        }
+      },
+      "rollbackAction": "update_tf_resource",
+      "evidence": {
+        "before": "Access: public",
+        "after": "Access: internal",
+        "risk": "Public access detected. Immediate remediation recommended."
+      }
+    },
+    {
+      "id": "arn:aws:ec2:us-east-1:123456789012:instance/i-002-restrict-policy-1783087829434",
+      "type": "immediate",
+      "action": "attach_restrictive_policy",
+      "severity": "critical",
+      "resourceId": "arn:aws:ec2:us-east-1:123456789012:instance/i-002",
+      "resourceName": "api-server-prod",
+      "resourceType": "aws_instance",
+      "blastRadius": 0,
+      "autoApprovable": true,
+      "requiresManualReview": false,
+      "driftPath": "policies.sg-rule-22-22",
+      "summary": "Remove overly-permissive policy from \"api-server-prod\"",
+      "terraformPatch": {
+        "filename": "remove-policy-api-server-prod.tf",
+        "resourceBlock": "# Remove overly-permissive policy: sg-rule-22-22\n# Resource: api-server-prod",
+        "variables": {
+          "policy_to_remove": "sg-rule-22-22"
+        },
+        "command": "aws iam delete-policy --policy-arn arn:aws:iam::ACCOUNT:policy/sg-rule-22-22"
+      },
+      "rollbackAction": "update_tf_resource",
+      "evidence": {
+        "before": "Policy: overly-permissive (0.0.0.0/0 or wildcard)",
+        "after": "Policy: restricted to required access only",
+        "risk": "Overly-permissive policy added outside IaC."
+      }
+    },
+    {
+      "id": "arn:aws:s3:::company-logs-prod-block-public-1783087829435",
+      "type": "immediate",
+      "action": "block_public_access",
+      "severity": "critical",
+      "resourceId": "arn:aws:s3:::company-logs-prod",
+      "resourceName": "company-logs-prod",
+      "resourceType": "aws_s3_bucket",
+      "blastRadius": 0,
+      "autoApprovable": true,
+      "requiresManualReview": false,
+      "driftPath": "access",
+      "summary": "Block public access for \"company-logs-prod\"",
+      "terraformPatch": {
+        "filename": "block-public-company-logs-prod.tf",
+        "resourceBlock": "# Block public access for S3 bucket: company-logs-prod\nresource \"aws_s3_bucket_public_access_block\" \"company-logs-prod\" {\n  bucket = aws_s3_bucket.company-logs-prod.id\n  \n  block_public_acls       = true\n  block_public_policy     = true\n  ignore_public_acls      = true\n  restrict_public_buckets = true\n}"
+      },
+      "rollbackAction": "update_tf_resource",
+      "evidence": {
+        "before": "Access: public",
+        "after": "Access: internal",
+        "risk": "Public access detected. Immediate remediation recommended."
+      }
+    }
+  ],
+  "manualReviews": [
+    {
+      "id": "arn:aws:ec2:us-east-1:123456789012:instance/i-002-review-1783087829434",
+      "type": "manual_review",
+      "action": "manual_review",
+      "severity": "critical",
+      "resourceId": "arn:aws:ec2:us-east-1:123456789012:instance/i-002",
+      "resourceName": "api-server-prod",
+      "resourceType": "aws_instance",
+      "blastRadius": 0,
+      "autoApprovable": false,
+      "requiresManualReview": true,
+      "driftPath": "networkExposure",
+      "summary": "Manual review required: Network exposure changed from \"vpc\" to \"public\"",
+      "terraformPatch": null,
+      "rollbackAction": null,
+      "evidence": {
+        "before": "\"vpc\"",
+        "after": "\"public\"",
+        "risk": "Network exposure changed from \"vpc\" to \"public\""
+      }
+    },
+    {
+      "id": "arn:aws:s3:::company-logs-prod-review-1783087829435",
+      "type": "manual_review",
+      "action": "manual_review",
+      "severity": "critical",
+      "resourceId": "arn:aws:s3:::company-logs-prod",
+      "resourceName": "company-logs-prod",
+      "resourceType": "aws_s3_bucket",
+      "blastRadius": 0,
+      "autoApprovable": false,
+      "requiresManualReview": true,
+      "driftPath": "networkExposure",
+      "summary": "Manual review required: Network exposure changed from \"unknown\" to \"public\"",
+      "terraformPatch": null,
+      "rollbackAction": null,
+      "evidence": {
+        "before": "\"unknown\"",
+        "after": "\"public\"",
+        "risk": "Network exposure changed from \"unknown\" to \"public\""
+      }
+    },
+    {
+      "id": "arn:aws:ec2:us-east-1:123456789012:instance/i-099-review-1783087829435",
+      "type": "manual_review",
+      "action": "manual_review",
+      "severity": "warning",
+      "resourceId": "arn:aws:ec2:us-east-1:123456789012:instance/i-099",
+      "resourceName": "bastion-staging",
+      "resourceType": "aws_instance",
+      "blastRadius": 0,
+      "autoApprovable": false,
+      "requiresManualReview": true,
+      "driftPath": "resource",
+      "summary": "Manual review required: Resource defined in IaC but not found in cloud",
+      "terraformPatch": null,
+      "rollbackAction": null,
+      "evidence": {
+        "before": "\"present\"",
+        "after": "\"absent\"",
+        "risk": "Resource defined in IaC but not found in cloud"
+      }
+    }
+  ]
+}

@@ -1,0 +1,4994 @@
+{
+  "meta": {
+    "scanDate": "2026-07-03T13:08:36.508Z",
+    "entryUrl": "https://www.allbirds.com",
+    "duration": "68.6s",
+    "version": "2.0.0"
+  },
+  "site": {
+    "archetype": "ecommerce",
+    "requiresJSRendering": false,
+    "totalPages": 2326,
+    "templatesDiscovered": 91,
+    "pagesSampled": 105,
+    "pagesCrawledSuccessfully": 105
+  },
+  "templates": [
+    {
+      "pattern": "/collections/{slug}",
+      "pageType": "product",
+      "instanceCount": 1316,
+      "samplesCrawled": 3,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/collections/mens-wool-runners ↔ https://www.allbirds.com/collections/mens-wool-runners",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1053,
+          "recommendation": "Break reciprocal canonical."
+        },
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/collections/109-tree-dashers-for-outlet-discount-code ↔ https://www.allbirds.com/collections/109-tree-dashers-for-outlet-discount-code",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1053,
+          "recommendation": "Break reciprocal canonical."
+        },
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/collections/new-arrivals-26 ↔ https://www.allbirds.com/collections/new-arrivals-26",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1053,
+          "recommendation": "Break reciprocal canonical."
+        },
+        {
+          "type": "missing-meta-description",
+          "severity": "warning",
+          "message": "2/3 samples missing meta description",
+          "confidence": "high",
+          "estimatedAffectedPages": 1053,
+          "recommendation": "Add meta descriptions to this template."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/collections/mens-wool-runners has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/collections/mens-wool-runners"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/collections/mens-wool-runners has 19654 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/collections/mens-wool-runners"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/collections/109-tree-dashers-for-outlet-discount-code has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/collections/109-tree-dashers-for-outlet-discount-code"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/collections/109-tree-dashers-for-outlet-discount-code has 18395 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/collections/109-tree-dashers-for-outlet-discount-code"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/products/{slug}",
+      "pageType": "product",
+      "instanceCount": 484,
+      "samplesCrawled": 3,
+      "confidence": "high",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/products/mens-wool-runners-natural-white ↔ https://www.allbirds.com/products/mens-wool-runners-natural-white",
+          "confidence": "medium",
+          "estimatedAffectedPages": 387,
+          "recommendation": "Break reciprocal canonical."
+        },
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/products/womens-tree-runner-go-medium-grey ↔ https://www.allbirds.com/products/womens-tree-runner-go-medium-grey",
+          "confidence": "medium",
+          "estimatedAffectedPages": 387,
+          "recommendation": "Break reciprocal canonical."
+        },
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/products/free-returns-coverage ↔ https://www.allbirds.com/products/free-returns-coverage",
+          "confidence": "medium",
+          "estimatedAffectedPages": 387,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/products/mens-wool-runners-natural-white has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/products/mens-wool-runners-natural-white"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/products/womens-tree-runner-go-medium-grey has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/products/womens-tree-runner-go-medium-grey"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/products/free-returns-coverage has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/products/free-returns-coverage"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/products/free-returns-coverage has 19431 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/products/free-returns-coverage"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/pages/{slug}",
+      "pageType": "product",
+      "instanceCount": 142,
+      "samplesCrawled": 3,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/pages/truth-about-allbirds-coupons ↔ https://www.allbirds.com/pages/truth-about-allbirds-coupons",
+          "confidence": "medium",
+          "estimatedAffectedPages": 114,
+          "recommendation": "Break reciprocal canonical."
+        },
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/pages/moonshot-reveal-press-release ↔ https://www.allbirds.com/pages/moonshot-reveal-press-release",
+          "confidence": "medium",
+          "estimatedAffectedPages": 114,
+          "recommendation": "Break reciprocal canonical."
+        },
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/pages/terralux-collection ↔ https://www.allbirds.com/pages/terralux-collection",
+          "confidence": "medium",
+          "estimatedAffectedPages": 114,
+          "recommendation": "Break reciprocal canonical."
+        },
+        {
+          "type": "missing-meta-description",
+          "severity": "warning",
+          "message": "2/3 samples missing meta description",
+          "confidence": "high",
+          "estimatedAffectedPages": 114,
+          "recommendation": "Add meta descriptions to this template."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/truth-about-allbirds-coupons H1 == title",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/truth-about-allbirds-coupons"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/truth-about-allbirds-coupons has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/truth-about-allbirds-coupons"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/pages/truth-about-allbirds-coupons has 18279 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/truth-about-allbirds-coupons"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/moonshot-reveal-press-release has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/moonshot-reveal-press-release"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/pages/moonshot-reveal-press-release has 19120 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/moonshot-reveal-press-release"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/terralux-collection has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/terralux-collection"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/pages/terralux-collection has 18495 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/terralux-collection"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/pages/stores/{slug}",
+      "pageType": "product",
+      "instanceCount": 119,
+      "samplesCrawled": 3,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/pages/stores/32-degrees-north ↔ https://www.allbirds.com/pages/stores/32-degrees-north",
+          "confidence": "medium",
+          "estimatedAffectedPages": 95,
+          "recommendation": "Break reciprocal canonical."
+        },
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/pages/stores/gene-lockwoods-sports-little-rock ↔ https://www.allbirds.com/pages/stores/gene-lockwoods-sports-little-rock",
+          "confidence": "medium",
+          "estimatedAffectedPages": 95,
+          "recommendation": "Break reciprocal canonical."
+        },
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/pages/stores/yaegers-shoes-toledo ↔ https://www.allbirds.com/pages/stores/yaegers-shoes-toledo",
+          "confidence": "medium",
+          "estimatedAffectedPages": 95,
+          "recommendation": "Break reciprocal canonical."
+        },
+        {
+          "type": "missing-h1",
+          "severity": "critical",
+          "message": "3/3 samples missing H1 tag",
+          "confidence": "high",
+          "estimatedAffectedPages": 119,
+          "recommendation": "Add H1 tag to this template."
+        },
+        {
+          "type": "missing-meta-description",
+          "severity": "warning",
+          "message": "3/3 samples missing meta description",
+          "confidence": "high",
+          "estimatedAffectedPages": 119,
+          "recommendation": "Add meta descriptions to this template."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/stores/32-degrees-north has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/stores/32-degrees-north"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/pages/stores/32-degrees-north has 18365 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/stores/32-degrees-north"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/stores/gene-lockwoods-sports-little-rock has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/stores/gene-lockwoods-sports-little-rock"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/pages/stores/gene-lockwoods-sports-little-rock has 18359 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/stores/gene-lockwoods-sports-little-rock"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/stores/yaegers-shoes-toledo has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/stores/yaegers-shoes-toledo"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/pages/stores/yaegers-shoes-toledo has 18353 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/stores/yaegers-shoes-toledo"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/pages/{slug}/{slug}",
+      "pageType": "product",
+      "instanceCount": 101,
+      "samplesCrawled": 3,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "duplicate-title",
+          "severity": "critical",
+          "message": "All 3 samples have identical title: \"Page Not Found - Allbirds\"",
+          "confidence": "high",
+          "estimatedAffectedPages": 101,
+          "recommendation": "Use unique titles for each page in this template."
+        },
+        {
+          "type": "missing-meta-description",
+          "severity": "warning",
+          "message": "3/3 samples missing meta description",
+          "confidence": "high",
+          "estimatedAffectedPages": 101,
+          "recommendation": "Add meta descriptions to this template."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/menu-image-list/copy-of-nav-tile-mens-1225-main has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/menu-image-list/copy-of-nav-tile-mens-1225-main"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/pages/menu-image-list/copy-of-nav-tile-mens-1225-main has 18266 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/menu-image-list/copy-of-nav-tile-mens-1225-main"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/menu-image-list/nav-tile-mens-sale-second-nav has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/menu-image-list/nav-tile-mens-sale-second-nav"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/pages/menu-image-list/nav-tile-mens-sale-second-nav has 18266 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/menu-image-list/nav-tile-mens-sale-second-nav"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/menu-image-list/womens-sale-list has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/menu-image-list/womens-sale-list"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/pages/menu-image-list/womens-sale-list has 18266 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/menu-image-list/womens-sale-list"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/blogs/the-perch/{slug}",
+      "pageType": "product",
+      "instanceCount": 53,
+      "samplesCrawled": 3,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/blogs/the-perch/what-s-trending-fall-shoe-trends-for-2024 ↔ https://www.allbirds.com/blogs/the-perch/what-s-trending-fall-shoe-trends-for-2024",
+          "confidence": "medium",
+          "estimatedAffectedPages": 42,
+          "recommendation": "Break reciprocal canonical."
+        },
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/blogs/the-perch/how-to-start-running-shop ↔ https://www.allbirds.com/blogs/the-perch/how-to-start-running-shop",
+          "confidence": "medium",
+          "estimatedAffectedPages": 42,
+          "recommendation": "Break reciprocal canonical."
+        },
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/blogs/the-perch/five-essential-fall-hiking-tips ↔ https://www.allbirds.com/blogs/the-perch/five-essential-fall-hiking-tips",
+          "confidence": "medium",
+          "estimatedAffectedPages": 42,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/blogs/the-perch/what-s-trending-fall-shoe-trends-for-2024 has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/blogs/the-perch/what-s-trending-fall-shoe-trends-for-2024"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/blogs/the-perch/what-s-trending-fall-shoe-trends-for-2024 has 18307 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/blogs/the-perch/what-s-trending-fall-shoe-trends-for-2024"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/blogs/the-perch/how-to-start-running-shop has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/blogs/the-perch/how-to-start-running-shop"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/blogs/the-perch/how-to-start-running-shop has 19327 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/blogs/the-perch/how-to-start-running-shop"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/blogs/the-perch/five-essential-fall-hiking-tips has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/blogs/the-perch/five-essential-fall-hiking-tips"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/blogs/news/{slug}",
+      "pageType": "product",
+      "instanceCount": 27,
+      "samplesCrawled": 3,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/blogs/news/allbirds-uber-eats-press-release ↔ https://www.allbirds.com/blogs/news/allbirds-uber-eats-press-release",
+          "confidence": "medium",
+          "estimatedAffectedPages": 22,
+          "recommendation": "Break reciprocal canonical."
+        },
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/blogs/news/golf-dasher-press-release ↔ https://www.allbirds.com/blogs/news/golf-dasher-press-release",
+          "confidence": "medium",
+          "estimatedAffectedPages": 22,
+          "recommendation": "Break reciprocal canonical."
+        },
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/blogs/news/canvas-cr-press-release ↔ https://www.allbirds.com/blogs/news/canvas-cr-press-release",
+          "confidence": "medium",
+          "estimatedAffectedPages": 22,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/blogs/news/allbirds-uber-eats-press-release has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/blogs/news/allbirds-uber-eats-press-release"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/blogs/news/allbirds-uber-eats-press-release has 18624 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/blogs/news/allbirds-uber-eats-press-release"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/blogs/news/golf-dasher-press-release has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/blogs/news/golf-dasher-press-release"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/blogs/news/golf-dasher-press-release has 18779 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/blogs/news/golf-dasher-press-release"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/blogs/news/canvas-cr-press-release has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/blogs/news/canvas-cr-press-release"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/agents.md",
+      "pageType": "static-page",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "high",
+      "templateIssues": [],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/agents.md has 534 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/agents.md"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/ ↔ https://www.allbirds.com/",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/ has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/pages/careers",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/pages/careers ↔ https://www.allbirds.com/pages/careers",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/pages/careers has 18240 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/careers"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/pages/fit-guide",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/pages/fit-guide ↔ https://www.allbirds.com/pages/fit-guide",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/pages/fit-guide has 18252 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/fit-guide"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/pages/our-story",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/pages/our-story ↔ https://www.allbirds.com/pages/our-story",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/our-story has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/our-story"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/pages/stores",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/pages/stores ↔ https://www.allbirds.com/pages/stores",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/pages/stores has 18248 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/stores"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/pages/help",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/pages/help ↔ https://www.allbirds.com/pages/help",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": []
+    },
+    {
+      "pattern": "/pages/sustainability",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/pages/sustainability ↔ https://www.allbirds.com/pages/sustainability",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/sustainability has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/sustainability"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/pages/affiliates",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/pages/affiliates ↔ https://www.allbirds.com/pages/affiliates",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/affiliates has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/affiliates"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/pages/affiliates has 18374 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/affiliates"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/pages/accessibility",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/pages/accessibility ↔ https://www.allbirds.com/pages/accessibility",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/accessibility has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/accessibility"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/pages/accessibility has 18384 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/accessibility"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/pages/footprint",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/pages/footprint ↔ https://www.allbirds.com/pages/footprint",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/footprint has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/footprint"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/pages/footprint has 18252 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/footprint"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/pages/afterpay",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/pages/afterpay ↔ https://www.allbirds.com/pages/afterpay",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/afterpay has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/afterpay"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/pages/afterpay has 18952 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/afterpay"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/pages/shoe-care",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/pages/shoe-care ↔ https://www.allbirds.com/pages/shoe-care",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/shoe-care has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/shoe-care"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/pages/erg",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/pages/erg ↔ https://www.allbirds.com/pages/erg",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/erg H1 == title",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/erg"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/erg has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/erg"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/pages/erg has 18241 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/erg"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/pages/cookies",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/pages/cookies ↔ https://www.allbirds.com/pages/cookies",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/pages/cookies has 18243 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/cookies"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/pages/press",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/pages/press ↔ https://www.allbirds.com/pages/press",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/press H1 == title",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/press"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/press has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/press"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/pages/press has 18243 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/press"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/pages/the-perch",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/pages/the-perch ↔ https://www.allbirds.com/pages/the-perch",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/the-perch H1 == title",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/the-perch"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/the-perch has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/the-perch"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/pages/the-perch has 18243 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/the-perch"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/pages/shanghai",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/pages/shanghai ↔ https://www.allbirds.com/pages/shanghai",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/shanghai H1 == title",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/shanghai"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/shanghai has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/shanghai"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/pages/shanghai has 18253 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/shanghai"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/pages/chengdu",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/pages/chengdu ↔ https://www.allbirds.com/pages/chengdu",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/chengdu H1 == title",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/chengdu"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/chengdu has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/chengdu"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/pages/chengdu has 18253 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/chengdu"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/pages/beijing",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/pages/beijing ↔ https://www.allbirds.com/pages/beijing",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/beijing H1 == title",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/beijing"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/beijing has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/beijing"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/pages/beijing has 18253 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/beijing"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/pages/garosu-gil",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/pages/garosu-gil ↔ https://www.allbirds.com/pages/garosu-gil",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/garosu-gil H1 == title",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/garosu-gil"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/garosu-gil has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/garosu-gil"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/pages/garosu-gil has 18251 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/garosu-gil"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/pages/berlin",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/pages/berlin ↔ https://www.allbirds.com/pages/berlin",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/berlin H1 == title",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/berlin"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/berlin has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/berlin"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/pages/berlin has 18249 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/berlin"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/pages/hamburg",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/pages/hamburg ↔ https://www.allbirds.com/pages/hamburg",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/hamburg H1 == title",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/hamburg"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/hamburg has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/hamburg"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/pages/hamburg has 18249 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/hamburg"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/pages/thehyundai",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/pages/thehyundai ↔ https://www.allbirds.com/pages/thehyundai",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/thehyundai H1 == title",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/thehyundai"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/thehyundai has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/thehyundai"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/pages/thehyundai has 18251 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/thehyundai"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/pages/auckland",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/pages/auckland ↔ https://www.allbirds.com/pages/auckland",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/auckland H1 == title",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/auckland"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/auckland has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/auckland"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/pages/auckland has 18253 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/auckland"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/pages/patents",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/pages/patents ↔ https://www.allbirds.com/pages/patents",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/patents has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/patents"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/pages/sms-opt-in",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/pages/sms-opt-in ↔ https://www.allbirds.com/pages/sms-opt-in",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/sms-opt-in H1 == title",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/sms-opt-in"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/sms-opt-in has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/sms-opt-in"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/pages/sms-opt-in has 18243 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/sms-opt-in"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/pages/tracking",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/pages/tracking ↔ https://www.allbirds.com/pages/tracking",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/pages/tracking has 18588 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/tracking"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/pages/cloudinary",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/pages/cloudinary ↔ https://www.allbirds.com/pages/cloudinary",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/cloudinary H1 == title",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/cloudinary"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/cloudinary has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/cloudinary"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/pages/cloudinary has 18241 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/cloudinary"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/pages/cookies-1",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/pages/cookies-1 ↔ https://www.allbirds.com/pages/cookies-1",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/pages/cookies-1 has 18240 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/cookies-1"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/pages/contact-us",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/pages/contact-us ↔ https://www.allbirds.com/pages/contact-us",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/contact-us H1 == title",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/contact-us"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/contact-us has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/contact-us"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/pages/contact-us has 18274 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/contact-us"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/pages/materials",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/pages/materials ↔ https://www.allbirds.com/pages/materials",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/materials has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/materials"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/pages/seattle",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/pages/seattle ↔ https://www.allbirds.com/pages/seattle",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/seattle H1 == title",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/seattle"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/seattle has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/seattle"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/pages/seattle has 18338 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/seattle"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/pages/quiz",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/pages/quiz ↔ https://www.allbirds.com/pages/quiz",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/pages/quiz has 18240 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/quiz"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/collections/shoes",
+      "pageType": "category",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "high",
+      "templateIssues": [],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/collections/shoes has 983 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/collections/shoes"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/collections/all",
+      "pageType": "category",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "high",
+      "templateIssues": [],
+      "pageIssues": []
+    },
+    {
+      "pattern": "/collections/bird-mask",
+      "pageType": "category",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "high",
+      "templateIssues": [],
+      "pageIssues": []
+    },
+    {
+      "pattern": "/collections/womens",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/collections/womens ↔ https://www.allbirds.com/collections/womens",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/collections/womens has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/collections/womens"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/collections/mens",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/collections/mens ↔ https://www.allbirds.com/collections/mens",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/collections/mens has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/collections/mens"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/collections/mens-socks",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/collections/mens-socks ↔ https://www.allbirds.com/collections/mens-socks",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/collections/mens-socks has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/collections/mens-socks"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/collections/mens-tees",
+      "pageType": "category",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "high",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/collections/mens-tees ↔ https://www.allbirds.com/collections/mens-tees",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/collections/mens-tees has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/collections/mens-tees"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/collections/mens-tees has 18454 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/collections/mens-tees"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/collections/mens-tops",
+      "pageType": "category",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "high",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/collections/mens-tops ↔ https://www.allbirds.com/collections/mens-tops",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/collections/mens-tops has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/collections/mens-tops"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/collections/mens-tops has 18386 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/collections/mens-tops"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/collections/neutrals",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/collections/neutrals ↔ https://www.allbirds.com/collections/neutrals",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/collections/neutrals has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/collections/neutrals"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/collections/neutrals has 27969 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/collections/neutrals"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/collections/new-tees",
+      "pageType": "category",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "high",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/collections/new-tees ↔ https://www.allbirds.com/collections/new-tees",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/collections/new-tees has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/collections/new-tees"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/collections/new-tees has 18459 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/collections/new-tees"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/collections/whats-hot",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/collections/whats-hot ↔ https://www.allbirds.com/collections/whats-hot",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/collections/whats-hot has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/collections/whats-hot"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/collections/whats-hot has 18790 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/collections/whats-hot"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/collections/{id}",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/collections/98 ↔ https://www.allbirds.com/collections/98",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/collections/98 has 18894 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/collections/98"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/collections/the-beanie",
+      "pageType": "category",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "high",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/collections/the-beanie ↔ https://www.allbirds.com/collections/the-beanie",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/collections/the-beanie has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/collections/the-beanie"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/collections/the-beanie has 18440 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/collections/the-beanie"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/collections/the-scarf",
+      "pageType": "category",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "high",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/collections/the-scarf ↔ https://www.allbirds.com/collections/the-scarf",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/collections/the-scarf has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/collections/the-scarf"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/collections/the-scarf has 18470 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/collections/the-scarf"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/collections/the-cap",
+      "pageType": "category",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "high",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/collections/the-cap ↔ https://www.allbirds.com/collections/the-cap",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/collections/the-cap has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/collections/the-cap"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/collections/the-cap has 18456 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/collections/the-cap"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/collections/face-masks",
+      "pageType": "category",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "high",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/collections/face-masks ↔ https://www.allbirds.com/collections/face-masks",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/collections/face-masks H1 == title",
+          "affectedUrls": [
+            "https://www.allbirds.com/collections/face-masks"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/collections/face-masks has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/collections/face-masks"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/collections/face-masks has 18458 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/collections/face-masks"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/collections/lace-kits",
+      "pageType": "category",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "high",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/collections/lace-kits ↔ https://www.allbirds.com/collections/lace-kits",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/collections/lace-kits H1 == title",
+          "affectedUrls": [
+            "https://www.allbirds.com/collections/lace-kits"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/collections/lace-kits has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/collections/lace-kits"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/collections/lace-kits has 18404 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/collections/lace-kits"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/collections/socks",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/collections/socks ↔ https://www.allbirds.com/collections/socks",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/collections/socks has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/collections/socks"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/collections/socks has 31943 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/collections/socks"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/collections/grey-shoes",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/collections/grey-shoes ↔ https://www.allbirds.com/collections/grey-shoes",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/collections/grey-shoes has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/collections/grey-shoes"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/collections/grey-shoes has 23240 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/collections/grey-shoes"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/collections/blue-shoes",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/collections/blue-shoes ↔ https://www.allbirds.com/collections/blue-shoes",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/collections/blue-shoes has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/collections/blue-shoes"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/collections/blue-shoes has 28650 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/collections/blue-shoes"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/collections/bags",
+      "pageType": "category",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "high",
+      "templateIssues": [],
+      "pageIssues": []
+    },
+    {
+      "pattern": "/collections/red-shoes",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/collections/red-shoes ↔ https://www.allbirds.com/collections/red-shoes",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/collections/red-shoes has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/collections/red-shoes"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/collections/red-shoes has 19773 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/collections/red-shoes"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/collections/sale-mens",
+      "pageType": "category",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "high",
+      "templateIssues": [],
+      "pageIssues": []
+    },
+    {
+      "pattern": "/collections/unisex",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/collections/unisex ↔ https://www.allbirds.com/collections/unisex",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/collections/unisex H1 == title",
+          "affectedUrls": [
+            "https://www.allbirds.com/collections/unisex"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/collections/unisex has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/collections/unisex"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/collections/unisex has 32836 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/collections/unisex"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/collections/shop-sale",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/collections/shop-sale ↔ https://www.allbirds.com/collections/shop-sale",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/collections/shop-sale H1 == title",
+          "affectedUrls": [
+            "https://www.allbirds.com/collections/shop-sale"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/collections/shop-sale has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/collections/shop-sale"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/collections/shop-sale has 34801 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/collections/shop-sale"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/collections/mens-boots",
+      "pageType": "category",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "high",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/collections/mens-boots ↔ https://www.allbirds.com/collections/mens-boots",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/collections/mens-boots H1 == title",
+          "affectedUrls": [
+            "https://www.allbirds.com/collections/mens-boots"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/collections/mens-boots has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/collections/mens-boots"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/collections/mens-boots has 18390 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/collections/mens-boots"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/collections/sale-26",
+      "pageType": "category",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "high",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/collections/sale-26 ↔ https://www.allbirds.com/collections/sale-26",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/collections/sale-26 has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/collections/sale-26"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/collections/sale-26 has 18391 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/collections/sale-26"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/blogs/the-perch",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/blogs/the-perch ↔ https://www.allbirds.com/blogs/the-perch",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/blogs/the-perch has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/blogs/the-perch"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/blogs/news",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/blogs/news ↔ https://www.allbirds.com/blogs/news",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": []
+    },
+    {
+      "pattern": "/pages/{slug}/men-menu",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/menu-image-list/men-menu has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/menu-image-list/men-menu"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/pages/menu-image-list/men-menu has 18266 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/menu-image-list/men-menu"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/pages/{slug}/woman",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/menu-image-list/woman has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/menu-image-list/woman"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/pages/menu-image-list/woman has 18266 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/menu-image-list/woman"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/pages/material/canvas",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/material/canvas has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/material/canvas"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/pages/material/canvas has 18266 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/material/canvas"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/pages/material/wool",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/material/wool has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/material/wool"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/pages/material/wool has 18266 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/material/wool"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/pages/stores/auckland",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/pages/stores/auckland ↔ https://www.allbirds.com/pages/stores/auckland",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/stores/auckland has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/stores/auckland"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/pages/stores/auckland has 18391 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/stores/auckland"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/pages/stores/beijing",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/pages/stores/beijing ↔ https://www.allbirds.com/pages/stores/beijing",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/stores/beijing has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/stores/beijing"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/pages/stores/beijing has 18383 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/stores/beijing"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/pages/stores/chengdu",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/pages/stores/chengdu ↔ https://www.allbirds.com/pages/stores/chengdu",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/stores/chengdu has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/stores/chengdu"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/pages/stores/chengdu has 18399 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/stores/chengdu"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/pages/stores/cooks",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/pages/stores/cooks ↔ https://www.allbirds.com/pages/stores/cooks",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/stores/cooks has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/stores/cooks"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/pages/stores/cooks has 18351 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/stores/cooks"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/pages/stores/eraldis",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/pages/stores/eraldis ↔ https://www.allbirds.com/pages/stores/eraldis",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/stores/eraldis has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/stores/eraldis"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/pages/stores/eraldis has 18349 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/stores/eraldis"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/pages/stores/foot-savvy",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/pages/stores/foot-savvy ↔ https://www.allbirds.com/pages/stores/foot-savvy",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/stores/foot-savvy has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/stores/foot-savvy"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/pages/stores/foot-savvy has 18355 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/stores/foot-savvy"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/pages/stores/getzs",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/pages/stores/getzs ↔ https://www.allbirds.com/pages/stores/getzs",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/stores/getzs has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/stores/getzs"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/pages/stores/getzs has 18354 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/stores/getzs"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/pages/stores/hopson-one",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/pages/stores/hopson-one ↔ https://www.allbirds.com/pages/stores/hopson-one",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/stores/hopson-one has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/stores/hopson-one"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/pages/stores/hopson-one has 18381 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/stores/hopson-one"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/pages/stores/landsharks",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/pages/stores/landsharks ↔ https://www.allbirds.com/pages/stores/landsharks",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/stores/landsharks has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/stores/landsharks"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/pages/stores/landsharks has 18347 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/stores/landsharks"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/pages/stores/medthreads",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/pages/stores/medthreads ↔ https://www.allbirds.com/pages/stores/medthreads",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/stores/medthreads has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/stores/medthreads"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/pages/stores/medthreads has 18349 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/stores/medthreads"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/pages/stores/ossines",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/pages/stores/ossines ↔ https://www.allbirds.com/pages/stores/ossines",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/stores/ossines has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/stores/ossines"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/pages/stores/ossines has 18349 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/stores/ossines"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/pages/stores/outside-in",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/pages/stores/outside-in ↔ https://www.allbirds.com/pages/stores/outside-in",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/stores/outside-in has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/stores/outside-in"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/pages/stores/outside-in has 18353 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/stores/outside-in"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/pages/stores/rivers",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/pages/stores/rivers ↔ https://www.allbirds.com/pages/stores/rivers",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/stores/rivers has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/stores/rivers"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/pages/stores/rivers has 18351 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/stores/rivers"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/pages/stores/shanghai",
+      "pageType": "unknown",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "high",
+      "templateIssues": [],
+      "pageIssues": []
+    },
+    {
+      "pattern": "/pages/stores/sole-mates",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/pages/stores/sole-mates ↔ https://www.allbirds.com/pages/stores/sole-mates",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/stores/sole-mates has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/stores/sole-mates"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/pages/stores/sole-mates has 18361 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/stores/sole-mates"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/pages/stores/trailhead",
+      "pageType": "unknown",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "high",
+      "templateIssues": [],
+      "pageIssues": []
+    },
+    {
+      "pattern": "/pages/stores/whats-hot",
+      "pageType": "product",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "structure",
+          "severity": "critical",
+          "message": "Reciprocal canonical: https://www.allbirds.com/pages/stores/whats-hot ↔ https://www.allbirds.com/pages/stores/whats-hot",
+          "confidence": "medium",
+          "estimatedAffectedPages": 1,
+          "recommendation": "Break reciprocal canonical."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/pages/stores/whats-hot has multiple H1s",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/stores/whats-hot"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/pages/stores/whats-hot has 18353 words but orphaned",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/stores/whats-hot"
+          ]
+        }
+      ]
+    }
+  ],
+  "globalContradictions": [
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/collections/mens-wool-runners has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/collections/mens-wool-runners"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/collections/mens-wool-runners has 19654 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/collections/mens-wool-runners"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/collections/109-tree-dashers-for-outlet-discount-code has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/collections/109-tree-dashers-for-outlet-discount-code"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/collections/109-tree-dashers-for-outlet-discount-code has 18395 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/collections/109-tree-dashers-for-outlet-discount-code"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/products/mens-wool-runners-natural-white has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/products/mens-wool-runners-natural-white"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/products/womens-tree-runner-go-medium-grey has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/products/womens-tree-runner-go-medium-grey"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/products/free-returns-coverage has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/products/free-returns-coverage"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/products/free-returns-coverage has 19431 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/products/free-returns-coverage"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "h1-equals-title",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/truth-about-allbirds-coupons H1 == title",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/truth-about-allbirds-coupons"
+      ],
+      "recommendation": "Differentiate H1 from title."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/truth-about-allbirds-coupons has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/truth-about-allbirds-coupons"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/pages/truth-about-allbirds-coupons has 18279 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/truth-about-allbirds-coupons"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/moonshot-reveal-press-release has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/moonshot-reveal-press-release"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/pages/moonshot-reveal-press-release has 19120 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/moonshot-reveal-press-release"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/terralux-collection has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/terralux-collection"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/pages/terralux-collection has 18495 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/terralux-collection"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/stores/32-degrees-north has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/stores/32-degrees-north"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/pages/stores/32-degrees-north has 18365 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/stores/32-degrees-north"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/stores/gene-lockwoods-sports-little-rock has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/stores/gene-lockwoods-sports-little-rock"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/pages/stores/gene-lockwoods-sports-little-rock has 18359 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/stores/gene-lockwoods-sports-little-rock"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/stores/yaegers-shoes-toledo has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/stores/yaegers-shoes-toledo"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/pages/stores/yaegers-shoes-toledo has 18353 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/stores/yaegers-shoes-toledo"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/menu-image-list/copy-of-nav-tile-mens-1225-main has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/menu-image-list/copy-of-nav-tile-mens-1225-main"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/pages/menu-image-list/copy-of-nav-tile-mens-1225-main has 18266 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/menu-image-list/copy-of-nav-tile-mens-1225-main"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/menu-image-list/nav-tile-mens-sale-second-nav has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/menu-image-list/nav-tile-mens-sale-second-nav"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/pages/menu-image-list/nav-tile-mens-sale-second-nav has 18266 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/menu-image-list/nav-tile-mens-sale-second-nav"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/menu-image-list/womens-sale-list has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/menu-image-list/womens-sale-list"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/pages/menu-image-list/womens-sale-list has 18266 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/menu-image-list/womens-sale-list"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/blogs/the-perch/what-s-trending-fall-shoe-trends-for-2024 has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/blogs/the-perch/what-s-trending-fall-shoe-trends-for-2024"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/blogs/the-perch/what-s-trending-fall-shoe-trends-for-2024 has 18307 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/blogs/the-perch/what-s-trending-fall-shoe-trends-for-2024"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/blogs/the-perch/how-to-start-running-shop has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/blogs/the-perch/how-to-start-running-shop"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/blogs/the-perch/how-to-start-running-shop has 19327 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/blogs/the-perch/how-to-start-running-shop"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/blogs/the-perch/five-essential-fall-hiking-tips has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/blogs/the-perch/five-essential-fall-hiking-tips"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/blogs/news/allbirds-uber-eats-press-release has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/blogs/news/allbirds-uber-eats-press-release"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/blogs/news/allbirds-uber-eats-press-release has 18624 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/blogs/news/allbirds-uber-eats-press-release"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/blogs/news/golf-dasher-press-release has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/blogs/news/golf-dasher-press-release"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/blogs/news/golf-dasher-press-release has 18779 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/blogs/news/golf-dasher-press-release"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/blogs/news/canvas-cr-press-release has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/blogs/news/canvas-cr-press-release"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/agents.md has 534 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/agents.md"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/ has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/pages/careers has 18240 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/careers"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/pages/fit-guide has 18252 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/fit-guide"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/our-story has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/our-story"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/pages/stores has 18248 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/stores"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/sustainability has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/sustainability"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/affiliates has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/affiliates"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/pages/affiliates has 18374 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/affiliates"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/accessibility has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/accessibility"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/pages/accessibility has 18384 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/accessibility"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/footprint has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/footprint"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/pages/footprint has 18252 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/footprint"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/afterpay has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/afterpay"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/pages/afterpay has 18952 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/afterpay"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/shoe-care has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/shoe-care"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "h1-equals-title",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/erg H1 == title",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/erg"
+      ],
+      "recommendation": "Differentiate H1 from title."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/erg has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/erg"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/pages/erg has 18241 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/erg"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/pages/cookies has 18243 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/cookies"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "h1-equals-title",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/press H1 == title",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/press"
+      ],
+      "recommendation": "Differentiate H1 from title."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/press has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/press"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/pages/press has 18243 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/press"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "h1-equals-title",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/the-perch H1 == title",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/the-perch"
+      ],
+      "recommendation": "Differentiate H1 from title."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/the-perch has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/the-perch"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/pages/the-perch has 18243 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/the-perch"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "h1-equals-title",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/shanghai H1 == title",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/shanghai"
+      ],
+      "recommendation": "Differentiate H1 from title."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/shanghai has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/shanghai"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/pages/shanghai has 18253 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/shanghai"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "h1-equals-title",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/chengdu H1 == title",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/chengdu"
+      ],
+      "recommendation": "Differentiate H1 from title."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/chengdu has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/chengdu"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/pages/chengdu has 18253 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/chengdu"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "h1-equals-title",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/beijing H1 == title",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/beijing"
+      ],
+      "recommendation": "Differentiate H1 from title."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/beijing has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/beijing"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/pages/beijing has 18253 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/beijing"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "h1-equals-title",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/garosu-gil H1 == title",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/garosu-gil"
+      ],
+      "recommendation": "Differentiate H1 from title."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/garosu-gil has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/garosu-gil"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/pages/garosu-gil has 18251 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/garosu-gil"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "h1-equals-title",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/berlin H1 == title",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/berlin"
+      ],
+      "recommendation": "Differentiate H1 from title."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/berlin has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/berlin"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/pages/berlin has 18249 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/berlin"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "h1-equals-title",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/hamburg H1 == title",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/hamburg"
+      ],
+      "recommendation": "Differentiate H1 from title."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/hamburg has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/hamburg"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/pages/hamburg has 18249 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/hamburg"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "h1-equals-title",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/thehyundai H1 == title",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/thehyundai"
+      ],
+      "recommendation": "Differentiate H1 from title."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/thehyundai has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/thehyundai"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/pages/thehyundai has 18251 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/thehyundai"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "h1-equals-title",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/auckland H1 == title",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/auckland"
+      ],
+      "recommendation": "Differentiate H1 from title."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/auckland has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/auckland"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/pages/auckland has 18253 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/auckland"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/patents has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/patents"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "h1-equals-title",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/sms-opt-in H1 == title",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/sms-opt-in"
+      ],
+      "recommendation": "Differentiate H1 from title."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/sms-opt-in has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/sms-opt-in"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/pages/sms-opt-in has 18243 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/sms-opt-in"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/pages/tracking has 18588 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/tracking"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "h1-equals-title",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/cloudinary H1 == title",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/cloudinary"
+      ],
+      "recommendation": "Differentiate H1 from title."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/cloudinary has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/cloudinary"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/pages/cloudinary has 18241 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/cloudinary"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/pages/cookies-1 has 18240 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/cookies-1"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "h1-equals-title",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/contact-us H1 == title",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/contact-us"
+      ],
+      "recommendation": "Differentiate H1 from title."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/contact-us has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/contact-us"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/pages/contact-us has 18274 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/contact-us"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/materials has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/materials"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "h1-equals-title",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/seattle H1 == title",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/seattle"
+      ],
+      "recommendation": "Differentiate H1 from title."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/seattle has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/seattle"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/pages/seattle has 18338 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/seattle"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/pages/quiz has 18240 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/quiz"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/collections/shoes has 983 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/collections/shoes"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/collections/womens has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/collections/womens"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/collections/mens has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/collections/mens"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/collections/mens-socks has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/collections/mens-socks"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/collections/mens-tees has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/collections/mens-tees"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/collections/mens-tees has 18454 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/collections/mens-tees"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/collections/mens-tops has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/collections/mens-tops"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/collections/mens-tops has 18386 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/collections/mens-tops"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/collections/neutrals has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/collections/neutrals"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/collections/neutrals has 27969 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/collections/neutrals"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/collections/new-tees has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/collections/new-tees"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/collections/new-tees has 18459 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/collections/new-tees"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/collections/whats-hot has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/collections/whats-hot"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/collections/whats-hot has 18790 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/collections/whats-hot"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/collections/98 has 18894 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/collections/98"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/collections/the-beanie has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/collections/the-beanie"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/collections/the-beanie has 18440 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/collections/the-beanie"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/collections/the-scarf has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/collections/the-scarf"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/collections/the-scarf has 18470 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/collections/the-scarf"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/collections/the-cap has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/collections/the-cap"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/collections/the-cap has 18456 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/collections/the-cap"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "h1-equals-title",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/collections/face-masks H1 == title",
+      "affectedUrls": [
+        "https://www.allbirds.com/collections/face-masks"
+      ],
+      "recommendation": "Differentiate H1 from title."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/collections/face-masks has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/collections/face-masks"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/collections/face-masks has 18458 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/collections/face-masks"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "h1-equals-title",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/collections/lace-kits H1 == title",
+      "affectedUrls": [
+        "https://www.allbirds.com/collections/lace-kits"
+      ],
+      "recommendation": "Differentiate H1 from title."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/collections/lace-kits has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/collections/lace-kits"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/collections/lace-kits has 18404 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/collections/lace-kits"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/collections/socks has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/collections/socks"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/collections/socks has 31943 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/collections/socks"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/collections/grey-shoes has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/collections/grey-shoes"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/collections/grey-shoes has 23240 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/collections/grey-shoes"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/collections/blue-shoes has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/collections/blue-shoes"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/collections/blue-shoes has 28650 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/collections/blue-shoes"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/collections/red-shoes has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/collections/red-shoes"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/collections/red-shoes has 19773 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/collections/red-shoes"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "h1-equals-title",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/collections/unisex H1 == title",
+      "affectedUrls": [
+        "https://www.allbirds.com/collections/unisex"
+      ],
+      "recommendation": "Differentiate H1 from title."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/collections/unisex has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/collections/unisex"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/collections/unisex has 32836 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/collections/unisex"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "h1-equals-title",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/collections/shop-sale H1 == title",
+      "affectedUrls": [
+        "https://www.allbirds.com/collections/shop-sale"
+      ],
+      "recommendation": "Differentiate H1 from title."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/collections/shop-sale has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/collections/shop-sale"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/collections/shop-sale has 34801 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/collections/shop-sale"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "h1-equals-title",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/collections/mens-boots H1 == title",
+      "affectedUrls": [
+        "https://www.allbirds.com/collections/mens-boots"
+      ],
+      "recommendation": "Differentiate H1 from title."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/collections/mens-boots has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/collections/mens-boots"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/collections/mens-boots has 18390 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/collections/mens-boots"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/collections/sale-26 has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/collections/sale-26"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/collections/sale-26 has 18391 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/collections/sale-26"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/blogs/the-perch has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/blogs/the-perch"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/menu-image-list/men-menu has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/menu-image-list/men-menu"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/pages/menu-image-list/men-menu has 18266 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/menu-image-list/men-menu"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/menu-image-list/woman has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/menu-image-list/woman"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/pages/menu-image-list/woman has 18266 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/menu-image-list/woman"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/material/canvas has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/material/canvas"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/pages/material/canvas has 18266 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/material/canvas"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/material/wool has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/material/wool"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/pages/material/wool has 18266 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/material/wool"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/stores/auckland has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/stores/auckland"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/pages/stores/auckland has 18391 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/stores/auckland"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/stores/beijing has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/stores/beijing"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/pages/stores/beijing has 18383 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/stores/beijing"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/stores/chengdu has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/stores/chengdu"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/pages/stores/chengdu has 18399 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/stores/chengdu"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/stores/cooks has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/stores/cooks"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/pages/stores/cooks has 18351 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/stores/cooks"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/stores/eraldis has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/stores/eraldis"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/pages/stores/eraldis has 18349 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/stores/eraldis"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/stores/foot-savvy has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/stores/foot-savvy"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/pages/stores/foot-savvy has 18355 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/stores/foot-savvy"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/stores/getzs has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/stores/getzs"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/pages/stores/getzs has 18354 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/stores/getzs"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/stores/hopson-one has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/stores/hopson-one"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/pages/stores/hopson-one has 18381 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/stores/hopson-one"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/stores/landsharks has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/stores/landsharks"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/pages/stores/landsharks has 18347 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/stores/landsharks"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/stores/medthreads has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/stores/medthreads"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/pages/stores/medthreads has 18349 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/stores/medthreads"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/stores/ossines has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/stores/ossines"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/pages/stores/ossines has 18349 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/stores/ossines"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/stores/outside-in has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/stores/outside-in"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/pages/stores/outside-in has 18353 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/stores/outside-in"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/stores/rivers has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/stores/rivers"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/pages/stores/rivers has 18351 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/stores/rivers"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/stores/sole-mates has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/stores/sole-mates"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/pages/stores/sole-mates has 18361 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/stores/sole-mates"
+      ],
+      "recommendation": "Add internal links to this content."
+    },
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/pages/stores/whats-hot has multiple H1s",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/stores/whats-hot"
+      ],
+      "recommendation": "Use one H1."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/pages/stores/whats-hot has 18353 words but orphaned",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/stores/whats-hot"
+      ],
+      "recommendation": "Add internal links to this content."
+    }
+  ],
+  "graphSummary": {
+    "nodeCount": 105,
+    "edgeCount": 1446,
+    "orphanCount": 86
+  },
+  "discovery": {
+    "sitemapUrls": 2327,
+    "crawlUrls": 20,
+    "sitemapOnly": 2306,
+    "crawlOnly": 0,
+    "overlap": 20
+  }
+}

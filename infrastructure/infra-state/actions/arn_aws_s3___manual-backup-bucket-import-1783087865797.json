@@ -1,0 +1,19 @@
+{
+  "actionId": "arn:aws:s3:::manual-backup-bucket-import-1783087865797",
+  "currentState": "deferred",
+  "stateHistory": [
+    {
+      "from": "initial",
+      "to": "pending",
+      "timestamp": "2026-07-03T14:11:05.832Z",
+      "metadata": {}
+    },
+    {
+      "from": "pending",
+      "to": "deferred",
+      "timestamp": "2026-07-03T14:11:05.932Z",
+      "metadata": {}
+    }
+  ],
+  "lastUpdated": "2026-07-03T14:11:05.932Z"
+}

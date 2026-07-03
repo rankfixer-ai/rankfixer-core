@@ -1,0 +1,804 @@
+{
+  "phase": "post-remediation",
+  "nodes": [
+    {
+      "id": "arn:aws:ec2:us-east-1:123456789012:instance/i-001",
+      "type": "compute",
+      "provider": "aws",
+      "name": "web-server-prod",
+      "serviceType": "aws_instance",
+      "environment": "prod",
+      "declaredState": {
+        "exists": true,
+        "source": "modules/compute/main.tf",
+        "lastModified": "2026-07-03T14:11:05.987Z",
+        "rawConfig": {
+          "address": "aws_instance.web_server",
+          "arn": "arn:aws:ec2:us-east-1:123456789012:instance/i-001",
+          "resource_type": "aws_instance",
+          "name": "web-server-prod",
+          "tags": {
+            "Name": "web-server-prod",
+            "Environment": "production",
+            "Criticality": "high"
+          },
+          "vpc_id": "vpc-001",
+          "subnet_id": "subnet-001a",
+          "security_group_ids": [
+            "sg-internal"
+          ],
+          "encryption": {
+            "enabled": true
+          },
+          "logging": {
+            "enabled": true,
+            "log_types": [
+              "access",
+              "audit"
+            ]
+          },
+          "file_path": "modules/compute/main.tf"
+        }
+      },
+      "actualState": {
+        "exists": true,
+        "region": "us-east-1",
+        "account": "123456789012",
+        "rawAttributes": {
+          "arn": "arn:aws:ec2:us-east-1:123456789012:instance/i-001",
+          "resource_type": "aws_instance",
+          "name": "web-server-prod",
+          "tags": {
+            "Name": "web-server-prod",
+            "Environment": "production"
+          },
+          "region": "us-east-1",
+          "account_id": "123456789012",
+          "vpc_id": "vpc-001",
+          "subnet_id": "subnet-001a",
+          "security_group_ids": [
+            "sg-internal"
+          ],
+          "encryption": {
+            "enabled": true
+          },
+          "logging": {
+            "enabled": true
+          }
+        }
+      },
+      "criticality": "high",
+      "isManaged": true,
+      "dependencies": [
+        "vpc-001",
+        "subnet-001a",
+        "sg-internal"
+      ],
+      "dependents": [],
+      "networkExposure": "vpc",
+      "blastRadius": 0,
+      "tags": {
+        "Name": "web-server-prod",
+        "Environment": "production",
+        "Criticality": "high"
+      },
+      "policies": [],
+      "encryption": {
+        "atRest": true,
+        "inTransit": false,
+        "keyManaged": false
+      },
+      "logging": {
+        "enabled": true,
+        "logTypes": []
+      },
+      "access": "internal",
+      "complianceStatus": {
+        "cisBenchmark": "unknown",
+        "soc2": "unknown",
+        "pci": "unknown",
+        "hipaa": "unknown",
+        "customPolicies": []
+      },
+      "drift": {
+        "detected": true,
+        "severity": "warning",
+        "fields": [
+          {
+            "path": "tags",
+            "declared": "3 tags",
+            "actual": "2 tags",
+            "risk": "Tags modified outside IaC",
+            "isCritical": false
+          }
+        ],
+        "lastDetected": "2026-07-03T14:11:05.989Z"
+      },
+      "createdAt": "2026-07-03T14:11:05.987Z",
+      "modifiedAt": "2026-07-03T14:11:05.987Z",
+      "createdBy": "unknown",
+      "costEstimate": 0,
+      "notes": []
+    },
+    {
+      "id": "arn:aws:ec2:us-east-1:123456789012:instance/i-002",
+      "type": "compute",
+      "provider": "aws",
+      "name": "api-server-prod",
+      "serviceType": "aws_instance",
+      "environment": "prod",
+      "declaredState": {
+        "exists": true,
+        "source": "modules/compute/main.tf",
+        "lastModified": "2026-07-03T14:11:05.987Z",
+        "rawConfig": {
+          "address": "aws_instance.api_server",
+          "arn": "arn:aws:ec2:us-east-1:123456789012:instance/i-002",
+          "resource_type": "aws_instance",
+          "name": "api-server-prod",
+          "tags": {
+            "Name": "api-server-prod",
+            "Environment": "production"
+          },
+          "vpc_id": "vpc-001",
+          "subnet_id": "subnet-001b",
+          "security_group_ids": [
+            "sg-api-internal"
+          ],
+          "encryption": {
+            "enabled": true
+          },
+          "file_path": "modules/compute/main.tf"
+        }
+      },
+      "actualState": {
+        "exists": true,
+        "region": "us-east-1",
+        "account": "123456789012",
+        "rawAttributes": {
+          "arn": "arn:aws:ec2:us-east-1:123456789012:instance/i-002",
+          "resource_type": "aws_instance",
+          "name": "api-server-prod",
+          "tags": {
+            "Name": "api-server-prod",
+            "Environment": "production"
+          },
+          "region": "us-east-1",
+          "account_id": "123456789012",
+          "vpc_id": "vpc-001",
+          "subnet_id": "subnet-001b",
+          "security_group_ids": [
+            "sg-api-internal"
+          ],
+          "security_group_rules": [
+            {
+              "from_port": 22,
+              "to_port": 22,
+              "ip_protocol": "tcp",
+              "ip_ranges": [
+                {
+                  "cidr_ip": "0.0.0.0/0"
+                }
+              ]
+            }
+          ],
+          "encryption": {
+            "enabled": true
+          }
+        }
+      },
+      "criticality": "high",
+      "isManaged": true,
+      "dependencies": [
+        "vpc-001",
+        "subnet-001b",
+        "sg-api-internal"
+      ],
+      "dependents": [],
+      "networkExposure": "vpc",
+      "blastRadius": 0,
+      "tags": {
+        "Name": "api-server-prod",
+        "Environment": "production"
+      },
+      "policies": [],
+      "encryption": {
+        "atRest": true,
+        "inTransit": false,
+        "keyManaged": false
+      },
+      "logging": {
+        "enabled": false,
+        "logTypes": []
+      },
+      "access": "internal",
+      "complianceStatus": {
+        "cisBenchmark": "unknown",
+        "soc2": "unknown",
+        "pci": "unknown",
+        "hipaa": "unknown",
+        "customPolicies": []
+      },
+      "drift": {
+        "detected": true,
+        "severity": "critical",
+        "fields": [
+          {
+            "path": "networkExposure",
+            "declared": "vpc",
+            "actual": "public",
+            "risk": "Network exposure changed from \"vpc\" to \"public\"",
+            "isCritical": true
+          },
+          {
+            "path": "access",
+            "declared": "internal",
+            "actual": "public",
+            "risk": "Access level changed from \"internal\" to \"public\"",
+            "isCritical": true
+          },
+          {
+            "path": "policies.sg-rule-22-22",
+            "declared": "absent",
+            "actual": "added",
+            "risk": "New policy \"sg-rule-22-22\" added outside IaC — OVERLY PERMISSIVE",
+            "isCritical": true
+          }
+        ],
+        "lastDetected": "2026-07-03T14:11:05.988Z"
+      },
+      "createdAt": "2026-07-03T14:11:05.987Z",
+      "modifiedAt": "2026-07-03T14:11:05.987Z",
+      "createdBy": "unknown",
+      "costEstimate": 0,
+      "notes": []
+    },
+    {
+      "id": "arn:aws:s3:::company-logs-prod",
+      "type": "storage",
+      "provider": "aws",
+      "name": "company-logs-prod",
+      "serviceType": "aws_s3_bucket",
+      "environment": "prod",
+      "declaredState": {
+        "exists": true,
+        "source": "modules/storage/s3.tf",
+        "lastModified": "2026-07-03T14:11:05.987Z",
+        "rawConfig": {
+          "address": "aws_s3_bucket.logs",
+          "arn": "arn:aws:s3:::company-logs-prod",
+          "resource_type": "aws_s3_bucket",
+          "name": "company-logs-prod",
+          "tags": {
+            "Name": "company-logs-prod",
+            "Environment": "production"
+          },
+          "encryption": {
+            "enabled": true,
+            "algorithm": "AES256"
+          },
+          "logging": {
+            "enabled": true
+          },
+          "public_access": false,
+          "file_path": "modules/storage/s3.tf"
+        }
+      },
+      "actualState": {
+        "exists": true,
+        "region": "us-east-1",
+        "account": "123456789012",
+        "rawAttributes": {
+          "arn": "arn:aws:s3:::company-logs-prod",
+          "resource_type": "aws_s3_bucket",
+          "name": "company-logs-prod",
+          "tags": {
+            "Name": "company-logs-prod"
+          },
+          "region": "us-east-1",
+          "account_id": "123456789012",
+          "public_access": true,
+          "acl": "public-read",
+          "encryption": {
+            "enabled": false
+          },
+          "logging": {
+            "enabled": false
+          }
+        }
+      },
+      "criticality": "high",
+      "isManaged": true,
+      "dependencies": [],
+      "dependents": [],
+      "networkExposure": "unknown",
+      "blastRadius": 0,
+      "tags": {
+        "Name": "company-logs-prod",
+        "Environment": "production"
+      },
+      "policies": [],
+      "encryption": {
+        "atRest": true,
+        "inTransit": false,
+        "keyManaged": false,
+        "algorithm": "AES256"
+      },
+      "logging": {
+        "enabled": true,
+        "logTypes": []
+      },
+      "access": "internal",
+      "complianceStatus": {
+        "cisBenchmark": "unknown",
+        "soc2": "unknown",
+        "pci": "unknown",
+        "hipaa": "unknown",
+        "customPolicies": []
+      },
+      "drift": {
+        "detected": true,
+        "severity": "critical",
+        "fields": [
+          {
+            "path": "networkExposure",
+            "declared": "unknown",
+            "actual": "public",
+            "risk": "Network exposure changed from \"unknown\" to \"public\"",
+            "isCritical": true
+          },
+          {
+            "path": "access",
+            "declared": "internal",
+            "actual": "public",
+            "risk": "Access level changed from \"internal\" to \"public\"",
+            "isCritical": true
+          },
+          {
+            "path": "encryption.atRest",
+            "declared": true,
+            "actual": false,
+            "risk": "Encryption at rest was disabled or removed",
+            "isCritical": true
+          },
+          {
+            "path": "tags",
+            "declared": "2 tags",
+            "actual": "1 tags",
+            "risk": "Tags modified outside IaC",
+            "isCritical": false
+          }
+        ],
+        "lastDetected": "2026-07-03T14:11:05.988Z"
+      },
+      "createdAt": "2026-07-03T14:11:05.987Z",
+      "modifiedAt": "2026-07-03T14:11:05.987Z",
+      "createdBy": "unknown",
+      "costEstimate": 0,
+      "notes": []
+    },
+    {
+      "id": "arn:aws:iam::123456789012:role/app-role",
+      "type": "iam",
+      "provider": "aws",
+      "name": "app-role",
+      "serviceType": "aws_iam_role",
+      "environment": "prod",
+      "declaredState": {
+        "exists": true,
+        "source": "modules/iam/roles.tf",
+        "lastModified": "2026-07-03T14:11:05.987Z",
+        "rawConfig": {
+          "address": "aws_iam_role.app_role",
+          "arn": "arn:aws:iam::123456789012:role/app-role",
+          "resource_type": "aws_iam_role",
+          "name": "app-role",
+          "tags": {
+            "Environment": "production"
+          },
+          "policies": [
+            {
+              "name": "app-policy",
+              "type": "iam_policy",
+              "document": {
+                "Version": "2012-10-17",
+                "Statement": [
+                  {
+                    "Effect": "Allow",
+                    "Action": [
+                      "s3:GetObject",
+                      "s3:PutObject"
+                    ],
+                    "Resource": [
+                      "arn:aws:s3:::company-logs-prod/*"
+                    ]
+                  }
+                ]
+              }
+            }
+          ],
+          "file_path": "modules/iam/roles.tf"
+        }
+      },
+      "actualState": {
+        "exists": true,
+        "region": "global",
+        "account": "123456789012",
+        "rawAttributes": {
+          "arn": "arn:aws:iam::123456789012:role/app-role",
+          "resource_type": "aws_iam_role",
+          "name": "app-role",
+          "region": "global",
+          "account_id": "123456789012",
+          "policies": [
+            {
+              "name": "app-policy",
+              "type": "iam_policy",
+              "document": {
+                "Version": "2012-10-17",
+                "Statement": [
+                  {
+                    "Effect": "Allow",
+                    "Action": [
+                      "s3:GetObject",
+                      "s3:PutObject"
+                    ],
+                    "Resource": [
+                      "arn:aws:s3:::company-logs-prod/*"
+                    ]
+                  }
+                ]
+              }
+            },
+            {
+              "name": "admin-access-manual",
+              "type": "iam_policy",
+              "document": {
+                "Version": "2012-10-17",
+                "Statement": [
+                  {
+                    "Effect": "Allow",
+                    "Action": "*",
+                    "Resource": "*"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "criticality": "medium",
+      "isManaged": true,
+      "dependencies": [],
+      "dependents": [],
+      "networkExposure": "unknown",
+      "blastRadius": 0,
+      "tags": {
+        "Environment": "production"
+      },
+      "policies": [
+        {
+          "name": "app-policy",
+          "type": "iam_policy",
+          "document": {
+            "Version": "2012-10-17",
+            "Statement": [
+              {
+                "Effect": "Allow",
+                "Action": [
+                  "s3:GetObject",
+                  "s3:PutObject"
+                ],
+                "Resource": [
+                  "arn:aws:s3:::company-logs-prod/*"
+                ]
+              }
+            ]
+          },
+          "isOverlyPermissive": false,
+          "violations": []
+        }
+      ],
+      "encryption": {
+        "atRest": false,
+        "inTransit": false,
+        "keyManaged": false
+      },
+      "logging": {
+        "enabled": false,
+        "logTypes": []
+      },
+      "access": "internal",
+      "complianceStatus": {
+        "cisBenchmark": "unknown",
+        "soc2": "unknown",
+        "pci": "unknown",
+        "hipaa": "unknown",
+        "customPolicies": []
+      },
+      "drift": {
+        "detected": true,
+        "severity": "warning",
+        "fields": [
+          {
+            "path": "policies.admin-access-manual",
+            "declared": "absent",
+            "actual": "added",
+            "risk": "New policy \"admin-access-manual\" added outside IaC",
+            "isCritical": false
+          },
+          {
+            "path": "tags",
+            "declared": "1 tags",
+            "actual": "0 tags",
+            "risk": "Tags modified outside IaC",
+            "isCritical": false
+          }
+        ],
+        "lastDetected": "2026-07-03T14:11:05.988Z"
+      },
+      "createdAt": "2026-07-03T14:11:05.987Z",
+      "modifiedAt": "2026-07-03T14:11:05.987Z",
+      "createdBy": "unknown",
+      "costEstimate": 0,
+      "notes": []
+    },
+    {
+      "id": "arn:aws:rds:us-east-1:123456789012:db/main-db",
+      "type": "compute",
+      "provider": "aws",
+      "name": "main-db",
+      "serviceType": "aws_db_instance",
+      "environment": "prod",
+      "declaredState": {
+        "exists": true,
+        "source": "modules/database/rds.tf",
+        "lastModified": "2026-07-03T14:11:05.987Z",
+        "rawConfig": {
+          "address": "aws_db_instance.main",
+          "arn": "arn:aws:rds:us-east-1:123456789012:db/main-db",
+          "resource_type": "aws_db_instance",
+          "name": "main-db",
+          "tags": {
+            "Name": "main-db",
+            "Environment": "production",
+            "Criticality": "critical"
+          },
+          "storage_encrypted": true,
+          "kms_key_id": "arn:aws:kms:us-east-1:123456789012:key/kms-001",
+          "publicly_accessible": false,
+          "file_path": "modules/database/rds.tf"
+        }
+      },
+      "actualState": {
+        "exists": true,
+        "region": "us-east-1",
+        "account": "123456789012",
+        "rawAttributes": {
+          "arn": "arn:aws:rds:us-east-1:123456789012:db/main-db",
+          "resource_type": "aws_db_instance",
+          "name": "main-db",
+          "tags": {
+            "Name": "main-db",
+            "Environment": "production"
+          },
+          "region": "us-east-1",
+          "account_id": "123456789012",
+          "storage_encrypted": false,
+          "publicly_accessible": false
+        }
+      },
+      "criticality": "critical",
+      "isManaged": true,
+      "dependencies": [
+        "arn:aws:kms:us-east-1:123456789012:key/kms-001"
+      ],
+      "dependents": [],
+      "networkExposure": "private",
+      "blastRadius": 0,
+      "tags": {
+        "Name": "main-db",
+        "Environment": "production",
+        "Criticality": "critical"
+      },
+      "policies": [],
+      "encryption": {
+        "atRest": true,
+        "inTransit": false,
+        "keyManaged": true
+      },
+      "logging": {
+        "enabled": false,
+        "logTypes": []
+      },
+      "access": "internal",
+      "complianceStatus": {
+        "cisBenchmark": "unknown",
+        "soc2": "unknown",
+        "pci": "unknown",
+        "hipaa": "unknown",
+        "customPolicies": []
+      },
+      "drift": {
+        "detected": true,
+        "severity": "critical",
+        "fields": [
+          {
+            "path": "encryption.atRest",
+            "declared": true,
+            "actual": false,
+            "risk": "Encryption at rest was disabled or removed",
+            "isCritical": true
+          },
+          {
+            "path": "tags",
+            "declared": "3 tags",
+            "actual": "2 tags",
+            "risk": "Tags modified outside IaC",
+            "isCritical": false
+          }
+        ],
+        "lastDetected": "2026-07-03T14:11:05.989Z"
+      },
+      "createdAt": "2026-07-03T14:11:05.987Z",
+      "modifiedAt": "2026-07-03T14:11:05.987Z",
+      "createdBy": "unknown",
+      "costEstimate": 0,
+      "notes": []
+    },
+    {
+      "id": "arn:aws:ec2:us-east-1:123456789012:instance/i-099",
+      "type": "compute",
+      "provider": "aws",
+      "name": "bastion-staging",
+      "serviceType": "aws_instance",
+      "environment": "staging",
+      "declaredState": {
+        "exists": true,
+        "source": "modules/bastion/main.tf",
+        "lastModified": "2026-07-03T14:11:05.987Z",
+        "rawConfig": {
+          "address": "aws_instance.bastion",
+          "arn": "arn:aws:ec2:us-east-1:123456789012:instance/i-099",
+          "resource_type": "aws_instance",
+          "name": "bastion-staging",
+          "tags": {
+            "Name": "bastion-staging",
+            "Environment": "staging"
+          },
+          "file_path": "modules/bastion/main.tf"
+        }
+      },
+      "actualState": {
+        "exists": false,
+        "region": "",
+        "account": "",
+        "rawAttributes": {}
+      },
+      "criticality": "medium",
+      "isManaged": true,
+      "dependencies": [],
+      "dependents": [],
+      "networkExposure": "unknown",
+      "blastRadius": 0,
+      "tags": {
+        "Name": "bastion-staging",
+        "Environment": "staging"
+      },
+      "policies": [],
+      "encryption": {
+        "atRest": false,
+        "inTransit": false,
+        "keyManaged": false
+      },
+      "logging": {
+        "enabled": false,
+        "logTypes": []
+      },
+      "access": "internal",
+      "complianceStatus": {
+        "cisBenchmark": "unknown",
+        "soc2": "unknown",
+        "pci": "unknown",
+        "hipaa": "unknown",
+        "customPolicies": []
+      },
+      "drift": {
+        "detected": true,
+        "severity": "warning",
+        "fields": [
+          {
+            "path": "resource",
+            "declared": "present",
+            "actual": "absent",
+            "risk": "Resource defined in IaC but does not exist in cloud — failed deployment?"
+          }
+        ],
+        "lastDetected": "2026-07-03T14:11:05.989Z"
+      },
+      "createdAt": "2026-07-03T14:11:05.988Z",
+      "modifiedAt": "2026-07-03T14:11:05.988Z",
+      "createdBy": "unknown",
+      "costEstimate": 0,
+      "notes": []
+    },
+    {
+      "id": "arn:aws:s3:::manual-backup-bucket",
+      "type": "storage",
+      "provider": "aws",
+      "name": "manual-backup-bucket",
+      "serviceType": "aws_s3_bucket",
+      "environment": "unknown",
+      "declaredState": {
+        "exists": false,
+        "source": "",
+        "lastModified": "",
+        "rawConfig": {}
+      },
+      "actualState": {
+        "exists": true,
+        "region": "us-east-1",
+        "account": "123456789012",
+        "rawAttributes": {
+          "arn": "arn:aws:s3:::manual-backup-bucket",
+          "resource_type": "aws_s3_bucket",
+          "name": "manual-backup-bucket",
+          "tags": {
+            "Name": "manual-backup-bucket"
+          },
+          "region": "us-east-1",
+          "account_id": "123456789012",
+          "public_access": false,
+          "encryption": {
+            "enabled": false
+          }
+        }
+      },
+      "criticality": "medium",
+      "isManaged": false,
+      "dependencies": [],
+      "dependents": [],
+      "networkExposure": "unknown",
+      "blastRadius": 0,
+      "tags": {
+        "Name": "manual-backup-bucket"
+      },
+      "policies": [],
+      "encryption": {
+        "atRest": false,
+        "inTransit": false,
+        "keyManaged": false
+      },
+      "logging": {
+        "enabled": false,
+        "logTypes": []
+      },
+      "access": "internal",
+      "complianceStatus": {
+        "cisBenchmark": "unknown",
+        "soc2": "unknown",
+        "pci": "unknown",
+        "hipaa": "unknown",
+        "customPolicies": []
+      },
+      "drift": {
+        "detected": true,
+        "severity": "critical",
+        "fields": [
+          {
+            "path": "resource",
+            "declared": "absent",
+            "actual": "present",
+            "risk": "Resource exists in cloud but is NOT defined in IaC — manual creation or drift"
+          }
+        ],
+        "lastDetected": "2026-07-03T14:11:05.989Z"
+      },
+      "createdAt": "2026-07-03T14:11:05.989Z",
+      "modifiedAt": "2026-07-03T14:11:05.989Z",
+      "createdBy": "unknown",
+      "costEstimate": 0,
+      "notes": []
+    }
+  ]
+}

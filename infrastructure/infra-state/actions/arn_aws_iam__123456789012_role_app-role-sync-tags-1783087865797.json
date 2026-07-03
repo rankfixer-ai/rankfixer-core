@@ -1,0 +1,19 @@
+{
+  "actionId": "arn:aws:iam::123456789012:role/app-role-sync-tags-1783087865797",
+  "currentState": "skipped",
+  "stateHistory": [
+    {
+      "from": "initial",
+      "to": "pending",
+      "timestamp": "2026-07-03T14:11:05.854Z",
+      "metadata": {}
+    },
+    {
+      "from": "pending",
+      "to": "skipped",
+      "timestamp": "2026-07-03T14:11:05.976Z",
+      "metadata": {}
+    }
+  ],
+  "lastUpdated": "2026-07-03T14:11:05.976Z"
+}

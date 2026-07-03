@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rankfixer Platform — Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: #f3f4f6; min-height: 100vh; }
+@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+.spinner { animation: spin 1s linear infinite; width: 20px; height: 20px; border: 3px solid #e5e7eb; border-top-color: #3b82f6; border-radius: 50%; display: inline-block; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel" data-type="module">
+// =============================================================================
+// HELPERS
+// =============================================================================
+function formatTimestamp(isoString) {
+    if (!isoString) return '';
+    const date = new Date(isoString);
+    const now = new Date();
+    const diffMs = now - date;
+    const diffMins = Math.floor(diffMs / 60000);
+    if (diffMins < 1) return 'Just now';
+    if (diffMins < 60) return `${diffMins}m ago`;
+    const diffHours = Math.floor(diffMins / 60);
+    if (diffHours < 24) return `${diffHours}h ago`;
+    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+}
+
+// =============================================================================
+// BUTTON STYLES
+// =============================================================================
+const approveButtonStyle = { padding: '8px 16px', backgroundColor: '#1d4ed8', color: '#ffffff', border: 'none', borderRadius: 8, fontSize: 13, fontWeight: 600, cursor: 'pointer' };
+const dismissButtonStyle = { padding: '8px 16px', backgroundColor: '#ffffff', color: '#6b7280', border: '1px solid #d1d5db', borderRadius: 8, fontSize: 13, fontWeight: 500, cursor: 'pointer' };
+const detailButtonStyle = { padding: '8px 16px', backgroundColor: '#ffffff', color: '#374151', border: '1px solid #d1d5db', borderRadius: 8, fontSize: 13, fontWeight: 500, cursor: 'pointer' };
+
+// =============================================================================
+// SCORE GAUGE
+// =============================================================================
+function ScoreGauge({ score = 0, size = 200, strokeWidth = 12 }) {
+    const radius = (size - strokeWidth) / 2;
+    const circumference = radius * 2 * Math.PI;
+    const offset = circumference - (score / 100) * circumference;
+    const color = score >= 80 ? '#22c55e' : score >= 60 ? '#eab308' : '#ef4444';
+    return (
+        <div style={{ position: 'relative', width: size, height: size, margin: '0 auto' }}>
+            <svg width={size} height={size}>
+                <circle cx={size/2} cy={size/2} r={radius} fill="none" stroke="#e5e7eb" strokeWidth={strokeWidth} />
+                <circle cx={size/2} cy={size/2} r={radius} fill="none" stroke={color}
+                    strokeWidth={strokeWidth} strokeLinecap="round"
+                    strokeDasharray={circumference} strokeDashoffset={offset}
+                    transform={`rotate(-90 ${size/2} ${size/2})`}
+                    style={{ transition: 'stroke-dashoffset 1s ease-in-out' }} />
+            </svg>
+            <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', textAlign: 'center' }}>
+                <div style={{ fontSize: size * 0.22, fontWeight: 700, color: '#111827', lineHeight: 1 }}>{score}</div>
+                <div style={{ fontSize: size * 0.08, color: '#6b7280', fontWeight: 500 }}>/100</div>
+            </div>
+        </div>
+    );
+}
+
+function TrendIndicator({ trend = 0, label = 'stable' }) {
+    const isPositive = trend > 0, isNegative = trend < 0;
+    const color = isPositive ? '#22c55e' : isNegative ? '#ef4444' : '#6b7280';
+    const arrow = isPositive ? '▲' : isNegative ? '▼' : '◆';
+    const text = isPositive ? `+${trend}` : isNegative ? `${trend}` : '—';
+    const statusText = label === 'better' ? 'Better than yesterday' : label === 'worse' ? 'Needs attention' : 'Holding steady';
+    return (
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, justifyContent: 'center' }}>
+            <span style={{ color, fontSize: 18, fontWeight: 700 }}>{arrow}</span>
+            <span style={{ color, fontSize: 24, fontWeight: 700 }}>{text}</span>
+            <span style={{ color: '#6b7280', fontSize: 14 }}>{statusText}</span>
+        </div>
+    );
+}
+
+function MiniStat({ label, value, suffix = '', warn = false }) {
+    return (
+        <div style={{ textAlign: 'center' }}>
+            <div style={{ fontSize: 20, fontWeight: 700, color: warn ? '#d97706' : '#111827' }}>{value}{suffix}</div>
+            <div style={{ fontSize: 11, color: '#6b7280' }}>{label}</div>
+        </div>
+    );
+}
+
+function ExecutiveSummary({ summary, stats }) {
+    return (
+        <div style={{ padding: 20 }}>
+            <h2 style={{ fontSize: 22, fontWeight: 700, color: '#111827', marginBottom: 8 }}>{summary.headline}</h2>
+            <p style={{ fontSize: 15, color: '#374151', marginBottom: 4 }}>{summary.subtext}</p>
+            <p style={{ fontSize: 15, color: summary.callToAction?.includes('attention') ? '#d97706' : '#22c55e', fontWeight: 500 }}>{summary.callToAction}</p>
+            <div style={{ display: 'flex', gap: 24, marginTop: 16, padding: 12, backgroundColor: '#f9fafb', borderRadius: 8 }}>
+                <MiniStat label="Auto-fixed" value={stats.autoFixedSinceLast} />
+                <MiniStat label="Hours saved" value={stats.manualHoursSaved} suffix="h" />
+                <MiniStat label="Pending" value={stats.pendingDecisions} warn={stats.pendingDecisions > 0} />
+                <MiniStat label="Regressions" value={stats.regressionsDetected} warn={stats.regressionsDetected > 0} />
+            </div>
+            {summary.lastAuditDate && (
+                <div style={{ fontSize: 12, color: '#9ca3af', marginTop: 8 }}>
+                    Last audit: {formatTimestamp(summary.lastAuditDate)}
+                    {summary.auditDuration && ` • Completed in ${summary.auditDuration}`}
+                </div>
+            )}
+        </div>
+    );
+}
+
+function DomainBreakdown({ domains = [] }) {
+    return (
+        <div style={{ padding: 12 }}>
+            {domains.map(domain => (
+                <div key={domain.name} style={{ marginBottom: 12 }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 4 }}>
+                        <span style={{ fontSize: 14, fontWeight: 500, color: '#374151' }}>{domain.name}</span>
+                        <span style={{ fontSize: 14, fontWeight: 600, color: domain.status === 'healthy' ? '#22c55e' : domain.status === 'warning' ? '#eab308' : '#ef4444' }}>
+                            {domain.score ?? '—'}
+                            {domain.trend !== 0 && <span style={{ fontSize: 11, marginLeft: 4 }}>{domain.trend > 0 ? '▲' : '▼'} {Math.abs(domain.trend)}</span>}
+                        </span>
+                    </div>
+                    <div style={{ height: 6, backgroundColor: '#e5e7eb', borderRadius: 3, overflow: 'hidden' }}>
+                        <div style={{ height: '100%', width: `${domain.score || 0}%`, backgroundColor: (domain.score || 0) >= 80 ? '#22c55e' : (domain.score || 0) >= 60 ? '#eab308' : '#ef4444', borderRadius: 3, transition: 'width 1s ease-in-out' }} />
+                    </div>
+                </div>
+            ))}
+        </div>
+    );
+}
+
+function HealthTrend({ data = [] }) {
+    if (data.length < 2) return null;
+    const maxScore = 100, minScore = Math.min(...data.map(d => d.overall), 60), range = maxScore - minScore;
+    const points = data.map((d, i) => { const x = (i / (data.length - 1)) * 100; const y = 100 - ((d.overall - minScore) / range) * 100; return `${x},${y}`; }).join(' ');
+    const isUp = data[data.length - 1].overall >= data[0].overall;
+    return (
+        <div style={{ padding: 12 }}>
+            <div style={{ fontSize: 13, color: '#6b7280', marginBottom: 4 }}>30-day trend</div>
+            <svg width="100%" height="60" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <polyline points={points} fill="none" stroke={isUp ? '#22c55e' : '#ef4444'} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11, color: '#9ca3af' }}>
+                <span>{data[0].date}</span><span>{data[data.length-1].date}</span>
+            </div>
+        </div>
+    );
+}
+
+function GovernanceToggle({ governance, onChange }) {
+    const isAuto = governance.mode === 'auto-pilot';
+    return (
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 12, backgroundColor: '#f9fafb', borderRadius: 12, border: '1px solid #e5e7eb', marginTop: 8 }}>
+            <div>
+                <div style={{ fontWeight: 600, fontSize: 13, color: '#111827' }}>{isAuto ? '🟢 Auto-Pilot' : '🟡 Co-Pilot'}</div>
+                <div style={{ fontSize: 11, color: '#6b7280', marginTop: 2 }}>{isAuto ? 'Minor fixes applied automatically.' : 'All fixes held for your approval.'}</div>
+            </div>
+            <div onClick={() => onChange(!isAuto)} style={{ width: 48, height: 26, borderRadius: 13, backgroundColor: isAuto ? '#22c55e' : '#d1d5db', position: 'relative', cursor: 'pointer', transition: 'background-color 0.2s', flexShrink: 0 }}>
+                <div style={{ width: 22, height: 22, borderRadius: 11, backgroundColor: '#ffffff', position: 'absolute', top: 2, left: isAuto ? 24 : 2, transition: 'left 0.2s', boxShadow: '0 1px 3px rgba(0,0,0,0.2)' }} />
+            </div>
+        </div>
+    );
+}
+
+function ActivityCard({ activity, onApprove, onDismiss, onViewDetails }) {
+    const icons = { fixed: '✅', decision_required: '⚠️', detected: '🔍', rolled_back: '🔁', trend_alert: '📊' };
+    const icon = icons[activity.type] || '📋';
+    const isActionable = activity.type === 'decision_required';
+    return (
+        <div style={{ border: `1px solid ${isActionable ? '#f59e0b' : '#e5e7eb'}`, borderRadius: 12, padding: 20, marginBottom: 12, backgroundColor: isActionable ? '#fffbeb' : '#ffffff', borderLeft: `4px solid ${isActionable ? '#f59e0b' : '#22c55e'}` }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12 }}>
+                <span style={{ fontSize: 20 }}>{icon}</span>
+                <div style={{ flex: 1 }}>
+                    <div style={{ fontWeight: 600, fontSize: 15, color: '#111827' }}>{activity.title}</div>
+                    {activity.subtitle && <div style={{ fontSize: 13, color: '#6b7280' }}>{activity.subtitle}</div>}
+                </div>
+                <span style={{ fontSize: 12, color: '#9ca3af' }}>{formatTimestamp(activity.timestamp)}</span>
+            </div>
+            {activity.type === 'fixed' && (
+                <div style={{ backgroundColor: '#f9fafb', borderRadius: 8, padding: 12, marginBottom: 12, fontSize: 13 }}>
+                    <div style={{ color: '#ef4444', marginBottom: 4 }}><strong>Before:</strong> {activity.beforeState || activity.risk}</div>
+                    <div style={{ color: '#22c55e' }}><strong>After:</strong> {activity.afterState || 'Fixed'}</div>
+                </div>
+            )}
+            {isActionable && (
+                <div style={{ backgroundColor: '#fef3c7', borderRadius: 8, padding: 12, marginBottom: 12, fontSize: 13, color: '#92400e' }}>
+                    <strong>Risk:</strong> {activity.risk}
+                    {activity.blastRadius > 0 && <span> • Affects {activity.blastRadius} {activity.blastRadiusLabel || 'resources'}</span>}
+                    <br /><strong>Recommended:</strong> {activity.recommendation}
+                </div>
+            )}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div style={{ display: 'flex', gap: 16, fontSize: 12, color: '#6b7280' }}>
+                    {activity.affectedCount > 0 && <span>📄 {activity.affectedCount} {activity.affectedLabel || 'pages'}</span>}
+                    {activity.executionTime && <span>⏱ {activity.executionTime}</span>}
+                    {activity.reversible && <span style={{ color: '#22c55e' }}>🔁 Reversible</span>}
+                </div>
+                <div style={{ display: 'flex', gap: 8 }}>
+                    {isActionable ? (<><button style={approveButtonStyle} onClick={() => onApprove?.(activity.id)}>Approve fix</button><button style={dismissButtonStyle} onClick={() => onDismiss?.(activity.id)}>Dismiss</button></>) : (<button style={detailButtonStyle} onClick={() => onViewDetails?.(activity.id)}>See details</button>)}
+                </div>
+            </div>
+        </div>
+    );
+}
+
+function DetailDrawer({ activity, onClose, onApprove }) {
+    return (<>
+        <div onClick={onClose} style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0,0,0,0.3)', zIndex: 100 }} />
+        <div style={{ position: 'fixed', top: 0, right: 0, bottom: 0, width: 480, maxWidth: '90vw', backgroundColor: '#ffffff', boxShadow: '-4px 0 24px rgba(0,0,0,0.12)', zIndex: 101, padding: 32, overflowY: 'auto' }}>
+            <button onClick={onClose} style={{ position: 'absolute', top: 16, right: 16, background: 'none', border: 'none', fontSize: 20, cursor: 'pointer', color: '#6b7280' }}>✕</button>
+            <div style={{ display: 'inline-block', padding: '4px 12px', borderRadius: 20, fontSize: 12, fontWeight: 600, marginBottom: 16, backgroundColor: activity.type === 'decision_required' ? '#fef3c7' : activity.type === 'fixed' ? '#dcfce7' : '#f3f4f6', color: activity.type === 'decision_required' ? '#92400e' : activity.type === 'fixed' ? '#166534' : '#374151' }}>
+                {activity.type === 'fixed' ? '✅ Fixed' : activity.type === 'decision_required' ? '⚠️ Needs Decision' : activity.type === 'detected' ? '🔍 Detected' : activity.type === 'rolled_back' ? '🔁 Rolled Back' : '📊 Alert'}
+            </div>
+            <h3 style={{ fontSize: 18, fontWeight: 700, color: '#111827', marginBottom: 8 }}>{activity.title}</h3>
+            {activity.subtitle && <p style={{ fontSize: 14, color: '#6b7280', marginBottom: 20 }}>{activity.subtitle}</p>}
+            {activity.type === 'fixed' ? (
+                <div style={{ marginBottom: 20 }}>
+                    <div style={{ backgroundColor: '#fef2f2', borderRadius: 8, padding: 16, marginBottom: 12 }}><div style={{ fontSize: 12, color: '#991b1b', fontWeight: 600, marginBottom: 4 }}>BEFORE</div><div style={{ fontSize: 14, color: '#7f1d1d' }}>{activity.beforeState}</div></div>
+                    <div style={{ backgroundColor: '#f0fdf4', borderRadius: 8, padding: 16 }}><div style={{ fontSize: 12, color: '#166534', fontWeight: 600, marginBottom: 4 }}>AFTER</div><div style={{ fontSize: 14, color: '#14532d' }}>{activity.afterState}</div></div>
+                </div>
+            ) : (
+                <div style={{ backgroundColor: '#fffbeb', borderRadius: 8, padding: 16, marginBottom: 20 }}>
+                    <div style={{ fontSize: 14, color: '#92400e', marginBottom: 8 }}><strong>Risk:</strong> {activity.risk}</div>
+                    {activity.blastRadius > 0 && <div style={{ fontSize: 14, color: '#92400e', marginBottom: 8 }}><strong>Blast Radius:</strong> {activity.blastRadius} {activity.blastRadiusLabel || 'resources'}</div>}
+                    <div style={{ fontSize: 14, color: '#92400e' }}><strong>Recommendation:</strong> {activity.recommendation}</div>
+                </div>
+            )}
+            <div style={{ display: 'flex', gap: 16, padding: 12, backgroundColor: '#f9fafb', borderRadius: 8, marginBottom: 24, fontSize: 13, color: '#6b7280' }}>
+                {activity.affectedCount > 0 && <div>📄 {activity.affectedCount} {activity.affectedLabel || 'items'}</div>}
+                {activity.executionTime && <div>⏱ {activity.executionTime}</div>}
+                {activity.reversible && <div style={{ color: '#22c55e' }}>🔁 Reversible</div>}
+            </div>
+            {activity.type === 'decision_required' && onApprove && (
+                <div style={{ display: 'flex', gap: 12 }}>
+                    <button onClick={onApprove} style={{ flex: 1, padding: '12px 24px', backgroundColor: '#1d4ed8', color: '#ffffff', border: 'none', borderRadius: 10, fontSize: 15, fontWeight: 600, cursor: 'pointer' }}>✅ Approve & Apply Fix</button>
+                    <button onClick={onClose} style={{ flex: 1, padding: '12px 24px', backgroundColor: '#ffffff', color: '#6b7280', border: '1px solid #d1d5db', borderRadius: 10, fontSize: 15, fontWeight: 500, cursor: 'pointer' }}>Dismiss</button>
+                </div>
+            )}
+            <div style={{ fontSize: 12, color: '#9ca3af', marginTop: 16 }}>Detected: {new Date(activity.timestamp).toLocaleString()}</div>
+        </div>
+    </>);
+}
+
+function Toast({ message, type = 'info' }) {
+    const bgColor = type === 'success' ? '#22c55e' : type === 'error' ? '#ef4444' : '#3b82f6';
+    return (<div style={{ position: 'fixed', bottom: 24, right: 24, backgroundColor: bgColor, color: '#ffffff', padding: '12px 24px', borderRadius: 10, fontSize: 14, fontWeight: 500, boxShadow: '0 4px 12px rgba(0,0,0,0.15)', zIndex: 200 }}>{message}</div>);
+}
+
+// =============================================================================
+// AUDIT RESULTS — Renders the output of a Site Mapper v2 audit
+// =============================================================================
+function AuditResults({ report, duration }) {
+    const { site, templates, globalContradictions } = report;
+    const totalIssues = templates.reduce((s, t) => s + t.templateIssues.length + t.pageIssues.length, 0);
+    const criticalCount = templates.reduce((s, t) => s + t.templateIssues.filter(i => i.severity === 'critical').length + t.pageIssues.filter(i => i.severity === 'critical').length, 0) + globalContradictions.filter(c => c.severity === 'critical').length;
+    const score = Math.max(0, 100 - (criticalCount * 15) - (totalIssues * 2));
+
+    return (
+        <div style={{ backgroundColor: '#ffffff', borderRadius: 12, border: '1px solid #e5e7eb', marginBottom: 24, overflow: 'hidden' }}>
+            {/* Header banner */}
+            <div style={{ background: 'linear-gradient(135deg, #1e3a5f, #2563eb)', padding: 24, color: '#ffffff' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                    <div>
+                        <div style={{ fontSize: 13, color: '#93c5fd', marginBottom: 4 }}>Site Mapper v2 Audit</div>
+                        <h2 style={{ fontSize: 20, fontWeight: 700, marginBottom: 4 }}>{site.url}</h2>
+                        <div style={{ display: 'flex', gap: 16, fontSize: 13, color: '#bfdbfe', marginTop: 8 }}>
+                            <span>🏷 {site.archetype}</span>
+                            <span>📄 {site.totalPages} pages</span>
+                            <span>📐 {site.templatesDiscovered} templates</span>
+                            <span>⏱ {duration}</span>
+                        </div>
+                    </div>
+                    <ScoreGauge score={score} size={90} strokeWidth={8} />
+                </div>
+            </div>
+
+            <div style={{ padding: 24 }}>
+                {/* Stats row */}
+                <div style={{ display: 'flex', gap: 16, marginBottom: 24, padding: 16, backgroundColor: '#f9fafb', borderRadius: 8 }}>
+                    <div style={{ flex: 1, textAlign: 'center' }}>
+                        <div style={{ fontSize: 24, fontWeight: 700, color: criticalCount > 0 ? '#ef4444' : '#22c55e' }}>{criticalCount}</div>
+                        <div style={{ fontSize: 12, color: '#6b7280' }}>Critical</div>
+                    </div>
+                    <div style={{ flex: 1, textAlign: 'center' }}>
+                        <div style={{ fontSize: 24, fontWeight: 700, color: '#111827' }}>{totalIssues}</div>
+                        <div style={{ fontSize: 12, color: '#6b7280' }}>Total Issues</div>
+                    </div>
+                    <div style={{ flex: 1, textAlign: 'center' }}>
+                        <div style={{ fontSize: 24, fontWeight: 700, color: '#111827' }}>{globalContradictions.length}</div>
+                        <div style={{ fontSize: 12, color: '#6b7280' }}>Contradictions</div>
+                    </div>
+                    <div style={{ flex: 1, textAlign: 'center' }}>
+                        <div style={{ fontSize: 24, fontWeight: 700, color: '#111827' }}>{templates.length}</div>
+                        <div style={{ fontSize: 12, color: '#6b7280' }}>Templates</div>
+                    </div>
+                </div>
+
+                {/* Templates */}
+                <h3 style={{ fontSize: 15, fontWeight: 600, color: '#111827', marginBottom: 12 }}>Templates & Issues</h3>
+                {templates.map((tp, i) => (
+                    <div key={i} style={{ border: '1px solid #e5e7eb', borderRadius: 10, padding: 16, marginBottom: 12 }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
+                            <div>
+                                <span style={{ fontFamily: 'monospace', fontSize: 13, color: '#2563eb', fontWeight: 600 }}>{tp.pattern}</span>
+                                <span style={{ marginLeft: 10, fontSize: 13, color: '#6b7280' }}>→ {tp.pageType}</span>
+                            </div>
+                            <span style={{ fontSize: 12, color: '#9ca3af' }}>{tp.instanceCount} pages</span>
+                        </div>
+                        {tp.templateIssues.length === 0 && tp.pageIssues.length === 0 ? (
+                            <div style={{ fontSize: 12, color: '#22c55e', paddingLeft: 4 }}>✓ No issues</div>
+                        ) : (
+                            <>
+                                {tp.templateIssues.map((issue, j) => (
+                                    <div key={`ti-${j}`} style={{ fontSize: 12, padding: '6px 10px', marginTop: 4, backgroundColor: issue.severity === 'critical' ? '#fef2f2' : issue.severity === 'warning' ? '#fffbeb' : '#f0fdf4', borderRadius: 6, color: issue.severity === 'critical' ? '#991b1b' : issue.severity === 'warning' ? '#92400e' : '#166534' }}>
+                                        <strong>[{issue.severity.toUpperCase()}]</strong> {issue.type}: {issue.message} <span style={{ color: '#9ca3af' }}>(~{issue.estimatedAffectedPages} pages)</span>
+                                    </div>
+                                ))}
+                                {tp.pageIssues.map((issue, j) => (
+                                    <div key={`pi-${j}`} style={{ fontSize: 12, padding: '6px 10px', marginTop: 4, backgroundColor: issue.severity === 'critical' ? '#fef2f2' : issue.severity === 'warning' ? '#fffbeb' : '#f0fdf4', borderRadius: 6, color: issue.severity === 'critical' ? '#991b1b' : issue.severity === 'warning' ? '#92400e' : '#166534' }}>
+                                        <strong>[{issue.severity.toUpperCase()}]</strong> {issue.type}: {issue.message}
+                                    </div>
+                                ))}
+                            </>
+                        )}
+                    </div>
+                ))}
+
+                {/* Global contradictions */}
+                {globalContradictions.length > 0 && (
+                    <div style={{ marginTop: 8 }}>
+                        <h3 style={{ fontSize: 15, fontWeight: 600, color: '#111827', marginBottom: 12 }}>Global Contradictions</h3>
+                        {globalContradictions.map((c, i) => (
+                            <div key={i} style={{ fontSize: 13, padding: '8px 12px', marginBottom: 6, backgroundColor: c.severity === 'critical' ? '#fef2f2' : '#fffbeb', borderRadius: 8, color: c.severity === 'critical' ? '#991b1b' : '#92400e' }}>
+                                <strong>[{c.severity.toUpperCase()}]</strong> {c.type}: {c.message}
+                            </div>
+                        ))}
+                    </div>
+                )}
+            </div>
+        </div>
+    );
+}
+
+// =============================================================================
+// MOCK DATA
+// =============================================================================
+const MOCK_RESPONSE = {
+    health: { overall: 78, trend: 3, trendLabel: "better", domains: [
+        { name: "SEO", score: 82, trend: 2, status: "healthy" },
+        { name: "Infrastructure", score: 74, trend: 5, status: "warning" },
+        { name: "GEO Citation", score: 67, trend: 0, status: "new" }
+    ]},
+    executiveSummary: { headline: "You're better than yesterday.", subtext: "3 critical issues were fixed automatically.", callToAction: "1 decision needs your attention.", lastAuditDate: "2026-07-03T14:10:29Z", auditDuration: "68.6s" },
+    stats: { totalAssets: 2333, autoFixedSinceLast: 12, pendingDecisions: 1, regressionsDetected: 0, manualHoursSaved: 4.5, driftIncidentsPrevented: 12 },
+    activityFeed: [
+        { id: "act-001", timestamp: new Date(Date.now() - 1000*60*15).toISOString(), type: "fixed", icon: "seo", title: "Repaired 4 broken canonical URLs", subtitle: "across your product template", beforeState: "4 product pages pointing to dead canonical targets, wasting crawl budget", afterState: "All canonicals self-referencing correctly. Indexing signals restored.", affectedCount: 243, affectedLabel: "product pages", executionTime: "3.2s", reversible: true },
+        { id: "act-002", timestamp: new Date(Date.now() - 1000*60*60*4).toISOString(), type: "decision_required", icon: "security", title: "Production firewall rule opened port 22", subtitle: "to the internet on api-server-prod", risk: "SSH exposed to 0.0.0.0/0", blastRadius: 12, blastRadiusLabel: "dependent resources", recommendation: "Restrict to internal VPC only" },
+        { id: "act-003", timestamp: new Date(Date.now() - 1000*60*60*6).toISOString(), type: "fixed", icon: "security", title: "Blocked public access on S3 bucket", subtitle: "company-logs-prod was publicly readable", beforeState: "Bucket ACL set to public-read. 12,400 objects exposed.", afterState: "Public access blocked. Bucket is now private. Encryption enabled.", affectedCount: 1, affectedLabel: "bucket", executionTime: "1.1s", reversible: true },
+        { id: "act-004", timestamp: new Date(Date.now() - 1000*60*60*8).toISOString(), type: "fixed", icon: "seo", title: "Added missing meta descriptions", subtitle: "to collection template", beforeState: "1,053 collection pages had no meta description", afterState: "Template updated with dynamic meta description. All pages covered.", affectedCount: 1053, affectedLabel: "collection pages", executionTime: "2.8s", reversible: true },
+        { id: "act-005", timestamp: new Date(Date.now() - 1000*60*60*24).toISOString(), type: "detected", icon: "geo", title: "Citation gap detected vs competitors", subtitle: "on product pages for 'sustainable running shoes'", risk: "Your CWS is 0.42 vs competitor avg 0.71. AI likely to cite competitors instead.", recommendation: "Add 3-4 cited statistics per page with inline source attribution", affectedCount: 484, affectedLabel: "product pages" },
+        { id: "act-006", timestamp: new Date(Date.now() - 1000*60*60*24*2).toISOString(), type: "fixed", icon: "seo", title: "Consolidated multiple H1 tags", subtitle: "across 15 individual pages", beforeState: "Pages had 2-5 H1 tags each, confusing search engines", afterState: "Each page now has exactly one H1. Heading hierarchy restored.", affectedCount: 15, affectedLabel: "pages", executionTime: "4.1s", reversible: true }
+    ],
+    healthTrend: [
+        { date: "2026-06-28", overall: 72 }, { date: "2026-06-30", overall: 75 }, { date: "2026-07-01", overall: 74 }, { date: "2026-07-02", overall: 76 }, { date: "2026-07-03", overall: 78 }
+    ],
+    governanceStatus: { mode: "auto-pilot", autoFixEnabled: true, pendingApprovalCount: 1, profileName: "Standard" }
+};
+
+// =============================================================================
+// INTERACTIVE DASHBOARD
+// =============================================================================
+function InteractiveDashboard() {
+    const [data, setData] = React.useState(MOCK_RESPONSE);
+    const [selectedActivity, setSelectedActivity] = React.useState(null);
+    const [toast, setToast] = React.useState(null);
+
+    // Audit state
+    const [auditUrl, setAuditUrl] = React.useState('');
+    const [auditRunning, setAuditRunning] = React.useState(false);
+    const [auditResult, setAuditResult] = React.useState(null);
+    const [auditError, setAuditError] = React.useState(null);
+    const [auditHistory, setAuditHistory] = React.useState([]);
+
+    const showToast = (message, type = 'info') => {
+        setToast({ message, type });
+        setTimeout(() => setToast(null), 3000);
+    };
+
+    const handleApprove = React.useCallback((activityId) => {
+        setData(prev => {
+            const updatedFeed = prev.activityFeed.map(a => a.id !== activityId ? a : { ...a, type: 'fixed', title: `Approved: ${a.title}`, afterState: `Fix applied. ${a.recommendation}`, executionTime: 'Just now', reversible: true });
+            return { ...prev, activityFeed: updatedFeed, stats: { ...prev.stats, pendingDecisions: prev.stats.pendingDecisions - 1, autoFixedSinceLast: prev.stats.autoFixedSinceLast + 1 }, executiveSummary: { ...prev.executiveSummary, callToAction: prev.stats.pendingDecisions - 1 > 0 ? `${prev.stats.pendingDecisions - 1} decisions need your attention.` : "No decisions pending — you're all clear." } };
+        });
+        showToast('Fix approved and applied.', 'success');
+    }, []);
+
+    const handleDismiss = React.useCallback((activityId) => {
+        setData(prev => {
+            const updatedFeed = prev.activityFeed.map(a => a.id !== activityId ? a : { ...a, type: 'detected', title: `Dismissed: ${a.title}`, subtitle: 'Marked as acknowledged — no action taken' });
+            return { ...prev, activityFeed: updatedFeed, stats: { ...prev.stats, pendingDecisions: prev.stats.pendingDecisions - 1 }, executiveSummary: { ...prev.executiveSummary, callToAction: prev.stats.pendingDecisions - 1 > 0 ? `${prev.stats.pendingDecisions - 1} decisions need your attention.` : "No decisions pending — you're all clear." } };
+        });
+        showToast('Issue dismissed.', 'info');
+    }, []);
+
+    const handleGovernanceChange = React.useCallback((isAuto) => {
+        setData(prev => ({ ...prev, governanceStatus: { ...prev.governanceStatus, mode: isAuto ? 'auto-pilot' : 'co-pilot', autoFixEnabled: isAuto } }));
+        showToast(isAuto ? 'Auto-Pilot enabled.' : 'Co-Pilot enabled. All fixes will wait for approval.', 'info');
+    }, []);
+
+    const handleViewDetails = React.useCallback((activityId) => {
+        setSelectedActivity(data.activityFeed.find(a => a.id === activityId));
+    }, [data.activityFeed]);
+
+    // ── Run Audit ──────────────────────────────────────────────────
+    const handleRunAudit = React.useCallback(async () => {
+        const url = auditUrl.trim();
+        if (!url) { showToast('Please enter a URL', 'error'); return; }
+        if (!url.startsWith('http://') && !url.startsWith('https://')) {
+            showToast('URL must start with http:// or https://', 'error');
+            return;
+        }
+
+        setAuditRunning(true);
+        setAuditError(null);
+        setAuditResult(null);
+
+        try {
+            const res = await fetch('http://127.0.0.1:3003/api/audit', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ url })
+            });
+
+            const json = await res.json();
+
+            if (!json.success) {
+                setAuditError(json.error || 'Audit failed');
+                showToast(`Audit failed: ${json.error}`, 'error');
+            } else {
+                setAuditResult({ report: json.report, duration: json.duration });
+                setAuditHistory(prev => [{ url, timestamp: new Date().toISOString(), report: json.report, duration: json.duration }, ...prev].slice(0, 10));
+                showToast(`Audit complete in ${json.duration}`, 'success');
+            }
+        } catch (err) {
+            const msg = err.message === 'Failed to fetch'
+                ? 'Cannot reach bridge server. Start it with: node platform/bridge-server.js'
+                : err.message;
+            setAuditError(msg);
+            showToast(msg, 'error');
+        } finally {
+            setAuditRunning(false);
+        }
+    }, [auditUrl]);
+
+    const handleKeyDown = React.useCallback((e) => {
+        if (e.key === 'Enter' && !auditRunning) handleRunAudit();
+    }, [handleRunAudit, auditRunning]);
+
+    const interactiveFeed = data.activityFeed.map(a => ({
+        ...a, onApprove: a.type === 'decision_required' ? () => handleApprove(a.id) : undefined,
+        onDismiss: a.type === 'decision_required' ? () => handleDismiss(a.id) : undefined,
+        onViewDetails: () => handleViewDetails(a.id)
+    }));
+
+    const interactiveData = {
+        ...data, activityFeed: interactiveFeed,
+        governanceStatus: { ...data.governanceStatus, onChange: handleGovernanceChange }
+    };
+
+    const { health, executiveSummary, stats, healthTrend, governanceStatus } = interactiveData;
+
+    const hasNoServer = auditError === 'Cannot reach bridge server. Start it with: node platform/bridge-server.js';
+
+    return (<>
+        <div style={{ maxWidth: 960, margin: '0 auto', padding: 24 }}>
+            {/* Header */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 28 }}>
+                <h1 style={{ fontSize: 20, fontWeight: 700, color: '#111827' }}>Rankfixer Platform</h1>
+                <div style={{ fontSize: 13, color: '#6b7280' }}>Dashboard v2.0.1</div>
+            </div>
+
+            {/* ── AUDIT INPUT PANEL ──────────────────────────────── */}
+            <div style={{ backgroundColor: '#ffffff', borderRadius: 12, border: '1px solid #e5e7eb', padding: 20, marginBottom: 24 }}>
+                <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+                    <div style={{ flex: 1 }}>
+                        <label style={{ fontSize: 13, fontWeight: 600, color: '#374151', display: 'block', marginBottom: 6 }}>
+                            Run a Site Audit
+                        </label>
+                        <input
+                            type="text"
+                            placeholder="https://example.com"
+                            value={auditUrl}
+                            onChange={e => { setAuditUrl(e.target.value); setAuditError(null); }}
+                            onKeyDown={handleKeyDown}
+                            disabled={auditRunning}
+                            style={{
+                                width: '100%', padding: '10px 14px', fontSize: 15,
+                                border: '1px solid #d1d5db', borderRadius: 8,
+                                outline: 'none', fontFamily: 'inherit',
+                                backgroundColor: auditRunning ? '#f3f4f6' : '#ffffff'
+                            }}
+                        />
+                    </div>
+                    <button
+                        onClick={handleRunAudit}
+                        disabled={auditRunning || !auditUrl.trim()}
+                        style={{
+                            padding: '10px 24px', fontSize: 15, fontWeight: 600,
+                            backgroundColor: auditRunning ? '#9ca3af' : '#2563eb',
+                            color: '#ffffff', border: 'none', borderRadius: 8,
+                            cursor: auditRunning ? 'not-allowed' : 'pointer',
+                            opacity: (!auditUrl.trim() || auditRunning) ? 0.6 : 1,
+                            marginTop: 22, display: 'flex', alignItems: 'center', gap: 8
+                        }}
+                    >
+                        {auditRunning ? <><span className="spinner"></span> Auditing...</> : '🔍 Audit'}
+                    </button>
+                </div>
+                {/* Server not running warning */}
+                {hasNoServer && (
+                    <div style={{ marginTop: 12, padding: 10, backgroundColor: '#fef2f2', borderRadius: 8, fontSize: 13, color: '#991b1b' }}>
+                        Bridge server not running. Start it in a terminal:
+                        <code style={{ display: 'block', marginTop: 4, padding: '6px 10px', backgroundColor: '#fee2e2', borderRadius: 4, fontFamily: 'monospace' }}>
+                            cd "C:\Users\acibr\Desktop\Reason\Projects\Active\Site Mapper" &amp;&amp; node platform/bridge-server.js
+                        </code>
+                    </div>
+                )}
+            </div>
+
+            {/* ── AUDIT RESULTS ──────────────────────────────────── */}
+            {auditResult && <AuditResults report={auditResult.report} duration={auditResult.duration} />}
+            {auditError && !hasNoServer && (
+                <div style={{ backgroundColor: '#fef2f2', borderRadius: 12, padding: 16, marginBottom: 24, border: '1px solid #fecaca', color: '#991b1b', fontSize: 14 }}>{auditError}</div>
+            )}
+
+            {/* ── AUDIT HISTORY ──────────────────────────────────── */}
+            {auditHistory.length > 0 && (
+                <div style={{ marginBottom: 24 }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
+                        <h3 style={{ fontSize: 15, fontWeight: 600, color: '#111827' }}>Audit History</h3>
+                        <button onClick={() => setAuditHistory([])} style={{ background: 'none', border: 'none', fontSize: 12, color: '#9ca3af', cursor: 'pointer' }}>Clear</button>
+                    </div>
+                    {auditHistory.map((h, i) => (
+                        <div key={i} onClick={() => setAuditResult({ report: h.report, duration: h.duration })} style={{
+                            display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                            padding: '10px 16px', marginBottom: 6, backgroundColor: '#ffffff',
+                            borderRadius: 8, border: '1px solid #e5e7eb', cursor: 'pointer',
+                            fontSize: 13, color: '#374151'
+                        }}>
+                            <span style={{ fontFamily: 'monospace' }}>{h.url}</span>
+                            <div style={{ display: 'flex', gap: 16, fontSize: 12, color: '#9ca3af' }}>
+                                <span>{h.report.site.archetype}</span>
+                                <span>{h.report.site.totalPages} pages</span>
+                                <span>{h.duration}</span>
+                                <span>{new Date(h.timestamp).toLocaleTimeString()}</span>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            )}
+
+            {/* ── DASHBOARD ──────────────────────────────────────── */}
+            <div style={{ display: 'grid', gridTemplateColumns: '280px 1fr', gap: 24, marginBottom: 32 }}>
+                <div style={{ textAlign: 'center' }}>
+                    <ScoreGauge score={health.overall} />
+                    <div style={{ marginTop: 16 }}><TrendIndicator trend={health.trend} label={health.trendLabel} /></div>
+                    <GovernanceToggle governance={governanceStatus} onChange={governanceStatus.onChange} />
+                </div>
+                <div>
+                    <ExecutiveSummary summary={executiveSummary} stats={stats} />
+                    <DomainBreakdown domains={health.domains} />
+                    <HealthTrend data={healthTrend} />
+                </div>
+            </div>
+
+            {/* ── ACTIVITY FEED ──────────────────────────────────── */}
+            <div>
+                <h3 style={{ fontSize: 16, fontWeight: 600, color: '#111827', marginBottom: 16 }}>Activity Feed</h3>
+                {interactiveFeed.length === 0 ? (
+                    <div style={{ padding: 40, textAlign: 'center', color: '#6b7280', backgroundColor: '#f9fafb', borderRadius: 12 }}>No activity yet. Run your first audit to see results.</div>
+                ) : (
+                    interactiveFeed.map(activity => <ActivityCard key={activity.id} activity={activity} onApprove={activity.onApprove} onDismiss={activity.onDismiss} onViewDetails={activity.onViewDetails} />)
+                )}
+            </div>
+        </div>
+
+        {selectedActivity && <DetailDrawer activity={selectedActivity} onClose={() => setSelectedActivity(null)} onApprove={selectedActivity.type === 'decision_required' ? () => { handleApprove(selectedActivity.id); setSelectedActivity(null); } : null} />}
+        {toast && <Toast message={toast.message} type={toast.type} />}
+    </>);
+}
+
+// =============================================================================
+// MOUNT
+// =============================================================================
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<InteractiveDashboard />);
+</script>
+</body>
+</html>

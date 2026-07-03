@@ -1,0 +1,103 @@
+{
+  "platform": "Continuum",
+  "version": "2.0.1",
+  "description": "Autonomous governance platform. Classify → Verify → Remediate across content, infrastructure, and AI reasoning.",
+  "endpoints": {
+    "bridge": {
+      "url": "http://localhost:3003",
+      "description": "Site Mapper v2 audit engine bridge"
+    },
+    "api": {
+      "url": "http://localhost:3001",
+      "description": "Full platform API (when deployed)"
+    }
+  },
+  "modules": {
+    "site-mapper": {
+      "entry": "rankfixer-mapper/audit-report-v2.js",
+      "function": "runDeepAuditV2",
+      "description": "Classify-first SEO/GEO audit pipeline. 11 phases: classify → discover → templates → crawl → graph → contradictions → extrapolate → report.",
+      "runtime": "node",
+      "dependencies": [
+        "rankfixer-mapper/site-classifier.js",
+        "rankfixer-mapper/crawler.js",
+        "rankfixer-mapper/url-discoverer.js",
+        "rankfixer-mapper/template-discoverer.js",
+        "rankfixer-mapper/graph-builder.js",
+        "rankfixer-mapper/contradiction-engine.js",
+        "rankfixer-mapper/extrapolator.js",
+        "rankfixer-mapper/citation-gap-auditor.js"
+      ]
+    },
+    "infrastructure-controller": {
+      "entry": "infrastructure/state-manager.js",
+      "function": "runControlLoop",
+      "description": "Infrastructure drift detection and remediation. Compares IaC declared state against cloud API actual state. Safety-gated with blast radius limits.",
+      "runtime": "node",
+      "dependencies": [
+        "infrastructure/resource-mapper.js",
+        "infrastructure/remediation-engine.js"
+      ]
+    },
+    "reasoning-verifier": {
+      "entry": "platform/reasoning-verifier.js",
+      "function": "verifyReasoningChain",
+      "description": "RVE — Reasoning Verification Engine. Parses AI Chain-of-Thought, extracts claims/evidence/inferences, ground-truths against live data sources.",
+      "runtime": "node",
+      "dependencies": [
+        "platform/reasoning-parser.js",
+        "platform/reasoning-remediator.js"
+      ]
+    }
+  },
+  "governance": {
+    "framework": "RPES",
+    "description": "Research (15%) + Performance (15%) + Economic (50%) + Structural (20%). Scores every finding. Gates autonomous actions by confidence, scope, impact, reversibility, and conflict.",
+    "file": "GOVERNANCE.md",
+    "autoFixGating": [
+      "Confidence ≥ 70%",
+      "Affects template or resource group (not single anomaly)",
+      "Estimated impact ≥ 5 assets (or cart/checkout/production)",
+      "Rollback plan exists and tested",
+      "No conflict with other detected issues"
+    ],
+    "thresholds": {
+      "autonomous": 80,
+      "recommend": 50,
+      "monitor": 25,
+      "log": 0
+    }
+  },
+  "dashboard": {
+    "components": [
+      "platform/ui-components.js",
+      "platform/mock-dashboard.js",
+      "platform/dashboard-interactions.js"
+    ],
+    "views": {
+      "executive": "/api/dashboard/summary",
+      "activityFeed": "Real-time feed of auto-fixes, decisions pending, and detected issues",
+      "healthTrend": "30-day sparkline of health score",
+      "governanceToggle": "Auto-Pilot / Co-Pilot mode switch"
+    }
+  },
+  "schema": {
+    "file": "platform/schema-platform.sql",
+    "tables": {
+      "tenants": "Multi-tenant isolation",
+      "sites": "What's being audited",
+      "audits": "Each control loop run",
+      "assets": "Individual pages/resources",
+      "findings": "Contradictions detected",
+      "remediation_actions": "Fixes applied or queued",
+      "audit_trail": "Immutable log of all mutations",
+      "governance_profiles": "Per-tenant auto-fix rules"
+    }
+  },
+  "howHermesUsesThis": {
+    "audit": "POST to bridge server: curl -X POST http://localhost:3003/audit -H 'Content-Type: application/json' -d '{\"url\":\"https://example.com\"}'",
+    "verify": "After audit completes, run RVE on any AI-generated content before publishing",
+    "monitor": "Poll /api/dashboard/summary for health score and pending decisions",
+    "fix": "Auto-approvable findings are executed automatically. High-risk findings appear in the dashboard for human approval."
+  }
+}

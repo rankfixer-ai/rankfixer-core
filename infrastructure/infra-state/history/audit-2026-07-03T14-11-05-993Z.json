@@ -1,0 +1,38 @@
+{
+  "type": "control_loop",
+  "provider": "aws",
+  "environment": "prod",
+  "dryRun": true,
+  "duration": "0.2s",
+  "mapping": {
+    "totalResources": 7,
+    "declaredResources": 6,
+    "actualResources": 7,
+    "managedResources": 6,
+    "unmanagedResources": 1,
+    "driftDetected": 7,
+    "criticalDrift": 4,
+    "publicExposure": 0,
+    "overlyPermissivePolicies": 0
+  },
+  "plan": {
+    "totalResources": 7,
+    "resourcesWithDrift": 7,
+    "criticalActions": 8,
+    "warningActions": 2,
+    "infoActions": 4,
+    "autoApprovedActions": 7,
+    "manualReviewRequired": 7,
+    "estimatedBlastRadius": 0
+  },
+  "execution": {
+    "executed": 0,
+    "deferred": 7,
+    "failed": 0
+  },
+  "verification": {
+    "resolved": 0,
+    "unresolved": 0
+  },
+  "timestamp": "2026-07-03T14:11:05.994Z"
+}

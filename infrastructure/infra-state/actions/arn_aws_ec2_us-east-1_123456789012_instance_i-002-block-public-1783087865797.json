@@ -1,0 +1,19 @@
+{
+  "actionId": "arn:aws:ec2:us-east-1:123456789012:instance/i-002-block-public-1783087865797",
+  "currentState": "skipped",
+  "stateHistory": [
+    {
+      "from": "initial",
+      "to": "pending",
+      "timestamp": "2026-07-03T14:11:05.808Z",
+      "metadata": {}
+    },
+    {
+      "from": "pending",
+      "to": "skipped",
+      "timestamp": "2026-07-03T14:11:05.877Z",
+      "metadata": {}
+    }
+  ],
+  "lastUpdated": "2026-07-03T14:11:05.877Z"
+}
