@@ -7,65 +7,57 @@
     <meta name="description" content="Access open-source datasets, methodologies, and benchmark reports on LLM Readiness and Generative Engine Optimization (GEO).">
     <meta property="og:title" content="Rankfixer Research — Open Source AI Visibility Data">
     <meta property="og:description" content="Open-source datasets on LLM Readiness across 100 SaaS companies. Methodology, benchmark reports, and the Rankfixer Core engine.">
-    <style>
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            color: #111;
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-        }
-        a { color: #0052FF; }
 
-        .nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 2rem;
-            border-bottom: 1px solid #eee;
+    <style>
+        :root {
+            --brand: #6C5CE7; --brand-hover: #5A4BD1; --bg: #0D0D1A; --bg-card: #151528;
+            --bg-input: #1E1E36; --text: #F0F0F5; --text-muted: #8888A0; --border: #2A2A45;
+            --radius: 12px; --radius-sm: 8px; --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
-        .nav-logo { font-weight: 700; font-size: 1.2rem; text-decoration: none; color: #000; }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { font-size: 16px; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+        body {
+            font-family: var(--font); background: var(--bg); color: var(--text);
+            line-height: 1.6; min-height: 100vh; -webkit-font-smoothing: antialiased;
+        }
+        a { color: var(--brand); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        .nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; border-bottom: 1px solid var(--border); }
+        .nav-logo { font-weight: 700; font-size: 1.2rem; text-decoration: none; color: var(--text); }
         .nav-links { display: flex; gap: 1.5rem; align-items: center; }
-        .nav-links a { text-decoration: none; color: #333; font-size: 0.9rem; }
+        .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; }
+        .nav-links a:hover { color: var(--text); }
 
         .container { max-width: 800px; margin: 0 auto; padding: 3rem 1.5rem; }
-        h1 { font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem; }
-        h2 { font-size: 1.3rem; font-weight: 700; margin: 2rem 0 0.75rem; padding-top: 1rem; border-top: 1px solid #eee; }
-        p { color: #555; margin-bottom: 1rem; }
+        h1 { font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text); }
+        h2 { font-size: 1.3rem; font-weight: 700; margin: 2rem 0 0.75rem; padding-top: 1rem; border-top: 1px solid var(--border); color: var(--text); }
+        p { color: var(--text-muted); margin-bottom: 1rem; }
         ul { padding-left: 1.5rem; margin-bottom: 1.5rem; }
-        li { margin-bottom: 0.4rem; color: #444; }
+        li { margin-bottom: 0.4rem; color: var(--text-muted); }
+        strong { color: var(--text); }
 
         .dataset-card {
-            background: #F9FAFB;
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: var(--radius); padding: 1.5rem; margin: 1.5rem 0;
         }
-        .dataset-card strong { display: block; margin-bottom: 0.3rem; }
+        .dataset-card strong { display: block; margin-bottom: 0.3rem; color: var(--text); }
 
         .btn-github {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: #24292e;
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 500;
-            margin-top: 1rem;
-            transition: background 0.2s;
+            display: inline-flex; align-items: center; gap: 6px;
+            background: #24292e; color: #fff; padding: 10px 20px; border-radius: var(--radius-sm);
+            text-decoration: none; font-weight: 500; margin-top: 1rem; transition: background 0.2s;
         }
-        .btn-github:hover { background: #1a1f23; }
+        .btn-github:hover { background: #1a1f23; text-decoration: none; }
 
-        .footer {
-            background: #111;
-            color: #fff;
-            padding: 2rem;
-            margin-top: 4rem;
-            text-align: center;
-            font-size: 0.8rem;
+        .github-block {
+            margin-top: 2rem; padding: 1.5rem; background: var(--bg-card);
+            border: 1px solid var(--border); border-radius: var(--radius); text-align: center;
         }
+
+        .site-footer { text-align: center; padding: 2rem 0; border-top: 1px solid var(--border); margin-top: 2rem; }
+        .site-footer p { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.3rem; }
+        .site-footer a { color: var(--text-muted); margin: 0 0.5rem; }
 
         @media (max-width: 600px) {
             .nav { flex-direction: column; gap: 0.5rem; padding: 0.75rem 1rem; }
@@ -115,24 +107,19 @@
         <h2>Contribute</h2>
         <p>All research is open-source. Fork the engine, run your own queries, or submit a PR.</p>
 
-        <!-- Fix 4: GitHub Link Block -->
-        <div style="margin-top: 2rem; padding: 1.5rem; background: #F9FAFB; border-radius: 8px; text-align: center;">
+        <div class="github-block">
           <p>📦 All research is open-source.</p>
-          <a href="https://github.com/rankfixer-ai/rankfixer-core"
-             style="background: #24292e; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; display: inline-block; margin-top: 0.5rem;">
-            View the Code on GitHub →
-          </a>
+          <a href="https://github.com/rankfixer-ai/rankfixer-core" class="btn-github">View the Code on GitHub →</a>
         </div>
 
-        <!-- Fix 5: Last Updated -->
-        <p style="color: #777; font-size: 0.85rem; margin-top: 0.5rem;">
-          Last updated: July 4, 2026
-        </p>
-    </div>
+        <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 1rem;">Last updated: July 4, 2026</p>
 
-    <footer class="footer">
-        &copy; 2026 Rankfixer AI. Open-source under MIT license.
-    </footer>
+        <footer class="site-footer">
+            <p>RankFixer — Know Your AI Visibility Score</p>
+            <p><a href="/">Home</a> <a href="/ai-visibility-checker">Free Checker</a> <a href="/blog">Blog</a> <a href="/research">Research</a> <a href="https://github.com/rankfixer-ai/rankfixer-core">GitHub</a></p>
+            <p>No signup required. No credit card. No BS.</p>
+        </footer>
+    </div>
 
 </body>
 </html>
