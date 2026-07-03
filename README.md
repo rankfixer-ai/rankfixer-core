@@ -1,0 +1,196 @@
+# 🧠 RankFixer Core
+
+> **An AI Website Recommendation Engine.**
+>
+> RankFixer analyzes website architecture, schema markup, and content structure to generate actionable recommendations for improving visibility in Large Language Models (ChatGPT, Perplexity, Gemini, Claude) and AI Overviews.
+
+[![GitHub stars](https://img.shields.io/github/stars/rankfixer-ai/rankfixer-core)](https://github.com/rankfixer-ai/rankfixer-core/stargazers)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
+
+---
+
+## 🎯 What is RankFixer?
+
+RankFixer is the **open-source R&D engine for Generative Engine Optimization (GEO).**
+
+Unlike traditional SEO tools that track keyword rankings, RankFixer **engineers citations** by analyzing how LLMs perceive, extract, and cite information from your website.
+
+**In plain English:** We help you get cited by ChatGPT, Perplexity, Claude, and Gemini.
+
+---
+
+## 🏗️ How It Works (The Architecture)
+
+RankFixer operates on a **3-step pipeline** that evaluates your site through the lens of an AI crawler:
+
+### Step 1: Extraction
+> Ingests raw HTML, JSON-LD schema, and structured data from a target URL.
+
+**What we extract:**
+- All schema.org markup types (JSON-LD, Microdata, RDFa)
+- Content hierarchy (H1 → H6 structure)
+- Entity relationships (people, places, organizations, products)
+- Core Web Vitals signals (LCP, INP, CLS)
+- robots.txt directives for AI crawlers (GPTBot, ClaudeBot, PerplexityBot)
+- llms.txt and llms-full.txt discovery
+
+### Step 2: LLM-Readiness Scoring
+> Evaluates 7 key signals that determine if an LLM will cite your content.
+
+| Signal | Weight | Why It Matters |
+| :--- | :--- | :--- |
+| **Schema Completeness** | 25% | LLMs extract structured data 3x more reliably than unstructured text |
+| **Entity Density** | 20% | Clear entity definitions with @id references = higher citation probability |
+| **Content Answer Density** | 20% | Direct, concise answers beat marketing fluff for LLM extraction |
+| **Technical Signals** | 15% | Load speed, mobile readiness, HTTPS, Core Web Vitals |
+| **Backlink Quality** | 10% | LLMs weigh backlinks as "authority votes" in training data |
+| **Brand Entity Recognition** | 5% | Is your brand defined as a schema.org Organization with sameAs links? |
+| **Freshness** | 5% | How recently was content updated? dateModified in schema matters |
+
+### Step 3: Recommendation Engine
+> Generates a prioritized list of actionable fixes to improve your AI visibility score.
+
+**Example recommendations:**
+- ❌ *Missing FAQPage schema → Add JSON-LD for question/answer pairs on your top 10 pages*
+- ❌ *Low entity density → Add 5+ @id-referenced brand mentions across H2 tags*
+- ❌ *No llms.txt file → Create one at root for AI crawler discovery*
+- ❌ *AI crawlers blocked → Allow GPTBot, ClaudeBot, PerplexityBot in robots.txt*
+- ❌ *JavaScript-only rendering → Add SSR or static fallback for key pages*
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
+- Python 3.9+
+- pip package manager
+
+### Installation
+```bash
+git clone https://github.com/rankfixer-ai/rankfixer-core.git
+cd rankfixer-core
+pip install -r requirements.txt
+```
+
+### Run a Website Analysis
+```python
+from rankfixer_core import Analyzer
+
+# Analyze a website for LLM readiness
+analyzer = Analyzer()
+result = analyzer.analyze("https://your-website.com")
+
+print(f"AI Visibility Score: {result.score}/100")
+print(f"Top Issue: {result.recommendations[0].title}")
+print(f"Estimated Fix Time: {result.recommendations[0].fix_time}")
+```
+
+### Benchmark Against Competitors
+```python
+# Analyze multiple domains to see where you stand
+websites = ["hubspot.com", "stripe.com", "shopify.com", "your-website.com"]
+scores = analyzer.batch_analyze(websites)
+
+for domain, result in scores.items():
+    print(f"{domain}: {result.score}/100 — {result.tier}")
+```
+
+### Export to JSON for Analysis
+```python
+import json
+
+result = analyzer.analyze("your-website.com", export=True)
+with open("my_ai_visibility_report.json", "w") as f:
+    json.dump(result.to_dict(), f, indent=2)
+```
+
+---
+
+## 📊 Why This Exists
+
+Traditional SEO optimizes for **keyword matching**. GEO (Generative Engine Optimization) optimizes for **machine comprehension**.
+
+**Old SEO thinking:**
+> *"How do I rank #1 for 'best CRM'?"*
+
+**New GEO thinking:**
+> *"How do I ensure ChatGPT cites my article when someone asks 'what is the best CRM?'"*
+
+RankFixer is the bridge between these two worlds. We've discovered that 78% of domains ranking in the top 3 on Google are **completely invisible to AI models.** That's the gap we close.
+
+---
+
+## 📦 Data We've Collected
+
+We've open-sourced our research data to help the community understand AI visibility:
+
+- **📈 `/data/top_100_saas_scores.json`** — AI Readiness scores of the top 100 SaaS companies, analyzed across all 7 signals
+- **📋 `/data/benchmark_report.md`** — Full analysis with industry breakdowns, quartile distributions, and actionable insights
+
+---
+
+## 🧪 Experiments
+
+We maintain a research folder for cutting-edge GEO experiments:
+
+- **📓 `/experiments/schema-impact.ipynb`** — Measuring the impact of schema.org markup on LLM extraction accuracy
+- **📓 `/experiments/backlink-correlation.ipynb`** — Do LLMs weigh backlinks similarly to Google's PageRank?
+- **📓 `/experiments/llm_readiness_analysis.ipynb`** — Full benchmark analysis of 100 SaaS domains across 7 signals
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions! See our [Contributing Guide](CONTRIBUTING.md) for details.
+
+**Areas we need help:**
+- Adding support for new schema.org types (Product, Event, JobPosting, Review)
+- Improving the LLM-readiness scoring model with real-world validation data
+- Building visualization dashboards for batch analysis results
+- Adding support for non-English language entity extraction
+- Creating a browser extension for instant on-page LLM-readiness scoring
+
+---
+
+## 📖 Documentation
+
+- [Full Architecture](docs/architecture.md) — Deep dive into the 3-step pipeline
+- [API Reference](docs/api-reference.md) — Complete API surface
+- [Use Cases & Examples](docs/examples.md) — Real-world scenarios and workflows
+
+---
+
+## 📄 License
+
+MIT License — see the [LICENSE](LICENSE) file for details.
+
+---
+
+## 🌐 Live Tool
+
+> 🧠 **Don't want to run the code? Try the free AI Visibility Checker:**
+>
+> 🔗 **[rankfixer.co/ai-visibility-checker](https://rankfixer.co/ai-visibility-checker)** — No signup. Instant results.
+
+---
+
+## 📬 Contact
+
+- **Website:** [rankfixer.co](https://rankfixer.co)
+- **Twitter/X:** [@RankFixer](https://twitter.com/RankFixer)
+- **Email:** hello@rankfixer.co
+
+---
+
+## ⭐ Why Star This Repo?
+
+- First open-source AI Website Recommendation Engine for GEO
+- Proprietary dataset: LLM readiness scores for top 100 SaaS companies
+- Cutting-edge research on how LLMs extract and cite web content
+- Community-driven development with active maintainers
+- Directly applicable to improving your own site's AI visibility
+
+---
+
+*Built with ❤️ by the RankFixer team. If this helps you get cited by ChatGPT, give us a star.*

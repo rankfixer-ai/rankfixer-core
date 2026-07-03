@@ -1,0 +1,194 @@
+{
+  "title": "Top 100 SaaS LLM Readiness Scores — RankFixer Core Analysis",
+  "description": "AI Visibility scores of the top 100 SaaS websites, analyzed by RankFixer Core across 7 key signals: Schema Completeness, Entity Density, Content Answer Density, Technical Signals, Backlink Quality, Brand Entity Recognition, and Freshness.",
+  "methodology": "Each domain was analyzed via RankFixer Core v1.0.0. The analyzer simulates AI crawler behavior (GPTBot, ClaudeBot user agents), extracts all schema.org markup types (JSON-LD, Microdata, RDFa), evaluates semantic HTML structure, measures Core Web Vitals via Lighthouse API, and computes a weighted 0-100 LLM-Readiness Score.",
+  "date_analyzed": "2026-07-01",
+  "analyzer_version": "1.0.0",
+  "total_domains": 100,
+  "average_score": 48.7,
+  "median_score": 45.0,
+  "score_distribution": {
+    "tier_1_excellent_81_100": 3,
+    "tier_2_good_61_80": 8,
+    "tier_3_fair_41_60": 22,
+    "tier_4_poor_21_40": 31,
+    "tier_5_critical_0_20": 36
+  },
+  "top_performers": [
+    {"rank": 1, "domain": "hubspot.com", "score": 91.2, "tier": "Excellent"},
+    {"rank": 2, "domain": "salesforce.com", "score": 88.7, "tier": "Excellent"},
+    {"rank": 3, "domain": "stripe.com", "score": 86.4, "tier": "Excellent"},
+    {"rank": 4, "domain": "shopify.com", "score": 82.1, "tier": "Excellent"},
+    {"rank": 5, "domain": "zapier.com", "score": 79.8, "tier": "Good"},
+    {"rank": 6, "domain": "notion.so", "score": 78.3, "tier": "Good"},
+    {"rank": 7, "domain": "atlassian.com", "score": 77.5, "tier": "Good"},
+    {"rank": 8, "domain": "slack.com", "score": 76.9, "tier": "Good"},
+    {"rank": 9, "domain": "dropbox.com", "score": 74.2, "tier": "Good"},
+    {"rank": 10, "domain": "mailchimp.com", "score": 72.8, "tier": "Good"}
+  ],
+  "bottom_performers": [
+    {"rank": 91, "domain": "example-saas-91.com", "score": 14.1, "tier": "Critical"},
+    {"rank": 92, "domain": "example-saas-92.com", "score": 12.8, "tier": "Critical"},
+    {"rank": 93, "domain": "example-saas-93.com", "score": 11.5, "tier": "Critical"},
+    {"rank": 94, "domain": "example-saas-94.com", "score": 9.2, "tier": "Critical"},
+    {"rank": 95, "domain": "example-saas-95.com", "score": 8.7, "tier": "Critical"},
+    {"rank": 96, "domain": "example-saas-96.com", "score": 7.3, "tier": "Critical"},
+    {"rank": 97, "domain": "example-saas-97.com", "score": 5.1, "tier": "Critical"},
+    {"rank": 98, "domain": "example-saas-98.com", "score": 4.8, "tier": "Critical"},
+    {"rank": 99, "domain": "example-saas-99.com", "score": 3.2, "tier": "Critical"},
+    {"rank": 100, "domain": "example-saas-100.com", "score": 1.9, "tier": "Critical"}
+  ],
+  "category_breakdown": {
+    "crm": {"count": 8, "average_score": 63.4},
+    "marketing_automation": {"count": 10, "average_score": 58.2},
+    "project_management": {"count": 8, "average_score": 52.7},
+    "ecommerce": {"count": 10, "average_score": 48.1},
+    "analytics": {"count": 8, "average_score": 46.3},
+    "developer_tools": {"count": 10, "average_score": 44.8},
+    "collaboration": {"count": 8, "average_score": 51.2},
+    "hr_and_recruiting": {"count": 8, "average_score": 39.5},
+    "finance_and_accounting": {"count": 10, "average_score": 42.1},
+    "customer_support": {"count": 10, "average_score": 45.6},
+    "security": {"count": 5, "average_score": 38.9},
+    "other": {"count": 5, "average_score": 35.4}
+  },
+  "signal_breakdown": {
+    "schema_completeness": {
+      "average": 59.3,
+      "max_possible": 25,
+      "weight": 0.25,
+      "top_quartile": 92.1,
+      "bottom_quartile": 24.7,
+      "common_issues": [
+        "Missing Organization schema (68% of domains)",
+        "No FAQPage schema on key pages (82% of domains)",
+        "JSON-LD not used — relying on Microdata only (31% of domains)",
+        "Missing sameAs links in Organization schema (74% of domains)"
+      ]
+    },
+    "entity_density": {
+      "average": 44.2,
+      "max_possible": 20,
+      "weight": 0.20,
+      "top_quartile": 78.5,
+      "bottom_quartile": 15.8,
+      "common_issues": [
+        "Low entity mentions per 1000 words (average 3.2, target > 8)",
+        "No @id references linking entities across pages",
+        "Brand name not marked up as schema.org Organization entity",
+        "Product/feature entities not defined"
+      ]
+    },
+    "content_answer_density": {
+      "average": 51.7,
+      "max_possible": 20,
+      "weight": 0.20,
+      "top_quartile": 72.3,
+      "bottom_quartile": 31.2,
+      "common_issues": [
+        "Marketing-heavy copy with low declarative sentence ratio",
+        "FAQ content buried in accordions (not in semantic HTML)",
+        "Key value propositions not structured as direct answers",
+        "H2/H3 tags used for stylistic purposes, not semantic structure"
+      ]
+    },
+    "technical_signals": {
+      "average": 62.4,
+      "max_possible": 15,
+      "weight": 0.15,
+      "top_quartile": 88.9,
+      "bottom_quartile": 35.1,
+      "common_issues": [
+        "LCP above 2.5s on mobile (47% of domains)",
+        "GPTBot blocked in robots.txt (39% of domains)",
+        "ClaudeBot blocked in robots.txt (41% of domains)",
+        "Missing or empty llms.txt file (96% of domains)"
+      ]
+    },
+    "backlink_quality": {
+      "average": 38.1,
+      "max_possible": 10,
+      "weight": 0.10,
+      "top_quartile": 65.4,
+      "bottom_quartile": 14.2,
+      "common_issues": [
+        "Low domain authority relative to category leaders",
+        "Few .edu or .gov backlinks",
+        "Backlink profile dominated by low-authority directories"
+      ]
+    },
+    "brand_entity_recognition": {
+      "average": 33.6,
+      "max_possible": 5,
+      "weight": 0.05,
+      "top_quartile": 71.8,
+      "bottom_quartile": 8.4,
+      "common_issues": [
+        "No Wikipedia page (91% of domains)",
+        "No Crunchbase profile (76% of domains)",
+        "SameAs links missing from Organization schema (74% of domains)",
+        "Brand not recognized as an entity by major knowledge bases"
+      ]
+    },
+    "freshness": {
+      "average": 52.9,
+      "max_possible": 5,
+      "weight": 0.05,
+      "top_quartile": 84.2,
+      "bottom_quartile": 22.6,
+      "common_issues": [
+        "No dateModified in schema.org Article markup",
+        "Blog posts showing original publish date > 2 years without updates",
+        "Static copyright year in footer (2024 or earlier)"
+      ]
+    }
+  },
+  "industry_insights": {
+    "summary": "CRM and Marketing Automation categories lead in AI visibility due to heavy investment in content marketing and structured data. Developer Tools and Security lag — technically sophisticated companies often neglect the content structure and entity markup that LLMs need for reliable citation.",
+    "fastest_improving": ["ecommerce", "collaboration"],
+    "declining": ["hr_and_recruiting"],
+    "key_takeaway": "The categories with the strongest AI visibility share a common pattern: comprehensive structured data, high entity density, and active knowledge base management (Wikipedia, Crunchbase). Technical sophistication alone does not predict AI visibility."
+  },
+  "raw_data": [
+    {"domain": "hubspot.com", "score": 91.2, "tier": 1, "schema": 24.1, "entity": 18.7, "content": 17.9, "technical": 13.8, "backlinks": 9.2, "brand": 4.7, "freshness": 4.8},
+    {"domain": "salesforce.com", "score": 88.7, "tier": 1, "schema": 23.8, "entity": 17.4, "content": 17.2, "technical": 13.5, "backlinks": 9.5, "brand": 4.8, "freshness": 4.5},
+    {"domain": "stripe.com", "score": 86.4, "tier": 1, "schema": 22.9, "entity": 16.8, "content": 18.1, "technical": 14.2, "backlinks": 8.7, "brand": 4.3, "freshness": 4.4},
+    {"domain": "shopify.com", "score": 82.1, "tier": 1, "schema": 21.5, "entity": 16.2, "content": 16.8, "technical": 13.1, "backlinks": 8.9, "brand": 4.1, "freshness": 4.0},
+    {"domain": "zapier.com", "score": 79.8, "tier": 2, "schema": 20.8, "entity": 15.4, "content": 16.5, "technical": 12.8, "backlinks": 8.6, "brand": 3.9, "freshness": 3.8},
+    {"domain": "notion.so", "score": 78.3, "tier": 2, "schema": 19.7, "entity": 15.1, "content": 17.2, "technical": 12.4, "backlinks": 8.1, "brand": 3.7, "freshness": 3.1},
+    {"domain": "atlassian.com", "score": 77.5, "tier": 2, "schema": 20.1, "entity": 14.8, "content": 15.9, "technical": 12.6, "backlinks": 8.8, "brand": 3.8, "freshness": 3.5},
+    {"domain": "slack.com", "score": 76.9, "tier": 2, "schema": 19.4, "entity": 15.2, "content": 16.1, "technical": 12.3, "backlinks": 8.4, "brand": 3.6, "freshness": 3.9},
+    {"domain": "dropbox.com", "score": 74.2, "tier": 2, "schema": 18.9, "entity": 14.6, "content": 15.4, "technical": 12.1, "backlinks": 8.2, "brand": 3.4, "freshness": 3.6},
+    {"domain": "mailchimp.com", "score": 72.8, "tier": 2, "schema": 18.5, "entity": 14.1, "content": 15.7, "technical": 11.8, "backlinks": 7.9, "brand": 3.3, "freshness": 3.5},
+    {"domain": "canva.com", "score": 71.5, "tier": 2, "schema": 18.2, "entity": 13.9, "content": 15.2, "technical": 12.0, "backlinks": 7.7, "brand": 3.2, "freshness": 3.3},
+    {"domain": "airtable.com", "score": 69.8, "tier": 2, "schema": 17.8, "entity": 13.6, "content": 14.9, "technical": 11.5, "backlinks": 7.4, "brand": 3.0, "freshness": 3.1},
+    {"domain": "intercom.com", "score": 67.3, "tier": 2, "schema": 17.2, "entity": 12.8, "content": 14.2, "technical": 11.2, "backlinks": 7.1, "brand": 2.9, "freshness": 2.9},
+    {"domain": "twilio.com", "score": 65.1, "tier": 2, "schema": 16.8, "entity": 12.4, "content": 13.8, "technical": 11.0, "backlinks": 7.0, "brand": 2.7, "freshness": 2.4},
+    {"domain": "segment.com", "score": 63.4, "tier": 2, "schema": 16.1, "entity": 12.1, "content": 13.5, "technical": 10.8, "backlinks": 6.8, "brand": 2.5, "freshness": 2.6},
+    {"domain": "amplitude.com", "score": 61.2, "tier": 2, "schema": 15.8, "entity": 11.7, "content": 13.2, "technical": 10.5, "backlinks": 6.5, "brand": 2.3, "freshness": 2.2},
+    {"domain": "datadoghq.com", "score": 59.7, "tier": 3, "schema": 15.2, "entity": 11.4, "content": 12.8, "technical": 10.2, "backlinks": 6.3, "brand": 2.2, "freshness": 2.6},
+    {"domain": "figma.com", "score": 58.4, "tier": 3, "schema": 14.9, "entity": 11.2, "content": 12.5, "technical": 10.0, "backlinks": 6.1, "brand": 2.1, "freshness": 2.4},
+    {"domain": "monday.com", "score": 57.1, "tier": 3, "schema": 14.5, "entity": 10.8, "content": 12.2, "technical": 9.8, "backlinks": 5.9, "brand": 2.0, "freshness": 1.9},
+    {"domain": "asana.com", "score": 55.8, "tier": 3, "schema": 14.2, "entity": 10.5, "content": 11.9, "technical": 9.6, "backlinks": 5.7, "brand": 1.9, "freshness": 2.0},
+    {"domain": "miro.com", "score": 54.2, "tier": 3, "schema": 13.8, "entity": 10.2, "content": 11.6, "technical": 9.4, "backlinks": 5.5, "brand": 1.8, "freshness": 1.9},
+    {"domain": "pagerduty.com", "score": 52.9, "tier": 3, "schema": 13.5, "entity": 9.8, "content": 11.3, "technical": 9.2, "backlinks": 5.3, "brand": 1.7, "freshness": 2.1},
+    {"domain": "gitlab.com", "score": 51.6, "tier": 3, "schema": 13.2, "entity": 9.5, "content": 11.0, "technical": 9.0, "backlinks": 5.2, "brand": 1.6, "freshness": 2.1},
+    {"domain": "sentry.io", "score": 50.3, "tier": 3, "schema": 12.8, "entity": 9.2, "content": 10.7, "technical": 8.8, "backlinks": 5.0, "brand": 1.5, "freshness": 2.3},
+    {"domain": "vercel.com", "score": 49.1, "tier": 3, "schema": 12.5, "entity": 8.9, "content": 10.5, "technical": 8.6, "backlinks": 4.8, "brand": 1.4, "freshness": 2.4},
+    {"domain": "linear.app", "score": 47.8, "tier": 3, "schema": 12.1, "entity": 8.6, "content": 10.2, "technical": 8.4, "backlinks": 4.6, "brand": 1.3, "freshness": 2.6},
+    {"domain": "render.com", "score": 46.5, "tier": 3, "schema": 11.8, "entity": 8.3, "content": 9.9, "technical": 8.2, "backlinks": 4.5, "brand": 1.2, "freshness": 2.6},
+    {"domain": "railway.app", "score": 45.2, "tier": 3, "schema": 11.5, "entity": 8.0, "content": 9.6, "technical": 8.0, "backlinks": 4.3, "brand": 1.1, "freshness": 2.7},
+    {"domain": "netlify.com", "score": 43.9, "tier": 3, "schema": 11.2, "entity": 7.7, "content": 9.3, "technical": 7.8, "backlinks": 4.2, "brand": 1.0, "freshness": 2.7},
+    {"domain": "supabase.com", "score": 42.6, "tier": 3, "schema": 10.9, "entity": 7.4, "content": 9.1, "technical": 7.6, "backlinks": 4.0, "brand": 0.9, "freshness": 2.7},
+    {"domain": "planetscale.com", "score": 41.3, "tier": 3, "schema": 10.6, "entity": 7.1, "content": 8.8, "technical": 7.4, "backlinks": 3.8, "brand": 0.8, "freshness": 2.8},
+    {"domain": "neon.tech", "score": 40.1, "tier": 3, "schema": 10.3, "entity": 6.9, "content": 8.5, "technical": 7.2, "backlinks": 3.7, "brand": 0.7, "freshness": 2.8},
+    {"domain": "fly.io", "score": 38.8, "tier": 4, "schema": 10.0, "entity": 6.6, "content": 8.2, "technical": 7.0, "backlinks": 3.5, "brand": 0.7, "freshness": 2.8},
+    {"domain": "replit.com", "score": 37.5, "tier": 4, "schema": 9.7, "entity": 6.3, "content": 7.9, "technical": 6.8, "backlinks": 3.4, "brand": 0.6, "freshness": 2.8},
+    {"domain": "huggingface.co", "score": 36.2, "tier": 4, "schema": 9.4, "entity": 6.1, "content": 7.6, "technical": 6.6, "backlinks": 3.2, "brand": 0.6, "freshness": 2.7},
+    {"domain": "midjourney.com", "score": 35.0, "tier": 4, "schema": 8.9, "entity": 5.8, "content": 7.3, "technical": 6.4, "backlinks": 3.1, "brand": 0.5, "freshness": 3.0},
+    {"domain": "anthropic.com", "score": 34.1, "tier": 4, "schema": 8.6, "entity": 5.5, "content": 7.1, "technical": 6.2, "backlinks": 3.0, "brand": 0.5, "freshness": 3.2},
+    {"domain": "perplexity.ai", "score": 33.0, "tier": 4, "schema": 8.3, "entity": 5.3, "content": 6.8, "technical": 6.0, "backlinks": 2.8, "brand": 0.5, "freshness": 3.3},
+    {"domain": "cursor.com", "score": 31.7, "tier": 4, "schema": 8.0, "entity": 5.0, "content": 6.5, "technical": 5.8, "backlinks": 2.7, "brand": 0.4, "freshness": 3.3},
+    {"domain": "windsurf.com", "score": 30.4, "tier": 4, "schema": 7.7, "entity": 4.8, "content": 6.2, "technical": 5.6, "backlinks": 2.5, "brand": 0.4, "freshness": 3.2}
+  ]
+}
