@@ -196,6 +196,7 @@
     <script>
     // DEBUG: global marker to verify script execution
     window.__IIFE_RAN = false;
+    document.addEventListener('DOMContentLoaded', function() {
     (function() {
         window.__IIFE_RAN = true;
         var domainInput = document.getElementById('domain-input');
@@ -399,6 +400,7 @@
             domainInput.style.border = '';
         });
     })();
+    });  // DOMContentLoaded
     </script>
 
     <!-- Supabase + Auth (for paywall flow) -->
