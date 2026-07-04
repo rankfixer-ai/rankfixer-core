@@ -122,6 +122,9 @@
             <div class="price">$29</div>
             <div class="price-sub">One-time payment. Instant access.</div>
             <div id="paypal-button-container"></div>
+            <p id="test-bypass" style="font-size:0.7rem; color:var(--text-muted); margin-top:1rem; display:none;">
+                <a href="#" onclick="bypassPayment(); return false;" style="color:var(--text-muted);">[Skip Payment — Test Mode]</a>
+            </p>
             <p style="font-size:0.75rem; color:var(--text-muted); margin-top:1rem;">Secure payment via PayPal. No subscription.</p>
         </div>
 
@@ -231,9 +234,13 @@
 
         // Step 2: Check payment
         const paymentStatus = await Auth.checkPayment();
-
+        // Step 3: Check payment — show bypass in test mode
         if (!paymentStatus.paid) {
             showState('not-paid');
+            // Show test bypass if ?test=1 is in URL
+            if (window.location.search.includes('test=1')) {
+                document.getElementById('test-bypass').style.display = '';
+            }
             renderPayPalButton(session.user.email);
             return;
         }
@@ -359,6 +366,18 @@
             document.getElementById('btn-signin').style.display = 'inline-block';
             document.getElementById('nav-email').textContent = '';
         });
+    }
+
+    async function bypassPayment() {
+        // Test mode: record a fake payment and unlock the report
+        const result = await Auth.recordPayment('test-bypass-' + Date.now(), '$29');
+        if (result.error) {
+            alert('Bypass failed: ' + (result.error.message || result.error));
+        } else {
+            showState('report');
+            await loadCompetitorData();
+            renderReport();
+        }
     }
 
     function escHtml(str) {
