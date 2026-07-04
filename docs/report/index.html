@@ -72,7 +72,7 @@
         .pricing-table td { padding: 8px; border-bottom: 1px solid var(--border); }
         .pricing-table tr:last-child td { border-bottom: none; }
 
-        .feature-tag { display: inline-block; background: var(--bg-input); padding: 3px 10px; border-radius: 100px; font-size: 0.75rem; color: var(--text-muted); margin: 2px; }
+        .feature-tag { display: inline-block; background: var(--bg-input); padding: 4px 12px; border-radius: 100px; font-size: 0.75rem; color: var(--text-muted); margin: 3px; line-height: 1.5; }
 
         .loading { text-align: center; padding: 2rem; color: var(--text-muted); }
         .spinner { display: inline-block; width: 24px; height: 24px; border: 3px solid var(--border); border-top-color: var(--brand); border-radius: 50%; animation: spin 0.8s linear infinite; margin-bottom: 0.5rem; }
@@ -332,14 +332,23 @@
         _competitorData.competitors.forEach(c => {
             const tiers = (c.pricing_tiers || []);
             const tierText = tiers.length
-                ? tiers.map(t => `${t.name}: ${t.price}`).join(', ')
+                ? tiers.map(t => {
+                    const price = t.price || '';
+                    // If the price field IS the full message (collapsed tier), use it as-is
+                    if (t.name === 'Custom' && price.startsWith('Custom/tiered pricing')) {
+                        return price;
+                    }
+                    // Add $ prefix to bare numeric prices
+                    const displayPrice = /^\d+(\.\d{2})?$/.test(price) ? '$' + price : price;
+                    return `${t.name}: ${displayPrice}`;
+                }).join(', ')
                 : 'Contact for pricing';
             pricingHtml += `<tr><td><strong>${escHtml(c.name)}</strong></td><td>${escHtml(tierText)}</td></tr>`;
         });
         pricingHtml += '</table>';
         document.getElementById('pricing-table').innerHTML = pricingHtml;
         document.getElementById('pricing-insight').textContent =
-            'Most competitors in this space use tiered pricing with a free trial or freemium entry point. Compare your pricing structure to the competitive range above.';
+            'Most competitors use custom or tiered pricing. Visit their websites for current plans and compare against your own offering.';
 
         // Feature cloud
         let allFeatures = new Set();
@@ -347,7 +356,7 @@
             (c.top_features || []).forEach(f => allFeatures.add(f));
         });
         let featureHtml = '';
-        Array.from(allFeatures).sort().slice(0, 30).forEach(f => {
+        Array.from(allFeatures).sort().slice(0, 20).forEach(f => {
             featureHtml += `<span class="feature-tag">${escHtml(f.substring(0, 60))}</span>`;
         });
         document.getElementById('feature-cloud').innerHTML = featureHtml || '<p style="color:var(--text-muted)">Feature data unavailable for this crawl.</p>';

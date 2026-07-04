@@ -600,10 +600,12 @@ class CompetitiveIntel:
             return []
 
         # --- Collapse gate ---
-        # Collapse if the data is too fragmented to display usefully.
+        # Collapse if the data is too fragmented or any tier name is
+        # unparseable (the scraper missed the plan name).
         too_many = len(deduped) > 6
+        has_unknown_names = unknown_count > 0
 
-        if too_many or has_truncated:
+        if too_many or has_truncated or has_unknown_names:
             label = competitor_name or "competitor"
             return [{
                 "name": "Custom",

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-04T16:31:44.889486+00:00",
+  "generated": "2026-07-04T16:35:44.755105+00:00",
   "competitor_count": 10,
   "competitors": [
     {
@@ -54,16 +54,8 @@
       "meta": "Introducing the first-ever GTM AI platform. Automate hundreds of tedious, repetitive tasks and empower your team to scale success like never before.",
       "pricing_tiers": [
         {
-          "name": "Enterprise",
-          "price": "20"
-        },
-        {
-          "name": "Unknown",
-          "price": "5"
-        },
-        {
-          "name": "Unknown",
-          "price": "20"
+          "name": "Custom",
+          "price": "Custom/tiered pricing — see Copy.ai website"
         }
       ],
       "top_features": [
@@ -189,28 +181,8 @@
       "meta": "Phrase is the AI-powered language intelligence platform for enterprise. Automate workflows, connect any tool or engine, and scale multilingual content globally.",
       "pricing_tiers": [
         {
-          "name": "Team",
-          "price": "20"
-        },
-        {
-          "name": "Business",
-          "price": "150"
-        },
-        {
-          "name": "Enterprise",
-          "price": "150"
-        },
-        {
-          "name": "Unknown",
-          "price": "15"
-        },
-        {
-          "name": "Free",
-          "price": "1"
-        },
-        {
-          "name": "Pro",
-          "price": "150"
+          "name": "Custom",
+          "price": "Custom/tiered pricing — see Phrase website"
         }
       ],
       "top_features": [
@@ -286,8 +258,8 @@
       "meta": "Semrush is the leading platform to grow and measure brand visibility across AI search, SEO, PPC, social, and more.",
       "pricing_tiers": [
         {
-          "name": "Unknown",
-          "price": "20"
+          "name": "Custom",
+          "price": "Custom/tiered pricing — see Semrush website"
         }
       ],
       "top_features": [
@@ -331,16 +303,8 @@
       "meta": "SE Ranking is a trusted AI SEO tool that pays for itself. Get accurate data, actionable insights, and automated reports. Powerful tools, simple execution.",
       "pricing_tiers": [
         {
-          "name": "Unknown",
-          "price": "$103.20"
-        },
-        {
-          "name": "growth",
-          "price": "$223.20"
-        },
-        {
-          "name": "Unknown",
-          "price": "$33.00"
+          "name": "Custom",
+          "price": "Custom/tiered pricing — see SE Ranking website"
         }
       ],
       "top_features": [
