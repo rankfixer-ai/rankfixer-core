@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your AI Visibility Report — RankFixer</title>
+    <meta name="description" content="Full AI visibility audit report with competitive analysis.">
+    <meta name="robots" content="noindex">
+
+    <!-- Supabase JS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- PayPal JS SDK (sandbox) -->
+    <script src="https://www.sandbox.paypal.com/sdk/js?client-id=AU_VuAlN8X2fVqtHMgToqIgU9DYOqX9X2JbTNDO01lO7T3A-QvqWyn0FjOtgTEVZjVCqLQUgAjkanRyt&currency=USD" data-namespace="paypalCheckout"></script>
+
+    <style>
+        :root {
+            --brand: #6C5CE7; --brand-hover: #5A4BD1; --bg: #0D0D1A; --bg-card: #151528;
+            --bg-input: #1E1E36; --text: #F0F0F5; --text-muted: #8888A0; --border: #2A2A45;
+            --success: #00C853; --warning: #FFB300; --danger: #FF5252;
+            --radius: 12px; --radius-sm: 8px; --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { font-size: 16px; }
+        body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.6; min-height: 100vh; }
+        a { color: var(--brand); }
+
+        .nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; border-bottom: 1px solid var(--border); }
+        .nav-logo { font-weight: 700; font-size: 1.1rem; color: var(--text); text-decoration: none; }
+        .nav-right { display: flex; align-items: center; gap: 1rem; }
+        .nav-right span { font-size: 0.85rem; color: var(--text-muted); }
+        .btn-sm { background: var(--brand); color: #fff; border: none; padding: 6px 14px; border-radius: 6px; font-size: 0.8rem; cursor: pointer; font-family: inherit; }
+        .btn-sm:hover { background: var(--brand-hover); }
+
+        .container { max-width: 860px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+        /* Paywall states */
+        .paywall-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 3rem 2rem; text-align: center; margin: 2rem 0; }
+        .paywall-card h2 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .paywall-card p { color: var(--text-muted); margin-bottom: 1.5rem; max-width: 420px; margin-left: auto; margin-right: auto; }
+        .paywall-card .price { font-size: 2.5rem; font-weight: 800; color: var(--brand); margin-bottom: 0.25rem; }
+        .paywall-card .price-sub { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 2rem; }
+        .btn-primary { background: var(--brand); color: #fff; border: none; padding: 14px 32px; font-size: 1rem; font-weight: 700; cursor: pointer; border-radius: var(--radius-sm); font-family: inherit; display: inline-block; text-decoration: none; }
+        .btn-primary:hover { background: var(--brand-hover); }
+
+        #paypal-button-container { max-width: 300px; margin: 1.5rem auto 0; }
+
+        /* Report sections */
+        .report-header { text-align: center; padding: 1rem 0 2rem; }
+        .report-header h1 { font-size: 1.6rem; font-weight: 800; }
+        .report-header .url-badge { display: inline-block; background: var(--bg-input); padding: 0.4rem 1rem; border-radius: 100px; font-size: 0.85rem; color: var(--brand); margin-top: 0.5rem; word-break: break-all; }
+
+        .section { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1.25rem; }
+        .section h3 { font-size: 1.1rem; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
+        .section h4 { font-size: 0.95rem; color: var(--text-muted); margin: 1rem 0 0.5rem; }
+
+        .competitor-row { display: flex; align-items: center; gap: 0.75rem; padding: 0.6rem 0; border-bottom: 1px solid var(--border); }
+        .competitor-row:last-child { border-bottom: none; }
+        .comp-name { font-weight: 600; min-width: 120px; font-size: 0.9rem; }
+        .comp-h1 { color: var(--text-muted); font-size: 0.8rem; flex: 1; }
+        .comp-ctas { display: flex; gap: 4px; flex-wrap: wrap; }
+        .comp-cta-tag { background: var(--bg-input); padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; color: var(--text-muted); }
+
+        .insight-box { background: rgba(108,92,231,0.1); border-left: 3px solid var(--brand); padding: 0.75rem 1rem; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; font-size: 0.85rem; color: var(--text-muted); margin: 1rem 0; }
+
+        .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; margin-bottom: 1rem; }
+        .stat-card { background: var(--bg-input); border-radius: var(--radius-sm); padding: 1rem; text-align: center; }
+        .stat-card .stat-value { font-size: 1.8rem; font-weight: 800; color: var(--brand); }
+        .stat-card .stat-label { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem; }
+
+        .pricing-table { width: 100%; font-size: 0.8rem; border-collapse: collapse; margin: 0.5rem 0; }
+        .pricing-table th { text-align: left; padding: 8px; color: var(--text-muted); font-weight: 500; border-bottom: 1px solid var(--border); }
+        .pricing-table td { padding: 8px; border-bottom: 1px solid var(--border); }
+        .pricing-table tr:last-child td { border-bottom: none; }
+
+        .feature-tag { display: inline-block; background: var(--bg-input); padding: 3px 10px; border-radius: 100px; font-size: 0.75rem; color: var(--text-muted); margin: 2px; }
+
+        .loading { text-align: center; padding: 2rem; color: var(--text-muted); }
+        .spinner { display: inline-block; width: 24px; height: 24px; border: 3px solid var(--border); border-top-color: var(--brand); border-radius: 50%; animation: spin 0.8s linear infinite; margin-bottom: 0.5rem; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .site-footer { text-align: center; padding: 2rem 0; border-top: 1px solid var(--border); margin-top: 3rem; color: var(--text-muted); font-size: 0.8rem; }
+
+        @media (max-width: 600px) {
+            .nav { padding: 0.75rem 1rem; }
+            .container { padding: 1rem; }
+            .competitor-row { flex-direction: column; align-items: flex-start; gap: 0.25rem; }
+            .paywall-card { padding: 2rem 1rem; }
+            .paywall-card .price { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="nav">
+        <a href="/" class="nav-logo">RankFixer</a>
+        <div class="nav-right" id="nav-user">
+            <span id="nav-email"></span>
+            <button class="btn-sm" id="btn-signout" style="display:none" onclick="doSignOut()">Sign Out</button>
+            <button class="btn-sm" id="btn-signin" onclick="Auth.showAuthModal('redirect')">Sign In</button>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <!-- STATE 1: Loading -->
+        <div id="state-loading" class="loading">
+            <div class="spinner"></div>
+            <p>Loading your report...</p>
+        </div>
+
+        <!-- STATE 2: Not authenticated → Sign in -->
+        <div id="state-not-auth" style="display:none" class="paywall-card">
+            <h2>Sign in to continue</h2>
+            <p>Create a free account to access your full AI visibility report.</p>
+            <button class="btn-primary" onclick="Auth.showAuthModal('redirect')">Sign In / Sign Up</button>
+        </div>
+
+        <!-- STATE 3: Authenticated but not paid → PayPal -->
+        <div id="state-not-paid" style="display:none" class="paywall-card">
+            <h2>Get Your Full AI Visibility Report</h2>
+            <p>Includes competitive landscape analysis, pricing comparison, and actionable recommendations.</p>
+            <div class="price">$29</div>
+            <div class="price-sub">One-time payment. Instant access.</div>
+            <div id="paypal-button-container"></div>
+            <p style="font-size:0.75rem; color:var(--text-muted); margin-top:1rem;">Secure payment via PayPal. No subscription.</p>
+        </div>
+
+        <!-- STATE 4: Paid → Full report -->
+        <div id="state-report" style="display:none">
+
+            <div class="report-header">
+                <h1>AI Visibility Report</h1>
+                <div class="url-badge" id="report-url">Loading...</div>
+            </div>
+
+            <!-- Competitive Landscape -->
+            <div class="section">
+                <h3>🏆 Competitive Landscape</h3>
+                <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1rem;">
+                    How your competitors position themselves in AI search.
+                    Updated weekly from our market intelligence pipeline.
+                </p>
+                <div id="competitor-list"></div>
+            </div>
+
+            <!-- Pricing Comparison -->
+            <div class="section">
+                <h3>💰 Pricing Intelligence</h3>
+                <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1rem;">
+                    Competitor pricing tiers. Use this to position your offering.
+                </p>
+                <div id="pricing-table"></div>
+                <div class="insight-box" id="pricing-insight"></div>
+            </div>
+
+            <!-- Feature Gaps -->
+            <div class="section">
+                <h3>🔍 Common Features Across Competitors</h3>
+                <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1rem;">
+                    Features your competitors advertise. Missing these puts you at a discoverability disadvantage.
+                </p>
+                <div id="feature-cloud"></div>
+                <div class="insight-box">Common features indicate table-stakes functionality. If your site doesn't mention these, AI models may overlook you for a competitor who does.</div>
+            </div>
+
+            <!-- Benchmark -->
+            <div class="section">
+                <h3>📊 Industry Benchmark</h3>
+                <div class="stat-grid">
+                    <div class="stat-card">
+                        <div class="stat-value">48.7</div>
+                        <div class="stat-label">Average AI Visibility Score (Top 100 SaaS)</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">67%</div>
+                        <div class="stat-label">Companies score below 40/100</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">3%</div>
+                        <div class="stat-label">Score above 80/100</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">96%</div>
+                        <div class="stat-label">Lack llms.txt file</div>
+                    </div>
+                </div>
+                <div class="insight-box">Source: RankFixer benchmark of 100 SaaS companies (July 2026). Top performers: HubSpot (91.2), Salesforce (88.7), Stripe (86.4).</div>
+            </div>
+
+            <!-- Recommendations -->
+            <div class="section">
+                <h3>✅ Priority Recommendations</h3>
+                <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1rem;">
+                    Based on competitive analysis and industry benchmarks, here's what to fix first:
+                </p>
+                <div id="recommendations"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer class="site-footer">
+        <p>RankFixer — Know Your AI Visibility Score</p>
+        <p><a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="/research">Research</a></p>
+    </footer>
+
+    <!-- Load JS -->
+    <script src="/js/supabase.js"></script>
+    <script src="/js/auth.js"></script>
+    <script>
+    // ===================================================================
+    // REPORT PAGE LOGIC
+    // ===================================================================
+
+    let _competitorData = null;
+    const REPORT_PRICE = '29.00';
+
+    async function init() {
+        // Step 1: Check auth
+        const session = await Auth.getSession();
+
+        if (!session) {
+            showState('not-auth');
+            return;
+        }
+
+        // Show email in nav
+        document.getElementById('nav-email').textContent = session.user.email;
+        document.getElementById('btn-signout').style.display = 'inline-block';
+        document.getElementById('btn-signin').style.display = 'none';
+
+        // Step 2: Check payment
+        const paymentStatus = await Auth.checkPayment();
+
+        if (!paymentStatus.paid) {
+            showState('not-paid');
+            renderPayPalButton(session.user.email);
+            return;
+        }
+
+        // Step 3: Show report
+        showState('report');
+        await loadCompetitorData();
+        renderReport();
+    }
+
+    function showState(state) {
+        ['loading', 'not-auth', 'not-paid', 'report'].forEach(s => {
+            document.getElementById('state-' + s).style.display = (s === state) ? '' : 'none';
+        });
+    }
+
+    // --- PayPal ---
+    function renderPayPalButton(userEmail) {
+        // PayPal sandbox Client ID — already loaded via SDK script tag above
+        // Switch to https://www.paypal.com/sdk/js for live/production
+
+        // Embedded PayPal button
+        if (typeof paypalCheckout !== 'undefined') {
+            paypalCheckout.Buttons({
+                style: { layout: 'vertical', color: 'gold', shape: 'rect', label: 'paypal' },
+                createOrder: function(data, actions) {
+                    return actions.order.create({
+                        purchase_units: [{ amount: { value: REPORT_PRICE } }]
+                    });
+                },
+                onApprove: async function(data, actions) {
+                    // Record payment in Supabase
+                    const result = await Auth.recordPayment(data.orderID, '$' + REPORT_PRICE);
+                    if (result.error) {
+                        alert('Payment recorded but failed to save. Please contact hello@rankfixer.co with order ID: ' + data.orderID);
+                    }
+                    // Show the report
+                    showState('report');
+                    await loadCompetitorData();
+                    renderReport();
+                },
+                onError: function(err) {
+                    console.error('PayPal error:', err);
+                    alert('Payment failed. Please try again or contact hello@rankfixer.co');
+                }
+            }).render('#paypal-button-container');
+        }
+    }
+
+    // --- Competitive Data ---
+    async function loadCompetitorData() {
+        try {
+            const resp = await fetch('/data/competitors.json');
+            if (resp.ok) {
+                _competitorData = await resp.json();
+                document.getElementById('report-url').textContent =
+                    'Competitive Intelligence · ' + _competitorData.competitor_count + ' competitors tracked';
+            }
+        } catch (e) {
+            console.warn('Could not load competitor data:', e);
+        }
+    }
+
+    function renderReport() {
+        const urlParam = new URLSearchParams(window.location.search).get('url');
+        if (urlParam) {
+            document.getElementById('report-url').textContent = urlParam;
+        }
+
+        if (!_competitorData || !_competitorData.competitors) {
+            document.getElementById('competitor-list').innerHTML =
+                '<p style="color:var(--text-muted)">Competitor data will appear after the next weekly crawl.</p>';
+            return;
+        }
+
+        // Competitor list
+        let html = '';
+        _competitorData.competitors.forEach(c => {
+            html += `<div class="competitor-row">
+                <div class="comp-name">${escHtml(c.name)}</div>
+                <div class="comp-h1">${escHtml((c.h1 || '').substring(0, 100))}</div>
+                <div class="comp-ctas">${(c.ctas || []).slice(0, 3).map(t => `<span class="comp-cta-tag">${escHtml(t.substring(0, 25))}</span>`).join('')}</div>
+            </div>`;
+        });
+        document.getElementById('competitor-list').innerHTML = html;
+
+        // Pricing table
+        let pricingHtml = '<table class="pricing-table"><tr><th>Competitor</th><th>Tiers</th></tr>';
+        _competitorData.competitors.forEach(c => {
+            const tiers = (c.pricing_tiers || []).map(t => `${t.name}: ${t.price}`).join(', ') || 'Contact for pricing';
+            pricingHtml += `<tr><td><strong>${escHtml(c.name)}</strong></td><td>${escHtml(tiers.substring(0, 120))}</td></tr>`;
+        });
+        pricingHtml += '</table>';
+        document.getElementById('pricing-table').innerHTML = pricingHtml;
+        document.getElementById('pricing-insight').textContent =
+            'Most competitors in this space use tiered pricing with a free trial or freemium entry point. Compare your pricing structure to the competitive range above.';
+
+        // Feature cloud
+        let allFeatures = new Set();
+        _competitorData.competitors.forEach(c => {
+            (c.top_features || []).forEach(f => allFeatures.add(f));
+        });
+        let featureHtml = '';
+        Array.from(allFeatures).sort().slice(0, 30).forEach(f => {
+            featureHtml += `<span class="feature-tag">${escHtml(f.substring(0, 60))}</span>`;
+        });
+        document.getElementById('feature-cloud').innerHTML = featureHtml || '<p style="color:var(--text-muted)">Feature data unavailable for this crawl.</p>';
+
+        // Recommendations
+        document.getElementById('recommendations').innerHTML = `
+            <div class="insight-box"><strong>1. Add llms.txt</strong> — 96% of sites lack one. Create a simple /llms.txt file listing your key pages for AI crawler discovery. Takes 5 minutes.</div>
+            <div class="insight-box"><strong>2. Implement FAQPage Schema</strong> — The highest-impact schema type for AI citation. Add JSON-LD question/answer pairs to your top 5 pages.</div>
+            <div class="insight-box"><strong>3. Review Competitor Positioning</strong> — Compare your homepage H1 to competitors above. Are you matching their breadth claims?</div>
+            <div class="insight-box"><strong>4. Ensure AI Crawler Access</strong> — Check robots.txt for GPTBot, ClaudeBot, and PerplexityBot. Don't accidentally block AI crawlers.</div>
+            <div class="insight-box"><strong>5. Track Weekly</strong> — AI visibility changes fast. Re-scan weekly and monitor competitor movements via our intelligence pipeline.</div>
+        `;
+    }
+
+    function doSignOut() {
+        Auth.signOut().then(() => {
+            showState('not-auth');
+            document.getElementById('btn-signout').style.display = 'none';
+            document.getElementById('btn-signin').style.display = 'inline-block';
+            document.getElementById('nav-email').textContent = '';
+        });
+    }
+
+    function escHtml(str) {
+        const div = document.createElement('div');
+        div.textContent = str;
+        return div.innerHTML;
+    }
+
+    // Boot
+    document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

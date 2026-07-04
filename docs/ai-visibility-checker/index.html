@@ -206,11 +206,16 @@
 
         <footer class="site-footer">
             <p>RankFixer — Know Your AI Visibility Score</p>
-            <p><a href="/">Home</a> <a href="/blog">Blog</a> <a href="https://github.com/rankfixer-ai/rankfixer-core">GitHub</a></p>
-            <p>No signup required. No credit card. No BS.</p>
+            <p><a href="/">Home</a> <a href="/report/">Full Report</a> <a href="/blog">Blog</a> <a href="https://github.com/rankfixer-ai/rankfixer-core">GitHub</a></p>
+            <p>No signup required for the free check.</p>
         </footer>
 
     </div>
+
+    <!-- Supabase + Auth (for paywall flow) -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="/js/supabase.js"></script>
+    <script src="/js/auth.js"></script>
 
     <script>
     (function() {
@@ -230,13 +235,98 @@
             return str.trim().replace(/^https?:\/\//i,'').replace(/\/.*$/,'').replace(/^www\./i,'');
         }
 
-        scanButton.addEventListener('click', function() {
+        async function runRealScan(domain) {
+            var url = 'https://' + domain;
+            var results = {
+                domain: domain,
+                hasHttps: true,
+                hasSchema: false,
+                hasFaqSchema: false,
+                hasOrganizationSchema: false,
+                hasLlmsTxt: false,
+                hasRobotsTxt: false,
+                allowsAiCrawlers: false,
+                hasMetaDescription: false,
+                hasTitle: false,
+                hasH1: false,
+                score: 0
+            };
+
+            var errors = [];
+
+            // 1. Fetch homepage
+            try {
+                var resp = await fetch(url, { headers: { 'User-Agent': 'RankFixer-Checker/1.0' } });
+                if (resp.ok) {
+                    var html = await resp.text();
+                    var lowerHtml = html.toLowerCase();
+
+                    // Check for schema.org JSON-LD
+                    results.hasSchema = /application\/ld\+json/.test(lowerHtml) || /"@context"\s*:\s*"https?:\/\/schema\.org"/.test(html);
+                    results.hasFaqSchema = /FAQPage/i.test(html);
+                    results.hasOrganizationSchema = /Organization/i.test(html) && /"@type"/.test(html);
+
+                    // Check meta tags
+                    results.hasMetaDescription = /<meta[^>]+name\s*=\s*["']description["'][^>]*>/i.test(html);
+                    results.hasTitle = /<title[^>]*>[^<]+<\/title>/i.test(html);
+                    results.hasH1 = /<h1[^>]*>/i.test(html);
+                }
+            } catch(e) {
+                errors.push('homepage: ' + e.message);
+            }
+
+            // 2. Check llms.txt
+            try {
+                var llmsResp = await fetch(url + '/llms.txt', { headers: { 'User-Agent': 'RankFixer-Checker/1.0' } });
+                results.hasLlmsTxt = llmsResp.ok;
+            } catch(e) {
+                errors.push('llms.txt: ' + e.message);
+            }
+
+            // 3. Check robots.txt for AI crawler access
+            try {
+                var robotsResp = await fetch(url + '/robots.txt', { headers: { 'User-Agent': 'RankFixer-Checker/1.0' } });
+                if (robotsResp.ok) {
+                    results.hasRobotsTxt = true;
+                    var robotsText = await robotsResp.text();
+                    // Check if AI crawlers are explicitly allowed or at least not blocked
+                    var hasGptBot = /GPTBot|gptbot|ChatGPT|chatgpt/i.test(robotsText);
+                    var hasClaudeBot = /ClaudeBot|claude/i.test(robotsText);
+                    var hasPerplexity = /PerplexityBot|perplexity/i.test(robotsText);
+                    // If robots.txt exists and doesn't specifically disallow common AI bots, count it
+                    var disallowedAll = /User-agent:\s*\*\s*\n\s*Disallow:\s*\//i.test(robotsText);
+                    results.allowsAiCrawlers = !disallowedAll && (hasGptBot || hasClaudeBot || hasPerplexity || robotsText.length < 100);
+                }
+            } catch(e) {
+                errors.push('robots.txt: ' + e.message);
+            }
+
+            // Calculate score
+            var score = 5; // base
+            if (results.hasHttps) score += 10;
+            if (results.hasSchema) score += 20;
+            if (results.hasFaqSchema) score += 10;
+            if (results.hasOrganizationSchema) score += 10;
+            if (results.hasLlmsTxt) score += 15;
+            if (results.allowsAiCrawlers) score += 10;
+            if (results.hasMetaDescription) score += 5;
+            if (results.hasTitle) score += 5;
+            if (results.hasH1) score += 5;
+            // Cap at 95 (perfect scores don't exist)
+            results.score = Math.min(score, 95);
+            results.errors = errors;
+
+            return results;
+        }
+
+        scanButton.addEventListener('click', async function() {
             var raw = domainInput.value;
             if (!raw.trim() || !isValidDomain(raw)) {
                 domainInput.style.border = '1px solid #E17055';
                 return;
             }
             domainInput.style.border = '';
+            var domain = cleanDomain(raw);
             scanSection.style.display = 'none';
             loadingScreen.classList.add('active');
 
@@ -245,28 +335,68 @@
                 setTimeout(function() {
                     if (i > 0) document.getElementById(steps[i-1]).classList.add('done');
                     document.getElementById(id).classList.add('active');
-                }, (i + 1) * 800);
+                }, (i + 1) * 700);
             });
 
-            // Simulate scan + show results
+            // Run the real scan
+            var scanResult;
+            try {
+                scanResult = await runRealScan(domain);
+            } catch(e) {
+                scanResult = { score: 5, domain: domain, errors: [e.message] };
+            }
+
+            // Complete loading animation
             setTimeout(function() {
                 document.getElementById(steps[4]).classList.add('done');
-            }, 4500);
+            }, 3800);
 
             setTimeout(function() {
                 loadingScreen.classList.remove('active');
                 resultsScreen.classList.add('active');
                 dataBanner.style.display = 'block';
 
-                var score = Math.floor(Math.random() * 40) + 5;
+                var score = scanResult.score;
                 var el = document.getElementById('score-number');
                 el.textContent = score;
                 el.style.color = score <= 20 ? '#E17055' : score <= 40 ? '#FDCB6E' : score <= 60 ? '#74B9FF' : score <= 80 ? '#00B894' : '#A29BFE';
-                document.getElementById('score-label').textContent = score <= 20 ? 'Critical' : score <= 40 ? 'Poor' : score <= 60 ? 'Fair' : score <= 80 ? 'Good' : 'Excellent';
-                document.getElementById('score-interpretation').textContent = '78% of domains score in the Critical/Poor range. You\'re not alone — and this is fixable.';
+
+                var tier = score <= 20 ? 'Critical' : score <= 40 ? 'Poor' : score <= 60 ? 'Fair' : score <= 80 ? 'Good' : 'Excellent';
+                document.getElementById('score-label').textContent = tier;
+
+                // Build detailed interpretation
+                var details = [];
+                if (scanResult.hasSchema) details.push('Has schema markup ✓');
+                else details.push('Missing schema markup ✗');
+                if (scanResult.hasLlmsTxt) details.push('Has llms.txt ✓');
+                else details.push('Missing llms.txt ✗');
+                if (scanResult.allowsAiCrawlers) details.push('AI crawlers likely allowed ✓');
+                else details.push('AI crawlers may be blocked ✗');
+
+                document.getElementById('score-interpretation').textContent = details.join(' · ');
+
+                // Add "Get Full Report" button
+                var existingBtn = document.getElementById('full-report-btn');
+                if (!existingBtn) {
+                    var btnDiv = document.createElement('div');
+                    btnDiv.id = 'full-report-btn';
+                    btnDiv.style.cssText = 'text-align:center; margin:1.5rem 0 0.5rem;';
+                    btnDiv.innerHTML = '<p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:0.75rem;">This is a quick check. Get the full report with competitor analysis.</p>' +
+                        '<a href="/report/?url=' + encodeURIComponent(domain) + '" class="btn-primary" style="display:inline-block;font-size:1rem;">Get Full Report — $29</a>' +
+                        '<p style="font-size:0.7rem;color:var(--text-muted);margin-top:0.5rem;">Includes competitive pricing, feature gaps, and actionable fixes.</p>';
+                    resultsScreen.appendChild(btnDiv);
+
+                    // Add styles for btn-primary in this page context
+                    if (!document.getElementById('btn-primary-style')) {
+                        var style = document.createElement('style');
+                        style.id = 'btn-primary-style';
+                        style.textContent = '.btn-primary { background: var(--brand); color: #fff; border: none; padding: 14px 32px; font-size: 1rem; font-weight: 700; cursor: pointer; font-family: var(--font); border-radius: var(--radius-sm); text-decoration: none; transition: background 0.2s; } .btn-primary:hover { background: var(--brand-hover); text-decoration: none; }';
+                        document.head.appendChild(style);
+                    }
+                }
 
                 resultsScreen.scrollIntoView({ behavior: 'smooth' });
-            }, 5500);
+            }, 4500);
         });
 
         domainInput.addEventListener('keydown', function(e) {

@@ -139,9 +139,11 @@
         <a href="/" class="nav-logo">Rankfixer</a>
         <div class="nav-links">
             <a href="/ai-visibility-checker">Free Checker</a>
+            <a href="/report/">Get Full Report</a>
             <a href="/research">Research</a>
             <a href="/blog">Blog</a>
             <a href="https://github.com/rankfixer-ai/rankfixer-core" target="_blank" rel="noopener">GitHub</a>
+            <a href="#" onclick="Auth.showAuthModal('redirect'); return false;" style="color:var(--brand);font-weight:600;">Sign In</a>
         </div>
     </nav>
 
@@ -233,6 +235,16 @@
             <p style="font-size: 0.8rem; color: var(--text-muted);">Open-source under MIT license</p>
         </section>
 
+        <!-- GET FULL REPORT CTA -->
+        <section class="social-proof" style="text-align:center; padding: 2rem 0;">
+            <h2 style="font-size:1.3rem; margin-bottom:0.75rem;">Want the full competitive analysis?</h2>
+            <p style="color:var(--text-muted); max-width:480px; margin:0 auto 1.5rem;">
+                Get a detailed report with competitor pricing, feature gaps, and positioning intelligence
+                — updated weekly from our market monitoring pipeline.
+            </p>
+            <a href="/report/" class="btn-primary">Get Full Report — $29</a>
+        </section>
+
         <!-- CITE -->
         <section class="cite-section">
             <h4>📚 Cite This Research</h4>
@@ -248,6 +260,11 @@
         </footer>
 
     </div>
+
+    <!-- Supabase + Auth -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="/js/supabase.js"></script>
+    <script src="/js/auth.js"></script>
 
 </body>
 </html>

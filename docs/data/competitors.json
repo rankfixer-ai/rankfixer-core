@@ -1,0 +1,511 @@
+{
+  "generated": "2026-07-03T19:39:51.533Z",
+  "competitor_count": 10,
+  "competitors": [
+    {
+      "id": "semrush",
+      "name": "Semrush",
+      "domain": "semrush.com",
+      "url": "https://www.semrush.com",
+      "h1": "Be found everywhere search happens",
+      "ctas": [
+        "Explore Semrush One",
+        "Try for free",
+        "Start now",
+        "Explore the index",
+        "Log In"
+      ],
+      "meta": "Semrush is the leading platform to grow and measure brand visibility across AI search, SEO, PPC, social, and more.",
+      "pricing_tiers": [
+        {
+          "name": "Unknown",
+          "price": "Contact for pricing"
+        },
+        {
+          "name": "Unknown",
+          "price": "Contact for pricing"
+        },
+        {
+          "name": "Unknown",
+          "price": "20"
+        },
+        {
+          "name": "Unknown",
+          "price": "20"
+        },
+        {
+          "name": "Unknown",
+          "price": "Contact for pricing"
+        }
+      ],
+      "top_features": [
+        "Semrush One",
+        "Request a Demo",
+        "Talk to Sales",
+        "AI Visibility Toolkit",
+        "SEO Toolkit",
+        "Traffic & Market Toolkit",
+        "Content Toolkit",
+        "Local Toolkit"
+      ],
+      "blog_posts": [
+        {
+          "title": "Why category entry points belong in every AI search strategyLearn how CEP-anchored content performs ",
+          "date": "June 18, 2026"
+        },
+        {
+          "title": "Bot traffic now exceeds traffic from human usersFor the first time, bots generate more web traffic t",
+          "date": "June 13, 2026"
+        },
+        {
+          "title": "What is AI sentiment analysis? A marketer\u2019s guideAI sentiment analysis tells you what AI platforms a",
+          "date": "June 16, 2026"
+        }
+      ]
+    },
+    {
+      "id": "seranking",
+      "name": "SE Ranking",
+      "domain": "seranking.com",
+      "url": "https://seranking.com",
+      "h1": "Don\u2019t just track visibility. Validate\u00a0it.",
+      "ctas": [
+        "Start free trial",
+        "Browse catalog",
+        "AI Visibility Tracker",
+        "AI Overviews Tracker",
+        "ChatGPT Tracker"
+      ],
+      "meta": "SE Ranking is a trusted AI SEO tool that pays for itself. Get accurate data, actionable insights, and automated reports. Powerful tools, simple execution.",
+      "pricing_tiers": [
+        {
+          "name": "Unknown",
+          "price": "$103.20"
+        },
+        {
+          "name": "Unknown",
+          "price": "$103.20"
+        },
+        {
+          "name": "growth",
+          "price": "$223.20"
+        },
+        {
+          "name": "growth",
+          "price": "$223.20"
+        },
+        {
+          "name": "Unknown",
+          "price": "Contact for pricing"
+        }
+      ],
+      "top_features": [
+        "Enterprises",
+        "Growing business",
+        "Keyword Research API",
+        "Backlinks API",
+        "Domain Analysis API",
+        "SEO Skills for Claude",
+        "Rank Tracker",
+        "Keyword Research"
+      ],
+      "blog_posts": [
+        {
+          "title": "for Agencies",
+          "date": null
+        },
+        {
+          "title": "for Enterprises",
+          "date": null
+        },
+        {
+          "title": "for SMBs",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "surferseo",
+      "name": "Surfer SEO",
+      "domain": "surferseo.com",
+      "url": "https://surferseo.com",
+      "h1": "Be The Answer\u00a0in Google\u2013 Everywhere Buyers Search.",
+      "ctas": [
+        "Sign up",
+        "See if you're the answer \u2014 no signup needed",
+        "4.8/5 \u00a0500+ Reviews",
+        "4.9/5 \u00a0400+ Reviews",
+        "4.6/5 \u00a0200+ Reviews"
+      ],
+      "meta": "Track and improve your brand's visibility across Google and AI search engines like ChatGPT, Gemini, and Perplexity. Surfer is built for marketing & SEO teams ready for the AI era.",
+      "pricing_tiers": [
+        {
+          "name": "Standard",
+          "price": "99"
+        },
+        {
+          "name": "Unknown",
+          "price": "Contact for pricing"
+        },
+        {
+          "name": "Unknown",
+          "price": "360"
+        },
+        {
+          "name": "Pro",
+          "price": "182"
+        },
+        {
+          "name": "Unknown",
+          "price": "Contact for pricing"
+        }
+      ],
+      "top_features": [],
+      "blog_posts": [
+        {
+          "title": "We Analyzed 5 Million AI Citations. Domain Authority Didn't Predict Any of Them.We analyzed 5 millio",
+          "date": "June19"
+        },
+        {
+          "title": "13 Best AI SEO Tools in 2026Discover the top AI SEO tools of 2026 that automate AI tracking, keyword",
+          "date": "June03"
+        },
+        {
+          "title": "9 Ways to Improve Your AI Visibility in 2026Learn 9 proven strategies to increase your visibility in",
+          "date": "May18"
+        }
+      ]
+    },
+    {
+      "id": "clearscope",
+      "name": "Clearscope",
+      "domain": "clearscope.io",
+      "url": "https://www.clearscope.io",
+      "h1": "Get Discovered on Google, ChatGPT, and What's Next",
+      "ctas": [
+        "Sign in",
+        "Start now",
+        "Request demo"
+      ],
+      "meta": "Clearscope is the discoverability platform for a new era in search. Improve and monitor your discoverability in Google, ChatGPT & beyond.  Own your topical authority in your space and break through the blank page with best-in-class AI drafts.",
+      "pricing_tiers": [],
+      "top_features": [],
+      "blog_posts": [
+        {
+          "title": "Blog",
+          "date": null
+        },
+        {
+          "title": "AEO",
+          "date": null
+        },
+        {
+          "title": "AI Content",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "marketmuse",
+      "name": "MarketMuse",
+      "domain": "marketmuse.com",
+      "url": "https://www.marketmuse.com",
+      "h1": "Create the content that counts",
+      "ctas": [
+        "Book a demo",
+        "See how we\u2019ll help you build authority",
+        "See how you analyze competitors",
+        "See the impact of personalized data",
+        "See an example content plan"
+      ],
+      "meta": "Our AI-powered software tells you what content to write (and how much) to leverage your experience and rank higher where competitors are weak.",
+      "pricing_tiers": [],
+      "top_features": [
+        "Product\n\n\tWhy MarketMuse?\n\tCompetitive Content Analysis\n\tContent Clusters\n\tConte",
+        "Why MarketMuse?",
+        "Competitive Content Analysis",
+        "Content Clusters",
+        "Content Planning",
+        "Content Brief Generator",
+        "Learn\n\n\tBlog\n\tContent Strategy Crash Course\n\tCase Studies\n\tGuides\n\tKnowledge Bas",
+        "Content Strategy Crash Course"
+      ],
+      "blog_posts": [
+        {
+          "title": "Why MarketMuse?",
+          "date": null
+        },
+        {
+          "title": "Competitive Content Analysis",
+          "date": null
+        },
+        {
+          "title": "Content Clusters",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "phraseio",
+      "name": "Phrase",
+      "domain": "phrase.com",
+      "url": "https://phrase.com",
+      "h1": "The world\u2019s leadingLanguage Intelligence Platform",
+      "ctas": [
+        "Request a demo",
+        "More on the Phrase Platform",
+        "Discover the platform",
+        "Visit our Developer Hub",
+        "Explore the Phrase ecosystem"
+      ],
+      "meta": "Phrase is the AI-powered language intelligence platform for enterprise. Automate workflows, connect any tool or engine, and scale multilingual content globally.",
+      "pricing_tiers": [
+        {
+          "name": "Team",
+          "price": "20"
+        },
+        {
+          "name": "Team",
+          "price": "20"
+        },
+        {
+          "name": "Business",
+          "price": "150"
+        },
+        {
+          "name": "Enterprise",
+          "price": "150"
+        },
+        {
+          "name": "Unknown",
+          "price": "15"
+        }
+      ],
+      "top_features": [
+        "English\n\n\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\t\t\tDeutsch\n\t\t\t\t\t\n\n\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\t\t\tFr",
+        "Get in touch",
+        "Pricing & plans",
+        "Request a demo",
+        "Technical support",
+        "Phrase Language Intelligence Platform",
+        "Phrase Strings",
+        "Phrase Studio"
+      ],
+      "blog_posts": [
+        {
+          "title": "Blog\n\n\n\nExpert insights, practical strategies, and real-world stories to help you streamline and opt",
+          "date": null
+        },
+        {
+          "title": "Where is the next generation discovering brands?\n\nYouTube, gaming, and AI assistants are fast becomi",
+          "date": null
+        },
+        {
+          "title": "Where is the next generation discovering brands?\n\nYouTube, gaming, and AI assistants are fast becomi",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "jasper",
+      "name": "Jasper AI",
+      "domain": "jasper.ai",
+      "url": "https://www.jasper.ai",
+      "h1": "Put AI agents to work for marketing",
+      "ctas": [
+        "Log In",
+        "Free Trial",
+        "Download PNG",
+        "All Logos"
+      ],
+      "meta": "Orchestrate intelligent agents to run end-to-end marketing workflows delivering speed, control, and measurable impact.",
+      "pricing_tiers": [
+        {
+          "name": "Unknown",
+          "price": "69"
+        },
+        {
+          "name": "Unknown",
+          "price": "59"
+        },
+        {
+          "name": "Unknown",
+          "price": "3"
+        },
+        {
+          "name": "Unknown",
+          "price": "3"
+        },
+        {
+          "name": "Unknown",
+          "price": "Contact for pricing"
+        }
+      ],
+      "top_features": [
+        "PlatformPlatformPlatform",
+        "SolutionsSolutionsSolutions",
+        "ResourcesResourcesResources",
+        "CompanyCompanyCompany",
+        "PricingPricingPricing",
+        "Get A DemoGet A DemoGet A Demo",
+        "IQ embeds governance, context, and trust from the start",
+        "Optimization"
+      ],
+      "blog_posts": [
+        {
+          "title": "Blog",
+          "date": null
+        },
+        {
+          "title": "Read this blog",
+          "date": null
+        },
+        {
+          "title": "Read this blog",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "copyai",
+      "name": "Copy.ai",
+      "domain": "copy.ai",
+      "url": "https://www.copy.ai",
+      "h1": "GTM\u00a0Platform",
+      "ctas": [
+        "\ud83c\udf89 The 2026 Benchmarks Report is Finally Here!\u00a0\ud83c\udf89",
+        "Get a DemoGet a Demo",
+        "Contact SalesTry for free",
+        "Get Demo",
+        "Get a demoGet a demoGet a demo"
+      ],
+      "meta": "Introducing the first-ever GTM AI platform. Automate hundreds of tedious, repetitive tasks and empower your team to scale success like never before.",
+      "pricing_tiers": [
+        {
+          "name": "Enterprise",
+          "price": "20"
+        },
+        {
+          "name": "Unknown",
+          "price": "5"
+        },
+        {
+          "name": "Unknown",
+          "price": "20"
+        },
+        {
+          "name": "Unknown",
+          "price": "20"
+        },
+        {
+          "name": "Unknown",
+          "price": "20"
+        }
+      ],
+      "top_features": [
+        "Prospecting Cockpit",
+        "Content Creation",
+        "Inbound Lead Processing",
+        "Account Based Marketing",
+        "Translation + Localization",
+        "Deal Coaching + Forecasting",
+        "GTM AI\u00a0Platform",
+        "2,000+ Integrations"
+      ],
+      "blog_posts": [
+        {
+          "title": "[PRESS RELEASE] Copy.ai's Go-To-Market AI Platform Sees 480% Revenue Growth in 2024",
+          "date": null
+        },
+        {
+          "title": "Account-Based Marketing vs Lead Generation: A Guide",
+          "date": null
+        },
+        {
+          "title": "Workflows 101: How to Build, Modify, and Run at Scale",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "writesonic",
+      "name": "Writesonic",
+      "domain": "writesonic.com",
+      "url": "https://writesonic.com",
+      "h1": "Win customers fromAI search.",
+      "ctas": [],
+      "meta": "The AI Search Growth Engine. GEO, AEO, and AI visibility in one platform. Track 10 AI platforms, run the work, prove the lift. Trusted by Amazon, Unilever, Acer & NP Digital.",
+      "pricing_tiers": [
+        {
+          "name": "Starter",
+          "price": "$79"
+        },
+        {
+          "name": "Unknown",
+          "price": "$79"
+        },
+        {
+          "name": "Unknown",
+          "price": "Contact for pricing"
+        },
+        {
+          "name": "Basic",
+          "price": "$199"
+        },
+        {
+          "name": "Unknown",
+          "price": "$199"
+        }
+      ],
+      "top_features": [
+        "Claude49.8%\u2191 5%",
+        "Gemini44.2%\u2193 2%",
+        "ChatGPT53.7%\u2191 3%",
+        "Google AIO41.5%\u2191 1%",
+        "AI Visibility Monitoring",
+        "AI Agent Analytics",
+        "Action Center",
+        "AI Article Writer"
+      ],
+      "blog_posts": [
+        {
+          "title": "AI SearchAEO for B2B: A Tactical Playbook (2026)A practical AEO playbook for B2B teams. Covers citat",
+          "date": "2026-07-02T06:44:00.735Z"
+        },
+        {
+          "title": "Rohit Mishra/July 2, 2026AI Search10 AEO Mistakes That Are Costing You VisibilityThe 10 AEO mistakes",
+          "date": "2026-07-02T06:09:57.737Z"
+        },
+        {
+          "title": "Rohit Mishra/July 1, 2026AI SearchAEO Checklist 2026: 35 Steps to Get Cited by ChatGPT, Perplexity, ",
+          "date": "2026-07-01T15:17:26.999Z"
+        }
+      ]
+    },
+    {
+      "id": "rytr",
+      "name": "Rytr",
+      "domain": "rytr.me",
+      "url": "https://rytr.me",
+      "h1": "Rytr's  AI generates original and compelling content that sounds like you, not a robot.",
+      "ctas": [],
+      "meta": "Discover Rytr, your free AI writing assistant. Craft high-quality content faster than ever before. Start for free and upgrade as you grow!",
+      "pricing_tiers": [],
+      "top_features": [],
+      "blog_posts": [
+        {
+          "title": "Post & Caption Ideas",
+          "date": null
+        },
+        {
+          "title": "Blog",
+          "date": null
+        },
+        {
+          "title": "Tackling The Evil Writer\u2019s BlockSeptember 7, 2023Writer\u2019s block, often referred to as a creative imp",
+          "date": null
+        }
+      ]
+    }
+  ]
+}

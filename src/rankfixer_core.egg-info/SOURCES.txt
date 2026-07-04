@@ -1,0 +1,8 @@
+README.md
+setup.py
+src/rankfixer_core/__init__.py
+src/rankfixer_core/analyzer.py
+src/rankfixer_core.egg-info/PKG-INFO
+src/rankfixer_core.egg-info/SOURCES.txt
+src/rankfixer_core.egg-info/dependency_links.txt
+src/rankfixer_core.egg-info/top_level.txt
