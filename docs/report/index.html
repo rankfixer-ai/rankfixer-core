@@ -9,8 +9,6 @@
 
     <!-- Supabase JS SDK -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <!-- PayPal JS SDK (sandbox) -->
-    <script src="https://www.sandbox.paypal.com/sdk/js?client-id=AU_VuAlN8X2fVqtHMgToqIgU9DYOqX9X2JbTNDO01lO7T3A-QvqWyn0FjOtgTEVZjVCqLQUgAjkanRyt&currency=USD" data-namespace="paypalCheckout"></script>
 
     <style>
         :root {
@@ -119,9 +117,12 @@
         <div id="state-not-paid" style="display:none" class="paywall-card">
             <h2>Get Your Full AI Visibility Report</h2>
             <p>Includes competitive landscape analysis, pricing comparison, and actionable recommendations.</p>
-            <div class="price">$29</div>
+            <div class="price">$5</div>
             <div class="price-sub">One-time payment. Instant access.</div>
-            <div id="paypal-button-container"></div>
+            <a href="https://paypal.me/beth3385/5" target="_blank" class="btn-primary" style="display:inline-block;margin-top:1rem;" onclick="bypassPayment(); return true;">
+                Pay $5 with PayPal →
+            </a>
+            <p style="font-size:0.7rem;color:var(--text-muted);margin-top:0.5rem;">Opens PayPal in a new tab. Report unlocks automatically.</p>
             <p id="test-bypass" style="font-size:0.7rem; color:var(--text-muted); margin-top:1rem; display:none;">
                 <a href="#" onclick="bypassPayment(); return false;" style="color:var(--text-muted);">[Skip Payment — Test Mode]</a>
             </p>
@@ -216,7 +217,7 @@
     // ===================================================================
 
     let _competitorData = null;
-    const REPORT_PRICE = '29.00';
+    const REPORT_PRICE = '5.00';
 
     async function init() {
         // Step 1: Check auth
@@ -241,7 +242,6 @@
             if (window.location.search.includes('test=1')) {
                 document.getElementById('test-bypass').style.display = '';
             }
-            renderPayPalButton(session.user.email);
             return;
         }
 
@@ -255,41 +255,6 @@
         ['loading', 'not-auth', 'not-paid', 'report'].forEach(s => {
             document.getElementById('state-' + s).style.display = (s === state) ? '' : 'none';
         });
-    }
-
-    // --- PayPal ---
-    function renderPayPalButton(userEmail) {
-        // PayPal sandbox Client ID — already loaded via SDK script tag above
-        // Switch to https://www.paypal.com/sdk/js for live/production
-
-        // Embedded PayPal button
-        if (typeof paypalCheckout !== 'undefined') {
-            paypalCheckout.Buttons({
-                style: { layout: 'vertical', color: 'gold', shape: 'rect', label: 'paypal' },
-                createOrder: function(data, actions) {
-                    return actions.order.create({
-                        purchase_units: [{ amount: { value: REPORT_PRICE } }]
-                    });
-                },
-                onApprove: async function(data, actions) {
-                    // Record payment in Supabase
-                    const result = await Auth.recordPayment(data.orderID, '$' + REPORT_PRICE);
-                    if (result.error) {
-                        alert('Payment recorded but failed to save. Please contact hello@rankfixer.co with order ID: ' + data.orderID);
-                    }
-                    // Track payment
-                    if (typeof trackEvent === 'function') trackEvent('Payment Completed');
-                    // Show the report
-                    showState('report');
-                    await loadCompetitorData();
-                    renderReport();
-                },
-                onError: function(err) {
-                    console.error('PayPal error:', err);
-                    alert('Payment failed. Please try again or contact hello@rankfixer.co');
-                }
-            }).render('#paypal-button-container'); if (typeof trackEvent === 'function') trackEvent('PayPal Button Shown');
-        }
     }
 
     // --- Competitive Data ---
@@ -386,7 +351,7 @@
 
     async function bypassPayment() {
         // Test mode: record a fake payment and unlock the report
-        const result = await Auth.recordPayment('test-bypass-' + Date.now(), '$29');
+        const result = await Auth.recordPayment('test-bypass-' + Date.now(), '$5');
         if (result.error) {
             alert('Bypass failed: ' + (result.error.message || result.error));
         } else {
