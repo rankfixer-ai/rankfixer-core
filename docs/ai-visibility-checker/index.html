@@ -199,7 +199,10 @@
     <script src="/js/auth.js"></script>
 
     <script>
+    // DEBUG: global marker to verify script execution
+    window.__IIFE_RAN = false;
     (function() {
+        window.__IIFE_RAN = true;
         var domainInput = document.getElementById('domain-input');
         var scanButton = document.getElementById('scan-button');
         var scanSection = document.getElementById('scan-section');
@@ -311,6 +314,7 @@
         }
 
         scanButton.addEventListener('click', async function() {
+            window.__SCAN_CLICKED = (window.__SCAN_CLICKED || 0) + 1;
             var raw = domainInput.value;
             if (!raw.trim() || !isValidDomain(raw)) {
                 domainInput.style.border = '1px solid #E17055';
