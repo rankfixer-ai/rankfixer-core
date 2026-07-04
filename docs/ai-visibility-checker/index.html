@@ -249,60 +249,71 @@
                 hasMetaDescription: false,
                 hasTitle: false,
                 hasH1: false,
+                corsBlocked: false,
                 score: 0
             };
 
             var errors = [];
 
+            // Helper: try direct fetch, fall back to CORS proxy
+            async function fetchWithFallback(targetUrl) {
+                // Try direct first
+                try {
+                    var r = await fetch(targetUrl, { headers: { 'User-Agent': 'RankFixer/1.0' } });
+                    if (r.ok) return r;
+                } catch(e) {
+                    // CORS or network error — try proxy
+                }
+                // Fall back to CORS proxy
+                try {
+                    var proxyUrl = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(targetUrl);
+                    var r = await fetch(proxyUrl);
+                    if (r.ok) { results.corsBlocked = true; return r; }
+                } catch(e2) {
+                    // Proxy also failed
+                }
+                return null;
+            }
+
             // 1. Fetch homepage
-            try {
-                var resp = await fetch(url, { headers: { 'User-Agent': 'RankFixer-Checker/1.0' } });
-                if (resp.ok) {
+            var resp = await fetchWithFallback(url);
+            if (resp) {
+                try {
                     var html = await resp.text();
                     var lowerHtml = html.toLowerCase();
 
-                    // Check for schema.org JSON-LD
                     results.hasSchema = /application\/ld\+json/.test(lowerHtml) || /"@context"\s*:\s*"https?:\/\/schema\.org"/.test(html);
                     results.hasFaqSchema = /FAQPage/i.test(html);
                     results.hasOrganizationSchema = /Organization/i.test(html) && /"@type"/.test(html);
-
-                    // Check meta tags
                     results.hasMetaDescription = /<meta[^>]+name\s*=\s*["']description["'][^>]*>/i.test(html);
                     results.hasTitle = /<title[^>]*>[^<]+<\/title>/i.test(html);
                     results.hasH1 = /<h1[^>]*>/i.test(html);
+                } catch(e) {
+                    errors.push('parse: ' + e.message);
                 }
-            } catch(e) {
-                errors.push('homepage: ' + e.message);
+            } else {
+                errors.push('homepage unreachable (CORS or network)');
             }
 
             // 2. Check llms.txt
             try {
-                var llmsResp = await fetch(url + '/llms.txt', { headers: { 'User-Agent': 'RankFixer-Checker/1.0' } });
-                results.hasLlmsTxt = llmsResp.ok;
-            } catch(e) {
-                errors.push('llms.txt: ' + e.message);
-            }
+                var llmsResp = await fetchWithFallback(url + '/llms.txt');
+                results.hasLlmsTxt = llmsResp && llmsResp.ok;
+            } catch(e) {}
 
             // 3. Check robots.txt for AI crawler access
             try {
-                var robotsResp = await fetch(url + '/robots.txt', { headers: { 'User-Agent': 'RankFixer-Checker/1.0' } });
-                if (robotsResp.ok) {
+                var robotsResp = await fetchWithFallback(url + '/robots.txt');
+                if (robotsResp && robotsResp.ok) {
                     results.hasRobotsTxt = true;
                     var robotsText = await robotsResp.text();
-                    // Check if AI crawlers are explicitly allowed or at least not blocked
-                    var hasGptBot = /GPTBot|gptbot|ChatGPT|chatgpt/i.test(robotsText);
-                    var hasClaudeBot = /ClaudeBot|claude/i.test(robotsText);
-                    var hasPerplexity = /PerplexityBot|perplexity/i.test(robotsText);
-                    // If robots.txt exists and doesn't specifically disallow common AI bots, count it
                     var disallowedAll = /User-agent:\s*\*\s*\n\s*Disallow:\s*\//i.test(robotsText);
-                    results.allowsAiCrawlers = !disallowedAll && (hasGptBot || hasClaudeBot || hasPerplexity || robotsText.length < 100);
+                    results.allowsAiCrawlers = !disallowedAll;
                 }
-            } catch(e) {
-                errors.push('robots.txt: ' + e.message);
-            }
+            } catch(e) {}
 
             // Calculate score
-            var score = 5; // base
+            var score = 5;
             if (results.hasHttps) score += 10;
             if (results.hasSchema) score += 20;
             if (results.hasFaqSchema) score += 10;
@@ -312,7 +323,6 @@
             if (results.hasMetaDescription) score += 5;
             if (results.hasTitle) score += 5;
             if (results.hasH1) score += 5;
-            // Cap at 95 (perfect scores don't exist)
             results.score = Math.min(score, 95);
             results.errors = errors;
 
