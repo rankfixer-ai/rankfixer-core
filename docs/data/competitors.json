@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-04T15:20:05.322549+00:00",
+  "generated": "2026-07-04T16:31:44.889486+00:00",
   "competitor_count": 10,
   "competitors": [
     {
@@ -58,11 +58,11 @@
           "price": "20"
         },
         {
-          "name": "Plan",
+          "name": "Unknown",
           "price": "5"
         },
         {
-          "name": "Plan",
+          "name": "Unknown",
           "price": "20"
         }
       ],
@@ -107,7 +107,7 @@
       "pricing_tiers": [
         {
           "name": "Custom",
-          "price": "Contact for pricing"
+          "price": "Custom/tiered pricing — see Jasper AI website"
         }
       ],
       "top_features": [
@@ -201,7 +201,7 @@
           "price": "150"
         },
         {
-          "name": "Plan",
+          "name": "Unknown",
           "price": "15"
         },
         {
@@ -286,7 +286,7 @@
       "meta": "Semrush is the leading platform to grow and measure brand visibility across AI search, SEO, PPC, social, and more.",
       "pricing_tiers": [
         {
-          "name": "Plan",
+          "name": "Unknown",
           "price": "20"
         }
       ],
@@ -331,7 +331,7 @@
       "meta": "SE Ranking is a trusted AI SEO tool that pays for itself. Get accurate data, actionable insights, and automated reports. Powerful tools, simple execution.",
       "pricing_tiers": [
         {
-          "name": "Plan",
+          "name": "Unknown",
           "price": "$103.20"
         },
         {
@@ -339,7 +339,7 @@
           "price": "$223.20"
         },
         {
-          "name": "Plan",
+          "name": "Unknown",
           "price": "$33.00"
         }
       ],
@@ -385,7 +385,7 @@
       "pricing_tiers": [
         {
           "name": "Custom",
-          "price": "Contact for pricing"
+          "price": "Custom/tiered pricing — see Surfer SEO website"
         }
       ],
       "top_features": [
@@ -424,7 +424,7 @@
       "pricing_tiers": [
         {
           "name": "Custom",
-          "price": "Contact for pricing"
+          "price": "Custom/tiered pricing — see Writesonic website"
         }
       ],
       "top_features": [

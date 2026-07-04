@@ -551,87 +551,64 @@ class CompetitiveIntel:
     @staticmethod
     def _clean_pricing_tiers(
         tiers: list[dict[str, Any]],
+        competitor_name: str = "",
     ) -> list[dict[str, Any]]:
-        """Clean pricing tiers: drop pure-Unknown entries, deduplicate,
-        collapse all-contact tiers, and label unnamed tiers as 'Plan'.
+        """Clean pricing tiers. Two paths:
+
+        1. If data is too fragmented (>4 deduped tiers, truncated entries,
+           or majority unknown names), collapse to a single clean line.
+        2. Otherwise return the tiers as-is — they're clean enough to display.
         """
         if not tiers:
             return []
 
-        # Step 1: replace unnamed tiers — drop if both name and price are
-        #         unknown; rename to 'Plan' if only name is unknown
-        meaningful: list[dict[str, Any]] = []
-        contact_only = True  # track whether ALL tiers are contact-for-pricing
+        # Deduplicate by (name, price) — keep first occurrence.
+        # Drop FAQ detritus along the way.
+        seen: set[tuple[str, str]] = set()
+        deduped: list[dict[str, Any]] = []
+        unknown_count = 0
+        has_truncated = False  # tier with a name but no captured price
 
         for t in tiers:
             name = (t.get("name") or "").strip()
-            price_raw = (t.get("price") or "").strip()
+            price = (t.get("price") or "").strip()
 
-            # Drop FAQ-like rows where price is 'Contact for pricing' and
-            # snippet is a question/help text
+            # Drop FAQ junk that leaked into the pricing scrape
             snippet = (t.get("snippet") or "").strip().lower()
-            if _is_faq_snippet(snippet) and (
-                price_raw == "Contact for pricing" or name == "Unknown"
-            ):
+            if _is_faq_snippet(snippet):
                 continue
 
-            # Drop rows where BOTH name and price are essentially unknown
+            # Drop rows where *both* name and price are empty / unknown
             if (not name or name.lower() == "unknown") and (
-                not price_raw
-                or price_raw.lower() in ("contact for pricing", "unknown", "-")
+                not price or price.lower() in ("contact for pricing", "unknown", "-")
             ):
                 continue
 
-            # Rename unnamed tiers
+            key = (name.lower(), price.lower() if price else "")
+            if key in seen:
+                continue
+            seen.add(key)
+
+            deduped.append({"name": name, "price": price})
+
             if not name or name.lower() == "unknown":
-                name = "Plan"
+                unknown_count += 1
+            if name and not price:
+                has_truncated = True
 
-            price = price_raw
-
-            meaningful.append({
-                "name": name,
-                "price": price,
-                "snippet": t.get("snippet", ""),
-            })
-
-            if price.lower() != "contact for pricing":
-                contact_only = False
-
-        if not meaningful:
+        if not deduped:
             return []
 
-        # Step 2: if every single tier is "Contact for pricing",
-        #         collapse to a single entry
-        if contact_only:
+        # --- Collapse gate ---
+        # Collapse if the data is too fragmented to display usefully.
+        too_many = len(deduped) > 6
+
+        if too_many or has_truncated:
+            label = competitor_name or "competitor"
             return [{
                 "name": "Custom",
-                "price": "Contact for pricing",
-                "snippet": "Custom pricing — contact for pricing",
-            }]
-
-        # Step 3: deduplicate by (name, price) key — keep first occurrence
-        seen: set[tuple[str, str]] = set()
-        deduped: list[dict[str, Any]] = []
-        for t in meaningful:
-            key = (t["name"].lower(), t["price"].lower())
-            if key not in seen:
-                seen.add(key)
-                deduped.append(t)
-
-        # Step 4: collapse fragmented competitors — if the scraper returned
-        #         too many unnamed tiers, the data is too noisy to display.
-        #         Fall back to "Custom pricing" just like the all-contact case.
-        MAX_TIERS = 6
-        named_count = sum(1 for t in deduped if t["name"].lower() != "plan")
-        unnamed_count = len(deduped) - named_count
-
-        if len(deduped) > MAX_TIERS or (
-            len(deduped) > 4 and unnamed_count > named_count
-        ):
-            return [{
-                "name": "Custom",
-                "price": "Contact for pricing",
-                "snippet": "Custom pricing — contact for pricing",
+                "price": f"Custom/tiered pricing — see {label} website",
+                "snippet": "",
             }]
 
         return deduped
@@ -711,7 +688,7 @@ class CompetitiveIntel:
         price_points: list[float] = []
 
         for name, raw_tiers in all_pricing.items():
-            tiers = self._clean_pricing_tiers(raw_tiers)
+            tiers = self._clean_pricing_tiers(raw_tiers, name)
             if not tiers:
                 summary.append({
                     "name": name,
@@ -723,8 +700,13 @@ class CompetitiveIntel:
             extracted_prices: list[str] = []
             for t in tiers:
                 price_str = t.get("price", "")
-                if price_str and price_str.lower() != "contact for pricing":
-                    extracted_prices.append(f"{t.get('name', 'Plan')}: {price_str}")
+                name_str = t.get("name", "")
+
+                # Collapsed tier: the price field IS the full display message
+                if name_str == "Custom" and price_str.startswith("Custom/tiered pricing"):
+                    extracted_prices.append(price_str)
+                elif price_str and price_str.lower() != "contact for pricing":
+                    extracted_prices.append(f"{name_str or 'Plan'}: {price_str}")
                     nums = re.findall(r"[\$€£]?(\d+(?:\.\d{2})?)", price_str)
                     for n in nums:
                         try:
@@ -732,7 +714,7 @@ class CompetitiveIntel:
                         except ValueError:
                             pass
                 else:
-                    extracted_prices.append(f"{t.get('name', 'Plan')}: Contact for pricing")
+                    extracted_prices.append(f"{name_str or 'Plan'}: Contact for pricing")
 
             summary.append({
                 "name": name,
