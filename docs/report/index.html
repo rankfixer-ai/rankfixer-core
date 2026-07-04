@@ -72,7 +72,7 @@
         .pricing-table td { padding: 8px; border-bottom: 1px solid var(--border); }
         .pricing-table tr:last-child td { border-bottom: none; }
 
-        .feature-tag { display: inline-block; background: var(--bg-input); padding: 4px 12px; border-radius: 100px; font-size: 0.75rem; color: var(--text-muted); margin: 3px; line-height: 1.5; }
+        .feature-tag { display: inline-block; background: var(--bg-input); padding: 4px 12px; border-radius: 100px; font-size: 0.75rem; color: var(--text-muted); line-height: 1.5; white-space: nowrap; }
 
         .loading { text-align: center; padding: 2rem; color: var(--text-muted); }
         .spinner { display: inline-block; width: 24px; height: 24px; border: 3px solid var(--border); border-top-color: var(--brand); border-radius: 50%; animation: spin 0.8s linear infinite; margin-bottom: 0.5rem; }
@@ -350,15 +350,16 @@
         document.getElementById('pricing-insight').textContent =
             'Most competitors use custom or tiered pricing. Visit their websites for current plans and compare against your own offering.';
 
-        // Feature cloud
+        // Feature cloud — use flex container so tags wrap with visible gaps
         let allFeatures = new Set();
         _competitorData.competitors.forEach(c => {
             (c.top_features || []).forEach(f => allFeatures.add(f));
         });
-        let featureHtml = '';
+        let featureHtml = '<div style="display:flex;flex-wrap:wrap;gap:6px;">';
         Array.from(allFeatures).sort().slice(0, 20).forEach(f => {
             featureHtml += `<span class="feature-tag">${escHtml(f.substring(0, 60))}</span>`;
         });
+        featureHtml += '</div>';
         document.getElementById('feature-cloud').innerHTML = featureHtml || '<p style="color:var(--text-muted)">Feature data unavailable for this crawl.</p>';
 
         // Recommendations
