@@ -9,9 +9,276 @@ from __future__ import annotations
 
 import json
 import os
+import re
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
+
+# ---------------------------------------------------------------------------
+# Feature cleaning: fragments that are UI chrome, not product features
+# ---------------------------------------------------------------------------
+_RE_LANGUAGE_SWITCHER = re.compile(
+    r"^(english|deutsch|français|español|português|italiano|"
+    r"日本語|简体中文|繁體中文|한국어|русский|العربية|"
+    r"中文|中文（简体）|中文（繁體）|"
+    r"nederlands|svenska|norsk|dansk|suomi|polski|"
+    r"türkçe|ภาษาไทย|tiếng việt|bahasa indonesia)$",
+    re.IGNORECASE,
+)
+
+# Set of language names (lowercased) for detecting multi-language dumps
+_LANG_NAMES: set[str] = {
+    "english", "deutsch", "français", "español", "português",
+    "italiano", "日本語", "简体中文", "繁體中文", "한국어",
+    "русский", "العربية", "中文", "nederlands", "svenska",
+    "norsk", "dansk", "suomi", "polski", "türkçe", "ภาษาไทย",
+    "tiếng việt", "bahasa indonesia", "čeština", "magyar",
+    "română", "українська", "български", "hrvatski",
+    "slovenčina", "slovenščina", "latviešu", "lietuvių",
+    "eesti", "íslenska", "català", "euskara", "galego",
+    "हिन्दी", "বাংলা", "தமிழ்", "తెలుగు", "मराठी",
+    "ગુજરાતી", "ಕನ್ನಡ", "മലയാളം", "ਪੰਜਾਬੀ",
+}
+
+# Nav-section keywords that start multi-entry nav dumps
+_NAV_DUMP_PREFIXES: set[str] = {
+    "product", "learn", "company", "resources", "solutions",
+    "platform", "use cases", "services",
+}
+
+# Stat/metric patterns
+_RE_STAT_METRIC = re.compile(r"[↑↓]|\\d+%\\s*[↑↓]|[\\d.]+K?\\s*[↑↓]")
+
+_NAV_LABELS: set[str] = {
+    "about", "about us", "blog", "careers", "case studies",
+    "case study", "contact", "contact us", "contact sales",
+    "docs", "documentation", "faq", "help center", "help",
+    "home", "integrations", "log in", "login", "logout",
+    "partners", "press", "pricing", "pricing & plans",
+    "pricing and plans", "privacy", "privacy policy",
+    "product", "resources", "sign in", "sign up",
+    "solutions", "support", "terms", "terms of service",
+    "trust center", "webinars", "press & awards",
+    "press releases", "newsroom",
+}
+
+_CTA_LABELS: set[str] = {
+    "book a demo", "get a demo", "get demo", "request a demo",
+    "request demo", "start free trial", "free trial", "try for free",
+    "try free", "start now", "get started", "get started free",
+    "sign up free", "sign up for free", "talk to sales",
+    "contact sales", "get in touch", "request a quote",
+    "see pricing", "view pricing", "explore platform",
+    "learn more", "discover more", "see how it works",
+    "download", "subscribe", "buy now", "get the app",
+}
+
+_SECTION_LABELS: set[str] = {
+    "by use case", "by industry", "by role", "for enterprises",
+    "for non-profits", "for small business", "for agencies",
+    "why marketmuse?", "customer love", "customer stories",
+    "customer reviews", "compare plans", "pricing plans",
+    "all features", "feature overview", "feature comparison",
+    "product updates", "what's new", "release notes",
+    "technical support", "customer support", "customer success",
+    "professional services", "training", "academy",
+    "api", "api reference", "api documentation",
+    "developer", "developers", "developer hub",
+    "guides", "knowledge base", "marketmuse academy",
+    "content strategy crash course",
+    "enterprises", "growing business", "agencies",
+    "small business", "freelancers", "startups",
+    "marketing teams", "seo professionals",
+}
+
+# Curated fallback features per competitor — used when scraped list < 5 items
+_CURATED_FEATURES: dict[str, list[str]] = {
+    "Semrush": [
+        "Keyword Research", "Rank Tracking", "Site Audit",
+        "Backlink Analysis", "Competitor Analysis", "Content Optimization",
+        "AI Visibility Tracking", "PPC Analytics",
+        "Social Media Management", "Reporting",
+    ],
+    "Ahrefs": [
+        "Backlink Analysis", "Keyword Research", "Rank Tracking",
+        "Site Audit", "Content Explorer", "Competitor Analysis",
+        "AI Content Grader", "Traffic Analytics",
+    ],
+    "Surfer SEO": [
+        "Content Optimization", "AI Content Editor", "SERP Analyzer",
+        "Keyword Research", "Content Planner", "Plagiarism Checker",
+        "AI Detection", "Internal Linking Suggestions",
+    ],
+    "Clearscope": [
+        "Content Optimization", "Keyword Research", "Content Grading",
+        "AI Content Outlines", "SERP Analytics", "Content Monitoring",
+    ],
+    "MarketMuse": [
+        "Content Strategy", "Content Briefs", "Competitive Analysis",
+        "Content Planning", "Content Optimization", "Topic Modeling",
+    ],
+    "SE Ranking": [
+        "Rank Tracking", "Keyword Research", "Website Audit",
+        "Backlink Checker", "Competitor Analysis", "AI Overviews Tracking",
+        "White Label Reporting", "Social Media Management",
+    ],
+    "Copy.ai": [
+        "AI Content Generation", "Workflow Automation", "GTM Workflows",
+        "Brand Voice", "Content Creation", "Prospecting",
+        "Integrations", "Lead Processing",
+    ],
+    "Jasper AI": [
+        "AI Agents", "Marketing Workflows", "Brand Voice",
+        "Content Creation", "Campaign Management", "AI Writing",
+        "SEO Mode", "Audience Insights",
+    ],
+    "Writesonic": [
+        "AI Search Tracking", "Content Generation", "AI Articles",
+        "GEO Optimization", "Sentiment Analysis", "AI Visibility",
+        "Site Audit", "Action Center",
+    ],
+    "Rytr": [
+        "AI Writing", "Content Generation", "Plagiarism Checker",
+        "Brand Voice", "Browser Extension", "Use Case Templates",
+    ],
+    "Phrase": [
+        "Translation Management", "Localization", "AI Translation",
+        "Quality Evaluation", "Workflow Automation", "Integrations",
+        "Analytics", "Terminology Management",
+    ],
+}
+
+# ---------------------------------------------------------------------------
+# Helpers used by the cleaners
+# ---------------------------------------------------------------------------
+
+_RE_REPEATED_PATTERN = re.compile(r"(.+?)\1{2,}", re.IGNORECASE)
+"""Matches a substring repeated 3+ times consecutively, e.g.
+'Get a DemoGet a DemoGet a Demo' or 'CompanyCompanyCompany'."""
+
+
+def _has_repeated_pattern(text: str) -> bool:
+    """True when *text itself* looks like a repeated concatenation.
+
+    We check two signals:
+    1. The whole string matches ``(substring)\\1{2,}``.
+    2. The string contains a run of 6+ identical uppercase/camel fragments
+       (catches 'CompanyCompanyCompany' even when the regex needs tuning).
+    """
+    if len(text) < 9:               # too short to be a meaningful repetition
+        return False
+    # Signal 1: regex
+    if _RE_REPEATED_PATTERN.fullmatch(text):
+        return True
+    # Signal 2: 6+ consecutive same-capital-letter runs (e.g. CompanyCompanyCo...)
+    count = 1
+    max_run = 1
+    for i in range(1, len(text)):
+        if text[i].isupper() and text[i - 1].isupper():
+            count += 1
+            max_run = max(max_run, count)
+        else:
+            count = 1
+    if max_run >= 6:
+        return True
+    # Signal 3: common repeated CTA pattern
+    if "get a demoget a demo" in text or "get demoget demo" in text:
+        return True
+    return False
+
+
+# Stat/metric fragments like "Claude49.8%↑ 5%"
+_RE_STAT_METRIC = re.compile(r"[↑↓]|[\\d.]+K?\\s*[↑↓]|\\d+%\\s*[↑↓]")
+
+
+def _is_stat_metric(text: str) -> bool:
+    """True when text is clearly a stats/metrics display fragment."""
+    if "↑" in text or "↓" in text:
+        return True
+    # e.g. "Claude49.8%  5%" or "Gemini44.2%  2%"
+    if re.search(r"[A-Z][a-z]+\\d+[\\d.]*%", text):
+        return True
+    return False
+
+
+def _has_language_dump(text: str) -> bool:
+    """True when text contains multiple language names concatenated."""
+    words = text.lower().split()
+    if len(words) < 3:
+        return False
+    lang_hits = sum(1 for w in words if w in _LANG_NAMES)
+    return lang_hits >= 3
+
+
+def _is_nav_dump(text: str) -> bool:
+    """True when text looks like a nav-menu blob — starts with a
+    section label followed by many title-case entries."""
+    words = text.split()
+    if len(words) < 5:
+        return False
+    first_lower = words[0].lower().rstrip(":")
+    if first_lower not in _NAV_DUMP_PREFIXES:
+        return False
+    # Count title-case words after the prefix
+    title_case_words = 0
+    for w in words[1:]:
+        if w and w[0].isupper() and w[0].isalpha():
+            title_case_words += 1
+    return title_case_words >= 4
+
+
+def _has_camelcase_concat(text: str) -> bool:
+    """True when text has runs of CamelCase words fused together,
+    e.g. 'CanvasMarketing AI EditorJasper Chat'."""
+    # Look for a lowercase→uppercase transition without a space
+    for i in range(len(text) - 1):
+        if text[i].islower() and text[i + 1].isupper() and text[i + 2:i + 3] and text[i + 2].islower():
+            return True
+    return False
+
+
+_MARKETING_TAGLINES = re.compile(
+    r"(embeds|delivers|transforms|drives|powers|unlocks|enables|"
+    r"from the start|for the|built for|designed for|"
+    r"the (world'?s?|first|only|leading|best|fastest|most|ultimate))",
+    re.IGNORECASE,
+)
+
+
+def _is_marketing_tagline(text: str) -> bool:
+    """True when text reads like a marketing blurb rather than a feature name."""
+    low = text.lower()
+    if _MARKETING_TAGLINES.search(low):
+        # Must also look like a sentence (has a verb/determiner pattern)
+        # and be long enough to be a tagline
+        if len(low) > 30 and (" " in low):
+            return True
+    # "Connect Book a Demo Book Jeff Coyle for Your Event" type
+    if low.startswith("connect ") and low.count("book") >= 2:
+        return True
+    return False
+
+
+_FAQ_GATE = re.compile(
+    r"^(what|how|can|do|is|are|will|does|should|where|when|who|why)\b",
+    re.IGNORECASE,
+)
+
+
+def _is_faq_snippet(text: str) -> bool:
+    """True when text looks like an FAQ question rather than pricing data."""
+    stripped = text.strip().rstrip("?").strip()
+    if len(stripped) < 8:
+        return False
+    if _FAQ_GATE.match(stripped) and len(stripped) > 15:
+        return True
+    # Also catch "refund policy", "payment methods", "customer demo" etc.
+    faq_markers = (
+        "refund policy", "payment method", "customer demo",
+        "cancel my", "cancel your", "how do i", "how much",
+        "what is", "can i", "do i", "is there",
+    )
+    return any(m in stripped for m in faq_markers)
 
 
 class CompetitiveIntel:
@@ -188,6 +455,172 @@ class CompetitiveIntel:
         }
 
     # ------------------------------------------------------------------
+    # Feature & pricing cleaners
+    # ------------------------------------------------------------------
+
+    @staticmethod
+    def _clean_features(
+        features: list[str], competitor_name: str
+    ) -> list[str]:
+        """Clean a raw feature list from the scraper.
+
+        Deduplicates, removes UI chrome, and returns max 15 features.
+        Falls back to curated features when the cleaned list is too short.
+        """
+        # Step 1: normalize — strip whitespace, collapse internal \n and \t
+        normalized: list[str] = []
+        for f in features:
+            cleaned = " ".join(f.split())
+            if cleaned:
+                normalized.append(cleaned)
+
+        # Step 2: classify each candidate
+        keep: list[str] = []
+        for f in normalized:
+            low = f.lower()
+
+            # --- Skip: language switchers ---
+            if _RE_LANGUAGE_SWITCHER.match(f):
+                continue
+
+            # --- Skip: nav / CTA / section labels ---
+            if low in _NAV_LABELS:
+                continue
+            if low in _CTA_LABELS:
+                continue
+            if low in _SECTION_LABELS:
+                continue
+
+            # --- Skip: repeated-word-to-separator patterns ---
+            # e.g. "CompanyCompanyCompany" or "Get a DemoGet a DemoGet a Demo"
+            if _has_repeated_pattern(low):
+                continue
+
+            # --- Skip: nav-menu dumps (tab-delimited multi-entries) ---
+            if "\t" in f and len(f.split("\t")) >= 3:
+                continue
+
+            # --- Skip: multi-language switcher dumps ---
+            if _has_language_dump(f):
+                continue
+
+            # --- Skip: nav-menu section blobs ---
+            if _is_nav_dump(f):
+                continue
+
+            # --- Skip: stat/metric fragments ---
+            if _is_stat_metric(f):
+                continue
+
+            # --- Skip: CamelCase concatenation ---
+            if _has_camelcase_concat(f):
+                continue
+
+            # --- Skip: marketing taglines ---
+            if _is_marketing_tagline(f):
+                continue
+
+            # --- Skip: FAQ-like entries sneaking in ---
+            if _is_faq_snippet(low):
+                continue
+
+            # --- Skip: very short or very long ---
+            if len(f) < 3 or len(f) > 120:
+                continue
+
+            keep.append(f)
+
+        # Step 3: case-insensitive dedup (preserve first occurrence)
+        seen: set[str] = set()
+        deduped: list[str] = []
+        for f in keep:
+            key = f.lower()
+            if key not in seen:
+                seen.add(key)
+                deduped.append(f)
+
+        # Step 4: if too few, fall back to curated list
+        if len(deduped) < 5:
+            fallback = _CURATED_FEATURES.get(competitor_name)
+            if fallback:
+                return fallback[:15]
+
+        # Step 5: cap at 15
+        return deduped[:15]
+
+    @staticmethod
+    def _clean_pricing_tiers(
+        tiers: list[dict[str, Any]],
+    ) -> list[dict[str, Any]]:
+        """Clean pricing tiers: drop pure-Unknown entries, deduplicate,
+        collapse all-contact tiers, and label unnamed tiers as 'Plan'.
+        """
+        if not tiers:
+            return []
+
+        # Step 1: replace unnamed tiers — drop if both name and price are
+        #         unknown; rename to 'Plan' if only name is unknown
+        meaningful: list[dict[str, Any]] = []
+        contact_only = True  # track whether ALL tiers are contact-for-pricing
+
+        for t in tiers:
+            name = (t.get("name") or "").strip()
+            price_raw = (t.get("price") or "").strip()
+
+            # Drop FAQ-like rows where price is 'Contact for pricing' and
+            # snippet is a question/help text
+            snippet = (t.get("snippet") or "").strip().lower()
+            if _is_faq_snippet(snippet) and (
+                price_raw == "Contact for pricing" or name == "Unknown"
+            ):
+                continue
+
+            # Drop rows where BOTH name and price are essentially unknown
+            if (not name or name.lower() == "unknown") and (
+                not price_raw
+                or price_raw.lower() in ("contact for pricing", "unknown", "-")
+            ):
+                continue
+
+            # Rename unnamed tiers
+            if not name or name.lower() == "unknown":
+                name = "Plan"
+
+            price = price_raw
+
+            meaningful.append({
+                "name": name,
+                "price": price,
+                "snippet": t.get("snippet", ""),
+            })
+
+            if price.lower() != "contact for pricing":
+                contact_only = False
+
+        if not meaningful:
+            return []
+
+        # Step 2: if every single tier is "Contact for pricing",
+        #         collapse to a single entry
+        if contact_only:
+            return [{
+                "name": "Custom",
+                "price": "Contact for pricing",
+                "snippet": "Custom pricing — contact for pricing",
+            }]
+
+        # Step 3: deduplicate by (name, price) key — keep first occurrence
+        seen: set[tuple[str, str]] = set()
+        deduped: list[dict[str, Any]] = []
+        for t in meaningful:
+            key = (t["name"].lower(), t["price"].lower())
+            if key not in seen:
+                seen.add(key)
+                deduped.append(t)
+
+        return deduped
+
+    # ------------------------------------------------------------------
     # Internal
     # ------------------------------------------------------------------
 
@@ -257,28 +690,38 @@ class CompetitiveIntel:
     def _build_pricing_comparison(
         self, all_pricing: dict[str, list[dict]]
     ) -> dict[str, Any]:
-        """Extract pricing tiers across competitors."""
+        """Extract cleaned pricing tiers across competitors."""
         summary: list[dict[str, Any]] = []
         price_points: list[float] = []
 
-        for name, tiers in all_pricing.items():
+        for name, raw_tiers in all_pricing.items():
+            tiers = self._clean_pricing_tiers(raw_tiers)
+            if not tiers:
+                summary.append({
+                    "name": name,
+                    "tier_count": 0,
+                    "prices": ["Contact for pricing"],
+                })
+                continue
+
             extracted_prices: list[str] = []
             for t in tiers:
                 price_str = t.get("price", "")
-                if price_str and price_str != "Contact for pricing":
-                    extracted_prices.append(f"{t.get('name', '?')}: {price_str}")
-                    # Try to extract a numeric price
-                    import re
-                    nums = re.findall(r"\$?(\d+(?:\.\d{2})?)", price_str)
+                if price_str and price_str.lower() != "contact for pricing":
+                    extracted_prices.append(f"{t.get('name', 'Plan')}: {price_str}")
+                    nums = re.findall(r"[\$€£]?(\d+(?:\.\d{2})?)", price_str)
                     for n in nums:
                         try:
                             price_points.append(float(n))
                         except ValueError:
                             pass
+                else:
+                    extracted_prices.append(f"{t.get('name', 'Plan')}: Contact for pricing")
+
             summary.append({
                 "name": name,
                 "tier_count": len(tiers),
-                "prices": extracted_prices[:5] if extracted_prices else ["Contact for pricing"],
+                "prices": extracted_prices,
             })
 
         price_range = None
@@ -303,16 +746,16 @@ class CompetitiveIntel:
         all_features: dict[str, list[str]],
         _site_features: set[str],
     ) -> dict[str, Any]:
-        """Summarize competitor feature lists."""
+        """Summarize competitor feature lists using cleaned features."""
         summary: list[dict[str, Any]] = []
-        all_unique = set()
+        all_unique: set[str] = set()
 
-        for name, features in all_features.items():
-            cleaned = [f[:100] for f in features if len(f) > 3]
-            all_unique.update(cleaned[:10])
+        for name, raw_features in all_features.items():
+            cleaned = self._clean_features(raw_features, name)
+            all_unique.update(f[:100] for f in cleaned)
             summary.append({
                 "name": name,
-                "feature_count": len(features),
+                "feature_count": len(cleaned),
                 "top_features": cleaned[:8],
             })
 
