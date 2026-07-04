@@ -277,6 +277,8 @@
                     if (result.error) {
                         alert('Payment recorded but failed to save. Please contact hello@rankfixer.co with order ID: ' + data.orderID);
                     }
+                    // Track payment
+                    if (typeof trackEvent === 'function') trackEvent('Payment Completed');
                     // Show the report
                     showState('report');
                     await loadCompetitorData();
@@ -286,7 +288,7 @@
                     console.error('PayPal error:', err);
                     alert('Payment failed. Please try again or contact hello@rankfixer.co');
                 }
-            }).render('#paypal-button-container');
+            }).render('#paypal-button-container'); if (typeof trackEvent === 'function') trackEvent('PayPal Button Shown');
         }
     }
 
@@ -363,6 +365,7 @@
         document.getElementById('feature-cloud').innerHTML = featureHtml || '<p style="color:var(--text-muted)">Feature data unavailable for this crawl.</p>';
 
         // Recommendations
+        if (typeof trackEvent === 'function') trackEvent('Report Viewed');
         document.getElementById('recommendations').innerHTML = `
             <div class="insight-box"><strong>1. Add llms.txt</strong> — 96% of sites lack one. Create a simple /llms.txt file listing your key pages for AI crawler discovery. Takes 5 minutes.</div>
             <div class="insight-box"><strong>2. Implement FAQPage Schema</strong> — The highest-impact schema type for AI citation. Add JSON-LD question/answer pairs to your top 5 pages.</div>
@@ -402,5 +405,6 @@
     // Boot
     document.addEventListener('DOMContentLoaded', init);
     </script>
+    <script src="/js/analytics.js"></script>
 </body>
 </html>

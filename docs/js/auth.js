@@ -145,6 +145,7 @@ const Auth = {
             return;
         }
 
+        if (typeof trackEvent === 'function') trackEvent('Signup Submitted');
         // Try sign in first
         let result = await Auth.signIn(email, password);
 
@@ -159,6 +160,7 @@ const Auth = {
         }
 
         // Success
+        if (typeof trackEvent === 'function') trackEvent('Signup Successful');
         Auth.closeAuthModal();
         if (onSuccess === 'redirect') {
             const params = new URLSearchParams(window.location.search);
