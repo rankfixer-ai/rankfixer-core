@@ -618,6 +618,22 @@ class CompetitiveIntel:
                 seen.add(key)
                 deduped.append(t)
 
+        # Step 4: collapse fragmented competitors — if the scraper returned
+        #         too many unnamed tiers, the data is too noisy to display.
+        #         Fall back to "Custom pricing" just like the all-contact case.
+        MAX_TIERS = 6
+        named_count = sum(1 for t in deduped if t["name"].lower() != "plan")
+        unnamed_count = len(deduped) - named_count
+
+        if len(deduped) > MAX_TIERS or (
+            len(deduped) > 4 and unnamed_count > named_count
+        ):
+            return [{
+                "name": "Custom",
+                "price": "Contact for pricing",
+                "snippet": "Custom pricing — contact for pricing",
+            }]
+
         return deduped
 
     # ------------------------------------------------------------------

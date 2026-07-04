@@ -330,8 +330,11 @@
         // Pricing table
         let pricingHtml = '<table class="pricing-table"><tr><th>Competitor</th><th>Tiers</th></tr>';
         _competitorData.competitors.forEach(c => {
-            const tiers = (c.pricing_tiers || []).map(t => `${t.name}: ${t.price}`).join(', ') || 'Contact for pricing';
-            pricingHtml += `<tr><td><strong>${escHtml(c.name)}</strong></td><td>${escHtml(tiers.substring(0, 120))}</td></tr>`;
+            const tiers = (c.pricing_tiers || []);
+            const tierText = tiers.length
+                ? tiers.map(t => `${t.name}: ${t.price}`).join(', ')
+                : 'Contact for pricing';
+            pricingHtml += `<tr><td><strong>${escHtml(c.name)}</strong></td><td>${escHtml(tierText)}</td></tr>`;
         });
         pricingHtml += '</table>';
         document.getElementById('pricing-table').innerHTML = pricingHtml;

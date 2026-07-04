@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-04T15:14:18.020001+00:00",
+  "generated": "2026-07-04T15:20:05.322549+00:00",
   "competitor_count": 10,
   "competitors": [
     {
@@ -106,59 +106,7 @@
       "meta": "Orchestrate intelligent agents to run end-to-end marketing workflows delivering speed, control, and measurable impact.",
       "pricing_tiers": [
         {
-          "name": "Plan",
-          "price": "69"
-        },
-        {
-          "name": "Plan",
-          "price": "59"
-        },
-        {
-          "name": "Plan",
-          "price": "3"
-        },
-        {
-          "name": "Plan",
-          "price": "2"
-        },
-        {
-          "name": "Plan",
-          "price": "5"
-        },
-        {
-          "name": "Plan",
-          "price": "30"
-        },
-        {
-          "name": "Plan",
-          "price": "100"
-        },
-        {
-          "name": "Team",
-          "price": "Contact for pricing"
-        },
-        {
-          "name": "Advanced",
-          "price": "100"
-        },
-        {
-          "name": "Advanced",
-          "price": "Contact for pricing"
-        },
-        {
-          "name": "Plan",
-          "price": "7"
-        },
-        {
-          "name": "Enterprise",
-          "price": "Contact for pricing"
-        },
-        {
-          "name": "Plan",
-          "price": "99"
-        },
-        {
-          "name": "Pro",
+          "name": "Custom",
           "price": "Contact for pricing"
         }
       ],
@@ -436,44 +384,8 @@
       "meta": "Track and improve your brand's visibility across Google and AI search engines like ChatGPT, Gemini, and Perplexity. Surfer is built for marketing & SEO teams ready for the AI era.",
       "pricing_tiers": [
         {
-          "name": "Standard",
-          "price": "99"
-        },
-        {
-          "name": "Plan",
-          "price": "360"
-        },
-        {
-          "name": "Pro",
-          "price": "182"
-        },
-        {
-          "name": "Plan",
-          "price": "299"
-        },
-        {
-          "name": "Plan",
-          "price": "100"
-        },
-        {
-          "name": "Plan",
-          "price": "49"
-        },
-        {
-          "name": "Plan",
-          "price": "120"
-        },
-        {
-          "name": "Enterprise",
-          "price": "999"
-        },
-        {
-          "name": "Plan",
-          "price": "99"
-        },
-        {
-          "name": "Plan",
-          "price": "182"
+          "name": "Custom",
+          "price": "Contact for pricing"
         }
       ],
       "top_features": [
@@ -511,55 +423,7 @@
       "meta": "The AI Search Growth Engine. GEO, AEO, and AI visibility in one platform. Track 10 AI platforms, run the work, prove the lift. Trusted by Amazon, Unilever, Acer & NP Digital.",
       "pricing_tiers": [
         {
-          "name": "Starter",
-          "price": "$79"
-        },
-        {
-          "name": "Plan",
-          "price": "$79"
-        },
-        {
-          "name": "Basic",
-          "price": "$199"
-        },
-        {
-          "name": "Plan",
-          "price": "$199"
-        },
-        {
-          "name": "Plan",
-          "price": "$399"
-        },
-        {
-          "name": "Enterprise",
-          "price": "10"
-        },
-        {
-          "name": "Plan",
-          "price": "10"
-        },
-        {
-          "name": "Plan",
-          "price": "50"
-        },
-        {
-          "name": "Plan",
-          "price": "$79/mo"
-        },
-        {
-          "name": "Starter",
-          "price": "$79/mo"
-        },
-        {
-          "name": "Basic",
-          "price": "$199/mo"
-        },
-        {
-          "name": "Growth",
-          "price": "$399/mo"
-        },
-        {
-          "name": "Enterprise",
+          "name": "Custom",
           "price": "Contact for pricing"
         }
       ],
