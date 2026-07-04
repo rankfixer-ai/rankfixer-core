@@ -13,12 +13,7 @@
     'use strict';
 
     var SCRIPT_URL = 'https://cloud.umami.is/script.js';
-    var WEBSITE_ID = 'RANKFIXER_ANALYTICS_ID';
-
-    // Bail gracefully if not configured — no errors, no noise
-    if (WEBSITE_ID === 'RANKFIXER_ANALYTICS_ID') {
-        return;
-    }
+    var WEBSITE_ID = '16392573-609e-4c6e-8bc6-caef82a8d952';
 
     // Inject Umami script (defer: non-blocking, fires after DOMContentLoaded)
     var script = document.createElement('script');
