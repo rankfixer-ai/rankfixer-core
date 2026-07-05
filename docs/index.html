@@ -27,38 +27,7 @@
     }
     </script>
 
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "How do I check if ChatGPT can cite my website?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Enter your domain at rankfixer.co/ai-visibility-checker for a free 7-signal analysis."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What is an AI visibility score?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "It measures how well LLMs like ChatGPT, Perplexity, and Gemini can extract and cite your content."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How do I improve my LLM readiness?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Fix schema markup, increase entity density, add clear answer structures, and ensure AI citation crawlers aren't blocked."
-          }
-        }
-      ]
-    }
-    </script>
+    <script id="faq-schema" type="application/ld+json"></script>
 
     <style>
         :root {
@@ -230,23 +199,10 @@
             </div>
         </section>
 
-        <!-- FAQ -->
+        <!-- FAQ — rendered from single source array -->
         <section class="features">
             <h2>Frequently Asked Questions</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <h3>How do I check if ChatGPT can cite my website?</h3>
-                    <p>Enter your domain at rankfixer.co/ai-visibility-checker for a free 7-signal analysis.</p>
-                </div>
-                <div class="feature-card">
-                    <h3>What is an AI visibility score?</h3>
-                    <p>It measures how well LLMs like ChatGPT, Perplexity, and Gemini can extract and cite your content.</p>
-                </div>
-                <div class="feature-card">
-                    <h3>How do I improve my LLM readiness?</h3>
-                    <p>Fix schema markup, increase entity density, add clear answer structures, and ensure AI citation crawlers aren't blocked.</p>
-                </div>
-            </div>
+            <div class="features-grid" id="faq-container"></div>
         </section>
 
         <!-- SOCIAL PROOF -->
@@ -300,5 +256,65 @@
     <script src="/js/auth.js"></script>
 
     <script src="/js/analytics.js"></script>
+
+    <!-- FAQ rendering — single source array → visible HTML + JSON-LD -->
+    <script>
+    (function() {
+        var faqItems = [
+            {
+                question: "How do I check if ChatGPT can cite my website?",
+                answer: "Enter your domain at rankfixer.co/ai-visibility-checker for a free 7-signal analysis."
+            },
+            {
+                question: "What is an AI visibility score?",
+                answer: "It measures how well LLMs like ChatGPT, Perplexity, and Gemini can extract and cite your content."
+            },
+            {
+                question: "How do I improve my LLM readiness?",
+                answer: "Fix schema markup, increase entity density, add clear answer structures, and ensure AI citation crawlers aren't blocked."
+            }
+        ];
+
+        // Render visible HTML
+        var container = document.getElementById('faq-container');
+        if (container) {
+            var html = '';
+            for (var i = 0; i < faqItems.length; i++) {
+                html += '<div class="feature-card">' +
+                    '<h3>' + escapeHtml(faqItems[i].question) + '</h3>' +
+                    '<p>' + escapeHtml(faqItems[i].answer) + '</p>' +
+                    '</div>';
+            }
+            container.innerHTML = html;
+        }
+
+        // Render JSON-LD schema
+        var schema = document.getElementById('faq-schema');
+        if (schema) {
+            var entities = [];
+            for (var i = 0; i < faqItems.length; i++) {
+                entities.push({
+                    "@type": "Question",
+                    "name": faqItems[i].question,
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": faqItems[i].answer
+                    }
+                });
+            }
+            schema.textContent = JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                "mainEntity": entities
+            });
+        }
+
+        function escapeHtml(str) {
+            var div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+    })();
+    </script>
 </body>
 </html>
