@@ -368,9 +368,28 @@
                     var btnDiv = document.createElement('div');
                     btnDiv.id = 'full-report-btn';
                     btnDiv.style.cssText = 'text-align:center; margin:1.5rem 0 0.5rem;';
-                    btnDiv.innerHTML = '<p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:0.75rem;">See how you compare to Stripe, HubSpot, and Shopify across all 7 signals.</p>' +
-                        '<a href="/report/?url=' + encodeURIComponent(domain) + '" class="btn-primary" style="display:inline-block;font-size:1rem;" onclick="if(typeof trackEvent==='function')trackEvent('click-get-full-report',{domain:'+"'"+domain+"'"+'});">Get Full Report — $5</a>' +
-                        '<p style="font-size:0.7rem;color:var(--text-muted);margin-top:0.5rem;">Competitive landscape, pricing intel, feature gaps, and priority fixes. Pay once — no subscription.</p>';
+
+                    var desc = document.createElement('p');
+                    desc.style.cssText = 'font-size:0.85rem;color:var(--text-muted);margin-bottom:0.75rem;';
+                    desc.textContent = 'See how you compare to Stripe, HubSpot, and Shopify across all 7 signals.';
+                    btnDiv.appendChild(desc);
+
+                    var link = document.createElement('a');
+                    link.href = '/report/?url=' + encodeURIComponent(domain);
+                    link.className = 'btn-primary';
+                    link.style.cssText = 'display:inline-block;font-size:1rem;';
+                    link.textContent = 'Get Full Report — $5';
+                    link.addEventListener('click', function(e) {
+                        if (typeof trackEvent === 'function') {
+                            trackEvent('click-get-full-report', { domain: domain });
+                        }
+                    });
+                    btnDiv.appendChild(link);
+
+                    var footnote = document.createElement('p');
+                    footnote.style.cssText = 'font-size:0.7rem;color:var(--text-muted);margin-top:0.5rem;';
+                    footnote.textContent = 'Competitive landscape, pricing intel, feature gaps, and priority fixes. Pay once — no subscription.';
+                    btnDiv.appendChild(footnote);
                     resultsScreen.appendChild(btnDiv);
 
                     // Add styles for btn-primary in this page context
