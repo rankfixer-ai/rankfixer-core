@@ -1,0 +1,20 @@
+# RankFixer — AI Website Recommendation Engine
+# llms.txt helps LLMs discover key pages on this site.
+# Learn more: https://llmstxt.org
+
+## About
+RankFixer analyzes website AI visibility across 7 signals.
+Free checker at /ai-visibility-checker.
+Open source under MIT license.
+
+## Key Pages
+- Home: https://rankfixer.co
+- AI Visibility Checker: https://rankfixer.co/ai-visibility-checker
+- Research: https://rankfixer.co/research
+- Blog: https://rankfixer.co/blog
+- Architecture: https://rankfixer.co/architecture
+- API Reference: https://rankfixer.co/api-reference
+- GitHub: https://github.com/rankfixer-ai/rankfixer-core
+
+## Optional
+- Full Report: https://rankfixer.co/report (competitive analysis, $5 one-time)
