@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your AI Visibility Score Changed. Was It You — Or the Model? | Rankfixer</title>
+    <meta name="description" content="When your AI visibility score drops, it might not be your site — it might be the model. Here's the research on silent LLM drift and how to detect it.">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Your AI Visibility Score Changed. Was It You — Or the Model?">
+    <meta property="og:description" content="When your AI visibility score drops, it might not be your site — it might be the model. Research on silent LLM drift and how to detect it.">
+    <meta property="og:image" content="https://rankfixer.co/images/blog/model-drift-ai-visibility.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:url" content="https://rankfixer.co/blog/model-drift-ai-visibility">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="RankFixer">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Your AI Visibility Score Changed. Was It You — Or the Model?">
+    <meta name="twitter:description" content="Silent LLM drift is changing AI visibility scores. Research on how to detect it.">
+    <meta name="twitter:image" content="https://rankfixer.co/images/blog/model-drift-ai-visibility.png">
+    <link rel="canonical" href="https://rankfixer.co/blog/model-drift-ai-visibility">
+
+    <!-- JSON-LD ScholarlyArticle Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "Your AI Visibility Score Changed. Was It You — Or the Model?",
+      "description": "When an AI visibility score drops without site changes, the most overlooked cause is silent model drift — LLMs changing their retrieval, ranking, or citation behavior without announcement.",
+      "author": {"@type": "Organization", "name": "RankFixer", "url": "https://rankfixer.co"},
+      "datePublished": "2026-07-07",
+      "dateModified": "2026-07-07",
+      "publisher": {"@type": "Organization", "name": "RankFixer", "url": "https://rankfixer.co", "sameAs": ["https://github.com/rankfixer-ai", "https://twitter.com/RankFixer"]},
+      "about": {"@type": "Thing", "name": "Model Drift", "description": "Silent behavior changes in Large Language Model APIs that affect retrieval, ranking, and citation patterns."},
+      "citation": [
+        {"@type": "CreativeWork", "name": "How Is ChatGPT's Behavior Changing Over Time?", "author": "Chen, Zaharia & Zou", "datePublished": "2024", "url": "https://hdsr.mitpress.mit.edu/pub/y95zitmz"},
+        {"@type": "CreativeWork", "name": "(Why) Is My Prompt Getting Worse? Rethinking Regression Testing for Evolving LLM APIs", "author": "Ma, Yang & Kästner", "datePublished": "2024", "url": "https://arxiv.org/abs/2311.11123"}
+      ],
+      "keywords": ["GEO", "Model Drift", "Research", "AI Visibility", "LLM Monitoring"],
+      "inLanguage": "en",
+      "isAccessibleForFree": true
+    }
+    </script>
+
+    <style>
+        :root {
+            --brand: #6C5CE7; --brand-hover: #5A4BD1; --bg: #0D0D1A; --bg-card: #151528;
+            --bg-input: #1E1E36; --text: #F0F0F5; --text-muted: #8888A0; --border: #2A2A45;
+            --radius: 12px; --radius-sm: 8px; --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { font-size: 16px; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+        body {
+            font-family: var(--font); background: var(--bg); color: var(--text);
+            line-height: 1.7; min-height: 100vh; -webkit-font-smoothing: antialiased;
+        }
+        a { color: var(--brand); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; border-bottom: 1px solid var(--border); }
+        .nav-logo { font-weight: 700; font-size: 1.2rem; text-decoration: none; color: var(--text); }
+        .nav-links { display: flex; gap: 1.5rem; align-items: center; }
+        .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; }
+        .nav-links a:hover { color: var(--text); }
+        .container { max-width: 720px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+        h1 { font-size: 2rem; font-weight: 800; line-height: 1.2; margin-bottom: 1rem; color: var(--text); }
+        h2 { font-size: 1.4rem; font-weight: 700; margin: 2.5rem 0 0.75rem; padding-top: 1rem; border-top: 1px solid var(--border); color: var(--text); }
+        h3 { font-size: 1.1rem; font-weight: 700; margin: 1.5rem 0 0.5rem; color: var(--text); }
+        p { margin-bottom: 1rem; color: var(--text-muted); }
+        strong { color: var(--text); }
+        em { color: var(--text-muted); }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0 1.5rem; font-size: 0.9rem; }
+        th, td { padding: 0.6rem 0.75rem; text-align: left; border-bottom: 1px solid var(--border); color: var(--text-muted); }
+        th { background: var(--bg-card); font-weight: 600; color: var(--text); }
+        blockquote { border-left: 3px solid var(--brand); padding-left: 1rem; margin: 1rem 0; color: var(--text-muted); font-style: italic; }
+        pre { background: var(--bg-card); padding: 1rem; border-radius: 6px; overflow-x: auto; font-size: 0.85rem; margin: 1rem 0; border: 1px solid var(--border); }
+        code { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.85rem; background: var(--bg-card); padding: 0.15rem 0.35rem; border-radius: 3px; color: var(--text); }
+        pre code { background: none; padding: 0; }
+        ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; color: var(--text-muted); }
+        li { margin-bottom: 0.35rem; }
+        hr { margin: 2rem 0; border: none; border-top: 1px solid var(--border); }
+        .btn-primary {
+            background: var(--brand); color: #fff; padding: 12px 28px; text-decoration: none; border-radius: var(--radius-sm);
+            font-weight: 700; font-size: 1rem; display: inline-block; transition: background 0.2s;
+        }
+        .btn-primary:hover { background: var(--brand-hover); text-decoration: none; }
+        .site-footer { text-align: center; padding: 2rem 0; border-top: 1px solid var(--border); margin-top: 2rem; }
+        .site-footer p { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.3rem; }
+        .site-footer a { color: var(--text-muted); margin: 0 0.5rem; }
+        .cause-box {
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm);
+            padding: 1.2rem 1.5rem; margin-bottom: 0.75rem;
+        }
+        .cause-box h3 { margin-top: 0; padding-top: 0; border: none; font-size: 1rem; }
+        .cause-box strong { display: block; margin-bottom: 0.3rem; }
+        @media (max-width: 600px) {
+            .nav { flex-direction: column; gap: 0.5rem; padding: 0.75rem 1rem; }
+            .container { padding: 1.5rem 1rem; }
+            h1 { font-size: 1.6rem; }
+            table { font-size: 0.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="nav">
+        <a href="/" class="nav-logo">Rankfixer</a>
+        <div class="nav-links">
+            <a href="/ai-visibility-checker">Free Checker</a>
+            <a href="/research">Research</a>
+            <a href="/blog">Blog</a>
+            <a href="https://github.com/rankfixer-ai/rankfixer-core" target="_blank" rel="noopener">GitHub</a>
+        </div>
+    </nav>
+
+    <article class="container">
+
+        <h1>Your AI Visibility Score Changed. Was It You — Or the Model?</h1>
+
+        <p><strong>Answer:</strong> When an AI visibility score drops without site changes, the most overlooked cause is silent model drift — LLMs changing their retrieval, ranking, or citation behavior without announcement. This is a measurable, documented phenomenon, and most teams have no monitoring in place to detect it.</p>
+
+        <hr>
+
+        <h2>What Is Model Drift in AI Visibility?</h2>
+
+        <p>Model drift occurs when an LLM API changes behavior without explicit notification from the provider. The same prompt, same endpoint, same model name — different output.</p>
+
+        <p>For AI visibility specifically, model drift can affect:</p>
+
+        <ul>
+            <li><strong>Citation patterns:</strong> Which sources the model selects and how it ranks them</li>
+            <li><strong>Schema interpretation:</strong> How the model parses and weights structured data</li>
+            <li><strong>Entity recognition:</strong> How the model resolves brand and topic entities</li>
+            <li><strong>Content formatting preferences:</strong> What content structures the model favors in responses</li>
+        </ul>
+
+        <h2>What Evidence Exists That Models Drift?</h2>
+
+        <p>A peer-reviewed study by <strong>Chen, Zaharia, and Zou (2024)</strong> published in the <em>Harvard Data Science Review</em> documented measurable model drift:</p>
+
+        <ul>
+            <li>GPT-4 accuracy on prime-number identification dropped from <strong>84% to 51%</strong> in three months</li>
+            <li>GPT-3.5 improved on some tasks while degrading on others</li>
+            <li>Both models showed increased formatting errors over time</li>
+        </ul>
+
+        <blockquote>
+            "The behavior of the 'same' LLM service can change substantially in a relatively short amount of time, highlighting the need for continuous monitoring of LLMs."<br>
+            — Chen, Zaharia & Zou (2024), Harvard Data Science Review
+        </blockquote>
+
+        <p>A separate study by <strong>Ma, Yang, and Kästner (2024)</strong> at the International Conference on AI Engineering noted:</p>
+
+        <blockquote>
+            "LLM APIs can be updated silently... the updates are not visible to the downstream developers."
+        </blockquote>
+
+        <p>This is not theoretical. Between March and June 2023, GPT-4's ability to follow user instructions decreased measurably — and the same model that correctly identified prime numbers 84% of the time dropped to 51%. <strong>Your AI visibility score can drift for reasons completely outside your control.</strong></p>
+
+        <h2>What Are the Three Causes of AI Visibility Score Changes?</h2>
+
+        <div class="cause-box">
+            <h3>Cause 1: Site Changes</h3>
+            <p>Content updates, schema markup breaks, AI crawler blocks, or Core Web Vitals regressions.</p>
+            <p><strong>Detection:</strong> Run an AI visibility scan<br>
+            <strong>Fix:</strong> Address flagged issues</p>
+        </div>
+
+        <div class="cause-box">
+            <h3>Cause 2: Competitor Improvements</h3>
+            <p>Other sites improve entity density, schema completeness, or content authority.</p>
+            <p><strong>Detection:</strong> Competitive analysis<br>
+            <strong>Fix:</strong> Improve your own entity density and schema</p>
+        </div>
+
+        <div class="cause-box" style="border-color: var(--brand);">
+            <h3>Cause 3: Model Drift</h3>
+            <p>The LLM's retrieval, ranking, or citation behavior shifts underneath all sites simultaneously.</p>
+            <p><strong>Detection:</strong> No existing tooling for this<br>
+            <strong>Fix:</strong> Unknown — problem is undiagnosed in most cases</p>
+        </div>
+
+        <p>AI visibility optimization currently addresses only two of three potential causes. The third — model-side drift — is an unmonitored variable that introduces unexplained variance into every AI visibility score.</p>
+
+        <h2>How Can Model Drift Be Detected?</h2>
+
+        <p>Rankfixer is developing a structured interrogation protocol that probes major LLM APIs weekly and extracts consistent capability profiles:</p>
+
+        <ol>
+            <li><strong>Tool execution behavior:</strong> How the model handles search, code execution, and function calling</li>
+            <li><strong>Safety filter thresholds:</strong> What content gets blocked, softened, or allowed</li>
+            <li><strong>Output formatting:</strong> How structured data and citations are structured in responses</li>
+            <li><strong>Reasoning patterns:</strong> Calibration, self-correction, and argument structure</li>
+        </ol>
+
+        <p>Same probes. Weekly cadence. Diff the outputs. Alert when something changes.</p>
+
+        <h2>How to Contribute to This Research</h2>
+
+        <p>Rankfixer is conducting customer discovery interviews with teams that have experienced model drift in production.</p>
+
+        <p><strong>Who should reach out:</strong> Engineering teams that have been impacted by silent model updates or have built internal monitoring tooling.</p>
+
+        <p><strong>Format:</strong> 20-minute research conversation. Not a sales call.</p>
+
+        <p><strong>What participants receive:</strong> Early access to the monitoring tool and research findings before public release.</p>
+
+        <p><strong>Contact:</strong> <a href="mailto:contact@rankfixer.co">contact@rankfixer.co</a></p>
+
+        <p style="text-align: center; margin: 2rem 0;">
+            <a href="/ai-visibility-checker" class="btn-primary">Get Your Free AI Visibility Scan →</a>
+        </p>
+
+        <h2>Key Takeaway</h2>
+
+        <p>AI visibility optimization currently addresses only one side of the equation — the website. The other side — the model doing the citing — is an unmonitored variable. Until model-side intelligence exists alongside site-side optimization, AI visibility scores will contain unexplained variance that teams cannot diagnose or control.</p>
+
+        <h2>Related Research</h2>
+
+        <ul>
+            <li>Chen, Zaharia & Zou (2024). "How Is ChatGPT's Behavior Changing Over Time?" <em>Harvard Data Science Review.</em></li>
+            <li>Ma, Yang & Kästner (2024). "(Why) Is My Prompt Getting Worse? Rethinking Regression Testing for Evolving LLM APIs." <em>CAIN 2024.</em></li>
+            <li>Rankfixer (2026). "<a href="/blog/ai-readiness-100-saas">We Analyzed the AI Readiness of 100 Top SaaS Websites.</a>"</li>
+        </ul>
+
+        <!-- Citation Block -->
+        <section style="padding: 2rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm); margin-top: 2rem;">
+          <h4 style="margin-top: 0; padding-top: 0; border: none; color: var(--text);">📚 Cite This Research</h4>
+          <p style="font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">
+            Rankfixer. (2026). <i>Your AI Visibility Score Changed. Was It You — Or the Model?</i>.
+            Retrieved from https://rankfixer.co/blog/model-drift-ai-visibility
+          </p>
+        </section>
+
+        <p style="text-align: center; margin-top: 2rem; font-size: 0.85rem; color: var(--text-muted);">
+            Published: July 7, 2026 · Category: Research · Tags: GEO, Model Drift, Research, AI Visibility, LLM Monitoring
+        </p>
+
+        <p style="text-align: center; font-size: 0.8rem; color: var(--text-muted);">
+            <em>This is the second in Rankfixer's research series on AI visibility infrastructure. Dataset and methodology will be released open-source under MIT license.</em>
+        </p>
+
+    </article>
+
+    <footer class="site-footer">
+        <p>RankFixer — Know Your AI Visibility Score</p>
+        <p><a href="/">Home</a> <a href="/ai-visibility-checker">Free Checker</a> <a href="/blog">Blog</a> <a href="/research">Research</a> <a href="https://github.com/rankfixer-ai/rankfixer-core">GitHub</a></p>
+        <p>No signup required. No credit card. No BS.</p>
+    </footer>
+
+</body>
+</html>

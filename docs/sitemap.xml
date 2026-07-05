@@ -20,13 +20,19 @@
    </url>
    <url>
       <loc>https://rankfixer.co/blog</loc>
-      <lastmod>2026-07-04</lastmod>
+      <lastmod>2026-07-07</lastmod>
       <changefreq>weekly</changefreq>
       <priority>0.7</priority>
    </url>
    <url>
       <loc>https://rankfixer.co/blog/ai-readiness-100-saas</loc>
       <lastmod>2026-07-04</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.8</priority>
+   </url>
+   <url>
+      <loc>https://rankfixer.co/blog/model-drift-ai-visibility</loc>
+      <lastmod>2026-07-07</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.8</priority>
    </url>
