@@ -1,13 +1,12 @@
-# Rankfixer AI Website Recommendation Engine
+# RankFixer AI Website Recommendation Engine
 # robots.txt — Last updated: 2026-07-05
-# Policy: All search crawlers welcome. Training crawlers neutral.
 
 User-agent: *
 Allow: /
+
 Sitemap: https://rankfixer.co/sitemap.xml
 
-# --- AI Search Crawlers: Explicitly Allowed ---
-# These bots crawl for real-time search/citation, not training.
+# --- Allow: AI search & user-directed retrieval (citation eligibility) ---
 
 User-agent: OAI-SearchBot
 Allow: /
@@ -18,10 +17,25 @@ Allow: /
 User-agent: Claude-SearchBot
 Allow: /
 
+User-agent: Claude-User
+Allow: /
+
 User-agent: PerplexityBot
 Allow: /
 
-# --- AI Training Crawlers: Neutral (no special rules) ---
-# GPTBot, ClaudeBot, Google-Extended, CCBot, Applebot-Extended, Cohere-Bot
-# fall through to User-agent: * Allow: / above.
-# We neither explicitly block nor invite them.
+User-agent: Perplexity-User
+Allow: /
+
+# --- Training crawlers: opt-out (no effect on citation eligibility) ---
+
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
