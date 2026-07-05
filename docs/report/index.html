@@ -255,6 +255,7 @@
 
         // Step 3: Show report
         showState('report');
+        if (typeof trackEvent === 'function') trackEvent('payment-complete', { domain: new URLSearchParams(window.location.search).get('url') || 'unknown' });
         await loadCompetitorData();
         renderReport();
     }
@@ -267,6 +268,7 @@
 
     function markPaymentPending() {
         // User clicked the PayPal link — show the pending confirmation
+        if (typeof trackEvent === 'function') trackEvent('payment-pending', { domain: new URLSearchParams(window.location.search).get('url') || 'unknown' });
         showState('pending');
     }
 

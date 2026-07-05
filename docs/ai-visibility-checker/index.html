@@ -368,9 +368,9 @@
                     var btnDiv = document.createElement('div');
                     btnDiv.id = 'full-report-btn';
                     btnDiv.style.cssText = 'text-align:center; margin:1.5rem 0 0.5rem;';
-                    btnDiv.innerHTML = '<p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:0.75rem;">This is a quick check. Get the full report with competitor analysis.</p>' +
-                        '<a href="/report/?url=' + encodeURIComponent(domain) + '" class="btn-primary" style="display:inline-block;font-size:1rem;" onclick="if(typeof trackEvent===&quot;function&quot;)trackEvent(&quot;Get Full Report Clicked&quot;);">Get Full Report — $5</a>' +
-                        '<p style="font-size:0.7rem;color:var(--text-muted);margin-top:0.5rem;">Includes competitive pricing, feature gaps, and actionable fixes.</p>';
+                    btnDiv.innerHTML = '<p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:0.75rem;">See how you compare to Stripe, HubSpot, and Shopify across all 7 signals.</p>' +
+                        '<a href="/report/?url=' + encodeURIComponent(domain) + '" class="btn-primary" style="display:inline-block;font-size:1rem;" onclick="if(typeof trackEvent==='function')trackEvent('click-get-full-report',{domain:'+"'"+domain+"'"+'});">Get Full Report — $5</a>' +
+                        '<p style="font-size:0.7rem;color:var(--text-muted);margin-top:0.5rem;">Competitive landscape, pricing intel, feature gaps, and priority fixes. Pay once — no subscription.</p>';
                     resultsScreen.appendChild(btnDiv);
 
                     // Add styles for btn-primary in this page context
@@ -386,7 +386,7 @@
 
                 // Analytics: free scan completed
                 if (typeof trackEvent === 'function') {
-                    trackEvent('Free Scan Completed');
+                    trackEvent('scan-completed', { domain: domain, score: score });
                 }
             }, 4500);
         });
