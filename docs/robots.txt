@@ -1,12 +1,13 @@
 # RankFixer AI Website Recommendation Engine
 # robots.txt — Last updated: 2026-07-05
+# Policy: All crawlers welcome. Open-source tool, open crawling posture.
 
 User-agent: *
 Allow: /
 
 Sitemap: https://rankfixer.co/sitemap.xml
 
-# --- Allow: AI search & user-directed retrieval (citation eligibility) ---
+# --- AI Search & User-Directed Retrieval (citation eligibility) ---
 
 User-agent: OAI-SearchBot
 Allow: /
@@ -26,16 +27,20 @@ Allow: /
 User-agent: Perplexity-User
 Allow: /
 
-# --- Training crawlers: opt-out (no effect on citation eligibility) ---
+# --- Training crawlers: also allowed ---
+# RankFixer crawls competitor sites weekly for competitive intelligence.
+# Blocking training crawlers while scraping others is inconsistent.
+# Additionally, being in training data increases brand recognition when
+# models are asked about AI visibility tools.
 
 User-agent: GPTBot
-Disallow: /
+Allow: /
 
 User-agent: ClaudeBot
-Disallow: /
+Allow: /
 
 User-agent: Google-Extended
-Disallow: /
+Allow: /
 
 User-agent: CCBot
-Disallow: /
+Allow: /
