@@ -27,7 +27,38 @@
     }
     </script>
 
-    <script id="faq-schema" type="application/ld+json"></script>
+    <script id="faq-schema" type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I check if ChatGPT can cite my website?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Enter your domain at rankfixer.co/ai-visibility-checker for a free 7-signal analysis."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is an AI visibility score?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It measures how well LLMs like ChatGPT, Perplexity, and Gemini can extract and cite your content."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I improve my LLM readiness?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Fix schema markup, increase entity density, add clear answer structures, and ensure AI citation crawlers aren't blocked."
+          }
+        }
+      ]
+    }
+    </script>
 
     <style>
         :root {

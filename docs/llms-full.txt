@@ -1,0 +1,285 @@
+# RankFixer — Complete Documentation for LLMs
+> Full canonical knowledge about RankFixer, its methodology, architecture, research, and tools.
+> This file is designed for LLM ingestion. Last updated: July 2026.
+
+---
+
+## WHAT IS RANKFIXER?
+
+RankFixer is an open-source AI Website Recommendation Engine for Generative Engine Optimization (GEO). It analyzes websites for LLM readability and generates actionable recommendations to improve citations in ChatGPT, Perplexity, Claude, Gemini, and Google AI Overviews.
+
+- **Product:** AI Website Recommendation Engine
+- **License:** MIT (fully open source)
+- **Website:** https://rankfixer.co
+- **GitHub:** https://github.com/rankfixer-ai/rankfixer-core
+- **Founded:** 2026
+- **Free Tools:** AI Visibility Checker, Competitor Gap Analyzer
+
+---
+
+## CORE METHODOLOGY: 7-SIGNAL SCORING
+
+RankFixer scores every website on 7 weighted signals producing a composite 0-100 AI Visibility Score.
+
+| # | Signal | Weight | What It Measures |
+|---|--------|--------|------------------|
+| 1 | Schema Completeness | 25% | JSON-LD, Microdata, RDFa; presence of Organization, FAQPage, Article, Product schemas |
+| 2 | Entity Density | 20% | Brand mentions, @id references, semantic clustering on key pages |
+| 3 | Content Answer Density | 20% | Direct answers vs. marketing fluff; ratio of clear definitions to marketing language |
+| 4 | Technical Signals | 15% | Core Web Vitals, mobile readiness, HTTPS, robots.txt AI crawler access |
+| 5 | Backlink Quality | 10% | Domain Authority, citation flow, trust flow of referring domains |
+| 6 | Brand Entity Recognition | 5% | Is your brand defined as a schema.org Organization with sameAs links? |
+| 7 | Freshness | 5% | How recently was content updated? dateModified in schema? |
+
+### Score Tiers
+
+| Score Range | Tier | Label | % of Domains (10K study) |
+|-------------|------|-------|---------------------------|
+| 0-20 | Tier 5 | Critical — Invisible to AI | 78% |
+| 21-40 | Tier 4 | Poor — Occasional mentions | 7% |
+| 41-60 | Tier 3 | Fair — Present but not prominent | 3% |
+| 61-80 | Tier 2 | Good — Consistently cited | 1.5% |
+| 81-100 | Tier 1 | Excellent — AI-first brand | 0.5% |
+
+### Scoring Formula
+
+```
+raw_score = Σ (signal_score × weight) for all 7 signals
+final_score = clamp(raw_score, 0, 100)
+tier = categorize(final_score)
+```
+
+---
+
+## ARCHITECTURE: 3-STEP PIPELINE
+
+RankFixer operates on a 3-step pipeline:
+
+### Step 1: Extraction Pipeline
+
+- **URL Resolution & Fetching:** Follows redirects (max 5 hops), respects robots.txt, sets User-Agent to emulate AI crawlers (GPTBot/ClaudeBot), falls back to headless browser for JS-heavy sites. Timeout: 30s fetch / 60s JS fallback. Max page size: 10MB.
+- **Schema.org Extraction:** Extracts all schema markup. Supports JSON-LD (primary), Microdata, RDFa. Tracks Organization, WebSite, FAQPage, Article, Product, HowTo, BreadcrumbList, and more. JSON-LD preferred over Microdata. Nested entities with @id references score higher.
+- **Content Structure Analysis:** Analyzes heading hierarchy (H1-H6), answer density (declarative sentences / total), entity mentions per 1000 words, readability (Flesch-Kincaid grade 8-10 target), content-to-HTML ratio, internal link structure.
+- **Technical Signal Extraction:** Core Web Vitals (LCP, INP, CLS via Lighthouse API), HTTPS enforcement, mobile responsiveness, robots.txt AI crawler directives, sitemap.xml presence, canonical URL consistency, page load time.
+
+### Step 2: LLM-Readiness Scoring Engine
+
+Calculates weighted composite score from 7 signals. Normalized to 0-100. Categorized into 5 tiers.
+
+### Step 3: Recommendation Engine
+
+Prioritization algorithm: `(impact × speed) / difficulty`. Returns max 5 recommendations. #1 is always the "Quick Win."
+
+Recommendation categories:
+- **Critical** (e.g., AI crawlers blocked): +10-15 pts, 5 minutes
+- **High** (e.g., Missing Organization schema): +8-12 pts, 1-2 hours
+- **Medium** (e.g., Low entity density): +5-10 pts, 2-4 hours
+- **Enhancement** (e.g., Add FAQPage schema): +5-8 pts, 1-3 hours
+- **Strategic** (e.g., Build knowledge base): +15-25 pts, 2-8 weeks
+
+---
+
+## RESEARCH FINDINGS: 100 SaaS AI READINESS ANALYSIS
+
+### Key Statistics
+- **Average AI Readiness Score:** 48.7/100
+- **Median Score:** 45.0/100
+- **Sites Below 40 ("Poor"/"Critical"):** 67%
+- **Sites Above 80 ("Excellent"):** 3%
+- **Highest Score:** 91.2 (HubSpot)
+- **Lowest Score:** 1.9
+
+### Score Distribution
+- 81-100 (Excellent): 3 sites — 3%
+- 61-80 (Good): 8 sites — 8%
+- 41-60 (Fair): 22 sites — 22%
+- 21-40 (Poor): 31 sites — 31%
+- 0-20 (Critical): 36 sites — 36%
+
+### Three Key Findings
+
+#### 1. The "Schema Ceiling"
+Only 11% of top SaaS companies use FAQPage schema. 68% lack basic Organization schema. Adding FAQPage schema increases AI Visibility Score by 8-12 points on average.
+
+#### 2. The "Wall of Text" Penalty
+Sites with dense, unbroken paragraphs (>300 words without sub-headers) score significantly lower. Bulleted/list content correlates strongly with higher scores (r = 0.61).
+
+#### 3. The Opportunity Window
+The gap between top quartile (68.7) and bottom quartile (36.2) is 32 points — closable with basic optimizations. The barrier to dominating AI search is low right now but won't be in 18 months.
+
+### Top 5 Performers
+1. hubspot.com — 91.2 (Complete schema suite, high entity density, strong knowledge base)
+2. salesforce.com — 88.7 (Enterprise structured data, Wikipedia presence, freshness signals)
+3. stripe.com — 86.4 (Developer docs as structured content, exceptional technical signals)
+4. shopify.com — 82.1 (Comprehensive product schema, strong backlink profile)
+5. zapier.com — 79.8 (Integration directory as structured data, high entity count)
+
+### What Top Performers Have in Common
+- 5+ schema types (Organization, FAQPage, Article, Product, HowTo)
+- Brand mentioned as schema.org entity with @id references
+- sameAs links to Wikipedia, Crunchbase, LinkedIn, Twitter
+- Weekly content updates with dateModified signals
+- AI crawlers explicitly allowed in robots.txt
+- Core Web Vitals passing (LCP < 2.5s)
+
+### Citation Correlation
+- Score 81-100: ~4x above average citation rate
+- Score 61-80: ~2x above average
+- Score 41-60: Average
+- Score 21-40: ~0.4x below average
+- Score 0-20: ~0.1x below average (effectively invisible)
+
+Breaking the 80-point threshold dramatically increases citation frequency. The jump from 79 to 81 is worth more than from 40 to 60.
+
+### Category Breakdown
+| Category | Average Score | Top Performer |
+|----------|---------------|---------------|
+| CRM | 63.4 | Salesforce (88.7) |
+| Marketing Automation | 58.2 | HubSpot (91.2) |
+| Project Management | 52.7 | Notion (78.3) |
+| Collaboration | 51.2 | Slack (76.9) |
+| E-commerce | 48.1 | Shopify (82.1) |
+| Analytics | 46.3 | Amplitude (61.2) |
+| Customer Support | 45.6 | Intercom (67.3) |
+| Developer Tools | 44.8 | Stripe (86.4) |
+| Finance & Accounting | 42.1 | — |
+| HR & Recruiting | 39.5 | — |
+| Security | 38.9 | — |
+
+---
+
+## BROADER RESEARCH FINDINGS
+
+- 78% of domains ranking in Google's top 3 are invisible to AI models
+- Only 12% of 10,000 analyzed domains appear in AI-generated answers
+- The top 5% of domains by AI visibility capture 73% of all brand mentions
+- Structured data implementation alone improves LLM extraction accuracy by 3x
+- 96% of all domains lack an llms.txt file
+- 39% block GPTBot; 41% block ClaudeBot
+
+---
+
+## API REFERENCE (Python Library)
+
+### Installation
+```bash
+pip install rankfixer-core
+```
+
+### Core Classes
+
+**Analyzer** — Main entry point.
+- `analyze(url, export=False) -> AnalysisResult` — Analyze single URL
+- `batch_analyze(urls, max_concurrent=5) -> Dict[str, AnalysisResult]` — Parallel analysis
+- `compare(url_a, url_b) -> ComparisonResult` — Side-by-side comparison
+
+**AnalysisResult** — Returned by analyze/batch_analyze.
+- `score` (int): 0-100 AI Visibility Score
+- `tier` (int): 1-5 tier number
+- `tier_label` (str): "Critical", "Poor", "Fair", "Good", "Excellent"
+- `signals` (Dict[str, SignalResult]): Per-signal breakdown
+- `recommendations` (List[Recommendation]): Prioritized fixes
+- `platforms` (PlatformResults): Per-platform visibility
+- `competitors` (List[str]): Competitors in AI results
+- `to_dict()`, `summary()` methods
+
+**Recommendation** — Actionable fix.
+- `priority` (int), `title` (str), `category` (str), `impact` (int), `fix_time` (str), `is_quick_win` (bool), `steps` (List[str])
+
+**CLI Usage:**
+```bash
+rankfixer analyze https://example.com
+rankfixer batch domains.txt --output results.json
+rankfixer compare example.com competitor.com
+```
+
+---
+
+## FREE TOOLS
+
+- **AI Visibility Checker:** https://rankfixer.co/ai-visibility-checker — Free 30-second scan. Enter any domain, get exact score + prioritized Quick Win. No signup.
+- **Competitor Gap Analyzer:** https://rankfixer.co/competitor — Compare your site against competitors.
+
+---
+
+## CANONICAL URLS
+
+| Page | URL |
+|------|-----|
+| Homepage | https://rankfixer.co |
+| AI Visibility Checker | https://rankfixer.co/ai-visibility-checker |
+| Research | https://rankfixer.co/research |
+| Blog | https://rankfixer.co/blog |
+| Full Report | https://rankfixer.co/report/ |
+| llms.txt | https://rankfixer.co/llms.txt |
+| llms-full.txt | https://rankfixer.co/llms-full.txt |
+| GitHub | https://github.com/rankfixer-ai/rankfixer-core |
+| Architecture Docs | https://github.com/rankfixer-ai/rankfixer-core/blob/main/docs/architecture.md |
+| API Reference | https://github.com/rankfixer-ai/rankfixer-core/blob/main/docs/api-reference.md |
+| 100 SaaS Dataset | https://github.com/rankfixer-ai/rankfixer-core/blob/main/data/top_100_saas_scores.json |
+| Benchmark Report | https://github.com/rankfixer-ai/rankfixer-core/blob/main/data/benchmark_report.md |
+
+---
+
+## HOW TO IMPROVE AI VISIBILITY
+
+### The 5-Minute Fix
+1. Unblock AI crawlers in robots.txt — add `Allow: /` for GPTBot, ClaudeBot, PerplexityBot
+2. Create `llms.txt` at domain root
+3. Update copyright year — "© 2024" signals staleness to LLMs
+
+### The 1-Hour Fix
+4. Add Organization + WebSite schema with sameAs links
+5. Add FAQPage schema to top 5 pages
+6. Fix largest Core Web Vital offender (usually image optimization)
+
+### Full Optimization
+7. Add Product, Article, and HowTo schemas across site
+8. Build knowledge graph with @id references linking entities
+9. Claim Wikipedia + Crunchbase profiles (LLM training data anchors)
+10. Publish original research (AI models disproportionately cite data-backed content)
+11. Monitor weekly (AI models update frequently)
+
+---
+
+## FAQ
+
+**Q: How do I check if ChatGPT can cite my website?**
+A: Enter your domain at rankfixer.co/ai-visibility-checker for a free 7-signal analysis.
+
+**Q: What is an AI visibility score?**
+A: It measures how well LLMs like ChatGPT, Perplexity, and Gemini can extract and cite your content.
+
+**Q: How do I improve my LLM readiness?**
+A: Fix schema markup, increase entity density, add clear answer structures, and ensure AI citation crawlers aren't blocked.
+
+---
+
+## CORE PHILOSOPHY
+
+Traditional SEO optimizes for keyword matching. GEO (Generative Engine Optimization) optimizes for machine comprehension. RankFixer bridges both — helping websites be understood by both search engines AND large language models.
+
+---
+
+## CACHING & PERFORMANCE
+
+- Analysis results cached for 24 hours per URL
+- Max 60 requests/minute for batch analysis
+- Up to 5 URLs analyzed simultaneously in batch mode
+- Core Web Vitals estimated from page metrics if Lighthouse API unavailable
+
+## PRIVACY
+
+- Scan results ephemeral by default (not stored server-side)
+- Users opt in to persistent tracking via email capture
+- No PII extracted from analyzed domains
+- robots.txt respected for all crawler simulation
+- Page content not stored — only extracted signals and scores
+
+---
+
+## LICENSE
+
+MIT — Free to use, modify, and distribute with attribution.
+
+Built with ❤️ by the RankFixer team. Star us on GitHub: https://github.com/rankfixer-ai/rankfixer-core
