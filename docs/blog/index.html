@@ -3,137 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog — Rankfixer | AI Visibility & GEO Research</title>
-    <meta name="description" content="Research, analysis, and guides on AI visibility, Generative Engine Optimization (GEO), and getting cited by ChatGPT, Perplexity, and Gemini.">
-
-    <meta property="og:title" content="Rankfixer Blog — AI Visibility & GEO Research">
-    <meta property="og:description" content="Open-source research on how LLMs cite websites. Guides on schema, entity density, and AI readiness.">
+    <title>Rankfixer Blog — AI Visibility & GEO</title>
+    <meta name="description" content="Practical guides on Generative Engine Optimization (GEO): how to get cited by ChatGPT, Perplexity, and Gemini.">
+    <meta property="og:title" content="Rankfixer Blog — AI Visibility & GEO">
+    <meta property="og:description" content="Practical guides on Generative Engine Optimization.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://rankfixer.co/blog">
-
-    <style>
-        :root {
-            --brand: #6C5CE7; --brand-hover: #5A4BD1; --bg: #0D0D1A; --bg-card: #151528;
-            --bg-input: #1E1E36; --text: #F0F0F5; --text-muted: #8888A0; --border: #2A2A45;
-            --radius: 12px; --radius-sm: 8px; --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        }
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        html { font-size: 16px; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-        body {
-            font-family: var(--font); background: var(--bg); color: var(--text);
-            line-height: 1.6; min-height: 100vh; -webkit-font-smoothing: antialiased;
-        }
-        a { color: var(--brand); text-decoration: none; }
-        a:hover { text-decoration: underline; }
-
-        .nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; border-bottom: 1px solid var(--border); }
-        .nav-logo { font-weight: 700; font-size: 1.2rem; text-decoration: none; color: var(--text); }
-        .nav-links { display: flex; gap: 1.5rem; align-items: center; }
-        .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; }
-        .nav-links a:hover { color: var(--text); }
-
-        .container { max-width: 720px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
-
-        .page-header { text-align: center; padding: 3rem 0 2rem; }
-        .page-header h1 { font-size: 2.2rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
-        .page-header p { font-size: 1.05rem; color: var(--text-muted); max-width: 500px; margin: 0 auto; }
-
-        .post-card {
-            background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
-            padding: 1.5rem; margin-bottom: 1rem; transition: border-color 0.2s;
-        }
-        .post-card:hover { border-color: var(--brand); }
-        .post-card .post-date { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.3rem; text-transform: uppercase; letter-spacing: 0.5px; }
-        .post-card h2 { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.4rem; line-height: 1.3; }
-        .post-card h2 a { color: var(--text); }
-        .post-card h2 a:hover { color: var(--brand); text-decoration: none; }
-        .post-card .post-excerpt { font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 0.75rem; }
-        .post-card .post-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; }
-        .post-tag {
-            font-size: 0.7rem; padding: 0.2rem 0.6rem; border-radius: 100px;
-            background: rgba(108, 92, 231, 0.12); color: var(--brand); font-weight: 600;
-        }
-        .post-card .read-more { font-size: 0.85rem; font-weight: 600; }
-
-        .coming-soon { text-align: center; padding: 3rem 0; }
-        .coming-soon h3 { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 0.5rem; }
-        .coming-soon p { color: var(--text-muted); font-size: 0.9rem; }
-
-        .site-footer { text-align: center; padding: 2rem 0; border-top: 1px solid var(--border); margin-top: 2rem; }
-        .site-footer p { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.3rem; }
-        .site-footer a { color: var(--text-muted); margin: 0 0.5rem; }
-
-        @media (max-width: 600px) {
-            .nav { flex-direction: column; gap: 0.5rem; padding: 0.75rem 1rem; }
-            .container { padding: 1rem; }
-            .page-header h1 { font-size: 1.6rem; }
-        }
-    </style>
+    <meta property="og:url" content="https://rankfixer.co/blog/">
+    <meta property="og:image" content="https://rankfixer.co/images/og-home.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Rankfixer Blog — AI Visibility & GEO">
+    <meta name="twitter:description" content="Practical guides on Generative Engine Optimization.">
+    <meta name="twitter:image" content="https://rankfixer.co/images/og-home.png">
+    <link rel="canonical" href="https://rankfixer.co/blog/">
+    <style>body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;max-width:720px;margin:40px auto;padding:0 20px;line-height:1.65;color:#1a1a2e}h1{font-size:2rem;color:#6C5CE7}a{color:#6C5CE7}.back{font-size:.9rem;margin-bottom:24px;display:inline-block}.post{padding:18px;border:1px solid #e2e2f0;border-radius:10px;margin:14px 0;text-decoration:none;display:block;color:inherit}.post:hover{border-color:#6C5CE7}.post h2{margin:.2rem 0;color:#6C5CE7}.post p{margin:.2rem 0;color:#555}</style>
 </head>
 <body>
+<a class="back" href="/">&larr; Back to Rankfixer</a>
+<h1>The Rankfixer Blog</h1>
+<p>Practical guides to getting cited by AI answer engines.</p>
 
-    <nav class="nav">
-        <a href="/" class="nav-logo">Rankfixer</a>
-        <div class="nav-links">
-            <a href="/ai-visibility-checker">Free Checker</a>
-            <a href="/research">Research</a>
-            <a href="/blog">Blog</a>
-            <a href="https://github.com/rankfixer-ai/rankfixer-core" target="_blank" rel="noopener">GitHub</a>
-        </div>
-    </nav>
+<a class="post" href="/blog/what-is-geo.html">
+  <h2>What Is GEO? Generative Engine Optimization Explained</h2>
+  <p>A plain-English explainer of GEO and why it matters in 2026.</p>
+</a>
+<a class="post" href="/blog/7-signals-llms-cite.html">
+  <h2>The 7 Signals LLMs Use to Decide What to Cite</h2>
+  <p>The structural signals that predict whether you'll be quoted.</p>
+</a>
+<a class="post" href="/blog/schema-markup-for-ai-citations.html">
+  <h2>Schema Markup for AI Citations: A Practical Guide</h2>
+  <p>The exact JSON-LD types that make your content citable.</p>
+</a>
 
-    <div class="container">
-
-        <header class="page-header">
-            <h1>Rankfixer Blog</h1>
-            <p>Open-source research on AI visibility, Generative Engine Optimization, and how LLMs cite websites.</p>
-        </header>
-
-        <!-- Published Posts -->
-        <article class="post-card">
-            <div class="post-date">July 7, 2026 · Research</div>
-            <h2><a href="/blog/model-drift-ai-visibility">Your AI Visibility Score Changed. Was It You — Or the Model?</a></h2>
-            <p class="post-excerpt">When your AI visibility score drops, it might not be your site — it might be the model. Silent LLM drift is a measurable, documented phenomenon, and most teams have no monitoring in place to detect it.</p>
-            <div class="post-tags">
-                <span class="post-tag">GEO</span>
-                <span class="post-tag">Model Drift</span>
-                <span class="post-tag">Research</span>
-                <span class="post-tag">AI Visibility</span>
-                <span class="post-tag">LLM Monitoring</span>
-            </div>
-            <p style="margin-top: 0.75rem;"><a href="/blog/model-drift-ai-visibility" class="read-more">Read the full analysis →</a></p>
-        </article>
-
-        <article class="post-card">
-            <div class="post-date">July 4, 2026 · Research</div>
-            <h2><a href="/blog/ai-readiness-100-saas">We Analyzed the AI Readiness of 100 Top SaaS Websites (Data + Open Source Code)</a></h2>
-            <p class="post-excerpt">We ran the top 100 B2B SaaS websites through RankFixer's AI Visibility engine. 67% scored below 40/100. Here's the full dataset, methodology, and open-source code.</p>
-            <div class="post-tags">
-                <span class="post-tag">GEO</span>
-                <span class="post-tag">AI Visibility</span>
-                <span class="post-tag">SaaS</span>
-                <span class="post-tag">Open Source</span>
-                <span class="post-tag">Research</span>
-            </div>
-            <p style="margin-top: 0.75rem;"><a href="/blog/ai-readiness-100-saas" class="read-more">Read the full analysis →</a></p>
-        </article>
-
-        <!-- Coming Soon -->
-        <section class="coming-soon">
-            <h3>More research coming soon</h3>
-            <p>We're analyzing AI visibility across industries. Subscribe to stay updated — or just check back.</p>
-            <p style="margin-top: 1rem;">
-                <a href="/ai-visibility-checker" style="font-weight: 600;">Run your free scan →</a>
-            </p>
-        </section>
-
-        <footer class="site-footer">
-            <p>RankFixer — Know Your AI Visibility Score</p>
-            <p><a href="/">Home</a> <a href="/ai-visibility-checker">Free Checker</a> <a href="/blog">Blog</a> <a href="/research">Research</a> <a href="https://github.com/rankfixer-ai/rankfixer-core">GitHub</a></p>
-            <p>No signup required. No credit card. No BS.</p>
-        </footer>
-
-    </div>
-
+<p><a href="/">Run a free AI visibility check &rarr;</a></p>
 </body>
 </html>

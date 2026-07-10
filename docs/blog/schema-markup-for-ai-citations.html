@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schema Markup for AI Citations: A Practical Guide | Rankfixer</title>
+    <meta name="description" content="JSON-LD schema is the fastest win for GEO. Learn the exact schema types that make your content citable by ChatGPT, Perplexity, and Gemini.">
+    <meta property="og:title" content="Schema Markup for AI Citations: A Practical Guide">
+    <meta property="og:description" content="The exact JSON-LD schema types that make your content citable by LLMs.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://rankfixer.co/blog/schema-markup-for-ai-citations">
+    <meta property="og:image" content="https://rankfixer.co/images/og-home.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Schema Markup for AI Citations: A Practical Guide">
+    <meta name="twitter:description" content="The exact JSON-LD schema types that make your content citable by LLMs.">
+    <meta name="twitter:image" content="https://rankfixer.co/images/og-home.png">
+    <link rel="canonical" href="https://rankfixer.co/blog/schema-markup-for-ai-citations">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "Schema Markup for AI Citations: A Practical Guide",
+      "description": "A practical guide to JSON-LD schema for LLM citations.",
+      "author": {"@type": "Organization", "name": "Rankfixer", "url": "https://rankfixer.co"},
+      "publisher": {"@type": "Organization", "name": "Rankfixer", "url": "https://rankfixer.co"},
+      "datePublished": "2026-07-11",
+      "mainEntityOfPage": "https://rankfixer.co/blog/schema-markup-for-ai-citations"
+    }
+    </script>
+    <style>body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;max-width:720px;margin:40px auto;padding:0 20px;line-height:1.65;color:#1a1a2e}h1{font-size:2rem;color:#6C5CE7}a{color:#6C5CE7}.back{font-size:.9rem;margin-bottom:24px;display:inline-block}pre{background:#0D0D1A;color:#e6e6ff;padding:14px;border-radius:8px;overflow:auto;font-size:.85rem}code{font-family:ui-monospace,Menlo,Consolas,monospace}</style>
+</head>
+<body>
+<a class="back" href="/blog/">&larr; Back to Rankfixer blog</a>
+<h1>Schema Markup for AI Citations: A Practical Guide</h1>
+<p><em>Published 2026-07-11 · 7 min read</em></p>
+
+<p>If you do one thing for GEO, do this: add JSON-LD schema. It's the single highest-leverage, lowest-effort change for getting cited by LLMs.</p>
+
+<h2>The three schema types that matter most</h2>
+
+<h3>1. Organization (on every page)</h3>
+<p>Tells models who you are and where else you exist on the web.</p>
+<pre><code>{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Rankfixer",
+  "url": "https://rankfixer.co",
+  "sameAs": [
+    "https://twitter.com/RankFixer",
+    "https://github.com/rankfixer-ai"
+  ]
+}</code></pre>
+
+<h3>2. Article / BlogPosting (on posts)</h3>
+<p>Marks headlines, authors, and publish dates so a model can quote you precisely.</p>
+
+<h3>3. FAQPage (on any Q&amp;A content)</h3>
+<p>FAQ schema is catnip for answer engines — it maps questions to answers in a structure models extract verbatim.</p>
+
+<h2>A 3-step rollout</h2>
+<ol>
+<li><strong>Audit:</strong> use <a href="/">Rankfixer</a> to see which schema types are missing.</li>
+<li><strong>Add:</strong> inject JSON-LD into your &lt;head&gt; (or use a tag manager).</li>
+<li><strong>Validate:</strong> confirm with Google's Rich Results test and re-run your AI visibility check.</li>
+</ol>
+
+<p>Schema won't save thin content — but on real, useful content, it's the difference between "cited" and "invisible." <a href="/">Check your schema score &rarr;</a></p>
+</body>
+</html>
