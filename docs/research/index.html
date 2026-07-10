@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rankfixer Research — Open Source AI Visibility Data</title>
+    <meta name="description" content="Access open-source datasets, methodologies, and benchmark reports on LLM Readiness and Generative Engine Optimization (GEO).">
+    <meta property="og:title" content="Rankfixer Research — Open Source AI Visibility Data">
+    <meta property="og:description" content="Open-source datasets on LLM Readiness across 100 SaaS companies. Methodology, benchmark reports, and the Rankfixer Core engine.">
+
+    <style>
+        :root {
+            --brand: #6C5CE7; --brand-hover: #5A4BD1; --bg: #0D0D1A; --bg-card: #151528;
+            --bg-input: #1E1E36; --text: #F0F0F5; --text-muted: #8888A0; --border: #2A2A45;
+            --radius: 12px; --radius-sm: 8px; --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { font-size: 16px; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+        body {
+            font-family: var(--font); background: var(--bg); color: var(--text);
+            line-height: 1.6; min-height: 100vh; -webkit-font-smoothing: antialiased;
+        }
+        a { color: var(--brand); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        .nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; border-bottom: 1px solid var(--border); }
+        .nav-logo { font-weight: 700; font-size: 1.2rem; text-decoration: none; color: var(--text); }
+        .nav-links { display: flex; gap: 1.5rem; align-items: center; }
+        .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; }
+        .nav-links a:hover { color: var(--text); }
+
+        .container { max-width: 800px; margin: 0 auto; padding: 3rem 1.5rem; }
+        h1 { font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text); }
+        h2 { font-size: 1.3rem; font-weight: 700; margin: 2rem 0 0.75rem; padding-top: 1rem; border-top: 1px solid var(--border); color: var(--text); }
+        p { color: var(--text-muted); margin-bottom: 1rem; }
+        ul { padding-left: 1.5rem; margin-bottom: 1.5rem; }
+        li { margin-bottom: 0.4rem; color: var(--text-muted); }
+        strong { color: var(--text); }
+
+        .dataset-card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: var(--radius); padding: 1.5rem; margin: 1.5rem 0;
+        }
+        .dataset-card strong { display: block; margin-bottom: 0.3rem; color: var(--text); }
+
+        .btn-github {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: #24292e; color: #fff; padding: 10px 20px; border-radius: var(--radius-sm);
+            text-decoration: none; font-weight: 500; margin-top: 1rem; transition: background 0.2s;
+        }
+        .btn-github:hover { background: #1a1f23; text-decoration: none; }
+
+        .github-block {
+            margin-top: 2rem; padding: 1.5rem; background: var(--bg-card);
+            border: 1px solid var(--border); border-radius: var(--radius); text-align: center;
+        }
+
+        .site-footer { text-align: center; padding: 2rem 0; border-top: 1px solid var(--border); margin-top: 2rem; }
+        .site-footer p { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.3rem; }
+        .site-footer a { color: var(--text-muted); margin: 0 0.5rem; }
+
+        @media (max-width: 600px) {
+            .nav { flex-direction: column; gap: 0.5rem; padding: 0.75rem 1rem; }
+            .container { padding: 2rem 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="nav">
+        <a href="/" class="nav-logo">Rankfixer</a>
+        <div class="nav-links">
+            <a href="/ai-visibility-checker">Free Checker</a>
+            <a href="/research">Research</a>
+            <a href="/blog">Blog</a>
+            <a href="https://github.com/rankfixer-ai/rankfixer-core" target="_blank" rel="noopener">GitHub</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Rankfixer Research</h1>
+        <p>Our open-source R&D into how LLMs extract, process, and cite websites.</p>
+
+        <div class="dataset-card">
+            <h2>Latest Research</h2>
+            <strong>Model Drift &amp; AI Visibility (July 2026)</strong>
+            <p>When your AI visibility score changes, it might not be your site — it might be the model. Research on silent LLM drift and how to detect changes in retrieval, ranking, and citation behavior.</p>
+            <ul>
+                <li><a href="/blog/model-drift-ai-visibility">Read the Full Analysis</a></li>
+            </ul>
+        </div>
+
+        <div class="dataset-card">
+            <h2>Latest Dataset</h2>
+            <strong>Top 100 SaaS LLM Readiness Scores (July 2026)</strong>
+            <p>We analyzed the top 100 SaaS websites across 7 key signals (Schema, Entities, Technical SEO) to determine their visibility to ChatGPT, Perplexity, and Gemini.</p>
+            <ul>
+                <li><a href="https://github.com/rankfixer-ai/rankfixer-core/blob/main/data/top_100_saas_scores.json">Download JSON Dataset</a></li>
+                <li><a href="/blog/ai-readiness-100-saas">Read the Full Analysis Report</a></li>
+            </ul>
+        </div>
+
+        <h2>Methodology</h2>
+        <p>How we calculate AI Visibility:</p>
+        <ul>
+            <li><strong>Schema Completeness (25%):</strong> Presence of JSON-LD, FAQPage, and Organization markup.</li>
+            <li><strong>Entity Density (20%):</strong> Brand mentions and semantic clustering.</li>
+            <li><strong>Content Answer Density (20%):</strong> Direct answers vs. marketing fluff.</li>
+            <li><strong>Technical Signals (15%):</strong> Web Vitals, robots.txt AI-crawler access, and llms.txt implementation.</li>
+            <li><strong>Backlink Quality (10%):</strong> Domain authority and trust flow.</li>
+            <li><strong>Brand Entity Recognition (5%):</strong> sameAs links and knowledge base presence.</li>
+            <li><strong>Freshness (5%):</strong> dateModified signals and content currency.</li>
+        </ul>
+        <p><a href="https://github.com/rankfixer-ai/rankfixer-core/blob/main/docs/architecture.md">View Full 7-Signal Methodology →</a></p>
+
+        <h2>Contribute</h2>
+        <p>All research is open-source. Fork the engine, run your own queries, or submit a PR.</p>
+
+        <div class="github-block">
+          <p>📦 All research is open-source.</p>
+          <a href="https://github.com/rankfixer-ai/rankfixer-core" class="btn-github">View the Code on GitHub →</a>
+        </div>
+
+        <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 1rem;">Last updated: July 4, 2026</p>
+
+        <footer class="site-footer">
+            <p>RankFixer — Know Your AI Visibility Score</p>
+            <p><a href="/">Home</a> <a href="/ai-visibility-checker">Free Checker</a> <a href="/blog">Blog</a> <a href="/research">Research</a> <a href="https://github.com/rankfixer-ai/rankfixer-core">GitHub</a></p>
+            <p>No signup required. No credit card. No BS.</p>
+        </footer>
+    </div>
+
+</body>
+</html>

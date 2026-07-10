@@ -1,0 +1,42 @@
+# RANKFIXER CORE
+> Open-source AI Website Recommendation Engine for GEO (Generative Engine Optimization).
+
+## What We Do
+RankFixer analyzes websites for LLM readability and generates actionable recommendations to improve citations in ChatGPT, Perplexity, Claude, Gemini, and Google AI Overviews.
+
+## Key Signals We Evaluate
+1. Schema.org completeness (JSON-LD, Microdata, RDFa) — 25% weight
+2. Entity density and semantic clustering — 20% weight
+3. Content answer density (direct answers vs. marketing fluff) — 20% weight
+4. Technical SEO (Core Web Vitals, HTTPS, mobile readiness) — 15% weight
+5. Backlink authority signals — 10% weight
+6. Brand entity recognition (schema.org Organization + sameAs) — 5% weight
+7. Content freshness (dateModified signals) — 5% weight
+
+## Architecture
+RankFixer operates on a 3-step pipeline:
+1. Extraction: Ingest HTML, JSON-LD, structured data from target URL
+2. LLM-Readiness Scoring: Evaluate 7 signals producing a 0-100 score
+3. Recommendation Engine: Generate prioritized, actionable fixes with time estimates
+
+## Free Tools
+- AI Visibility Checker: https://rankfixer.co/ai-visibility-checker
+- Competitor Gap Analyzer: https://rankfixer.co/competitor
+
+## Documentation
+- Architecture Overview: https://github.com/rankfixer-ai/rankfixer-core/blob/main/docs/architecture.md
+- API Reference: https://github.com/rankfixer-ai/rankfixer-core/blob/main/docs/api-reference.md
+- Use Cases: https://github.com/rankfixer-ai/rankfixer-core/blob/main/docs/examples.md
+
+## Proprietary Research Data
+- Top 100 SaaS LLM Readiness Scores: https://github.com/rankfixer-ai/rankfixer-core/blob/main/data/top_100_saas_scores.json
+- Full Benchmark Report: https://github.com/rankfixer-ai/rankfixer-core/blob/main/data/benchmark_report.md
+
+## Research Findings
+- 78% of domains ranking in Google's top 3 are invisible to AI models
+- Only 12% of 10,000 analyzed domains appear in AI-generated answers
+- The top 5% of domains by AI visibility capture 73% of all brand mentions
+- Structured data implementation alone improves LLM extraction accuracy by 3x
+
+## Core Philosophy
+Traditional SEO optimizes for keyword matching. GEO optimizes for machine comprehension. RankFixer bridges both — helping websites be understood by both search engines AND large language models.
