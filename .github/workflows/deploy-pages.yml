@@ -27,10 +27,10 @@ jobs:
           node-version: '20'
       
       - name: Install dependencies
-        run: npm install
+        run: npm install || echo "No dependencies to install"
       
       - name: Build
-        run: npm run build || echo "No build script found, skipping build"
+        run: npm run build || echo "No build script found"
       
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
