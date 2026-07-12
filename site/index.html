@@ -155,7 +155,26 @@
         .site-footer p { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.3rem; }
         .site-footer a { color: var(--text-muted); margin: 0 0.5rem; }
 
-        @media (max-width: 600px) {
+        /* CONTACT FORM — reuses existing tokens */
+        .contact-section { padding: 3rem 0; text-align: center; }
+        .contact-section h2 { font-size: 1.6rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text); }
+        .contact-section .lead { color: var(--text-muted); max-width: 560px; margin: 0 auto 1.5rem; font-size: 1rem; }
+        .contact-section .lead strong { color: var(--brand); }
+        .formwrap { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.75rem; max-width: 620px; margin: 0 auto; text-align: left; }
+        .field { margin-bottom: 1rem; }
+        .field label { display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.4rem; }
+        .field input, .field select, .field textarea {
+            width: 100%; background: var(--bg-input); border: 1px solid var(--border); border-radius: var(--radius-sm);
+            padding: 0.7rem 0.85rem; color: var(--text); font-size: 0.9rem; font-family: var(--font);
+        }
+        .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--brand); }
+        .field.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; }
+        .hidden { position: absolute; left: -9999px; height: 0; overflow: hidden; }
+        .formnote { color: var(--brand); font-size: 0.9rem; margin-top: 0.85rem; min-height: 1.1rem; }
+        .formnote.err { color: #ff6b6b; }
+        @media (max-width: 600px) { .field.row2 { grid-template-columns: 1fr; } }
+
+
             .nav { flex-direction: column; gap: 0.5rem; padding: 0.75rem 1rem; }
             .container { padding: 1rem; }
             .hero { padding: 2rem 0 1.5rem; }
@@ -174,6 +193,7 @@
             <a href="/ai-visibility-checker">Free Checker</a>
             <a href="/research">Research</a>
             <a href="/blog">Blog</a>
+            <a href="#contact">Contact</a>
             <a href="https://github.com/rankfixer-ai/rankfixer-core" target="_blank" rel="noopener">GitHub</a>
         </div>
     </nav>
@@ -189,7 +209,7 @@
             <p class="hero-sub">Engineer your site for LLM citations with actionable recommendations.</p>
             <div class="hero-cta">
                 <a href="/ai-visibility-checker" class="btn-primary">Check Your AI Visibility →</a>
-                <a href="https://github.com/rankfixer-ai/rankfixer-core" target="_blank" rel="noopener" class="btn-secondary">View on GitHub</a>
+                <a href="#contact" class="btn-secondary">Get Started → Contact Us</a>
             </div>
         </header>
 
@@ -292,6 +312,39 @@
             <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">Dataset available under MIT license.</p>
         </section>
 
+        <!-- CONTACT -->
+        <section id="contact" class="contact-section">
+            <h2>Get started</h2>
+            <p class="lead">Questions about AI visibility, enterprise use, or contributing? <strong>We'll respond within 24 hours.</strong></p>
+            <div class="formwrap">
+                <form name="rankfixer-contact" action="/" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="return handleContact(event)">
+                    <input type="hidden" name="form-name" value="rankfixer-contact" />
+                    <p class="hidden"><label>Don't fill this: <input name="bot-field" /></label></p>
+                    <div class="field row2">
+                        <div><label for="name">Name</label><input id="name" name="name" type="text" required placeholder="Jane Doe" /></div>
+                        <div><label for="email">Email</label><input id="email" name="email" type="email" required placeholder="you@company.com" /></div>
+                    </div>
+                    <div class="field row2">
+                        <div><label for="company">Company</label><input id="company" name="company" type="text" placeholder="Acme Inc" /></div>
+                        <div><label for="interest">Interest</label>
+                            <select id="interest" name="interest">
+                                <option value="General enquiry">General enquiry</option>
+                                <option value="Enterprise / Custom">Enterprise / Custom</option>
+                                <option value="Partnership">Partnership</option>
+                                <option value="Contribute">Contribute</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="msg">Anything else? (optional)</label>
+                        <textarea id="msg" name="message" rows="3" placeholder="Your site, current AI visibility concerns, timeline…"></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary" style="width:100%;border:none;cursor:pointer">Get Started → Contact Us</button>
+                    <div class="formnote" id="formNote"></div>
+                </form>
+            </div>
+        </section>
+
         <!-- FOOTER — matches checker exactly -->
         <footer class="site-footer">
             <p>RankFixer — Know Your AI Visibility Score</p>
@@ -300,6 +353,41 @@
         </footer>
 
     </div>
+
+    <script>
+      function handleContact(e){
+        e.preventDefault();
+        const form = e.target;
+        const note = document.getElementById("formNote");
+        const data = new FormData(form);
+        note.className = "formnote";
+        note.textContent = "Sending…";
+        fetch("/", {
+          method: "POST",
+          headers: { "Accept": "application/json" },
+          body: data
+        }).then(r => {
+          if (!r.ok) throw new Error(r.status);
+          form.reset();
+          note.textContent = "✓ Thanks — your request is in. We'll respond within 24 hours.";
+        }).catch(() => {
+          const f = Object.fromEntries(data.entries());
+          const ts = new Date().toISOString();
+          const subj = encodeURIComponent("RankFixer Inquiry — " + (f.interest || ""));
+          const body = encodeURIComponent(
+            "Name: " + (f.name||"") + "\n" +
+            "Email: " + (f.email||"") + "\n" +
+            "Company: " + (f.company||"") + "\n" +
+            "Interest: " + (f.interest||"") + "\n" +
+            "Message: " + (f.message||"") + "\n" +
+            "Submitted: " + ts + "\n"
+          );
+          window.location.href = "mailto:acibronjan@gmail.com?subject=" + subj + "&body=" + body;
+          note.textContent = "✓ Opening your email app to send the request. We'll respond within 24 hours.";
+        });
+        return false;
+      }
+    </script>
 
 </body>
 </html>
