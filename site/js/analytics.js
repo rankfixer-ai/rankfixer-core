@@ -2,8 +2,10 @@
  * analytics.js — Centralized Analytics Service for RankFixer
  * ===========================================================
  *
- * Backend-agnostic event layer. Currently targets Umami (privacy-first,
- * no cookies, no PII). Swappable to GA4 by replacing the `_send()` adapter.
+ * Backend-agnostic event layer. Targets Umami (privacy-first, no cookies,
+ * no PII) AND mirrors every event to GA4 via gtag() for manual dashboard
+ * visibility without an API key. Swap/extend the `_send()` adapter to add
+ * more destinations.
  *
  * DESIGN:
  *   - All events route through `Rfx.track(name, params)`.
@@ -70,6 +72,16 @@
     function _send(name, data) {
         if (typeof umami !== 'undefined' && umami.track) {
             try { umami.track(name, data); } catch (_) { /* silent */ }
+        }
+        // Mirror to GA4 if gtag is present (dual-fire for manual dashboard checks)
+        if (typeof gtag !== 'undefined') {
+            try {
+                var gaData = {};
+                for (var k in data) { if (data.hasOwnProperty(k)) gaData[k] = data[k]; }
+                // GA4 reserves 'page' as a reserved param in some configs; alias to page_path
+                if (gaData.page) { gaData.page_path = gaData.page; delete gaData.page; }
+                gtag('event', name, gaData);
+            } catch (_) { /* silent */ }
         }
     }
 
