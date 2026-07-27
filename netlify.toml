@@ -1,3 +1,8 @@
 [build]
-  command = "true"
-  publish = "site"
+  base = "site"
+  publish = "."
+
+[[redirects]]
+  from = "/report"
+  to = "/report/"
+  status = 301
