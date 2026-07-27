@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Schema & FAQPage JSON-LD Generator — RankFixer</title>
+    <meta name="description" content="Free no-account tool: generate valid schema.org JSON-LD for FAQPage and Organization markup. Paste into your site to improve AI visibility. No signup.">
+
+    <meta property="og:title" content="Free Schema & FAQPage JSON-LD Generator — RankFixer">
+    <meta property="og:description" content="Generate valid FAQPage + Organization JSON-LD in seconds. Free, no account.">
+    <meta property="og:url" content="https://rankfixer.co/schema-generator/">
+    <meta property="og:type" content="website">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YXZVCPBCZN"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YXZVCPBCZN');
+    </script>
+
+    <style>
+        :root {
+            --brand: #6C5CE7; --brand-hover: #5A4BD1; --bg: #0D0D1A; --bg-card: #151528;
+            --bg-input: #1E1E36; --text: #F0F0F5; --text-muted: #8888A0; --border: #2A2A45;
+            --good: #00C853; --warn: #FFB300; --bad: #FF5252;
+            --radius: 12px; --radius-sm: 8px; --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { font-size: 16px; scroll-behavior: smooth; }
+        body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.6; min-height: 100vh; }
+        a { color: var(--brand); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        .nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; border-bottom: 1px solid var(--border); }
+        .nav-logo { font-weight: 700; font-size: 1.2rem; color: var(--text); text-decoration: none; }
+        .nav-links { display: flex; gap: 1.5rem; align-items: center; }
+        .nav-links a { color: var(--text-muted); font-size: 0.9rem; text-decoration: none; }
+        .nav-links a:hover { color: var(--text); }
+
+        .container { max-width: 760px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+        .hero { text-align: center; padding: 2.5rem 0 1.5rem; }
+        .hero-badge { display: inline-block; background: rgba(108, 92, 231, 0.15); color: var(--brand); font-size: 0.8rem; font-weight: 600; padding: 0.35rem 0.85rem; border-radius: 100px; margin-bottom: 1.25rem; }
+        .hero h1 { font-size: clamp(1.7rem, 5vw, 2.3rem); font-weight: 800; line-height: 1.2; margin-bottom: 0.75rem; }
+        .hero p { font-size: 1.02rem; color: var(--text-muted); max-width: 540px; margin: 0 auto; }
+
+        .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.75rem; margin-bottom: 1.5rem; }
+        .card h2 { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.25rem; color: var(--text); }
+        .card .sub { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.25rem; }
+
+        .field { margin-bottom: 1rem; }
+        .field label { display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.4rem; }
+        .field input, .field textarea {
+            width: 100%; background: var(--bg-input); border: 1px solid var(--border);
+            border-radius: var(--radius-sm); padding: 0.7rem 0.85rem; color: var(--text);
+            font-size: 0.9rem; font-family: var(--font);
+        }
+        .field input:focus, .field textarea:focus { outline: none; border-color: var(--brand); }
+        .field .hint { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.3rem; }
+
+        .faq-row { border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.85rem; margin-bottom: 0.75rem; background: var(--bg-input); }
+        .faq-row .field { margin-bottom: 0.6rem; }
+        .faq-row .field:last-child { margin-bottom: 0; }
+        .faq-actions { display: flex; gap: 0.75rem; margin-bottom: 1rem; }
+
+        .btn { display: inline-block; background: var(--brand); color: #fff; border: none;
+            padding: 0.7rem 1.25rem; font-size: 0.9rem; font-weight: 700; cursor: pointer;
+            border-radius: var(--radius-sm); font-family: var(--font); text-decoration: none; }
+        .btn:hover { background: var(--brand-hover); text-decoration: none; }
+        .btn.secondary { background: transparent; color: var(--brand); border: 1px solid var(--brand); }
+        .btn.secondary:hover { background: rgba(108,92,231,0.1); }
+
+        .output-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; }
+        .output-head h3 { font-size: 1rem; font-weight: 700; color: var(--text); }
+        pre.output {
+            background: #0A0A14; border: 1px solid var(--border); border-radius: var(--radius-sm);
+            padding: 1rem; font-size: 0.8rem; line-height: 1.5; color: #C8C8E0;
+            overflow-x: auto; white-space: pre-wrap; word-break: break-word; max-height: 420px; overflow-y: auto;
+            font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
+        }
+        .copy-ok { color: var(--good); font-size: 0.8rem; }
+
+        .cta-card { background: var(--bg-card); border: 2px solid var(--brand); border-radius: var(--radius); padding: 1.75rem; text-align: center; margin: 1.5rem 0; }
+        .cta-card h2 { font-size: 1.3rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .cta-card p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.25rem; max-width: 480px; margin-left: auto; margin-right: auto; }
+        .cta-card .price { font-size: 2rem; font-weight: 800; color: var(--brand); margin-bottom: 0.25rem; }
+
+        .site-footer { text-align: center; padding: 2rem 0 1rem; border-top: 1px solid var(--border); margin-top: 1.5rem; }
+        .site-footer p { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.3rem; }
+        .site-footer a { color: var(--text-muted); margin: 0 0.5rem; }
+
+        @media (max-width: 600px) {
+            .nav { flex-direction: column; gap: 0.5rem; padding: 0.75rem 1rem; }
+            .container { padding: 1rem; }
+            .hero { padding: 1.5rem 0 1rem; }
+            .card { padding: 1.25rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="nav">
+        <a href="/" class="nav-logo">Rankfixer</a>
+        <div class="nav-links">
+            <a href="/ai-visibility-checker">Free Checker</a>
+            <a href="/schema-generator">Schema Gen</a>
+            <a href="/#pricing">Pricing</a>
+            <a href="/research">Research</a>
+            <a href="https://github.com/rankfixer-ai/rankfixer-core" target="_blank" rel="noopener">GitHub</a>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <header class="hero">
+            <div class="hero-badge">Free Tool · No Account</div>
+            <h1>Schema &amp; FAQPage JSON-LD Generator</h1>
+            <p>Generate valid schema.org markup for your FAQ and Organization in seconds. Paste it into your site's &lt;head&gt; to improve how ChatGPT, Perplexity, and Gemini read your content.</p>
+        </header>
+
+        <!-- ORG CARD -->
+        <div class="card">
+            <h2>1. Your Organization</h2>
+            <p class="sub">Used to build the Organization + WebSite schema block.</p>
+            <div class="field">
+                <label for="org-name">Organization name</label>
+                <input id="org-name" type="text" placeholder="Acme Inc" />
+            </div>
+            <div class="field">
+                <label for="org-url">Website URL</label>
+                <input id="org-url" type="url" placeholder="https://acme.com" />
+                <div class="hint">Include https:// — used as the @id and url in the schema.</div>
+            </div>
+            <div class="field">
+                <label for="org-logo">Logo URL (optional)</label>
+                <input id="org-logo" type="url" placeholder="https://acme.com/logo.png" />
+            </div>
+        </div>
+
+        <!-- FAQ CARD -->
+        <div class="card">
+            <h2>2. FAQ Entries</h2>
+            <p class="sub">Add the questions your customers actually ask. Each becomes a schema.org FAQPage item.</p>
+            <div id="faq-list"></div>
+            <div class="faq-actions">
+                <button class="btn secondary" id="add-faq">+ Add question</button>
+            </div>
+        </div>
+
+        <!-- OUTPUT CARD -->
+        <div class="card">
+            <div class="output-head">
+                <h3>3. Your JSON-LD</h3>
+                <span id="copy-status"></span>
+            </div>
+            <pre class="output" id="output">Fill in the form above to generate your schema.</pre>
+            <div class="faq-actions" style="margin-top:1rem; margin-bottom:0;">
+                <button class="btn" id="copy-btn">Copy JSON-LD</button>
+                <button class="btn secondary" id="download-btn">Download .json</button>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="cta-card">
+            <h2>Want the rest of your schema fixed?</h2>
+            <p>This tool covers FAQPage + Organization. The $99 report audits all 15+ schema factors — including the citation-critical ones (entity density, HowTo, Product, breadcrumb) that most sites miss.</p>
+            <div class="price">$99 <small style="font-size:1rem;color:var(--text-muted);">one-time</small></div>
+            <div style="margin-top:1.25rem;">
+                <a class="btn" id="cta-report" href="/report/">Get Full Report → $99</a>
+            </div>
+        </div>
+
+        <footer class="site-footer">
+            <p>RankFixer — Know Your AI Visibility Score</p>
+            <p><a href="/">Home</a> · <a href="/ai-visibility-checker">Free Checker</a> · <a href="/report/">Report</a> · <a href="/blog">Blog</a> · <a href="https://github.com/rankfixer-ai/rankfixer-core">GitHub</a></p>
+        </footer>
+
+    </div>
+
+    <script src="/js/analytics.js"></script>
+    <script src="/js/schema-gen.js"></script>
+</body>
+</html>
