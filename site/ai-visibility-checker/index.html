@@ -383,7 +383,7 @@
                 'Interested in: FULL AI Visibility Report ($99 one-time)\n'
             );
             document.getElementById('upgrade-link').href =
-                'mailto:acibronjan@gmail.com?subject=' + subj + '&body=' + body;
+                '/report/?domain=' + encodeURIComponent(scannedDomain) + '&email=' + encodeURIComponent(scannedEmail);
 
             dataBanner.style.display = 'block';
             resultsScreen.classList.add('active');
