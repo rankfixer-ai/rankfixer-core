@@ -314,8 +314,13 @@
             }
             domainInput.style.border = '';
             var domain = cleanDomain(raw);
+            var startTime = Date.now();
             scanSection.style.display = 'none';
             loadingScreen.classList.add('active');
+
+            // Analytics: audit started
+            Rfx.track('audit_started', { tool_type: 'geo_checker', domain: domain, source: 'checker_page' });
+            Rfx.track('visibility_check_started', { domain: domain });
 
             var steps = ['step-1','step-2','step-3','step-4','step-5'];
             steps.forEach(function(id, i) {
@@ -327,11 +332,15 @@
 
             // Run the real scan
             var scanResult;
+            var scanError = null;
             try {
                 scanResult = await runRealScan(domain);
             } catch(e) {
                 scanResult = { score: 5, domain: domain, errors: [e.message] };
+                scanError = e.message;
             }
+
+            var durationSec = ((Date.now() - startTime) / 1000).toFixed(1);
 
             // Complete loading animation
             setTimeout(function() {
@@ -375,16 +384,15 @@
                     btnDiv.appendChild(desc);
 
                     var link = document.createElement('a');
-                    link.href = 'https://paypal.me/beth3385/5';
+                    link.href = '/report/';
                     link.target = '_blank';
                     link.rel = 'noopener';
                     link.className = 'btn-primary';
                     link.style.cssText = 'display:inline-block;font-size:1rem;';
                     link.textContent = 'Get Full Report — $5';
                     link.addEventListener('click', function(e) {
-                        if (typeof trackEvent === 'function') {
-                            trackEvent('click-get-full-report', { domain: domain });
-                        }
+                        Rfx.track('pricing_click', { button_text: 'Get Full Report — $5', section: 'audit_results', domain: domain });
+                        Rfx.track('run_audit', { domain: domain, score: score });
                     });
                     btnDiv.appendChild(link);
 
@@ -405,9 +413,18 @@
 
                 resultsScreen.scrollIntoView({ behavior: 'smooth' });
 
-                // Analytics: free scan completed
-                if (typeof trackEvent === 'function') {
-                    trackEvent('scan-completed', { domain: domain, score: score });
+                // Analytics: audit completed
+                Rfx.track('audit_completed', {
+                    domain: domain, score: score, duration_seconds: durationSec,
+                    recommendation_count: 0, tool_type: 'geo_checker'
+                });
+                Rfx.track('visibility_check_completed', {
+                    domain: domain, score: score, duration_seconds: durationSec
+                });
+
+                // Track scan errors if any
+                if (scanError) {
+                    Rfx.error('audit_failed', { endpoint: 'runRealScan', message: scanError, domain: domain });
                 }
             }, 4500);
         });
@@ -426,5 +443,45 @@
     <script src="/js/auth.js"></script>
 
     <script src="/js/analytics.js"></script>
+
+    <!-- Event tracking: checker page -->
+    <script>
+    (function() {
+        function on(sel, evt, fn) {
+            var els = document.querySelectorAll(sel);
+            for (var i = 0; i < els.length; i++) els[i].addEventListener(evt, fn);
+        }
+        function text(el) { return (el.textContent || '').trim().substring(0, 80); }
+
+        // Nav clicks
+        on('.nav-links a', 'click', function(e) {
+            var t = text(this);
+            if (/github/i.test(t) || /github/i.test(this.href)) {
+                Rfx.track('github_click', { button_text: t, section: 'nav' });
+            } else {
+                Rfx.track('navigation_click', { link_text: t, href: this.getAttribute('href') || '' });
+            }
+        });
+
+        // Footer clicks
+        on('.site-footer a', 'click', function() {
+            Rfx.track('footer_cta', { link_text: text(this), href: this.getAttribute('href') || '' });
+        });
+
+        // Score comparison link (data source banner)
+        var banner = document.getElementById('data-source-banner');
+        if (banner) {
+            banner.addEventListener('click', function(e) {
+                var a = e.target.closest('a');
+                if (a) Rfx.track('learn_more', { button_text: text(a), section: 'data_banner' });
+            });
+        }
+
+        // Top-score link
+        on('a[href*="blog/ai-readiness"]', 'click', function() {
+            Rfx.track('learn_more', { button_text: text(this), section: 'results_link' });
+        });
+    })();
+    </script>
 </body>
 </html>

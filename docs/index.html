@@ -296,6 +296,81 @@
 
     <script src="/js/analytics.js"></script>
 
+    <!-- Event tracking: homepage -->
+    <script>
+    (function() {
+        function on(sel, evt, fn) {
+            var els = document.querySelectorAll(sel);
+            for (var i = 0; i < els.length; i++) els[i].addEventListener(evt, fn);
+        }
+        function text(el) { return (el.textContent || '').trim().substring(0, 80); }
+
+        // Hero CTA buttons
+        on('.hero-cta .btn-primary', 'click', function(e) {
+            Rfx.track('hero_cta_click', { button_text: text(this), section: 'hero' });
+        });
+        on('.hero-cta .btn-secondary', 'click', function(e) {
+            Rfx.track('github_click', { button_text: text(this), section: 'hero' });
+        });
+
+        // Navigation clicks
+        on('.nav-links a', 'click', function(e) {
+            var t = text(this);
+            if (/github/i.test(t) || /github/i.test(this.href)) {
+                Rfx.track('github_click', { button_text: t, section: 'nav' });
+            } else {
+                Rfx.track('navigation_click', { link_text: t, href: this.getAttribute('href') || '' });
+            }
+        });
+
+        // Feature cards — expand / interaction
+        on('.feature-card', 'click', function(e) {
+            var h3 = this.querySelector('h3');
+            Rfx.track('features_expand', { feature: h3 ? text(h3) : 'unknown' });
+        });
+
+        // FAQ items (rendered dynamically via JS, so bind to container)
+        var faqContainer = document.getElementById('faq-container');
+        if (faqContainer) {
+            faqContainer.addEventListener('click', function(e) {
+                var card = e.target.closest('.feature-card');
+                if (card) {
+                    var h3 = card.querySelector('h3');
+                    Rfx.track('faq_expand', { question: h3 ? text(h3) : 'unknown' });
+                }
+            });
+        }
+
+        // GitHub star / view source CTAs
+        on('.btn-github', 'click', function() {
+            Rfx.track('github_click', { button_text: text(this), section: 'github_cta' });
+        });
+        on('.github-cta-inner a:not(.btn-github)', 'click', function() {
+            Rfx.track('github_click', { button_text: text(this), section: 'source_link' });
+        });
+
+        // Get Full Report CTA — pricing
+        on('.social-proof .btn-primary', 'click', function() {
+            Rfx.track('pricing_click', { button_text: text(this), section: 'report_cta' });
+        });
+
+        // Footer CTAs
+        on('.site-footer a', 'click', function(e) {
+            Rfx.track('footer_cta', { link_text: text(this), href: this.getAttribute('href') || '' });
+        });
+
+        // Read the open-source analysis link
+        on('.social-proof a[href*="blog"]', 'click', function() {
+            Rfx.track('learn_more', { button_text: text(this), section: 'social_proof' });
+        });
+
+        // Sign In click
+        on('.nav-links a[onclick*="Auth"]', 'click', function() {
+            Rfx.track('navigation_click', { link_text: 'Sign In', section: 'nav' });
+        });
+    })();
+    </script>
+
     <!-- FAQ rendering — single source array → visible HTML + JSON-LD -->
     <script>
     (function() {

@@ -118,15 +118,13 @@
             <h2>Get Your Full AI Visibility Report</h2>
             <p>Includes competitive landscape analysis, pricing comparison, and actionable recommendations.</p>
             <div class="price">$5</div>
-            <div class="price-sub">One-time payment. Instant access once confirmed.</div>
-            <a href="https://paypal.me/beth3385/5" target="_blank" class="btn-primary" style="display:inline-block;margin-top:1rem;" onclick="markPaymentPending(); return true;">
-                Pay $5 with PayPal →
-            </a>
-            <p style="font-size:0.7rem;color:var(--text-muted);margin-top:0.5rem;">Opens PayPal in a new tab. We'll unlock your report once payment is confirmed — usually within a few hours.</p>
-            <p id="test-bypass" style="font-size:0.7rem; color:var(--text-muted); margin-top:1rem; display:none;">
-                <a href="#" onclick="bypassPayment(); return false;" style="color:var(--text-muted);">[Skip Payment — Test Mode]</a>
-            </p>
-            <p style="font-size:0.75rem; color:var(--text-muted); margin-top:1rem;">Secure payment via PayPal. No subscription.</p>
+            <div class="price-sub">One-time payment. Instant access after secure checkout.</div>
+            <button id="pay-button" class="btn-primary" style="display:inline-block;margin-top:1rem;cursor:pointer;" onclick="startCheckout();">
+                Pay $5 — Secure Checkout →
+            </button>
+            <p id="pay-error" style="font-size:0.8rem;color:var(--danger);margin-top:0.5rem;display:none;"></p>
+            <p style="font-size:0.7rem;color:var(--text-muted);margin-top:0.5rem;">Secure payment via Stripe. Your report unlocks automatically once payment is confirmed.</p>
+            <p style="font-size:0.75rem; color:var(--text-muted); margin-top:1rem;">Secure payment via Stripe. No subscription.</p>
         </div>
 
         <!-- STATE 3b: Payment pending (user clicked PayPal link) -->
@@ -225,6 +223,7 @@
     // ===================================================================
 
     let _competitorData = null;
+    var _reportDomain = 'unknown';  // set in init(), used in renderReport()
     const REPORT_PRICE = '5.00';
 
     async function init() {
@@ -246,16 +245,14 @@
         // Step 3: Check payment — show bypass in test mode
         if (!paymentStatus.paid) {
             showState('not-paid');
-            // Show test bypass if ?test=1 is in URL
-            if (window.location.search.includes('test=1')) {
-                document.getElementById('test-bypass').style.display = '';
-            }
             return;
         }
 
         // Step 3: Show report
         showState('report');
-        if (typeof trackEvent === 'function') trackEvent('payment-complete', { domain: new URLSearchParams(window.location.search).get('url') || 'unknown' });
+        _reportDomain = new URLSearchParams(window.location.search).get('url') || 'unknown';
+        Rfx.track('payment_complete', { domain: _reportDomain });
+        Rfx.track('report_download', { report_type: 'competitive_intelligence', domain: _reportDomain });
         await loadCompetitorData();
         renderReport();
     }
@@ -266,10 +263,29 @@
         });
     }
 
-    function markPaymentPending() {
-        // User clicked the PayPal link — show the pending confirmation
-        if (typeof trackEvent === 'function') trackEvent('payment-pending', { domain: new URLSearchParams(window.location.search).get('url') || 'unknown' });
-        showState('pending');
+    async function startCheckout() {
+        // C1 fix: the client NEVER writes paid. We ask the server to create a
+        // Stripe Checkout Session, then redirect. The webhook sets paid=true.
+        const btn = document.getElementById('pay-button');
+        if (btn) { btn.disabled = true; btn.textContent = 'Redirecting\u2026'; }
+        try {
+            const resp = await fetch('/api/create-checkout', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    price: REPORT_PRICE,
+                    url: new URLSearchParams(window.location.search).get('url') || ''
+                })
+            });
+            if (!resp.ok) throw new Error('checkout_failed');
+            const data = await resp.json();
+            Rfx.track('payment_pending', { domain: new URLSearchParams(window.location.search).get('url') || 'unknown' });
+            window.location.href = data.url; // Stripe-hosted Checkout
+        } catch (e) {
+            const err = document.getElementById('pay-error');
+            if (err) { err.textContent = 'Could not start checkout. Please try again.'; err.style.display = 'block'; }
+            if (btn) { btn.disabled = false; btn.textContent = 'Pay $5 — Secure Checkout →'; }
+        }
     }
 
     // --- Competitive Data ---
@@ -345,7 +361,7 @@
         document.getElementById('feature-cloud').innerHTML = featureHtml || '<p style="color:var(--text-muted)">Feature data unavailable for this crawl.</p>';
 
         // Recommendations
-        if (typeof trackEvent === 'function') trackEvent('Report Viewed');
+        Rfx.track('report_viewed', { domain: _reportDomain });
         document.getElementById('recommendations').innerHTML = `
             <div class="insight-box"><strong>1. Add llms.txt</strong> — 96% of sites lack one. Create a simple /llms.txt file listing your key pages for AI crawler discovery. Takes 5 minutes.</div>
             <div class="insight-box"><strong>2. Implement FAQPage Schema</strong> — The highest-impact schema type for AI citation. Add JSON-LD question/answer pairs to your top 5 pages.</div>
@@ -364,17 +380,6 @@
         });
     }
 
-    async function bypassPayment() {
-        // Test mode: record a fake payment and unlock the report
-        const result = await Auth.recordPayment('test-bypass-' + Date.now(), '$5');
-        if (result.error) {
-            alert('Bypass failed: ' + (result.error.message || result.error));
-        } else {
-            showState('report');
-            await loadCompetitorData();
-            renderReport();
-        }
-    }
 
     function escHtml(str) {
         const div = document.createElement('div');
@@ -386,5 +391,37 @@
     document.addEventListener('DOMContentLoaded', init);
     </script>
     <script src="/js/analytics.js"></script>
+
+    <!-- Event tracking: report page -->
+    <script>
+    (function() {
+        function on(sel, evt, fn) {
+            var els = document.querySelectorAll(sel);
+            for (var i = 0; i < els.length; i++) els[i].addEventListener(evt, fn);
+        }
+        function text(el) { return (el.textContent || '').trim().substring(0, 80); }
+
+        // Pay button
+        var payBtn = document.getElementById('pay-button');
+        if (payBtn) {
+            payBtn.addEventListener('click', function() {
+                Rfx.track('pricing_click', { button_text: text(this), section: 'paywall' });
+                Rfx.track('upgrade_plan', { plan: 'report_5', section: 'paywall' });
+            });
+        }
+
+        // Sign in / sign out buttons
+        on('#btn-signin', 'click', function() { Rfx.track('navigation_click', { link_text: 'Sign In', section: 'nav' }); });
+        on('#btn-signout', 'click', function() { Rfx.track('navigation_click', { link_text: 'Sign Out', section: 'nav' }); });
+
+        // Nav links
+        on('.nav-logo', 'click', function() { Rfx.track('navigation_click', { link_text: 'Rankfixer', section: 'nav' }); });
+
+        // Footer links
+        on('.site-footer a', 'click', function() {
+            Rfx.track('footer_cta', { link_text: text(this), href: this.getAttribute('href') || '' });
+        });
+    })();
+    </script>
 </body>
 </html>
