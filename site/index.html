@@ -486,5 +486,85 @@
       }
     </script>
 
+    <script src="/js/analytics.js"></script>
+
+    <!-- Event tracking: homepage -->
+    <script>
+    (function() {
+        function on(sel, evt, fn) {
+            var els = document.querySelectorAll(sel);
+            for (var i = 0; i < els.length; i++) els[i].addEventListener(evt, fn);
+        }
+        function text(el) { return (el.textContent || '').trim().substring(0, 80); }
+
+        // Hero CTA
+        on('.hero-cta .btn-primary', 'click', function() {
+            Rfx.track('hero_cta_click', { button_text: text(this), section: 'hero' });
+        });
+        on('.hero-cta .btn-secondary', 'click', function() {
+            Rfx.track('github_click', { button_text: text(this), section: 'hero' });
+        });
+
+        // Navigation
+        on('.nav-links a', 'click', function() {
+            var t = text(this), h = this.getAttribute('href') || '';
+            if (/github/i.test(t) || /github/i.test(h)) {
+                Rfx.track('github_click', { button_text: t, section: 'nav' });
+            } else if (h === '#pricing') {
+                Rfx.track('navigation_click', { link_text: 'Pricing', section: 'nav' });
+            } else if (h === '#contact') {
+                Rfx.track('navigation_click', { link_text: 'Contact', section: 'nav' });
+            } else {
+                Rfx.track('navigation_click', { link_text: t, href: h });
+            }
+        });
+
+        // Feature cards
+        on('.feature-card', 'click', function() {
+            var h3 = this.querySelector('h3');
+            Rfx.track('features_expand', { feature: h3 ? text(h3) : 'unknown' });
+        });
+
+        // Pricing plan clicks
+        on('.plan .buy', 'click', function() {
+            var plan = this.closest('.plan');
+            var h3 = plan ? plan.querySelector('h3') : null;
+            var planName = h3 ? text(h3) : 'unknown';
+            Rfx.track('pricing_click', { button_text: text(this), plan: planName, section: 'pricing' });
+            if (/Pro/i.test(planName)) {
+                Rfx.track('upgrade_plan', { plan: 'pro_249', section: 'pricing' });
+            } else if (/Paid|Report/i.test(planName)) {
+                Rfx.track('upgrade_plan', { plan: 'report_99', section: 'pricing' });
+            }
+        });
+
+        // GitHub CTAs
+        on('.btn-github', 'click', function() {
+            Rfx.track('github_click', { button_text: text(this), section: 'github_cta' });
+        });
+        on('.github-cta-inner a:not(.btn-github)', 'click', function() {
+            Rfx.track('github_click', { button_text: text(this), section: 'source_link' });
+        });
+
+        // Contact form submit
+        var contactForm = document.querySelector('form[name="rankfixer-contact"]');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function() {
+                Rfx.track('contact_form_submit', { source_page: location.pathname });
+            });
+        }
+
+        // Social proof links
+        on('.social-proof a', 'click', function() {
+            Rfx.track('learn_more', { button_text: text(this), section: 'social_proof' });
+        });
+
+        // Footer
+        on('.site-footer a', 'click', function() {
+            Rfx.track('footer_cta', { link_text: text(this), href: this.getAttribute('href') || '' });
+        });
+    })();
+    </script>
+
 </body>
 </html>

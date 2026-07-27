@@ -401,5 +401,67 @@
     })();
     </script>
 
+    <script src="/js/analytics.js"></script>
+
+    <!-- Event tracking: checker page -->
+    <script>
+    (function() {
+        function on(sel, evt, fn) {
+            var els = document.querySelectorAll(sel);
+            for (var i = 0; i < els.length; i++) els[i].addEventListener(evt, fn);
+        }
+        function text(el) { return (el.textContent || '').trim().substring(0, 80); }
+
+        // Nav clicks
+        on('.nav-links a', 'click', function() {
+            var t = text(this), h = this.getAttribute('href') || '';
+            if (/github/i.test(t) || /github/i.test(h)) {
+                Rfx.track('github_click', { button_text: t, section: 'nav' });
+            } else {
+                Rfx.track('navigation_click', { link_text: t, href: h });
+            }
+        });
+
+        // Audit started — intercept scan button
+        var scanBtn = document.getElementById('scan-button');
+        var origScanClick = scanBtn.onclick;
+        scanBtn.addEventListener('click', function() {
+            var domain = (document.getElementById('domain-input').value || '').trim();
+            if (domain) {
+                Rfx.track('audit_started', { tool_type: 'geo_checker', domain: domain, source: 'checker_page' });
+                Rfx.track('visibility_check_started', { domain: domain });
+            }
+        });
+
+        // Email submitted (lead capture gate)
+        var emailBtn = document.getElementById('email-button');
+        emailBtn.addEventListener('click', function() {
+            var email = (document.getElementById('email-input').value || '').trim();
+            if (email && /@/.test(email)) {
+                Rfx.track('email_signup', { source_page: '/ai-visibility-checker' });
+                var domain = (document.getElementById('domain-input').value || '').trim();
+                if (domain) {
+                    Rfx.track('audit_completed', { domain: domain, tool_type: 'geo_checker', source: 'checker_page' });
+                    Rfx.track('visibility_check_completed', { domain: domain });
+                }
+            }
+        });
+
+        // Upgrade / Get Report click
+        var upgradeLink = document.getElementById('upgrade-link');
+        if (upgradeLink) {
+            upgradeLink.addEventListener('click', function() {
+                Rfx.track('pricing_click', { button_text: text(this), section: 'audit_results', plan: 'report_99' });
+                Rfx.track('upgrade_plan', { plan: 'report_99' });
+            });
+        }
+
+        // Footer
+        on('.site-footer a', 'click', function() {
+            Rfx.track('footer_cta', { link_text: text(this), href: this.getAttribute('href') || '' });
+        });
+    })();
+    </script>
+
 </body>
 </html>
