@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Visibility Report — RankFixer</title>
+    <meta name="description" content="Get your full AI Visibility Report with 15+ scoring factors, competitor comparison, and a custom 30-day optimization plan. $99 one-time.">
+
+    <meta property="og:title" content="AI Visibility Report — RankFixer">
+    <meta property="og:description" content="Full competitive AI visibility audit with 15+ scoring factors. $99 one-time.">
+    <meta property="og:url" content="https://rankfixer.co/report/">
+    <meta property="og:type" content="website">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YXZVCPBCZN"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YXZVCPBCZN');
+    </script>
+
+    <style>
+        :root {
+            --brand: #6C5CE7; --brand-hover: #5A4BD1; --bg: #0D0D1A; --bg-card: #151528;
+            --bg-input: #1E1E36; --text: #F0F0F5; --text-muted: #8888A0; --border: #2A2A45;
+            --good: #00C853; --warn: #FFB300; --bad: #FF5252;
+            --radius: 12px; --radius-sm: 8px; --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { font-size: 16px; scroll-behavior: smooth; }
+        body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.6; min-height: 100vh; }
+        a { color: var(--brand); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        /* NAV */
+        .nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; border-bottom: 1px solid var(--border); }
+        .nav-logo { font-weight: 700; font-size: 1.2rem; color: var(--text); text-decoration: none; }
+        .nav-links { display: flex; gap: 1.5rem; align-items: center; }
+        .nav-links a { color: var(--text-muted); font-size: 0.9rem; text-decoration: none; }
+        .nav-links a:hover { color: var(--text); }
+
+        .container { max-width: 720px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+        /* HERO */
+        .hero { text-align: center; padding: 3rem 0 2rem; }
+        .hero-badge { display: inline-block; background: rgba(108, 92, 231, 0.15); color: var(--brand); font-size: 0.8rem; font-weight: 600; padding: 0.35rem 0.85rem; border-radius: 100px; margin-bottom: 1.5rem; }
+        .hero h1 { font-size: clamp(1.8rem, 5vw, 2.4rem); font-weight: 800; line-height: 1.2; margin-bottom: 0.75rem; }
+        .hero p { font-size: 1.05rem; color: var(--text-muted); max-width: 520px; margin: 0 auto 1.5rem; }
+
+        /* DOMAIN BADGE */
+        .domain-badge { display: inline-block; background: var(--bg-input); padding: 0.5rem 1.2rem; border-radius: 100px; font-size: 0.9rem; color: var(--brand); margin-bottom: 1.5rem; word-break: break-all; }
+        .domain-badge.empty { color: var(--text-muted); font-style: italic; }
+
+        /* CARD */
+        .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; margin-bottom: 1.5rem; }
+        .card h2 { font-size: 1.3rem; font-weight: 700; margin-bottom: 1rem; color: var(--text); }
+        .card h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.75rem; color: var(--text); }
+
+        /* FEATURE LIST */
+        .feature-list { list-style: none; padding: 0; }
+        .feature-list li { padding: 0.6rem 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; color: var(--text-muted); display: flex; align-items: flex-start; gap: 0.6rem; }
+        .feature-list li:last-child { border-bottom: none; }
+        .feature-list .icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+
+        /* HOW IT WORKS */
+        .steps { display: grid; gap: 0.75rem; }
+        .step { display: flex; gap: 0.75rem; align-items: flex-start; }
+        .step-num { background: var(--brand); color: #fff; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 700; flex-shrink: 0; }
+        .step-text { font-size: 0.9rem; color: var(--text-muted); }
+        .step-text strong { color: var(--text); }
+
+        /* CTA */
+        .cta-card { background: var(--bg-card); border: 2px solid var(--brand); border-radius: var(--radius); padding: 2rem; text-align: center; margin: 2rem 0; }
+        .cta-card h2 { font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .cta-card .price { font-size: 2.5rem; font-weight: 800; color: var(--brand); margin-bottom: 0.25rem; }
+        .cta-card .price-sub { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.5rem; }
+        .cta-card .checklist { list-style: none; padding: 0; margin: 0 auto 1.5rem; max-width: 400px; text-align: left; }
+        .cta-card .checklist li { font-size: 0.85rem; color: var(--text-muted); padding: 0.35rem 0; }
+        .btn-primary {
+            display: inline-block; background: var(--brand); color: #fff; border: none;
+            padding: 14px 32px; font-size: 1rem; font-weight: 700; cursor: pointer;
+            border-radius: var(--radius-sm); font-family: var(--font); text-decoration: none;
+            transition: background 0.2s;
+        }
+        .btn-primary:hover { background: var(--brand-hover); text-decoration: none; }
+
+        /* FAQ / PROOF */
+        .social-proof { text-align: center; padding: 1rem 0; }
+        .social-proof blockquote {
+            font-size: 1.1rem; font-weight: 600; color: var(--text);
+            border-left: 3px solid var(--brand); padding: 1rem 1.5rem; text-align: left;
+            max-width: 540px; margin: 0 auto;
+            background: var(--bg-card); border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+        }
+
+        /* FOOTER */
+        .site-footer { text-align: center; padding: 2rem 0; border-top: 1px solid var(--border); margin-top: 2rem; }
+        .site-footer p { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.3rem; }
+        .site-footer a { color: var(--text-muted); margin: 0 0.5rem; }
+
+        @media (max-width: 600px) {
+            .nav { flex-direction: column; gap: 0.5rem; padding: 0.75rem 1rem; }
+            .container { padding: 1rem; }
+            .hero { padding: 2rem 0 1.5rem; }
+            .hero h1 { font-size: 1.5rem; }
+            .card { padding: 1.25rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="nav">
+        <a href="/" class="nav-logo">Rankfixer</a>
+        <div class="nav-links">
+            <a href="/ai-visibility-checker">Free Checker</a>
+            <a href="/#pricing">Pricing</a>
+            <a href="/research">Research</a>
+            <a href="/blog">Blog</a>
+            <a href="https://github.com/rankfixer-ai/rankfixer-core" target="_blank" rel="noopener">GitHub</a>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <!-- HERO -->
+        <header class="hero">
+            <div class="hero-badge">Full AI Visibility Report</div>
+            <h1>Your Complete AI Visibility Audit</h1>
+            <p>15+ scoring factors across 5 dimensions. Competitor comparison. Custom 30-day optimization plan.</p>
+            <div class="domain-badge" id="domain-badge">Enter your domain on the Free Checker first</div>
+        </header>
+
+        <!-- WHAT YOU GET -->
+        <div class="card">
+            <h2>📋 What's in the $99 Report</h2>
+            <ul class="feature-list">
+                <li><span class="icon">📊</span> <span><strong>15+ scoring factors</strong> — fully broken down across 5 dimensions (Schema Completeness, Entity Density, Citation Signals, Technical SEO, Content Structure)</span></li>
+                <li><span class="icon">🆚</span> <span><strong>Competitor comparison</strong> — top 5 competitors in your category, ranked by AI visibility</span></li>
+                <li><span class="icon">🔍</span> <span><strong>Specific citation analysis</strong> — exactly where and how ChatGPT, Perplexity, and Gemini mention you (or your competitors)</span></li>
+                <li><span class="icon">🗺️</span> <span><strong>Custom 30-day optimization plan</strong> — prioritized fixes based on your actual gaps, not generic advice</span></li>
+                <li><span class="icon">✅</span> <span><strong>"Quick wins" checklist</strong> — 5-7 fixes you can ship today for immediate improvement</span></li>
+                <li><span class="icon">📄</span> <span><strong>PDF export + presentation deck</strong> — shareable format for your team or clients</span></li>
+                <li><span class="icon">📧</span> <span><strong>Priority email support</strong> — 30 days of follow-up questions included</span></li>
+                <li><span class="icon">📞</span> <span><strong>30-minute strategy call</strong> — we walk through the report together and plan next steps</span></li>
+            </ul>
+        </div>
+
+        <!-- HOW IT WORKS -->
+        <div class="card">
+            <h2>⚡ How It Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <div class="step-text"><strong>Run the free scan</strong> at /ai-visibility-checker — get your teaser score and see if you have an AI visibility gap</div>
+                </div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <div class="step-text"><strong>Order the report</strong> — click below or from the checker results. We'll email you to confirm your domain and any specific questions.</div>
+                </div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <div class="step-text"><strong>Receive your full report within 48 hours</strong> — PDF + strategy call included. Pay after you review the findings.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SOCIAL PROOF -->
+        <div class="social-proof">
+            <blockquote>
+                "We analyzed 100 SaaS companies. Only 3% scored above 80/100 for AI visibility."
+            </blockquote>
+            <p style="margin-top: 1rem;"><a href="/blog/ai-readiness-100-saas">Read the open-source analysis →</a></p>
+        </div>
+
+        <!-- CTA -->
+        <div class="cta-card">
+            <h2>Get Your Full Report</h2>
+            <div class="price">$99 <small style="font-size:1rem;color:var(--text-muted);">one-time</small></div>
+            <div class="price-sub">Delivered within 48 hours. Pay after review.</div>
+            <ul class="checklist">
+                <li>✓ 15+ scoring factors across 5 dimensions</li>
+                <li>✓ Top-5 competitor comparison</li>
+                <li>✓ Custom 30-day optimization plan</li>
+                <li>✓ PDF + presentation deck</li>
+                <li>✓ 30-minute strategy call included</li>
+            </ul>
+            <a class="btn-primary" id="cta-button" href="mailto:acibronjan@gmail.com?subject=RankFixer%20Paid%20Report%20Inquiry&body=Domain%3A%20%0AEmail%3A%20%0AInterested%20in%3A%20Full%20AI%20Visibility%20Report%20(%2499%20one-time)%0A%0AQuestions%2Fnotes%3A%20">
+                Get Full Report → $99
+            </a>
+            <p style="font-size:0.8rem;color:var(--text-muted);margin-top:0.75rem;">We'll email you to confirm your domain and any specific questions before starting.</p>
+        </div>
+
+        <!-- FOOTER -->
+        <footer class="site-footer">
+            <p>RankFixer — Know Your AI Visibility Score</p>
+            <p><a href="/">Home</a> · <a href="/ai-visibility-checker">Free Checker</a> · <a href="/blog">Blog</a> · <a href="/research">Research</a> · <a href="https://github.com/rankfixer-ai/rankfixer-core">GitHub</a></p>
+        </footer>
+
+    </div>
+
+    <script src="/js/analytics.js"></script>
+
+    <script>
+    (function() {
+        // Parse URL params (passed from checker: ?domain=example.com&email=user@email.com)
+        var params = new URLSearchParams(window.location.search);
+        var domain = params.get('domain') || '';
+        var email  = params.get('email')  || '';
+
+        // Update domain badge
+        var badge = document.getElementById('domain-badge');
+        if (domain) {
+            badge.textContent = domain;
+            badge.classList.remove('empty');
+        }
+
+        // Update CTA mailto link with domain + email
+        var cta = document.getElementById('cta-button');
+        if (domain || email) {
+            var subj = encodeURIComponent('RankFixer Paid Report Inquiry');
+            var body = encodeURIComponent(
+                'Domain: ' + domain + '\n' +
+                'Email: ' + email + '\n' +
+                'Interested in: Full AI Visibility Report ($99 one-time)\n' +
+                '\nQuestions/notes: '
+            );
+            cta.href = 'mailto:acibronjan@gmail.com?subject=' + subj + '&body=' + body;
+        }
+
+        // Event tracking
+        function on(sel, evt, fn) {
+            var els = document.querySelectorAll(sel);
+            for (var i = 0; i < els.length; i++) els[i].addEventListener(evt, fn);
+        }
+        function text(el) { return (el.textContent || '').trim().substring(0, 80); }
+
+        // Page view
+        Rfx.track('report_viewed', { domain: domain || 'direct', source: 'report_page' });
+
+        // CTA click
+        if (cta) {
+            cta.addEventListener('click', function() {
+                Rfx.track('pricing_click', { button_text: text(this), section: 'report_cta', plan: 'report_99' });
+                Rfx.track('upgrade_plan', { plan: 'report_99' });
+            });
+        }
+
+        // Nav
+        on('.nav-links a', 'click', function() {
+            var t = text(this), h = this.getAttribute('href') || '';
+            if (/github/i.test(t) || /github/i.test(h)) {
+                Rfx.track('github_click', { button_text: t, section: 'nav' });
+            } else {
+                Rfx.track('navigation_click', { link_text: t, href: h });
+            }
+        });
+
+        // Footer
+        on('.site-footer a', 'click', function() {
+            Rfx.track('footer_cta', { link_text: text(this), href: this.getAttribute('href') || '' });
+        });
+    })();
+    </script>
+
+</body>
+</html>
