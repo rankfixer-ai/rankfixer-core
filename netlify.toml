@@ -2,6 +2,9 @@
   base = "site"
   publish = "."
 
+[functions]
+  directory = "netlify/functions"
+
 [[redirects]]
   from = "/report"
   to = "/report/"

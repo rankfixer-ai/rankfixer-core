@@ -212,7 +212,7 @@
         <!-- Results (FREE TEASER) -->
         <section id="results-screen" aria-live="polite">
             <div style="text-align:center;">
-                <span class="sample-badge">SAMPLE RESULTS — UPGRADE FOR VERIFIED SCORE</span>
+                <span class="sample-badge">FREE SCAN — UPGRADE FOR FULL REPORT</span>
             </div>
             <div class="score-section">
                 <div class="score-number" id="score-number" style="color: var(--brand);">--</div>
@@ -234,7 +234,7 @@
                     <li><span class="lock">🔒</span> Priority email support (30 days) + 30-min strategy call</li>
                 </ul>
                 <a class="upgrade-cta" id="upgrade-link" href="#">Get Full Report → $99</a>
-                <p class="honesty-note">The score above is a <strong>sample</strong> from a simplified model, shown to demonstrate the tool. The $99 report runs the full RankFixer engine for a verified, detailed breakdown.</p>
+                <p class="honesty-note">The score above is a <strong>real analysis</strong> of your site's AI visibility (schema, entity, content, crawlability). The $99 report adds 15+ deeper factors, competitor comparison, and a custom 30-day plan.</p>
             </div>
 
             <div style="text-align: center; margin: 1rem 0;">
@@ -307,36 +307,47 @@
             return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(str.trim());
         }
 
-        // ---- Scoring (swap this one function for the real rankfixer-core engine later) ----
-        // Deterministic, reasonable SAMPLE score derived from the domain (stable per domain).
-        // Band 34-56: intentionally " Fair/Poor" so the teaser is honest and the upgrade has room.
-        function computeSample(domain) {
-            var s = domain.toLowerCase();
-            var h = 0;
-            for (var i = 0; i < s.length; i++) { h = (h << 5) - h + s.charCodeAt(i); h |= 0; }
-            h = Math.abs(h);
-            var score = 34 + (h % 23); // 34..56
-            var label, color, rankPct, explanation;
-            if (score <= 40) { label = 'Poor'; color = 'var(--bad)'; }
-            else if (score <= 50) { label = 'Fair'; color = 'var(--warn)'; }
-            else { label = 'Fair'; color = 'var(--ok)'; }
-            rankPct = Math.max(5, Math.min(92, Math.round((score - 32) / 26 * 100)));
-            var explanations = [
-                "Your brand lacks structured entity data, making it hard for LLMs to cite you confidently.",
-                "Schema markup is thin — AI engines can't extract your key facts reliably.",
-                "Entity density is low; your brand isn't clearly defined to models like ChatGPT.",
-                "Citation signals are weak; competitors likely outrank you in AI answers.",
-                "Content is scannable but lacks clear answer structures AI can lift directly."
-            ];
-            explanation = explanations[h % explanations.length];
-            return {
-                score: score, label: label, color: color,
-                rankText: rankPct + "% of domains we've analyzed score higher than this.",
-                explanation: explanation
-            };
+        // ---- Real scoring engine (Netlify Function) ----
+        // Calls /.netlify/functions/score which fetches + analyzes the domain.
+        function computeRealScore(domain, cb) {
+            fetch('/.netlify/functions/score', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ domain: domain })
+            }).then(function (r) { return r.json(); }).then(function (data) {
+                if (data.error || typeof data.score !== 'number') {
+                    cb({ score: 0, label: 'Unknown', color: 'var(--warn)',
+                         rankText: 'Analysis unavailable — site may block crawlers.',
+                         explanation: 'We could not analyze this domain. It may block automated crawlers or be unreachable.',
+                         dimensions: data.dimensions || {}, signals: data.signals || [] });
+                    return;
+                }
+                var color = data.score >= 80 ? 'var(--ok)' : data.score >= 60 ? 'var(--warn)' : 'var(--bad)';
+                cb({ score: data.score, label: data.label, color: color,
+                     rankText: data.score + '/100 AI Visibility Score',
+                     explanation: buildExplanation(data),
+                     dimensions: data.dimensions || {}, signals: data.signals || [] });
+            }).catch(function () {
+                cb({ score: 0, label: 'Unknown', color: 'var(--warn)',
+                     rankText: 'Analysis failed — try again.',
+                     explanation: 'The analysis service could not be reached. Please try again.',
+                     dimensions: {}, signals: [] });
+            });
         }
 
-        scanButton.addEventListener('click', function() {
+        function buildExplanation(data) {
+            var d = data.dimensions || {};
+            var weak = [];
+            if ((d.schema || 0) < 50) weak.push('schema markup is thin');
+            if ((d.entity || 0) < 50) weak.push('your brand entity is not clearly defined');
+            if ((d.content || 0) < 50) weak.push('content lacks clear answer structures');
+            if ((d.crawlable || 0) < 70) weak.push('pages may be hard for AI crawlers to access');
+            if ((d.llmsTxt || 0) < 50) weak.push('no llms.txt for AI crawlers');
+            if (weak.length === 0) return 'Strong AI visibility — your site is well-structured for LLM citation.';
+            return 'Key gaps: ' + weak.join(', ') + '.';
+        }
+
+
             var raw = domainInput.value;
             if (!raw.trim() || !isValidDomain(raw)) {
                 domainInput.style.border = '1px solid #E17055';
@@ -370,29 +381,30 @@
             scannedEmail = em.trim();
             emailScreen.style.display = 'none';
 
-            // Show FREE TEASER (sample score)
-            var r = computeSample(scannedDomain);
-            var el = document.getElementById('score-number');
-            el.textContent = r.score;
-            el.style.color = r.color;
-            document.getElementById('score-label').textContent = r.label;
-            document.getElementById('rank-pill').textContent = '📊 ' + r.rankText;
-            document.getElementById('score-explanation').textContent = r.explanation;
+            // Show REAL score from the analysis engine
+            computeRealScore(scannedDomain, function (r) {
+                var el = document.getElementById('score-number');
+                el.textContent = r.score;
+                el.style.color = r.color;
+                document.getElementById('score-label').textContent = r.label;
+                document.getElementById('rank-pill').textContent = '📊 ' + r.rankText;
+                document.getElementById('score-explanation').textContent = r.explanation;
 
-            // Upgrade link carries domain + email for the lead
-            var subj = encodeURIComponent('RankFixer Paid Report Inquiry');
-            var body = encodeURIComponent(
-                'Domain: ' + scannedDomain + '\n' +
-                'Email: ' + scannedEmail + '\n' +
-                'Sample score: ' + r.score + '/100 (' + r.label + ')\n' +
-                'Interested in: FULL AI Visibility Report ($99 one-time)\n'
-            );
-            document.getElementById('upgrade-link').href =
-                '/report/?domain=' + encodeURIComponent(scannedDomain) + '&email=' + encodeURIComponent(scannedEmail);
+                // Upgrade link carries domain + email for the lead
+                var subj = encodeURIComponent('RankFixer Paid Report Inquiry');
+                var body = encodeURIComponent(
+                    'Domain: ' + scannedDomain + '\n' +
+                    'Email: ' + scannedEmail + '\n' +
+                    'AI Visibility Score: ' + r.score + '/100 (' + r.label + ')\n' +
+                    'Interested in: FULL AI Visibility Report ($99 one-time)\n'
+                );
+                document.getElementById('upgrade-link').href =
+                    '/report/?domain=' + encodeURIComponent(scannedDomain) + '&email=' + encodeURIComponent(scannedEmail);
 
-            dataBanner.style.display = 'block';
-            resultsScreen.classList.add('active');
-            resultsScreen.scrollIntoView({ behavior: 'smooth' });
+                dataBanner.style.display = 'block';
+                resultsScreen.classList.add('active');
+                resultsScreen.scrollIntoView({ behavior: 'smooth' });
+            });
         });
 
         domainInput.addEventListener('keydown', function(e) {
