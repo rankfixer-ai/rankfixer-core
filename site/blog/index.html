@@ -11,15 +11,6 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://rankfixer.co/blog">
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YXZVCPBCZN"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-YXZVCPBCZN');
-    </script>
-
     <style>
         :root {
             --brand: #6C5CE7; --brand-hover: #5A4BD1; --bg: #0D0D1A; --bg-card: #151528;
@@ -35,9 +26,9 @@
         a { color: var(--brand); text-decoration: none; }
         a:hover { text-decoration: underline; }
 
-        .nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; border-bottom: 1px solid var(--border); }
+        .nav { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; padding: 1rem 2rem; border-bottom: 1px solid var(--border); }
         .nav-logo { font-weight: 700; font-size: 1.2rem; text-decoration: none; color: var(--text); }
-        .nav-links { display: flex; gap: 1.5rem; align-items: center; }
+        .nav-links { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; }
         .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; }
         .nav-links a:hover { color: var(--text); }
 
@@ -52,21 +43,12 @@
             padding: 1.5rem; margin-bottom: 1rem; transition: border-color 0.2s;
         }
         .post-card:hover { border-color: var(--brand); }
-        .post-card .post-date { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.3rem; text-transform: uppercase; letter-spacing: 0.5px; }
         .post-card h2 { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.4rem; line-height: 1.3; }
         .post-card h2 a { color: var(--text); }
         .post-card h2 a:hover { color: var(--brand); text-decoration: none; }
         .post-card .post-excerpt { font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 0.75rem; }
-        .post-card .post-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; }
-        .post-tag {
-            font-size: 0.7rem; padding: 0.2rem 0.6rem; border-radius: 100px;
-            background: rgba(108, 92, 231, 0.12); color: var(--brand); font-weight: 600;
-        }
         .post-card .read-more { font-size: 0.85rem; font-weight: 600; }
-
-        .coming-soon { text-align: center; padding: 3rem 0; }
-        .coming-soon h3 { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 0.5rem; }
-        .coming-soon p { color: var(--text-muted); font-size: 0.9rem; }
+        .post-count { font-size: 0.85rem; color: var(--text-muted); text-align: center; margin-bottom: 1.5rem; }
 
         .site-footer { text-align: center; padding: 2rem 0; border-top: 1px solid var(--border); margin-top: 2rem; }
         .site-footer p { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.3rem; }
@@ -85,9 +67,14 @@
         <a href="/" class="nav-logo">Rankfixer</a>
         <div class="nav-links">
             <a href="/ai-visibility-checker">Free Checker</a>
+            <a href="/schema-generator">Schema Gen</a>
             <a href="/research">Research</a>
             <a href="/blog">Blog</a>
+            <a href="/blog/tool-directory">Tools Directory</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#contact">Contact</a>
             <a href="https://github.com/rankfixer-ai/rankfixer-core" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://www.linkedin.com/in/janacibron/" target="_blank" rel="noopener">LinkedIn</a>
         </div>
     </nav>
 
@@ -98,37 +85,66 @@
             <p>Open-source research on AI visibility, Generative Engine Optimization, and how LLMs cite websites.</p>
         </header>
 
-        <!-- Published Posts -->
+        <p class="post-count">10 article(s) — updated August 08, 2026</p>
+
         <article class="post-card">
-            <div class="post-date">July 4, 2026 · Research</div>
+            <h2><a href="/blog/ecosystem_authority_bundle.md">Ecosystem Authority Bundle</a></h2>
+            <p style="margin-top: 0.6rem;"><a href="/blog/ecosystem_authority_bundle.md" class="read-more">Read the article →</a></p>
+        </article>
+        <article class="post-card">
+            <h2><a href="/blog/how-to-rank-for-ai-overviews-a-blogger-s-guide-to-ai-visibility.md">How to Rank for AI Overviews a Blogger's Guide to AI Visibility</a></h2>
+            <p style="margin-top: 0.6rem;"><a href="/blog/how-to-rank-for-ai-overviews-a-blogger-s-guide-to-ai-visibility.md" class="read-more">Read the article →</a></p>
+        </article>
+        <article class="post-card">
+            <h2><a href="/blog/how-to-rank-for-ai-overviews-a-blogger-s-guide-to-geo-success.md">How to Rank for AI Overviews a Blogger's Guide to GEO Success</a></h2>
+            <p style="margin-top: 0.6rem;"><a href="/blog/how-to-rank-for-ai-overviews-a-blogger-s-guide-to-geo-success.md" class="read-more">Read the article →</a></p>
+        </article>
+        <article class="post-card">
+            <h2><a href="/blog/how-to-rank-in-ai-overviews-the-2025-aeo-playbook-for-bloggers.md">How to Rank in AI Overviews the 2025 Aeo Playbook for Bloggers</a></h2>
+            <p style="margin-top: 0.6rem;"><a href="/blog/how-to-rank-in-ai-overviews-the-2025-aeo-playbook-for-bloggers.md" class="read-more">Read the article →</a></p>
+        </article>
+        <article class="post-card">
+            <h2><a href="/blog/how-to-rank-in-ai-overviews-the-2025-geo-playbook-for-bloggers.md">How to Rank in AI Overviews the 2025 GEO Playbook for Bloggers</a></h2>
+            <p style="margin-top: 0.6rem;"><a href="/blog/how-to-rank-in-ai-overviews-the-2025-geo-playbook-for-bloggers.md" class="read-more">Read the article →</a></p>
+        </article>
+        <article class="post-card">
+            <h2><a href="/blog/how-to-rank-in-ai-overviews-the-2025-geo-playbook-for-marketers.md">How to Rank in AI Overviews the 2025 GEO Playbook for Marketers</a></h2>
+            <p style="margin-top: 0.6rem;"><a href="/blog/how-to-rank-in-ai-overviews-the-2025-geo-playbook-for-marketers.md" class="read-more">Read the article →</a></p>
+        </article>
+        <article class="post-card">
+            <h2><a href="/blog/PREDICTIVE_ROADMAP.md">Predictive Roadmap</a></h2>
+            <p style="margin-top: 0.6rem;"><a href="/blog/PREDICTIVE_ROADMAP.md" class="read-more">Read the article →</a></p>
+        </article>
+        <article class="post-card">
+            <h2><a href="/blog/SOVEREIGN_AUTHORITY.md">Sovereign Authority</a></h2>
+            <p style="margin-top: 0.6rem;"><a href="/blog/SOVEREIGN_AUTHORITY.md" class="read-more">Read the article →</a></p>
+        </article>
+        <article class="post-card">
+            <h2><a href="/blog/why-is-my-blog-not-ranking-on-google-7-ai-era-fixes-that-actually-work.md">Why Is My Blog Not Ranking on Google 7 AI Era Fixes That Actually Work</a></h2>
+            <p style="margin-top: 0.6rem;"><a href="/blog/why-is-my-blog-not-ranking-on-google-7-ai-era-fixes-that-actually-work.md" class="read-more">Read the article →</a></p>
+        </article>
+        <article class="post-card">
+            <h2><a href="/blog/why-is-my-blog-not-ranking-on-google-and-how-to-fix-it-in-2025.md">Why Is My Blog Not Ranking on Google and How to Fix It in 2025</a></h2>
+            <p style="margin-top: 0.6rem;"><a href="/blog/why-is-my-blog-not-ranking-on-google-and-how-to-fix-it-in-2025.md" class="read-more">Read the article →</a></p>
+        </article>
+        <section class="post-card">
             <h2><a href="/blog/ai-readiness-100-saas">We Analyzed the AI Readiness of 100 Top SaaS Websites (Data + Open Source Code)</a></h2>
             <p class="post-excerpt">We ran the top 100 B2B SaaS websites through RankFixer's AI Visibility engine. 67% scored below 40/100. Here's the full dataset, methodology, and open-source code.</p>
-            <div class="post-tags">
-                <span class="post-tag">GEO</span>
-                <span class="post-tag">AI Visibility</span>
-                <span class="post-tag">SaaS</span>
-                <span class="post-tag">Open Source</span>
-                <span class="post-tag">Research</span>
-            </div>
             <p style="margin-top: 0.75rem;"><a href="/blog/ai-readiness-100-saas" class="read-more">Read the full analysis →</a></p>
-        </article>
-
-        <!-- Coming Soon -->
-        <section class="coming-soon">
-            <h3>More research coming soon</h3>
-            <p>We're analyzing AI visibility across industries. Subscribe to stay updated — or just check back.</p>
-            <p style="margin-top: 1rem;">
-                <a href="/ai-visibility-checker" style="font-weight: 600;">Run your free scan →</a>
-            </p>
         </section>
 
-        <footer class="site-footer">
-            <p>RankFixer — Know Your AI Visibility Score</p>
-            <p><a href="/">Home</a> <a href="/ai-visibility-checker">Free Checker</a> <a href="/blog">Blog</a> <a href="/research">Research</a> <a href="https://github.com/rankfixer-ai/rankfixer-core">GitHub</a></p>
-            <p>No signup required. No credit card. No BS.</p>
-        </footer>
+        <section class="post-card">
+            <h2><a href="/blog/tool-directory">Tools Directory — The Ultimate Living Directory of SEO &amp; AI Visibility Tools</a></h2>
+            <p class="post-excerpt">A living directory of the top 10 SEO, GEO, and AI-visibility tools with ratings, reviews, and best use cases, maintained by RankFixer's Autonomous R&amp;D Loop.</p>
+            <p style="margin-top: 0.75rem;"><a href="/blog/tool-directory" class="read-more">Browse the directory →</a></p>
+        </section>
 
     </div>
+
+    <footer class="site-footer">
+        <p>RankFixer — Know Your AI Visibility Score</p>
+        <p><a href="/">Home</a> <a href="/ai-visibility-checker">Free Checker</a> <a href="/schema-generator">Schema Gen</a> <a href="/blog">Blog</a> <a href="/blog/tool-directory">Tools Directory</a> <a href="/research">Research</a> <a href="https://github.com/rankfixer-ai/rankfixer-core">GitHub</a> <a href="https://www.linkedin.com/in/janacibron/">LinkedIn</a></p>
+    </footer>
 
 </body>
 </html>
