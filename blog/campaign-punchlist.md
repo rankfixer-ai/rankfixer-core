@@ -104,7 +104,7 @@ Copy this into the blog post's `<head>`:
     "url": "https://rankfixer.co",
     "sameAs": [
       "https://github.com/rankfixer-ai",
-      "https://twitter.com/RankFixer"
+      "https://x.com/bronJIQ"
     ]
   },
   "about": {
