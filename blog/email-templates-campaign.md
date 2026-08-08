@@ -1,7 +1,7 @@
 # Campaign Email Templates — "100 SaaS AI Readiness" Launch
 
-> **Sender:** Alex from RankFixer (alex@rankfixer.co)
-> **Reply-to:** alex@rankfixer.co (monitor replies)
+> **Sender:** Alex from RankFixer (acibronjan@gmail.com)
+> **Reply-to:** acibronjan@gmail.com (monitor replies)
 > **Format:** Plain-text style, HTML wrapper from `email-templates/email-templates.md`
 > **UTM:** utm_source=email&utm_medium=transactional&utm_campaign=saas_readiness_launch
 
