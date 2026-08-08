@@ -98,4 +98,4 @@ By contributing, you agree that your contributions will be licensed under the MI
 
 ---
 
-*Questions? Open a [Discussion](https://github.com/rankfixer-ai/rankfixer-core/discussions) or reach out to hello@rankfixer.co.*
+*Questions? Open a [Discussion](https://github.com/rankfixer-ai/rankfixer-core/discussions) or reach out to acibronjan@gmail.com.*

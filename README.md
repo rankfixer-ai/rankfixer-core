@@ -179,7 +179,7 @@ MIT License — see the [LICENSE](LICENSE) file for details.
 
 - **Website:** [rankfixer.co](https://rankfixer.co)
 - **Twitter/X:** [@RankFixer](https://twitter.com/RankFixer)
-- **Email:** hello@rankfixer.co
+- **Email:** acibronjan@gmail.com
 
 ---
 
