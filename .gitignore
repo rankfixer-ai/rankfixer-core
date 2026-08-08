@@ -2,3 +2,5 @@ node_modules/
 *.log
 competitive-intel/
 rankfixer-internal/
+# never commit credential store copies
+*.git-credentials*
