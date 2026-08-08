@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Predictive Roadmap — RankFixer</title>
+<style>
+    :root {
+        --brand: #6C5CE7; --brand-hover: #5A4BD1; --bg: #0D0D1A; --bg-card: #151528;
+        --text: #F0F0F5; --text-muted: #8888A0; --border: #2A2A45;
+        --radius: 12px; --radius-sm: 8px; --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.7; overflow-x: hidden; width: 100%; }
+    a { color: var(--brand); }
+    .nav { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; padding: 1rem 2rem; border-bottom: 1px solid var(--border); }
+    .nav-logo { font-weight: 700; font-size: 1.2rem; text-decoration: none; color: var(--text); }
+    .nav-links { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; }
+    .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; }
+    .nav-links a:hover { color: var(--text); }
+    .container { max-width: 720px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+    .article h1 { font-size: 2rem; font-weight: 800; letter-spacing: -0.02em; margin: 0 0 1rem; }
+    .article h2 { font-size: 1.4rem; font-weight: 700; margin: 2rem 0 0.75rem; }
+    .article h3 { font-size: 1.15rem; font-weight: 700; margin: 1.5rem 0 0.5rem; }
+    .article p { margin-bottom: 1rem; }
+    .article ul, .article ol { margin: 0 0 1rem 1.4rem; }
+    .article li { margin-bottom: 0.35rem; }
+    .article blockquote { border-left: 3px solid var(--brand); padding: 0.5rem 1rem; color: var(--text-muted); margin-bottom: 1rem; }
+    .article code { background: var(--bg-card); border: 1px solid var(--border); padding: 0.1rem 0.35rem; border-radius: 4px; font-size: 0.9em; }
+    .article pre { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 1rem; overflow-x: auto; margin-bottom: 1rem; }
+    .article pre code { background: none; border: none; padding: 0; }
+    .article hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
+    footer { text-align: center; padding: 2rem; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.8rem; }
+    footer a { color: var(--text-muted); margin: 0 0.5rem; }
+    @media (max-width: 480px) {
+        nav, .nav { flex-wrap: wrap; justify-content: center; gap: 5px; font-size: 0.8rem; padding: 0 10px; }
+        .container { padding: 1rem; max-width: 100%; }
+        .article h1 { font-size: 1.5rem; }
+        .article pre { max-width: 100%; }
+    }
+</style>
+</head>
+<body>
+<nav class="nav">
+    <a href="/" class="nav-logo">Rankfixer</a>
+    <div class="nav-links">
+        <a href="/ai-visibility-checker">Free Checker</a>
+        <a href="/blog/tool-directory">Tools Directory</a>
+        <a href="/blog">Blog</a>
+        <a href="#pricing">Pricing</a>
+    </div>
+</nav>
+<main class="container article">
+<h1>The Predictive Roadmap: RankFixer &amp; RPES (Next 12 Months)</h1>
+<p>This roadmap is generated and validated by the RPES Prophet Engine.</p>
+<h2>Community/GitHub Ecosystem</h2>
+<h3>Community Plugin SDK &amp; Governance Working Group — Q3</h3>
+<p><strong>Forecasted Confidence:</strong> 93%</p>
+<p>Release the official RankFixer Plugin SDK (TypeScript + Python) with a verified plugin registry. Launch the RPES Governance Working Group on GitHub with a public RFC process for policy changes. Introduce 'RPES Badges' for repos that pass compliance checks. Target: 50 community plugins and 10 external contributors to the RPES spec by end of quarter.</p>
+<h3>GitHub Star Growth &amp; Maintainer Onboarding Program — Q2</h3>
+<p><strong>Forecasted Confidence:</strong> 84%</p>
+<p>Launch a structured 'First-Time Contributor' program with good-first-issues, mentorship calls, and a monthly 'RankFixer Hack Day'. Set a public goal to reach 2,000 GitHub stars and 100 active forks. Introduce a 'Core Team' rotation with transparent decision logs. This builds the human infrastructure needed to sustain both the tool and the RPES standard.</p>
+<h3>RankFixer Marketplace &amp; Data Donation Program — Q1</h3>
+<p><strong>Forecasted Confidence:</strong> 84%</p>
+<p>Launch a curated marketplace for community-built 'visibility models' and 'policy packs' (e.g., GDPR-aware policies, Google E-E-A-T policies). Introduce an opt-in data donation program where users can share anonymized ranking data to train open models. All marketplace revenue goes to a community fund for RPES development. This creates a self-sustaining ecosystem loop.</p>
+<h2>Core Tool Features</h2>
+<h3>AI-Visibility Engine v1.0 with Explainable Ranking — Q1</h3>
+<p><strong>Forecasted Confidence:</strong> 82%</p>
+<p>Ship the first production-grade core feature: an AI-driven visibility analyzer that not only detects ranking factors but explains them in plain language. Includes a local-first dashboard, a browser extension for on-page audits, and a CLI for CI/CD integration. This establishes RankFixer as the 'GitHub of SEO debugging' by making AI insights reproducible and auditable.</p>
+<h3>AI-Visibility Copilot &amp; Automated Remediation Workflows — Q4</h3>
+<p><strong>Forecasted Confidence:</strong> 80%</p>
+<p>Extend the core tool with an AI copilot that not only diagnoses visibility issues but proposes and (with user consent) auto-implements fixes via GitHub Actions or webhook integrations. Includes a 'visibility regression test' suite that runs on every commit. This closes the loop from detection to remediation, making RankFixer the default 'CI for SEO' in open-source stacks.</p>
+<h2>RPES Standard Evolution</h2>
+<h3>RPES v0.9 – Formal Policy Schema &amp; Compliance API — Q2</h3>
+<p><strong>Forecasted Confidence:</strong> 84%</p>
+<p>Evolve RPES from a conceptual framework into a machine-readable standard. Publish the RPES JSON Schema (v0.9) for defining 'reasoned policies' (e.g., content freshness, backlink trust, AI-generated content flags). Launch a public Compliance API that lets any tool validate its actions against RPES policies. This is the first step toward making RPES a neutral, auditable layer between AI tools and search engines.</p>
+<h3>RPES v1.0 – Certified Standard &amp; Federated Policy Network — Q4</h3>
+<p><strong>Forecasted Confidence:</strong> 79%</p>
+<p>Declare RPES v1.0 stable after 6 months of real-world testing. Ship the 'Policy Mesh' feature: a decentralized way for organizations to publish, subscribe, and negotiate RPES policies across domains. Integrate this into RankFixer's core tool via a 'Policy Advisor' that flags conflicts between site policies and search engine guidelines. Publish a formal whitepaper and host the first RPES Summit (virtual).</p>
+<h3>RPES Reference Implementation &amp; Cross-Tool Interop — Q3</h3>
+<p><strong>Forecasted Confidence:</strong> 81%</p>
+<p>Publish a reference implementation of RPES in Go (for performance) and a lightweight JavaScript validator. Partner with 3 other open-source SEO/AI tools to adopt RPES as an optional compliance layer. Create a public 'RPES Interop Test Suite' that any tool can run. This moves RPES from a RankFixer-specific idea to an industry-neutral standard.</p>
+<p>&lt;!-- deploy-merge-verification --&gt;</p>
+</main>
+<footer>
+    <p>RankFixer — Know Your AI Visibility Score</p>
+    <p><a href="/">Home</a> <a href="/ai-visibility-checker">Free Checker</a> <a href="/schema-generator">Schema Gen</a> <a href="/blog">Blog</a> <a href="/blog/tool-directory">Tools Directory</a> <a href="/research">Research</a> <a href="#contact">Contact</a> <a href="https://github.com/rankfixer-ai/rankfixer-core">GitHub</a> <a href="https://www.linkedin.com/in/janacibron/">LinkedIn</a></p>
+</footer>
+</body>
+</html>
