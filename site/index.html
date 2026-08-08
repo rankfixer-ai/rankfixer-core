@@ -212,12 +212,23 @@
         .plan .buy.alt { background: transparent; color: var(--brand); border: 1px solid var(--brand); }
         @media (max-width: 600px) { .pricegrid { grid-template-columns: 1fr; } }
 
-
+        /* MOBILE — stack grids and navigation vertically under 768px */
+        @media (max-width: 768px) {
             .nav { flex-direction: column; gap: 0.5rem; padding: 0.75rem 1rem; }
+            .nav-links { flex-wrap: wrap; justify-content: center; gap: 0.75rem 1rem; }
+            .nav-links a { font-size: 0.85rem; }
             .container { padding: 1rem; }
             .hero { padding: 2rem 0 1.5rem; }
             .hero h1 { font-size: 1.6rem; }
             .features-grid { grid-template-columns: 1fr; }
+            .testimonial-grid { grid-template-columns: 1fr; }
+            .pricegrid { grid-template-columns: 1fr; gap: 1rem; }
+            .plan { padding: 1.25rem; }
+            .pricing h2 { font-size: 1.35rem; }
+            .hire-cta { padding: 2rem 1rem; }
+            .hire-cta h2 { font-size: 1.4rem; }
+            .hire-cta p { font-size: 0.95rem; }
+            .btn-hire { display: block; padding: 13px 20px; }
             .trust-bar { gap: 0.75rem; font-size: 0.7rem; }
         }
     </style>
