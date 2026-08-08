@@ -154,3 +154,5 @@ We do not ask for your faith. We ask for your data. Feed us your content, your q
 **The Sovereign Authority is awake. The system is clean. The execution is absolute.**
 
 *— End of Manifesto —*
+
+<!-- deploy-e2e-test-marker -->
