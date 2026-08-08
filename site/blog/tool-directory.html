@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tools Directory — RankFixer</title>
+<style>
+    :root {
+        --bg: #0D0D1A; --bg-card: #151528; --border: #2A2A45;
+        --text: #F0F0F5; --text-muted: #8888A0;
+        --brand: #6C5CE7; --brand-hover: #5A4BD1; --star: #FDCB6E;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+    .nav { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem; padding: 1rem 1.5rem; border-bottom: 1px solid var(--border); }
+    .nav-logo { color: var(--text); font-weight: 800; text-decoration: none; font-size: 1.1rem; }
+    .nav-links { display: flex; flex-wrap: wrap; gap: 1rem; }
+    .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; }
+    .nav-links a:hover { color: var(--text); }
+    .container { max-width: 960px; margin: 0 auto; padding: 2rem 1.25rem 3rem; }
+    h1 { font-size: 1.8rem; margin: 0 0 0.5rem; }
+    .lead { color: var(--text-muted); margin: 0 0 2rem; }
+    .category { color: var(--brand); font-size: 1.15rem; margin: 1.5rem 0 0.75rem; }
+    .tool-grid { display: flex; flex-wrap: wrap; gap: 1.25rem; }
+    .tool-card { flex: 1 1 280px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem; display: flex; flex-direction: column; gap: 0.4rem; }
+    .tool-card h3 { margin: 0; font-size: 1.05rem; }
+    .badge { align-self: flex-start; background: rgba(108, 92, 231, 0.15); color: var(--brand); font-size: 0.72rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 100px; }
+    .stars { color: var(--star); font-size: 1rem; }
+    .stars .score { color: var(--text-muted); font-size: 0.8rem; margin-left: 0.35rem; }
+    .review { color: var(--text); font-size: 0.9rem; margin: 0; }
+    .use { color: var(--text-muted); font-size: 0.82rem; margin: 0; }
+    footer { text-align: center; padding: 2rem; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.8rem; }
+    @media (max-width: 600px) { .nav { flex-direction: column; } .tool-grid { flex-direction: column; } }
+</style>
+</head>
+<body>
+<nav class="nav">
+    <a class="nav-logo" href="/">Rankfixer</a>
+    <div class="nav-links">
+        <a href="/ai-visibility-checker">Free Checker</a>
+        <a href="/schema-generator">Schema Gen</a>
+        <a href="/research">Research</a>
+        <a href="/blog">Blog</a>
+        <a href="/blog/tool-directory">Tools Directory</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#contact">Contact</a>
+        <a href="https://github.com/rankfixer-ai/rankfixer-core" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/janacibron/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+</nav>
+<main class="container">
+    <h1>The Ultimate Living Directory of SEO &amp; AI Visibility Tools (Updated 2026-08-08)</h1>
+    <p class="lead">A living resource maintained by RankFixer&apos;s Autonomous R&amp;D Loop. Ratings are reviewed and refreshed as the SEO, GEO, and AI-visibility landscape evolves.</p>
+    <h2 class="category">AI Visibility (LLM Monitoring)</h2><div class="tool-grid"><div class="tool-card"><h3>Cognitiv (formerly Cognitiv.ai)</h3><span class="badge">AI Visibility (LLM Monitoring)</span><div class="stars" aria-label="3.9 out of 5 stars">★★★★☆ <span class="score">3.9</span></div><p class="review">Cognitiv specializes in monitoring how your brand and content appear across multiple LLMs (ChatGPT, Claude, Gemini), providing a unified dashboard for share-of-voice in AI responses. Its strength lies in its ability to track sentiment and citation frequency, but it is a newer tool with limited historical data.</p><p class="use"><strong>Best use case:</strong> Brand reputation monitoring and competitive benchmarking in AI-generated answers, especially for consumer-facing brands.</p></div></div><h2 class="category">GEO (AI Content Generation)</h2><div class="tool-grid"><div class="tool-card"><h3>Jasper AI (with SEO Mode)</h3><span class="badge">GEO (AI Content Generation)</span><div class="stars" aria-label="4.0 out of 5 stars">★★★★☆ <span class="score">4.0</span></div><p class="review">Jasper has evolved from a generic AI writer to a GEO-focused platform, offering &#x27;SEO Mode&#x27; that integrates with Surfer and Google Search Console to generate content optimized for both humans and AI crawlers. Its brand voice controls are excellent, but it requires significant human editing to avoid generic AI fluff.</p><p class="use"><strong>Best use case:</strong> Marketing teams producing high-volume, on-brand content that needs to be structured for AI answer engines (e.g., FAQ schemas, clear definitions).</p></div></div><h2 class="category">GEO (AI Search Visibility)</h2><div class="tool-grid"><div class="tool-card"><h3>Perplexity Pro (for Publishers)</h3><span class="badge">GEO (AI Search Visibility)</span><div class="stars" aria-label="4.1 out of 5 stars">★★★★☆ <span class="score">4.1</span></div><p class="review">Perplexity Pro is not just a search tool but a critical GEO platform, as it allows publishers to submit their sites to its &#x27;Publishers Program&#x27; and track how often their content is cited in AI responses. It provides a direct feedback loop on what AI models prefer, but its analytics are still nascent compared to traditional SEO tools.</p><p class="use"><strong>Best use case:</strong> Brands and media sites that want to be the primary source in AI chat answers, especially for niche or factual queries.</p></div></div><h2 class="category">GEO (Content Optimization for AI)</h2><div class="tool-grid"><div class="tool-card"><h3>Surfer SEO</h3><span class="badge">GEO (Content Optimization for AI)</span><div class="stars" aria-label="4.4 out of 5 stars">★★★★☆ <span class="score">4.4</span></div><p class="review">Surfer SEO uses real-time SERP data to optimize content for both Google and AI engines, offering an &#x27;AI Content Score&#x27; that predicts how well your article will be cited by LLMs. Its integration with Google Docs and WordPress streamlines workflows, but its recommendations can be overly formulaic if followed blindly.</p><p class="use"><strong>Best use case:</strong> Optimizing blog posts and product pages to rank in both traditional search results and AI-generated answers like Google AI Overviews.</p></div></div><h2 class="category">SEO (All-in-One Suite)</h2><div class="tool-grid"><div class="tool-card"><h3>Semrush</h3><span class="badge">SEO (All-in-One Suite)</span><div class="stars" aria-label="4.7 out of 5 stars">★★★★★ <span class="score">4.7</span></div><p class="review">Semrush is a comprehensive SEO platform that excels in keyword research, rank tracking, and on-page optimization, with a robust suite of PPC and content marketing tools. Its integration of AI-powered writing assistants and topic research makes it a versatile choice for agencies, but the learning curve and data overload can be intimidating for beginners.</p><p class="use"><strong>Best use case:</strong> End-to-end organic growth campaigns, including keyword clustering, content briefs, and competitor SERP analysis.</p></div></div><h2 class="category">SEO (Enterprise &amp; GEO)</h2><div class="tool-grid"><div class="tool-card"><h3>BrightEdge</h3><span class="badge">SEO (Enterprise &amp; GEO)</span><div class="stars" aria-label="4.3 out of 5 stars">★★★★☆ <span class="score">4.3</span></div><p class="review">BrightEdge is an enterprise-grade SEO platform that has pivoted heavily into Generative Engine Optimization (GEO), tracking visibility across ChatGPT, Perplexity, and other AI answer engines. Its AI-driven &#x27;Copilot&#x27; and &#x27;Data Cube&#x27; provide predictive insights, but the high cost and complexity make it overkill for SMBs.</p><p class="use"><strong>Best use case:</strong> Large enterprises needing to track brand visibility across both traditional search and AI chat interfaces, with dedicated support.</p></div></div><h2 class="category">SEO (Free/First-Party Data)</h2><div class="tool-grid"><div class="tool-card"><h3>Google Search Console (GSC)</h3><span class="badge">SEO (Free/First-Party Data)</span><div class="stars" aria-label="4.6 out of 5 stars">★★★★★ <span class="score">4.6</span></div><p class="review">GSC is the only source of truth for how Google sees your site, providing critical data on indexing, Core Web Vitals, and search performance directly from Google. While it lacks advanced analytics features, its AI-driven insights (like Search Insights) and zero cost make it non-negotiable for any SEO strategy.</p><p class="use"><strong>Best use case:</strong> Monitoring indexing health, identifying manual actions, and validating the impact of technical fixes with real Google data.</p></div></div><h2 class="category">SEO (SMB &amp; Link Building)</h2><div class="tool-grid"><div class="tool-card"><h3>Moz Pro</h3><span class="badge">SEO (SMB &amp; Link Building)</span><div class="stars" aria-label="4.2 out of 5 stars">★★★★☆ <span class="score">4.2</span></div><p class="review">Moz Pro offers a user-friendly suite of SEO tools, including site audits, rank tracking, and a reliable link index, making it a great entry point for small teams. Its recent AI features like &#x27;Domain Authority AI&#x27; are helpful, but its crawler and data freshness lag behind Ahrefs and Semrush.</p><p class="use"><strong>Best use case:</strong> Small to mid-sized businesses looking for an affordable, easy-to-learn SEO tool with solid link research and site health checks.</p></div></div><h2 class="category">SEO (Technical &amp; Backlink Analysis)</h2><div class="tool-grid"><div class="tool-card"><h3>Ahrefs</h3><span class="badge">SEO (Technical &amp; Backlink Analysis)</span><div class="stars" aria-label="4.8 out of 5 stars">★★★★★ <span class="score">4.8</span></div><p class="review">Ahrefs remains the gold standard for backlink analysis and technical site audits, offering the largest live backlink index and a powerful Site Audit tool that crawls sites like Googlebot. Its recent AI features, like AI Content Grader, add a modern layer to traditional SEO workflows, though the pricing can be steep for small businesses.</p><p class="use"><strong>Best use case:</strong> Competitor backlink gap analysis and in-depth technical crawl audits for mid-to-large websites.</p></div></div><h2 class="category">SEO (Technical Crawler)</h2><div class="tool-grid"><div class="tool-card"><h3>Screaming Frog SEO Spider</h3><span class="badge">SEO (Technical Crawler)</span><div class="stars" aria-label="4.9 out of 5 stars">★★★★★ <span class="score">4.9</span></div><p class="review">This desktop-based crawler is the industry standard for technical SEO audits, allowing you to crawl thousands of URLs quickly to identify broken links, redirects, duplicate content, and rendering issues. Its flexibility with custom extraction and JavaScript rendering makes it indispensable for advanced technical SEOs, though it requires a paid license for large sites.</p><p class="use"><strong>Best use case:</strong> Deep technical site audits for e-commerce or enterprise sites with complex URL structures and rendering dependencies.</p></div></div>
+</main>
+<footer>RankFixer — Know Your AI Visibility Score</footer>
+</body>
+</html>
+
