@@ -347,7 +347,7 @@
             return 'Key gaps: ' + weak.join(', ') + '.';
         }
 
-
+        scanButton.addEventListener('click', function() {
             var raw = domainInput.value;
             if (!raw.trim() || !isValidDomain(raw)) {
                 domainInput.style.border = '1px solid #E17055';
