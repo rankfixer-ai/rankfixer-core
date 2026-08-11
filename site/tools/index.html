@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unified Tools — RankFixer</title>
+  <meta name="description" content="Unified free AI visibility tools for business. All tools in one place.">
+  <meta property="og:title" content="Unified Tools — RankFixer">
+  <meta property="og:description" content="Unified free AI visibility tools for business. All tools in one place.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://rankfixer.co/tools/">
+  <meta property="og:site_name" content="RankFixer">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-YXZVCPBCZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-YXZVCPBCZN');
+  </script>
+
+  <style>
+    :root {
+      --brand: #6C5CE7; --brand-hover: #5A4BD1; --bg: #0D0D1A; --bg-card: #151528;
+      --bg-input: #1E1E36; --text: #F0F0F5; --text-muted: #8888A0; --border: #2A2A45;
+      --good: #00C853; --warn: #FFB300; --bad: #FF5252;
+      --radius: 12px; --radius-sm: 8px; --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.6; min-height: 100vh; }
+    a { color: var(--brand); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .nav { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; padding: 1rem 2rem; border-bottom: 1px solid var(--border); }
+    .nav-logo { font-weight: 700; font-size: 1.2rem; color: var(--text); text-decoration: none; }
+    .nav-links { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; }
+    .nav-links a { color: var(--text-muted); font-size: 0.9rem; text-decoration: none; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a.active { color: var(--text); font-weight: 700; }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+    .page-header { text-align: center; padding: 3rem 0 2rem; }
+    .page-header h1 { font-size: 2.2rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+    .page-header p { font-size: 1.05rem; color: var(--text-muted); max-width: 700px; margin: 0 auto; }
+
+    .section-title { font-size: 1.1rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+
+    .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; margin-top: 0.5rem; }
+    .tool-card {
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem;
+      display: flex; flex-direction: column; gap: 0.5rem; transition: border-color 0.2s;
+    }
+    .tool-card:hover { border-color: var(--brand); }
+    .tool-card h3 { font-size: 1.1rem; font-weight: 700; color: var(--text); }
+    .tool-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; }
+    .tool-card .tool-meta { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem; }
+    .badge {
+      display: inline-block; background: rgba(108,92,231,0.15); color: var(--brand); border: 1px solid rgba(108,92,231,0.35);
+      font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; padding: 0.2rem 0.5rem; border-radius: 999px;
+    }
+    .badge.coming { background: rgba(136,136,160,0.08); color: var(--text-muted); border-color: rgba(136,136,160,0.25); }
+
+    .btn {
+      display: inline-block; background: var(--brand); color: #fff; border: none; padding: 0.7rem 1.25rem;
+      font-size: 0.9rem; font-weight: 700; cursor: pointer; border-radius: var(--radius-sm); font-family: var(--font); text-decoration: none;
+    }
+    .btn:hover { background: var(--brand-hover); text-decoration: none; }
+    .btn.secondary { background: transparent; color: var(--brand); border: 1px solid var(--brand); }
+
+    .cta-banner {
+      background: linear-gradient(180deg, rgba(108,92,231,0.12), rgba(108,92,231,0.03));
+      border: 1px solid rgba(108,92,231,0.35); border-radius: var(--radius); padding: 1.5rem; text-align: center; margin: 2rem 0;
+    }
+    .cta-banner h3 { font-size: 1.25rem; font-weight: 800; margin-bottom: 0.5rem; }
+    .cta-banner p { color: var(--text-muted); font-size: 0.95rem; max-width: 640px; margin: 0 auto 1rem; }
+
+    .site-footer { text-align: center; padding: 2rem 0; border-top: 1px solid var(--border); margin-top: 2rem; }
+    .site-footer p { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.3rem; }
+    .site-footer a { color: var(--text-muted); margin: 0 0.5rem; }
+
+    @media (max-width: 600px) {
+      .nav { flex-direction: column; gap: 0.5rem; padding: 0.75rem 1rem; }
+      .container { padding: 1rem; }
+      .page-header h1 { font-size: 1.6rem; }
+      .tools-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="/" class="nav-logo">Rankfixer</a>
+    <div class="nav-links">
+      <a href="/tools" class="active">Unified Tools</a>
+      <a href="/research">Research</a>
+      <a href="/blog">Blog</a>
+      <a href="https://github.com/rankfixer-ai/rankfixer-core" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <header class="page-header">
+      <h1>Unified Tools</h1>
+      <p>One place to audit, generate, monitor, and improve your AI visibility. Built for business owners who need results, not AI jargon.</p>
+    </header>
+
+    <div class="cta-banner">
+      <h3>Stop drowning in AI noise.</h3>
+      <p>Use these tools to see what AI knows about your business, fix what's missing, and track it over time — without learning prompt engineering or hiring a team.</p>
+      <a class="btn" href="/ai-visibility-checker">Run Free AI Visibility Check</a>
+    </div>
+
+    <div class="section-title">Available Now</div>
+    <div class="tools-grid">
+      <div class="tool-card">
+        <h3>🔎 AI Visibility Checker</h3>
+        <p>Scan any domain and see how ChatGPT, Perplexity, and Gemini describe your brand. Get a free AI Visibility Score.</p>
+        <div class="tool-meta"><span class="badge">Free</span> · 30s scan · No signup</div>
+        <a class="btn" href="/ai-visibility-checker">Open Tool</a>
+      </div>
+
+      <div class="tool-card">
+        <h3>🧩 Schema Generator</h3>
+        <p>Generate valid FAQPage + Organization JSON-LD. Copy or download and paste into your site to improve AI citation.</p>
+        <div class="tool-meta"><span class="badge">Free</span> · Instant · No account</div>
+        <a class="btn" href="/schema-generator">Open Tool</a>
+      </div>
+
+      <div class="tool-card">
+        <h3>📄 Full AI Visibility Report</h3>
+        <p>15+ scoring factors, competitor comparison, and a custom 30-day optimization plan. Delivered within 48 hours.</p>
+        <div class="tool-meta"><span class="badge">$99</span> · PDF + call</div>
+        <a class="btn secondary" href="/report/">View Sample</a>
+      </div>
+    </div>
+
+    <div class="section-title">Coming Soon</div>
+    <div class="tools-grid">
+      <div class="tool-card">
+        <h3>📈 Visibility Tracker</h3>
+        <p>Track your AI Visibility Score over time. See when your citations drop and get alerts before it costs you revenue.</p>
+        <div class="tool-meta"><span class="badge coming">Upcoming</span></div>
+      </div>
+
+      <div class="tool-card">
+        <h3>🗺️ Citation Mapper</h3>
+        <p>See exactly which pages, FAQs, and entities AI engines cite for your target keywords. Close the gap between your content and AI retrieval.</p>
+        <div class="tool-meta"><span class="badge coming">Upcoming</span></div>
+      </div>
+
+      <div class="tool-card">
+        <h3>🔄 Schema Monitor</h3>
+        <p>Continuously validate your live schema markup. Get notified when AI crawlers see something different than Google's testing tool.</p>
+        <div class="tool-meta"><span class="badge coming">Upcoming</span></div>
+      </div>
+
+      <div class="tool-card">
+        <h3>📋 Competitor Benchmark</h3>
+        <p>Compare your AI Visibility Score against 3 competitors. See who's getting cited, who's invisible, and why.</p>
+        <div class="tool-meta"><span class="badge coming">Upcoming</span></div>
+      </div>
+    </div>
+
+    <div class="cta-banner">
+      <h3>Need more than tools?</h3>
+      <p>We offer done-for-you AI visibility audits and optimization. Coming soon — no waitlist yet, but we'll have a clear path for businesses that want results faster.</p>
+      <a class="btn secondary" href="/report/">See What a Full Audit Looks Like</a>
+    </div>
+
+    <footer class="site-footer">
+      <p>RankFixer — Unified Tools for AI Visibility</p>
+      <p><a href="/tools">Unified Tools</a> <a href="/research">Research</a> <a href="/blog">Blog</a> <a href="https://github.com/rankfixer-ai/rankfixer-core">GitHub</a></p>
+      <p style="margin-top:0.5rem;">Governed by 31-pillar verification. Every system proven before it ships. <a href="/research/">View Proof</a></p>
+    </footer>
+  </div>
+
+  <script src="/js/analytics.js"></script>
+  <script>
+    (function() {
+      function on(sel, evt, fn) {
+        var els = document.querySelectorAll(sel);
+        for (var i = 0; i < els.length; i++) els[i].addEventListener(evt, fn);
+      }
+      function text(el) { return (el.textContent || '').trim().substring(0, 80); }
+
+      Rfx.track('tools_page_viewed', { source: 'tools_hub' });
+
+      on('.tool-card .btn', 'click', function() {
+        var label = text(this);
+        Rfx.track('tool_opened', { button_text: label, source: 'tools_hub' });
+      });
+
+      on('.nav-links a', 'click', function() {
+        var t = text(this), h = this.getAttribute('href') || '';
+        if (/github/i.test(t) || /github/i.test(h)) {
+          Rfx.track('github_click', { button_text: t, section: 'nav' });
+        } else {
+          Rfx.track('navigation_click', { link_text: t, href: h });
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

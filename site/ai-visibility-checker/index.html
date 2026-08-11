@@ -197,7 +197,7 @@
     <nav class="nav">
         <a href="/" class="nav-logo">Rankfixer</a>
         <div class="nav-links">
-            <a href="/ai-visibility-checker">Free Checker</a>
+            <a href="/tools" title="AI Visibility Checker, Schema Generator, Report & more">Unified Tools</a>
             <a href="/research">Research</a>
             <a href="/blog">Blog</a>
             <a href="https://github.com/rankfixer-ai/rankfixer-core" target="_blank" rel="noopener">GitHub</a>
@@ -299,6 +299,13 @@
             <a href="/blog/ai-readiness-100-saas">Read the open-source analysis →</a>
         </div>
 
+        <!-- POST-SCAN CTA -->
+        <div class="upgrade-box" id="post-scan-cta" style="display:none; text-align:center;">
+            <h3>Want this monitored 24/7 with automatic alerts?</h3>
+            <p style="color:var(--text-muted); margin:0.5rem 0 1rem;">I build governed systems that track AI visibility and alert you the moment your score drops.</p>
+            <a class="upgrade-cta" href="/report/" style="display:inline-block; max-width:320px;">Book Free Ops Audit — 15 minutes</a>
+        </div>
+
         <!-- Testimonials -->
         <section class="testimonials">
             <h3>Join 10,000+ teams who know their AI visibility score</h3>
@@ -320,8 +327,9 @@
 
         <footer class="site-footer">
             <p>RankFixer — Know Your AI Visibility Score</p>
-            <p><a href="/">Home</a> <a href="/ai-visibility-checker">Free Checker</a> <a href="/schema-generator">Schema Gen</a> <a href="/blog">Blog</a> <a href="https://github.com/rankfixer-ai/rankfixer-core">GitHub</a></p>
+            <p><a href="/">Home</a> <a href="/tools" title="AI Visibility Checker, Schema Generator, Report & more">Unified Tools</a> <a href="/schema-generator">Schema Gen</a> <a href="/blog">Blog</a> <a href="https://github.com/rankfixer-ai/rankfixer-core">GitHub</a></p>
             <p>No signup required. No credit card. No BS.</p>
+            <p style="margin-top:0.5rem;">Governed by 31-pillar verification. Every system proven before it ships. <a href="/research/">View Proof</a></p>
         </footer>
 
     </div>
@@ -448,6 +456,8 @@
 
                 dataBanner.style.display = 'block';
                 resultsScreen.classList.add('active');
+                var postScanCta = document.getElementById('post-scan-cta');
+                if (postScanCta) postScanCta.style.display = 'block';
                 resultsScreen.scrollIntoView({ behavior: 'smooth' });
             });
         });
