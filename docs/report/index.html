@@ -117,10 +117,10 @@
         <div id="state-not-paid" style="display:none" class="paywall-card">
             <h2>Get Your Full AI Visibility Report</h2>
             <p>Includes competitive landscape analysis, pricing comparison, and actionable recommendations.</p>
-            <div class="price">$5</div>
+            <div class="price">$99</div>
             <div class="price-sub">One-time payment. Instant access after secure checkout.</div>
             <button id="pay-button" class="btn-primary" style="display:inline-block;margin-top:1rem;cursor:pointer;" onclick="startCheckout();">
-                Pay $5 — Secure Checkout →
+                Pay $99 — Secure Checkout →
             </button>
             <p id="pay-error" style="font-size:0.8rem;color:var(--danger);margin-top:0.5rem;display:none;"></p>
             <p style="font-size:0.7rem;color:var(--text-muted);margin-top:0.5rem;">Secure payment via Stripe. Your report unlocks automatically once payment is confirmed.</p>
@@ -224,7 +224,7 @@
 
     let _competitorData = null;
     var _reportDomain = 'unknown';  // set in init(), used in renderReport()
-    const REPORT_PRICE = '5.00';
+    const REPORT_PRICE = '99.00';
 
     async function init() {
         // Step 1: Check auth
@@ -284,7 +284,7 @@
         } catch (e) {
             const err = document.getElementById('pay-error');
             if (err) { err.textContent = 'Could not start checkout. Please try again.'; err.style.display = 'block'; }
-            if (btn) { btn.disabled = false; btn.textContent = 'Pay $5 — Secure Checkout →'; }
+            if (btn) { btn.disabled = false; btn.textContent = 'Pay $99 — Secure Checkout →'; }
         }
     }
 

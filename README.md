@@ -40,7 +40,7 @@ RankFixer operates on a **3-step pipeline** that evaluates your site through the
 
 | Signal | Weight | Why It Matters |
 | :--- | :--- | :--- |
-| **Schema Completeness** | 25% | LLMs extract structured data 3x more reliably than unstructured text |
+| **Schema Completeness** | 25% | LLMs extract structured data more reliably than unstructured text |
 | **Entity Density** | 20% | Clear entity definitions with @id references = higher citation probability |
 | **Content Answer Density** | 20% | Direct, concise answers beat marketing fluff for LLM extraction |
 | **Technical Signals** | 15% | Load speed, mobile readiness, HTTPS, Core Web Vitals |
@@ -117,7 +117,7 @@ Traditional SEO optimizes for **keyword matching**. GEO (Generative Engine Optim
 **New GEO thinking:**
 > *"How do I ensure ChatGPT cites my article when someone asks 'what is the best CRM?'"*
 
-RankFixer is the bridge between these two worlds. We've discovered that 78% of domains ranking in the top 3 on Google are **completely invisible to AI models.** That's the gap we close.
+RankFixer is the bridge between these two worlds. We've found that many well-ranked domains are still largely invisible to AI models, and we measure exactly where you stand. That's the gap we close.
 
 ---
 
