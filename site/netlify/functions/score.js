@@ -74,7 +74,7 @@ export async function handler(event) {
   }
 }
 
-function scoreCrawlable(htmlRes, robotsRes) {
+export function scoreCrawlable(htmlRes, robotsRes) {
   let s = 50;
   if (htmlRes.status === 'fulfilled' && htmlRes.value.ok) s += 30;
   else if (htmlRes.status === 'fulfilled' && htmlRes.value.status === 403) s -= 30;
@@ -85,7 +85,7 @@ function scoreCrawlable(htmlRes, robotsRes) {
   return s;
 }
 
-function scoreSchema(html) {
+export function scoreSchema(html) {
   const ldMatches = html.match(/application\/ld\+json/gi) || [];
   let s = 10 * Math.min(ldMatches.length, 3);
   const types = (html.match(/"@type"\s*:\s*"([^"]+)"/g) || []).map(m => m.match(/"@type"\s*:\s*"([^"]+)"/)[1]);
@@ -97,7 +97,7 @@ function scoreSchema(html) {
   return Math.min(100, s);
 }
 
-function scoreEntity(html) {
+export function scoreEntity(html) {
   let s = 20;
   // @id linking
   const ids = html.match(/"@id"\s*:\s*"([^"]+)"/g) || [];
@@ -112,7 +112,7 @@ function scoreEntity(html) {
   return Math.min(100, s);
 }
 
-function scoreContent(html) {
+export function scoreContent(html) {
   let s = 0;
   const text = html.replace(/<script[\s\S]*?<\/script>/gi, '').replace(/<style[\s\S]*?<\/style>/gi, '').replace(/<[^>]+>/g, ' ');
   const words = text.split(/\s+/).filter(Boolean).length;
@@ -129,7 +129,7 @@ function scoreContent(html) {
   return Math.min(100, s);
 }
 
-function scoreStructure(html) {
+export function scoreStructure(html) {
   let s = 20;
   if (/<h1/i.test(html)) s += 20;
   const h2 = (html.match(/<h2/gi) || []).length;

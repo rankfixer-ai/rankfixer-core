@@ -52,7 +52,6 @@ teamwork.com
 basecamp.com
 bigcommerce.com
 woocommerce.com
-square.com
 gocardless.com
 adyen.com
 digitalocean.com
@@ -71,7 +70,6 @@ bamboohr.com
 lever.co
 zendesk.com
 freshdesk.com
-helpdesk.com
 front.com
 xero.com
 quickbooks.com
@@ -87,11 +85,16 @@ squareup.com
 brex.com
 ramp.com
 grammarly.com
-mongo.com
 elastic.co
 docker.com
 circleci.com
-azure.com
-aws.com
-gcp.com
 newrelic.com
+aws.amazon.com
+cloud.google.com
+azure.microsoft.com
+mongodb.com
+helpscout.com
+zoho.com
+webflow.com
+calendly.com
+typeform.com
