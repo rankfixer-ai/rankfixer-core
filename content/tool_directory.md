@@ -1,6 +1,6 @@
 # The Ultimate Living Directory of SEO & AI Visibility Tools (Updated 2026-08-08)
 
-A living resource maintained by RankFixer's Autonomous R&D Loop. Ratings are reviewed and refreshed as the SEO, GEO, and AI-visibility landscape evolves.
+A living resource maintained by the RankFixer team. Ratings are reviewed and refreshed as the SEO, GEO, and AI-visibility landscape evolves.
 
 ## AI Content Generation & GEO
 

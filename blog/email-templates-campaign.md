@@ -64,7 +64,7 @@ Start with the free scan — 30 seconds, no signup needed.
 ## Email 2: High-Intent PQLs — Day 3
 
 **Segment:** Users with PQL score 50+ OR who have scanned 3+ times OR whose score improved 10+ points
-**Subject:** Your AI visibility vs. the top 100 SaaS companies
+**Subject:** Your AI visibility vs. 90 leading SaaS companies
 
 ```
 Subject: Your {{domain}} score vs. the top 100 SaaS companies

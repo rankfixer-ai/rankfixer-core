@@ -123,7 +123,7 @@ RankFixer is the bridge between these two worlds. We've found that many well-ran
 
 We've open-sourced our research data to help the community understand AI visibility:
 
-- **📈 `/data/top_100_saas_scores.json`** — AI Readiness scores of the top 100 SaaS companies, analyzed across all 6 signals
+- **📈 `/data/top_100_saas_scores.json`** — AI Readiness scores of 90 scorable top SaaS domains (100 attempted), analyzed across all 6 signals
 - **📋 `/data/benchmark_report.md`** — Full analysis with industry breakdowns, quartile distributions, and actionable insights
 
 ---
@@ -185,7 +185,7 @@ MIT License — see the [LICENSE](LICENSE) file for details.
 ## ⭐ Why Star This Repo?
 
 - First open-source AI Website Recommendation Engine for GEO
-- Proprietary dataset: LLM readiness scores for top 100 SaaS companies
+- Open dataset: LLM readiness scores for 90 scorable top SaaS domains (100 attempted)
 - Cutting-edge research on how LLMs extract and cite web content
 - Community-driven development with active maintainers
 - Directly applicable to improving your own site's AI visibility

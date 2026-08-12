@@ -160,7 +160,7 @@ Happy to answer questions about the methodology or specific findings.
 
 **Body:**
 
-We built an open-source engine that scores websites on how likely they are to be cited by ChatGPT, Perplexity, and Claude. We ran it against the top 100 SaaS companies.
+We built an open-source engine that scores websites on how likely they are to be cited by ChatGPT, Perplexity, and Claude. We ran it against 90 scorable domains (100 attempted).
 
 Average 62.7/100. The #1 gap was schema markup (average 26.6/100). The #1 quick win is adding Organization + WebSite schema.
 

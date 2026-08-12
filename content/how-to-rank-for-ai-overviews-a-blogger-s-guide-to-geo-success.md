@@ -36,7 +36,7 @@ Here’s how to inject statistical authority without conducting a formal study:
 - **Cite one meta-study per post.** Find a reputable 2023-2024 study (e.g., from Pew Research, Gartner, or academic journals) that supports your main claim. Quote the exact figure, not a paraphrase.
 - **Create a "data box."** Dedicate a small table or callout box in your post that lists your key stats separately from the prose. This makes it trivially easy for an AI crawler to isolate and quote.
 
-RankFixer tracks "numeric density" — the number of unique, context-relevant numbers per 500 words. We’ve found that posts with at least 5 specific data points are **3.2x more likely** to appear in AI Overviews than those with zero.
+As a rule of thumb, posts with specific, dated data points are far more likely to be cited in AI answers than posts with none. Our content signal rewards substantial, structured copy - not stats for their own sake.
 
 ---
 
@@ -64,7 +64,7 @@ How to write quote-worthy sentences:
 - **Use the "zero-pronoun" rule.** Avoid sentences that start with "It" or "This" referring to a previous sentence. Instead, repeat the subject. Bad: "It is crucial for SEO." Good: "Page speed is crucial for SEO."
 - **End each section with a bolded takeaway.** For example, after a paragraph about internal linking, write: **"Internal links pass 40% more ranking equity than external links."** This single sentence can be lifted directly by the AI.
 
-We tested this with RankFixer's "quote extraction simulator." We fed 50 blog posts to GPT-4o and asked it to cite one sentence per post. Posts with bolded, standalone key takeaways were cited **4.1x more often** than those without.
+Practical tip: bolded, standalone key takeaways are easier for an LLM to extract and quote than the same ideas buried mid-paragraph.
 
 ---
 

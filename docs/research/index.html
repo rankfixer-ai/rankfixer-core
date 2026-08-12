@@ -1,134 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rankfixer Research — Open Source AI Visibility Data</title>
-    <meta name="description" content="Access open-source datasets, methodologies, and benchmark reports on LLM Readiness and Generative Engine Optimization (GEO).">
-    <meta property="og:title" content="Rankfixer Research — Open Source AI Visibility Data">
-    <meta property="og:description" content="Open-source datasets on LLM Readiness across 100 SaaS companies. Methodology, benchmark reports, and the Rankfixer Core engine.">
-
-    <style>
-        :root {
-            --brand: #6C5CE7; --brand-hover: #5A4BD1; --bg: #0D0D1A; --bg-card: #151528;
-            --bg-input: #1E1E36; --text: #F0F0F5; --text-muted: #8888A0; --border: #2A2A45;
-            --radius: 12px; --radius-sm: 8px; --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        }
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        html { font-size: 16px; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-        body {
-            font-family: var(--font); background: var(--bg); color: var(--text);
-            line-height: 1.6; min-height: 100vh; -webkit-font-smoothing: antialiased;
-        }
-        a { color: var(--brand); text-decoration: none; }
-        a:hover { text-decoration: underline; }
-
-        .nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; border-bottom: 1px solid var(--border); }
-        .nav-logo { font-weight: 700; font-size: 1.2rem; text-decoration: none; color: var(--text); }
-        .nav-links { display: flex; gap: 1.5rem; align-items: center; }
-        .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; }
-        .nav-links a:hover { color: var(--text); }
-
-        .container { max-width: 800px; margin: 0 auto; padding: 3rem 1.5rem; }
-        h1 { font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text); }
-        h2 { font-size: 1.3rem; font-weight: 700; margin: 2rem 0 0.75rem; padding-top: 1rem; border-top: 1px solid var(--border); color: var(--text); }
-        p { color: var(--text-muted); margin-bottom: 1rem; }
-        ul { padding-left: 1.5rem; margin-bottom: 1.5rem; }
-        li { margin-bottom: 0.4rem; color: var(--text-muted); }
-        strong { color: var(--text); }
-
-        .dataset-card {
-            background: var(--bg-card); border: 1px solid var(--border);
-            border-radius: var(--radius); padding: 1.5rem; margin: 1.5rem 0;
-        }
-        .dataset-card strong { display: block; margin-bottom: 0.3rem; color: var(--text); }
-
-        .btn-github {
-            display: inline-flex; align-items: center; gap: 6px;
-            background: #24292e; color: #fff; padding: 10px 20px; border-radius: var(--radius-sm);
-            text-decoration: none; font-weight: 500; margin-top: 1rem; transition: background 0.2s;
-        }
-        .btn-github:hover { background: #1a1f23; text-decoration: none; }
-
-        .github-block {
-            margin-top: 2rem; padding: 1.5rem; background: var(--bg-card);
-            border: 1px solid var(--border); border-radius: var(--radius); text-align: center;
-        }
-
-        .site-footer { text-align: center; padding: 2rem 0; border-top: 1px solid var(--border); margin-top: 2rem; }
-        .site-footer p { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.3rem; }
-        .site-footer a { color: var(--text-muted); margin: 0 0.5rem; }
-
-        @media (max-width: 600px) {
-            .nav { flex-direction: column; gap: 0.5rem; padding: 0.75rem 1rem; }
-            .container { padding: 2rem 1rem; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rankfixer Research - AI Readiness Benchmark</title>
+<meta name="description" content="How we scored 90 top SaaS domains for AI visibility. Average score 62.7/100, tier distribution, and the biggest gaps - all with open-source code.">
+<meta property="og:title" content="Rankfixer Research - AI Readiness Benchmark">
+<meta property="og:description" content="The AI Readiness Benchmark: 90 SaaS domains scored across six signals. Open data, open code.">
+<style>
+:root {
+--brand: #6C5CE7;
+--brand-hover: #5A4BD1;
+--bg: #0D0D1A;
+--bg-card: #151528;
+--text: #F0F0F5;
+--text-muted: #8888A0;
+--border: #2A2A45;
+--radius: 12px;
+--radius-sm: 8px;
+--font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.6; min-height: 100vh; }
+a { color: var(--brand); text-decoration: none; }
+a:hover { color: var(--brand-hover); }
+.nav { display: flex; align-items: center; justify-content: space-between; padding: 1rem 2rem; max-width: 1080px; margin: 0 auto; }
+.nav .logo { font-weight: 700; font-size: 1.1rem; color: var(--text); }
+.nav .logo span { color: var(--brand); }
+.nav a { color: var(--text-muted); margin-left: 1.25rem; font-size: 0.9rem; }
+.nav a:hover { color: var(--text); }
+.container { max-width: 1080px; margin: 0 auto; padding: 2rem; }
+.hero { text-align: center; padding: 3rem 1rem 2rem; }
+.hero h1 { font-size: 2.2rem; margin-bottom: 0.75rem; }
+.hero p { color: var(--text-muted); max-width: 640px; margin: 0 auto 1rem; font-size: 1.05rem; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 2.5rem 0; }
+.stat { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.4rem; text-align: center; }
+.stat .num { font-size: 2rem; font-weight: 800; color: var(--brand); }
+.stat .lbl { color: var(--text-muted); font-size: 0.85rem; margin-top: 0.35rem; }
+h2 { font-size: 1.35rem; margin: 2.5rem 0 1rem; color: var(--text); }
+.card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1.25rem; }
+.card p { color: var(--text-muted); margin-bottom: 0.75rem; }
+.card p:last-child { margin-bottom: 0; }
+table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.92rem; }
+th, td { text-align: left; padding: 0.65rem 0.8rem; border-bottom: 1px solid var(--border); }
+th { color: var(--text-muted); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.04em; }
+td { color: var(--text); }
+.bar-wrap { display: flex; align-items: center; gap: 0.75rem; }
+.bar { height: 8px; border-radius: 4px; background: var(--brand); flex: 1; max-width: 200px; }
+.bar.muted { background: var(--border); }
+.cta { text-align: center; margin: 3rem 0 1rem; }
+.btn { display: inline-block; background: var(--brand); color: #fff; padding: 0.8rem 1.6rem; border-radius: var(--radius-sm); font-weight: 600; }
+.btn:hover { background: var(--brand-hover); color: #fff; }
+.note { color: var(--text-muted); font-size: 0.85rem; margin-top: 0.5rem; }
+footer { text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.85rem; border-top: 1px solid var(--border); margin-top: 3rem; }
+footer a { color: var(--text-muted); margin: 0 0.6rem; }
+@media (max-width: 640px) {
+  .hero h1 { font-size: 1.6rem; }
+  .nav { padding: 1rem; }
+  .container { padding: 1rem; }
+}
+</style>
 </head>
 <body>
+<nav class="nav">
+  <div class="logo">Rank<span>Fixer</span></div>
+  <div><a href="/">Home</a><a href="/tools">Tools</a><a href="/blog">Blog</a><a href="/report">Report</a></div>
+</nav>
+<div class="container">
+  <div class="hero">
+    <h1>The AI Readiness Benchmark</h1>
+    <p>In August 2026 we scored the AI visibility of 90 top SaaS domains using our open-source engine. Here is exactly what we found - and how you can reproduce it.</p>
+  </div>
 
-    <nav class="nav">
-        <a href="/" class="nav-logo">Rankfixer</a>
-        <div class="nav-links">
-            <a href="/ai-visibility-checker">Free Checker</a>
-            <a href="/research">Research</a>
-            <a href="/blog">Blog</a>
-            <a href="https://github.com/rankfixer-ai/rankfixer-core" target="_blank" rel="noopener">GitHub</a>
-        </div>
-    </nav>
+  <div class="stats">
+    <div class="stat"><div class="num">62.7</div><div class="lbl">Average score / 100</div></div>
+    <div class="stat"><div class="num">63</div><div class="lbl">Median score</div></div>
+    <div class="stat"><div class="num">72%</div><div class="lbl">Publish an llms.txt (65/90)</div></div>
+    <div class="stat"><div class="num">6.7%</div><div class="lbl">Reached "Excellent" tier</div></div>
+  </div>
 
-    <div class="container">
-        <h1>Rankfixer Research</h1>
-        <p>Our open-source R&D into how LLMs extract, process, and cite websites.</p>
+  <h2>Score distribution</h2>
+  <div class="card">
+    <table>
+      <tr><th>Tier</th><th>Range</th><th>Share of domains</th><th></th></tr>
+      <tr><td>Excellent</td><td>81-100</td><td>6.7%</td><td><div class="bar-wrap"><div class="bar" style="width:6.7%"></div></div></td></tr>
+      <tr><td>Good</td><td>61-80</td><td>50.0%</td><td><div class="bar-wrap"><div class="bar" style="width:50%"></div></div></td></tr>
+      <tr><td>Fair</td><td>41-60</td><td>41.1%</td><td><div class="bar-wrap"><div class="bar" style="width:41.1%"></div></div></td></tr>
+      <tr><td>Poor</td><td>21-40</td><td>2.2%</td><td><div class="bar-wrap"><div class="bar" style="width:2.2%"></div></div></td></tr>
+      <tr><td>Critical</td><td>0-20</td><td>0%</td><td><div class="bar-wrap"><div class="bar muted"></div></div></td></tr>
+    </table>
+    <p class="note">Most SaaS domains are "Good" at the fundamentals. Very few are truly optimized for AI extraction - and almost none are invisible.</p>
+  </div>
 
-        <div class="dataset-card">
-            <h2>Latest Research</h2>
-            <strong>Model Drift &amp; AI Visibility (July 2026)</strong>
-            <p>When your AI visibility score changes, it might not be your site — it might be the model. Research on silent LLM drift and how to detect changes in retrieval, ranking, and citation behavior.</p>
-            <ul>
-                <li><a href="/blog/model-drift-ai-visibility">Read the Full Analysis</a></li>
-            </ul>
-        </div>
+  <h2>How we scored</h2>
+  <div class="card">
+    <p>Each domain was scored across <strong>six signals</strong>, each weighted to produce a 0-100 score:</p>
+    <table>
+      <tr><th>Signal</th><th>Weight</th><th>What it measures</th></tr>
+      <tr><td>Schema completeness</td><td>25%</td><td>JSON-LD structured data (Organization, FAQPage, Article, etc.)</td></tr>
+      <tr><td>Entity consistency</td><td>20%</td><td>@id linkage, sameAs links, brand definition, OG/Twitter meta</td></tr>
+      <tr><td>Content structure</td><td>20%</td><td>Substantial text, FAQ-style questions, lists/tables, meta description</td></tr>
+      <tr><td>Technical structure</td><td>15%</td><td>H1/H2 hierarchy, nav/main landmarks, microdata</td></tr>
+      <tr><td>Crawlability</td><td>10%</td><td>AI crawler access (GPTBot, ClaudeBot, PerplexityBot) + robots.txt</td></tr>
+      <tr><td>llms.txt</td><td>10%</td><td>Dedicated llms.txt file for AI crawler discovery</td></tr>
+    </table>
+    <p>The engine fetches each domain's homepage, robots.txt, and llms.txt, then scores the signals. The full source is open source (MIT) - the scoring code and the raw dataset are on GitHub.</p>
+  </div>
 
-        <div class="dataset-card">
-            <h2>Latest Dataset</h2>
-            <strong>Top 100 SaaS LLM Readiness Scores (July 2026)</strong>
-            <p>We analyzed the top 100 SaaS websites across 6 key signals (Schema, Entities, Technical SEO) to determine their visibility to ChatGPT, Perplexity, and Gemini.</p>
-            <ul>
-                <li><a href="https://github.com/rankfixer-ai/rankfixer-core/blob/main/data/top_100_saas_scores.json">Download JSON Dataset</a></li>
-                <li><a href="/blog/ai-readiness-100-saas">Read the Full Analysis Report</a></li>
-            </ul>
-        </div>
+  <h2>What we learned</h2>
+  <div class="card">
+    <p><strong>Schema is the biggest gap.</strong> The average schema score was 26.6/100 - by far the weakest signal. Most sites either have no structured data or use it inconsistently.</p>
+    <p><strong>llms.txt is becoming standard.</strong> 72% of the domains we scanned publish one. It is cheap to add and directly signals AI crawlers.</p>
+    <p><strong>Blocking AI crawlers is a real problem.</strong> 9 of the 100 domains we attempted were bot-blocked (403/406/429) and could not be scored. If your robots.txt blocks GPTBot and friends, you are invisible by choice.</p>
+  </div>
 
-        <h2>Methodology</h2>
-        <p>How we calculate AI Visibility:</p>
-        <ul>
-            <li><strong>Schema Completeness (25%):</strong> Presence of JSON-LD, FAQPage, and Organization markup.</li>
-            <li><strong>Entity Density (20%):</strong> Brand mentions and semantic clustering.</li>
-            <li><strong>Content Answer Density (20%):</strong> Direct answers vs. marketing fluff.</li>
-            <li><strong>Technical Signals (15%):</strong> Web Vitals, robots.txt AI-crawler access, and llms.txt implementation.</li>
-            <li><strong>Backlink Quality (10%):</strong> Domain authority and trust flow.</li>
-            <li><strong>Brand Entity Recognition (5%):</strong> sameAs links and knowledge base presence.</li>
-            <li><strong>Freshness (5%):</strong> dateModified signals and content currency.</li>
-        </ul>
-        <p><a href="https://github.com/rankfixer-ai/rankfixer-core/blob/main/docs/architecture.md">View Full 6-Signal Methodology →</a></p>
+  <h2>Scope and honesty notes</h2>
+  <div class="card">
+    <p>We attempted 100 domains; 9 were bot-blocked and 1 was unreachable, leaving 90 scored. Scores reflect each domain's public homepage at scan time - they change as sites change. This is a snapshot, not a live feed, and not a ranking of "best" companies.</p>
+  </div>
 
-        <h2>Contribute</h2>
-        <p>All research is open-source. Fork the engine, run your own queries, or submit a PR.</p>
-
-        <div class="github-block">
-          <p>📦 All research is open-source.</p>
-          <a href="https://github.com/rankfixer-ai/rankfixer-core" class="btn-github">View the Code on GitHub →</a>
-        </div>
-
-        <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 1rem;">Last updated: July 4, 2026</p>
-
-        <footer class="site-footer">
-            <p>RankFixer — Know Your AI Visibility Score</p>
-            <p><a href="/">Home</a> <a href="/ai-visibility-checker">Free Checker</a> <a href="/blog">Blog</a> <a href="/research">Research</a> <a href="https://github.com/rankfixer-ai/rankfixer-core">GitHub</a></p>
-            <p>No signup required. No credit card. No BS.</p>
-        </footer>
-    </div>
-
+  <div class="cta">
+    <a class="btn" href="/ai-visibility-checker/">Run your free AI visibility scan</a>
+    <p class="note">Free. No signup. Scores your domain across the same six signals.</p>
+  </div>
+</div>
+<footer>
+  <p>RankFixer - Know Your AI Visibility Score</p>
+  <p><a href="/">Home</a> <a href="/tools">Tools</a> <a href="/blog">Blog</a> <a href="/report">Report</a> <a href="https://github.com/rankfixer-ai/rankfixer-core">GitHub</a></p>
+</footer>
 </body>
 </html>

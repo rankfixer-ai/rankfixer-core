@@ -1,413 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rankfixer Research — Live Data</title>
-    <meta name="description" content="Live economic and market signals powering RankFixer's research engine. Updated every 30 minutes. Free API data.">
-    <meta property="og:title" content="Rankfixer Research — Live Data">
-    <meta property="og:description" content="Live economic and market signals. No API keys. Updated every 30 minutes.">
-
-    <style>
-        :root {
-            --brand: #6C5CE7;
-            --brand-hover: #5A4BD1;
-            --bg: #0D0D1A;
-            --bg-card: #151528;
-            --bg-input: #1E1E36;
-            --text: #F0F0F5;
-            --text-muted: #8888A0;
-            --border: #2A2A45;
-            --radius: 12px;
-            --radius-sm: 8px;
-            --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            --live-green: #22c55e;
-            --live-red: #ef4444;
-            --live-amber: #f59e0b;
-            --card-bg: #0f172a;
-            --card-border: #1e293b;
-            --text-primary: #f1f5f9;
-            --text-secondary: #94a3b8;
-            --governance-bg: #020617;
-        }
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        html { font-size: 16px; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-        body {
-            font-family: var(--font);
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-            min-height: 100vh;
-            -webkit-font-smoothing: antialiased;
-        }
-        a { color: var(--brand); text-decoration: none; }
-        a:hover { text-decoration: underline; }
-
-        .nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 2rem;
-            border-bottom: 1px solid var(--border);
-            background: rgba(13, 13, 26, 0.8);
-            backdrop-filter: blur(10px);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        .nav-logo { font-weight: 700; font-size: 1.2rem; text-decoration: none; color: var(--text); }
-        .nav-links { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; }
-        .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; transition: color 0.2s; }
-        .nav-links a:hover { color: var(--text); }
-
-        .container { max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem; }
-
-        /* LIVE BAR */
-        .live-bar {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.25rem;
-            align-items: center;
-            justify-content: space-between;
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: var(--radius);
-            padding: 1rem 1.25rem;
-            margin-bottom: 1.5rem;
-        }
-        .live-indicator {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-weight: 700;
-            font-size: 0.85rem;
-            color: var(--text-primary);
-        }
-        .pulse-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: var(--live-red);
-            animation: pulse 1.5s infinite;
-        }
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
-        }
-        .live-meta {
-            display: flex;
-            gap: 1.25rem;
-            flex-wrap: wrap;
-        }
-        .live-meta span {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-        }
-        .live-meta strong { color: var(--text-primary); }
-
-        /* CARDS */
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-        .card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: var(--radius);
-            padding: 1.25rem;
-        }
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.75rem;
-        }
-        .card-title {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--text-secondary);
-            font-weight: 600;
-        }
-        .card-badge {
-            font-size: 0.65rem;
-            padding: 0.2rem 0.5rem;
-            border-radius: 100px;
-            background: rgba(108, 92, 231, 0.15);
-            color: var(--brand);
-            font-weight: 700;
-        }
-        .signal-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.35rem 0;
-            border-bottom: 1px solid var(--border);
-            font-size: 0.85rem;
-        }
-        .signal-row:last-child { border-bottom: none; }
-        .signal-name { color: var(--text-secondary); }
-        .signal-value { font-weight: 700; color: var(--text-primary); }
-        .trend { font-size: 0.75rem; margin-left: 0.5rem; }
-        .trend.up { color: var(--live-green); }
-        .trend.down { color: var(--live-red); }
-        .trend.flat { color: var(--text-secondary); }
-
-        /* SIGNALS LIST */
-        .signals-list {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: var(--radius);
-            padding: 1.25rem;
-            margin-bottom: 1.5rem;
-        }
-        .signals-header {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--text-secondary);
-            font-weight: 600;
-            margin-bottom: 0.75rem;
-        }
-        .signal-item {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.6rem 0;
-            border-bottom: 1px solid var(--border);
-            font-size: 0.85rem;
-        }
-        .signal-item:last-child { border-bottom: none; }
-        .signal-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            flex-shrink: 0;
-        }
-        .signal-dot.green { background: var(--live-green); box-shadow: 0 0 8px rgba(34, 197, 94, 0.4); }
-        .signal-dot.yellow { background: var(--live-amber); box-shadow: 0 0 8px rgba(245, 158, 11, 0.4); }
-        .signal-dot.red { background: var(--live-red); box-shadow: 0 0 8px rgba(239, 68, 68, 0.4); }
-        .signal-label { color: var(--text-secondary); }
-        .signal-text { color: var(--text-primary); font-weight: 600; }
-
-        /* SOURCE BAR */
-        .source-bar {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.75rem;
-            align-items: center;
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: var(--radius);
-            padding: 1rem 1.25rem;
-            margin-bottom: 1.5rem;
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-        }
-        .source-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.35rem;
-            background: rgba(34, 197, 94, 0.1);
-            color: var(--live-green);
-            padding: 0.35rem 0.7rem;
-            border-radius: 100px;
-            font-weight: 600;
-            font-size: 0.75rem;
-        }
-        .source-note { margin-left: auto; }
-
-        /* GOVERNANCE FOOTER */
-
-        /* MOBILE */
-        @media (max-width: 768px) {
-            .nav { flex-direction: column; gap: 0.5rem; padding: 0.75rem 1rem; }
-            .nav-links { flex-wrap: wrap; justify-content: center; gap: 0.75rem 1rem; }
-            .nav-links a { font-size: 0.85rem; }
-            .container { padding: 1rem; }
-            .cards-grid { grid-template-columns: 1fr; }
-            .live-bar { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
-            .source-note { margin-left: 0; margin-top: 0.5rem; }
-        }
-        @media (max-width: 480px) {
-            .nav, .nav-links { flex-wrap: wrap; justify-content: center; }
-            .container { padding: 1rem 0.75rem; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rankfixer Research - AI Readiness Benchmark</title>
+<meta name="description" content="How we scored 90 top SaaS domains for AI visibility. Average score 62.7/100, tier distribution, and the biggest gaps - all with open-source code.">
+<meta property="og:title" content="Rankfixer Research - AI Readiness Benchmark">
+<meta property="og:description" content="The AI Readiness Benchmark: 90 SaaS domains scored across six signals. Open data, open code.">
+<style>
+:root {
+--brand: #6C5CE7;
+--brand-hover: #5A4BD1;
+--bg: #0D0D1A;
+--bg-card: #151528;
+--text: #F0F0F5;
+--text-muted: #8888A0;
+--border: #2A2A45;
+--radius: 12px;
+--radius-sm: 8px;
+--font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.6; min-height: 100vh; }
+a { color: var(--brand); text-decoration: none; }
+a:hover { color: var(--brand-hover); }
+.nav { display: flex; align-items: center; justify-content: space-between; padding: 1rem 2rem; max-width: 1080px; margin: 0 auto; }
+.nav .logo { font-weight: 700; font-size: 1.1rem; color: var(--text); }
+.nav .logo span { color: var(--brand); }
+.nav a { color: var(--text-muted); margin-left: 1.25rem; font-size: 0.9rem; }
+.nav a:hover { color: var(--text); }
+.container { max-width: 1080px; margin: 0 auto; padding: 2rem; }
+.hero { text-align: center; padding: 3rem 1rem 2rem; }
+.hero h1 { font-size: 2.2rem; margin-bottom: 0.75rem; }
+.hero p { color: var(--text-muted); max-width: 640px; margin: 0 auto 1rem; font-size: 1.05rem; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 2.5rem 0; }
+.stat { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.4rem; text-align: center; }
+.stat .num { font-size: 2rem; font-weight: 800; color: var(--brand); }
+.stat .lbl { color: var(--text-muted); font-size: 0.85rem; margin-top: 0.35rem; }
+h2 { font-size: 1.35rem; margin: 2.5rem 0 1rem; color: var(--text); }
+.card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1.25rem; }
+.card p { color: var(--text-muted); margin-bottom: 0.75rem; }
+.card p:last-child { margin-bottom: 0; }
+table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.92rem; }
+th, td { text-align: left; padding: 0.65rem 0.8rem; border-bottom: 1px solid var(--border); }
+th { color: var(--text-muted); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.04em; }
+td { color: var(--text); }
+.bar-wrap { display: flex; align-items: center; gap: 0.75rem; }
+.bar { height: 8px; border-radius: 4px; background: var(--brand); flex: 1; max-width: 200px; }
+.bar.muted { background: var(--border); }
+.cta { text-align: center; margin: 3rem 0 1rem; }
+.btn { display: inline-block; background: var(--brand); color: #fff; padding: 0.8rem 1.6rem; border-radius: var(--radius-sm); font-weight: 600; }
+.btn:hover { background: var(--brand-hover); color: #fff; }
+.note { color: var(--text-muted); font-size: 0.85rem; margin-top: 0.5rem; }
+footer { text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.85rem; border-top: 1px solid var(--border); margin-top: 3rem; }
+footer a { color: var(--text-muted); margin: 0 0.6rem; }
+@media (max-width: 640px) {
+  .hero h1 { font-size: 1.6rem; }
+  .nav { padding: 1rem; }
+  .container { padding: 1rem; }
+}
+</style>
 </head>
 <body>
-    <nav class="nav">
-        <a href="/" class="nav-logo">Rankfixer</a>
-        <div class="nav-links">
-            <a href="/tools" title="AI Visibility Checker, Schema Generator, Report & more">Tools</a>
-            <a href="/tools">Tools</a>
-            <a href="/blog">Blog</a>
-            <a href="/research">Research</a>
-            <a href="https://github.com/rankfixer-ai/rankfixer-core" target="_blank" rel="noopener">GitHub</a>
-        </div>
-    </nav>
+<nav class="nav">
+  <div class="logo">Rank<span>Fixer</span></div>
+  <div><a href="/">Home</a><a href="/tools">Tools</a><a href="/blog">Blog</a><a href="/report">Report</a></div>
+</nav>
+<div class="container">
+  <div class="hero">
+    <h1>The AI Readiness Benchmark</h1>
+    <p>In August 2026 we scored the AI visibility of 90 top SaaS domains using our open-source engine. Here is exactly what we found - and how you can reproduce it.</p>
+  </div>
 
-    <div class="container">
-        <h1>Live Research Data</h1>
-        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
-            Economic and market signals powering RankFixer's research engine.
-            Updated every 30 minutes. All data from free APIs. No API keys.
-        </p>
+  <div class="stats">
+    <div class="stat"><div class="num">62.7</div><div class="lbl">Average score / 100</div></div>
+    <div class="stat"><div class="num">63</div><div class="lbl">Median score</div></div>
+    <div class="stat"><div class="num">72%</div><div class="lbl">Publish an llms.txt (65/90)</div></div>
+    <div class="stat"><div class="num">6.7%</div><div class="lbl">Reached "Excellent" tier</div></div>
+  </div>
 
-        <!-- LIVE BAR -->
-        <div class="live-bar">
-            <div class="live-indicator">
-                <span class="pulse-dot"></span>
-                <span>LIVE</span>
-            </div>
-            <div class="live-meta">
-                <span>Updated: <strong id="updatedAt">—</strong></span>
-                <span>Next update: <strong id="nextUpdate">—</strong></span>
-            </div>
-        </div>
+  <h2>Score distribution</h2>
+  <div class="card">
+    <table>
+      <tr><th>Tier</th><th>Range</th><th>Share of domains</th><th></th></tr>
+      <tr><td>Excellent</td><td>81-100</td><td>6.7%</td><td><div class="bar-wrap"><div class="bar" style="width:6.7%"></div></div></td></tr>
+      <tr><td>Good</td><td>61-80</td><td>50.0%</td><td><div class="bar-wrap"><div class="bar" style="width:50%"></div></div></td></tr>
+      <tr><td>Fair</td><td>41-60</td><td>41.1%</td><td><div class="bar-wrap"><div class="bar" style="width:41.1%"></div></div></td></tr>
+      <tr><td>Poor</td><td>21-40</td><td>2.2%</td><td><div class="bar-wrap"><div class="bar" style="width:2.2%"></div></div></td></tr>
+      <tr><td>Critical</td><td>0-20</td><td>0%</td><td><div class="bar-wrap"><div class="bar muted"></div></div></td></tr>
+    </table>
+    <p class="note">Most SaaS domains are "Good" at the fundamentals. Very few are truly optimized for AI extraction - and almost none are invisible.</p>
+  </div>
 
-        <!-- DATA CARDS -->
-        <div class="cards-grid">
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-title">MACRO</div>
-                    <div class="card-badge">World Bank / FRED</div>
-                </div>
-                <div id="macroCard">
-                    <div class="signal-row"><span class="signal-name">GDP</span><span class="signal-value">Loading…</span></div>
-                    <div class="signal-row"><span class="signal-name">Unemployment</span><span class="signal-value">Loading…</span></div>
-                    <div class="signal-row"><span class="signal-name">Interest Rate</span><span class="signal-value">Loading…</span></div>
-                </div>
-            </div>
+  <h2>How we scored</h2>
+  <div class="card">
+    <p>Each domain was scored across <strong>six signals</strong>, each weighted to produce a 0-100 score:</p>
+    <table>
+      <tr><th>Signal</th><th>Weight</th><th>What it measures</th></tr>
+      <tr><td>Schema completeness</td><td>25%</td><td>JSON-LD structured data (Organization, FAQPage, Article, etc.)</td></tr>
+      <tr><td>Entity consistency</td><td>20%</td><td>@id linkage, sameAs links, brand definition, OG/Twitter meta</td></tr>
+      <tr><td>Content structure</td><td>20%</td><td>Substantial text, FAQ-style questions, lists/tables, meta description</td></tr>
+      <tr><td>Technical structure</td><td>15%</td><td>H1/H2 hierarchy, nav/main landmarks, microdata</td></tr>
+      <tr><td>Crawlability</td><td>10%</td><td>AI crawler access (GPTBot, ClaudeBot, PerplexityBot) + robots.txt</td></tr>
+      <tr><td>llms.txt</td><td>10%</td><td>Dedicated llms.txt file for AI crawler discovery</td></tr>
+    </table>
+    <p>The engine fetches each domain's homepage, robots.txt, and llms.txt, then scores the signals. The full source is open source (MIT) - the scoring code and the raw dataset are on GitHub.</p>
+  </div>
 
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-title">TECH</div>
-                    <div class="card-badge">HN / GitHub</div>
-                </div>
-                <div id="techCard">
-                    <div class="signal-row"><span class="signal-name">Top Story</span><span class="signal-value">Loading…</span></div>
-                    <div class="signal-row"><span class="signal-name">Trending Repo</span><span class="signal-value">Loading…</span></div>
-                    <div class="signal-row"><span class="signal-name">Top Language</span><span class="signal-value">Loading…</span></div>
-                </div>
-            </div>
+  <h2>What we learned</h2>
+  <div class="card">
+    <p><strong>Schema is the biggest gap.</strong> The average schema score was 26.6/100 - by far the weakest signal. Most sites either have no structured data or use it inconsistently.</p>
+    <p><strong>llms.txt is becoming standard.</strong> 72% of the domains we scanned publish one. It is cheap to add and directly signals AI crawlers.</p>
+    <p><strong>Blocking AI crawlers is a real problem.</strong> 9 of the 100 domains we attempted were bot-blocked (403/406/429) and could not be scored. If your robots.txt blocks GPTBot and friends, you are invisible by choice.</p>
+  </div>
 
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-title">SENTIMENT</div>
-                    <div class="card-badge">GDELT</div>
-                </div>
-                <div id="sentimentCard">
-                    <div class="signal-row"><span class="signal-name">Headline</span><span class="signal-value">Loading…</span></div>
-                    <div class="signal-row"><span class="signal-name">Source</span><span class="signal-value">Loading…</span></div>
-                    <div class="signal-row"><span class="signal-name">Tone</span><span class="signal-value">Loading…</span></div>
-                </div>
-            </div>
-        </div>
+  <h2>Scope and honesty notes</h2>
+  <div class="card">
+    <p>We attempted 100 domains; 9 were bot-blocked and 1 was unreachable, leaving 90 scored. Scores reflect each domain's public homepage at scan time - they change as sites change. This is a snapshot, not a live feed, and not a ranking of "best" companies.</p>
+  </div>
 
-        <!-- SIGNALS LIST -->
-        <div class="signals-list">
-            <div class="signals-header">Key Signals</div>
-            <div id="signalsList"></div>
-        </div>
-
-        <!-- SOURCE BAR -->
-        <div class="source-bar">
-            <span class="source-pill">✓ World Bank</span>
-            <span class="source-pill">✓ FRED</span>
-            <span class="source-pill">✓ Hacker News</span>
-            <span class="source-pill">✓ Wikipedia</span>
-            <span class="source-pill">✓ GitHub</span>
-            <span class="source-pill">✓ GDELT</span>
-            <span class="source-note">All sources free. No API keys. Pulled every 30 minutes.</span>
-        </div>
-    </div>
-
-    <script>
-        async function loadResearchData() {
-            try {
-                const resp = await fetch('./latest.json', { cache: 'no-store' });
-                if (!resp.ok) throw new Error('HTTP ' + resp.status);
-                const data = await resp.json();
-                render(data);
-            } catch (e) {
-                document.getElementById('macroCard').innerHTML = '<div class="signal-row"><span class="signal-value">Data unavailable — next update in 30 minutes</span></div>';
-                document.getElementById('techCard').innerHTML = '';
-                document.getElementById('sentimentCard').innerHTML = '';
-                document.getElementById('signalsList').innerHTML = '';
-                document.getElementById('updatedAt').textContent = 'Error';
-            }
-        }
-
-        function render(data) {
-            const feeds = data.feeds || {};
-            const now = new Date();
-            document.getElementById('updatedAt').textContent = now.toLocaleTimeString();
-            const next = new Date(now.getTime() + 30 * 60000);
-            document.getElementById('nextUpdate').textContent = next.toLocaleTimeString();
-
-            const wb = feeds.worldbank || {};
-            const fred = feeds.fred || {};
-            const hn = feeds.hackernews || {};
-            const gh = feeds.github || {};
-            const gdelt = feeds.gdelt || {};
-
-            // A feed that returned an error has no usable value -> show N/A for its field(s)
-            const hasError = (f) => f && typeof f.error !== 'undefined';
-
-            const macroCard = document.getElementById('macroCard');
-            const gdp = (!hasError(wb) && wb.value != null) ? '$' + Number(wb.value).toLocaleString() : 'N/A';
-            const fredVal = (!hasError(fred) && fred.value != null) ? fred.value + '%' : 'N/A';
-            macroCard.innerHTML = `
-                <div class="signal-row"><span class="signal-name">GDP (PH)</span><span class="signal-value">${gdp}</span></div>
-                <div class="signal-row"><span class="signal-name">Unemployment</span><span class="signal-value">${fredVal}</span></div>
-                <div class="signal-row"><span class="signal-name">Interest Rate</span><span class="signal-value">${fredVal}</span></div>
-            `;
-
-            const techCard = document.getElementById('techCard');
-            const topStory = (!hasError(hn) && hn.stories && hn.stories[0]) ? hn.stories[0].title : 'N/A';
-            const topRepo = (!hasError(gh) && gh.repos && gh.repos[0]) ? gh.repos[0].name : 'N/A';
-            const topLang = (!hasError(gh) && gh.repos && gh.repos[0] && gh.repos[0].language) ? gh.repos[0].language : 'N/A';
-            techCard.innerHTML = `
-                <div class="signal-row"><span class="signal-name">Top Story</span><span class="signal-value">${topStory}</span></div>
-                <div class="signal-row"><span class="signal-name">Trending Repo</span><span class="signal-value">${topRepo}</span></div>
-                <div class="signal-row"><span class="signal-name">Top Language</span><span class="signal-value">${topLang}</span></div>
-            `;
-
-            const sentimentCard = document.getElementById('sentimentCard');
-            const article = (!hasError(gdelt) && gdelt.articles && gdelt.articles[0]) ? gdelt.articles[0] : null;
-            sentimentCard.innerHTML = `
-                <div class="signal-row"><span class="signal-name">Headline</span><span class="signal-value">${article ? article.title : 'N/A'}</span></div>
-                <div class="signal-row"><span class="signal-name">Source</span><span class="signal-value">${article ? article.source : 'N/A'}</span></div>
-                <div class="signal-row"><span class="signal-name">Tone</span><span class="signal-value">${article ? (article.url || 'neutral') : 'N/A'}</span></div>
-            `;
-
-            const signalsList = document.getElementById('signalsList');
-            const signals = [];
-            if (!hasError(wb) && wb.value != null) signals.push({ color: 'green', text: 'World Bank GDP data active' });
-            if (!hasError(fred) && fred.value != null) signals.push({ color: 'green', text: 'FRED labor data active' });
-            if (!hasError(hn) && hn.stories && hn.stories.length) signals.push({ color: 'green', text: 'Hacker News trending loaded' });
-            if (!hasError(gh) && gh.repos && gh.repos.length) signals.push({ color: 'yellow', text: 'GitHub trending data present' });
-            if (!hasError(gdelt) && gdelt.articles && gdelt.articles.length) signals.push({ color: 'green', text: 'GDELT news stream active' });
-            if (!signals.length) {
-                signals.push({ color: 'red', text: 'No live data sources returned values' });
-            }
-
-            signalsList.innerHTML = signals.map(s => `
-                <div class="signal-item">
-                    <span class="signal-dot ${s.color}"></span>
-                    <span class="signal-label">SIGNAL</span>
-                    <span class="signal-text">${s.text}</span>
-                </div>
-            `).join('');
-        }
-
-        loadResearchData();
-        setInterval(loadResearchData, 30 * 60 * 1000);
-    </script>
+  <div class="cta">
+    <a class="btn" href="/ai-visibility-checker/">Run your free AI visibility scan</a>
+    <p class="note">Free. No signup. Scores your domain across the same six signals.</p>
+  </div>
+</div>
+<footer>
+  <p>RankFixer - Know Your AI Visibility Score</p>
+  <p><a href="/">Home</a> <a href="/tools">Tools</a> <a href="/blog">Blog</a> <a href="/report">Report</a> <a href="https://github.com/rankfixer-ai/rankfixer-core">GitHub</a></p>
+</footer>
 </body>
 </html>
-

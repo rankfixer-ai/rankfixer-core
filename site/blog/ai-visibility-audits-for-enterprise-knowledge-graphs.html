@@ -61,48 +61,43 @@
 <h2>H2: Why Traditional SEO Audits Fail to Measure Entity Authority</h2>
 <p>Standard SEO tools crawl your sitemap, check your meta tags, and score your backlinks. They are blind to the semantic layer. When your knowledge graph powers a public API or a data portal, traditional crawlers see a JavaScript shell or a JSON blob—they do not see the <em>relationships</em> between your products, people, and concepts.</p>
 <p><strong>The Failure:</strong> An SEO audit might tell you your domain authority is 70/100. But when an LLM is asked to list "top logistics platforms," it relies on its training data and live retrieval. If your graph's entities are not wrapped in <code>schema.org</code> (specifically <code>Dataset</code>, <code>Organization</code>, or <code>Product</code> types) with explicit <code>sameAs</code> links to Wikidata, the LLM cannot verify your existence.</p>
-<p><strong>The RankFixer Solution:</strong> Our open-source <code>GraphGEO-Audit</code> tool performs a <strong>Triple-View Analysis</strong>. It simultaneously evaluates: (1) your graph's internal ontology consistency, (2) the public HTML/RDFa surface of your data endpoints, and (3) the LLM's <em>perception</em> of your entities using live probe queries against GPT-4 and Claude. This audit scores you on <strong>Entity Confidence</strong> and <strong>Citeability</strong>, not just keyword density.</p>
+<p><strong>The RankFixer Solution:</strong> Our open-source checker scores the <em>public surface</em> of your graph&mdash;the pages, schema, and llms.txt that an LLM can actually reach&mdash;across six signals: schema completeness, entity consistency, content structure, technical structure, crawlability, and llms.txt. You get a 0&ndash;100 AI visibility score and a concrete list of what an LLM can and cannot verify about your entities.</p>
 <hr>
 <h2>H2: The Top 5 Knowledge Graph Blind Spots in AI Search (And How to Fix Them)</h2>
-<p>Through our audits of Fortune 500 data teams, we have identified five recurring blind spots that destroy AI visibility:</p>
+<p>From our benchmark of 90 top SaaS domains, five recurring blind spots stand out. Here they are, with honest fixes:</p>
 <ol>
-<li><strong>The "Siloed Schema" Problem:</strong> Your internal ontology uses proprietary terms (e.g., <code>cust_acct_id</code>). AI models need <code>schema:accountId</code> and <code>rdf:type</code> mappings. <strong>Fix:</strong> Use RankFixer's <code>Schema-Mapper</code> to auto-generate JSON-LD mappings from your OWL/RDF files.</li>
+<li><strong>The "Siloed Schema" Problem:</strong> Your internal ontology uses proprietary terms (e.g., <code>cust_acct_id</code>). AI models read <code>schema.org</code>, not your private vocabulary. <strong>Fix:</strong> Publish JSON-LD that maps your key entities to <code>schema:Organization</code>, <code>schema:Product</code>, or <code>schema:Dataset</code> types&mdash;this is the highest-weighted signal in our scoring.</li>
 </ol>
 <ol>
-<li><strong>The "Hallucination Gap":</strong> You have the data, but the AI doesn't know you have it. <strong>Fix:</strong> Our <code>Entity-Probe</code> script generates 50 AI questions your graph <em>should</em> answer, then checks if the AI cites you or a competitor.</li>
+<li><strong>The "Hallucination Gap":</strong> You have the data, but the AI does not know you have it. <strong>Fix:</strong> Publish it where crawlers can reach it: a public llms.txt file that maps your key pages, and an HTML surface for every entity instead of only a SPARQL or JSON endpoint. llms.txt presence is a scored signal.</li>
 </ol>
 <ol>
-<li><strong>The "SparQL Snobbery":</strong> You expose a SPARQL endpoint, but most LLMs cannot query SPARQL in real-time. They need RESTful APIs with natural language prompts. <strong>Fix:</strong> Deploy RankFixer's <code>Graph-2-Text</code> middleware that converts your SPARQL results into plain-text, context-rich snippets that are indexable.</li>
+<li><strong>The "SPARQL Snobbery":</strong> You expose a SPARQL endpoint, but most LLMs cannot query SPARQL in real time. <strong>Fix:</strong> Render your entities as static HTML pages with clear headings, definitions, and links. Our content and structure signals measure exactly that surface.</li>
 </ol>
 <ol>
-<li><strong>The "Wikidata Disconnect":</strong> Without <code>owl:sameAs</code> links to major knowledge bases, you are an orphan entity. <strong>Fix:</strong> Our <code>Entity-Linker</code> tool automatically matches your nodes against Wikidata and adds the disambiguating links.</li>
+<li><strong>The "Wikidata Disconnect":</strong> Without <code>sameAs</code> links to major knowledge bases, you are an orphan entity. <strong>Fix:</strong> Add <code>sameAs</code> links to Wikidata and industry registries in your Organization and Product schema&mdash;entity consistency is one of our six scored signals.</li>
 </ol>
 <ol>
-<li><strong>The "Stale Graph" Perception:</strong> AI models trust recency. If your graph's last public update timestamp is old, you are deprioritized. <strong>Fix:</strong> The audit includes a <code>Freshness-Index</code> that triggers automated pings to search engines when your graph updates.</li>
+<li><strong>The "Stale Graph" Perception:</strong> AI models trust recency. If your graph&rsquo;s public pages are clearly out of date, they are deprioritized. <strong>Fix:</strong> Keep the pages LLMs actually read&mdash;your entity pages and llms.txt&mdash;current, with visible update dates.</li>
 </ol>
 <hr>
 <h2>H2: How RankFixer's Open-Source GEO Tools Automate the Audit Process</h2>
-<p>We believe AI visibility is a right, not a premium feature. That is why our core audit engine is <strong>100% open-source</strong> under the Apache 2.0 license. You can run it on your own infrastructure without sending proprietary data to a third-party SaaS.</p>
-<p><strong>The Workflow:</strong> - <strong>Step 1:</strong> Clone the <code>rankfixer/geo-audit</code> repository. - <strong>Step 2:</strong> Point it at your graph's endpoint (SPARQL, Neo4j, or REST). - <strong>Step 3:</strong> Run <code>python audit.py --mode deep</code>. The tool will: - Crawl your public-facing pages for structured data. - Generate a "Shadow Graph" of how an LLM <em>thinks</em> your entities are connected. - Compare the two to identify semantic drift. - <strong>Step 4:</strong> Output a JSON report with a <strong>GEO Score</strong> (0-100) and a prioritized backlog of fixes.</p>
+<p>We believe AI visibility is a right, not a premium feature. That is why our core audit engine is <strong>100% open-source</strong> under the MIT license. You can run it on your own infrastructure without sending proprietary data to a third-party SaaS.</p>
+<p><strong>The Workflow:</strong> <strong>Step 1:</strong> Run the free checker on your public-facing domain, or run the open-source scoring engine from GitHub. <strong>Step 2:</strong> It fetches your homepage, robots.txt, and llms.txt, then scores six signals. <strong>Step 3:</strong> Read the 0&ndash;100 score, tier rating, and signal breakdown. <strong>Step 4:</strong> Order the $99 report for the prioritized fix list, delivered by email as an HTML report.</p>
 <p>Unlike expensive proprietary tools, this audit does not require a consultant to interpret. The output includes exact code snippets to patch your schema. It turns a month-long consulting engagement into a 2-hour engineering task.</p>
 <hr>
-<h2>H2: Case Study: From Invisible to Cited in 14 Days</h2>
-<p>We recently audited a global pharmaceutical distributor. Their knowledge graph contained 2 million drug interaction nodes. However, when we asked ChatGPT for "drug interaction data sources," they were not mentioned.</p>
-<p><strong>The Audit Findings:</strong> - <strong>Schema Mismatch:</strong> 80% of their entities lacked <code>schema:Drug</code> type; they used <code>pharma:Substance</code> instead. - <strong>No Entity Links:</strong> Zero links to Wikidata or PubChem. - <strong>Natural Language Gap:</strong> Their API required complex POST requests with API keys—invisible to AI crawlers.</p>
-<p><strong>The RankFixer Fix:</strong> - Ran <code>Schema-Mapper</code> to add <code>schema:Drug</code> and <code>schema:MedicalCondition</code> types. - Used <code>Entity-Linker</code> to connect to 1.2 million PubChem entries. - Deployed <code>Graph-2-Text</code> to create static HTML "fact sheets" for every drug, summarizing the graph data in plain language.</p>
-<p><strong>The Result:</strong> Within 14 days, a follow-up probe showed that ChatGPT and Perplexity cited their fact sheets in 68% of relevant queries. Their organic AI referral traffic increased by <strong>300%</strong>. This was not a marketing campaign; it was purely a technical visibility fix.</p>
-<hr>
+
 <h2>H2: The 30-Day Enterprise Action Plan for GEO Readiness</h2>
 <p>You do not need to wait for a Q4 budget cycle. Here is a pragmatic roadmap to start your AI Visibility Audit today:</p>
 <ul>
-<li><strong>Week 1 (Discovery):</strong> Run RankFixer's <code>geo-audit</code> in "lite mode" to get a baseline score. Identify your top 10 revenue-driving entities (products, people, or datasets).</li>
-<li><strong>Week 2 (Schema Alignment):</strong> Use the <code>Schema-Mapper</code> to ensure those 10 entities have exact <code>schema.org</code> types. Do not try to map the entire graph at once—focus on the crown jewels.</li>
-<li><strong>Week 3 (External Linking):</strong> Execute the <code>Entity-Linker</code> to connect those entities to Wikidata and industry-specific ontologies (e.g., GS1 for retail, HL7 for health).</li>
-<li><strong>Week 4 (Validation &amp; Iteration):</strong> Re-run the audit. Then, set up a <strong>CI/CD pipeline</strong> where every change to your graph triggers a fresh <code>Entity-Probe</code> test to ensure you maintain your GEO Score.</li>
+<li><strong>Week 1 (Discovery):</strong> Run the free AI Visibility Checker on your public-facing domain to get a baseline score. Identify your top 10 revenue-driving entities (products, people, or datasets).</li>
+<li><strong>Week 2 (Schema Alignment):</strong> Publish <code>schema.org</code> JSON-LD for those 10 entities (Organization, Product, or Dataset). Do not try to map the entire graph at once&mdash;focus on the crown jewels.</li>
+<li><strong>Week 3 (External Linking):</strong> Add <code>sameAs</code> links from your schema to Wikidata and industry ontologies (e.g., GS1 for retail, HL7 for health).</li>
+<li><strong>Week 4 (Validation &amp; Iteration):</strong> Re-run the free checker and track your six signals over time. Add a CI step that re-validates your schema and llms.txt on every deploy.</li>
 </ul>
 <p><strong>The Bottom Line:</strong> The era of "build it and they will come" is over. For enterprise knowledge graphs, you must <em>actively broadcast</em> your semantic authority to AI engines. RankFixer gives you the open-source tools to do this in-house, transparently, and at scale. The question is no longer "Do we have the data?" but "Can AI find the data we have?"</p>
 <hr>
-<p><strong>Ready to see your blind spots?</strong> Visit our GitHub repository and run the free audit. Your graph contains the answers—it is time the AI world knew it.</p>
+<p><strong>Ready to see your blind spots?</strong> Run the free checker on your public domain. Your data contains the answers&mdash;it is time the AI world knew it.</p>
 </main>
 <footer>
     <p>RankFixer — Know Your AI Visibility Score</p>
