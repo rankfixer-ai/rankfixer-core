@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Payment Confirmed — Rankfixer</title>
+<title>Payment Confirmed — RankFixer</title>
 <style>
   :root { --brand:#6C5CE7; --bg:#0D0D1A; --bg-card:#151528; --text:#F0F0F5; --text-muted:#8888A0; --border:#2A2A45; }
   * { box-sizing:border-box; margin:0; padding:0; }
@@ -14,15 +14,49 @@
   p { color:var(--text-muted); line-height:1.6; margin-bottom:1.5rem; }
   a.btn { display:inline-block; background:var(--brand); color:#fff; padding:.8rem 1.6rem; border-radius:100px; text-decoration:none; font-weight:700; }
   .note { font-size:.85rem; color:var(--text-muted); margin-top:1.5rem; }
+  .domain { color:var(--text); font-weight:700; }
 </style>
 </head>
 <body>
   <div class="card">
     <div class="check">&#10003;</div>
-    <h1>Payment confirmed</h1>
-    <p>Thanks — your RankFixer Full AI Visibility Report is on its way. We will email the report to the address you provided at checkout.</p>
+    <h1 id="title">Payment confirmed</h1>
+    <p id="detail">Thanks — your RankFixer Full AI Visibility Report is on its way. We will email the report to the address you provided at checkout.</p>
     <a class="btn" href="/">Back to Rankfixer</a>
     <p class="note">Questions? Email <a href="mailto:acibronjan@gmail.com" style="color:var(--brand)">acibronjan@gmail.com</a></p>
   </div>
+  <script>
+  (function () {
+    var params = new URLSearchParams(window.location.search);
+    var sessionId = params.get('session_id');
+    if (!sessionId) return; // direct visit without a session: keep the generic message above
+
+    var title = document.getElementById('title');
+    var detail = document.getElementById('detail');
+    title.textContent = 'Looking up your order…';
+    detail.textContent = 'One moment while we confirm your payment.';
+
+    fetch('/.netlify/functions/get-session?session_id=' + encodeURIComponent(sessionId))
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (data && data.paid) {
+          title.textContent = 'Payment confirmed';
+          var email = data.email || 'your checkout address';
+          if (data.domain) {
+            detail.innerHTML = 'Your RankFixer Full AI Visibility Report for <span class="domain">' + data.domain + '</span> is being prepared. We\'ll email it to ' + email + ' when it\'s ready.';
+          } else {
+            detail.textContent = 'Your RankFixer Full AI Visibility Report is being prepared. We\'ll email it to ' + email + ' when it\'s ready.';
+          }
+        } else {
+          title.textContent = 'We\'re preparing your report';
+          detail.textContent = 'Your payment is being finalized. Check your email in a few minutes for your report.';
+        }
+      })
+      .catch(function () {
+        title.textContent = 'Payment confirmed';
+        detail.textContent = 'Thanks — your RankFixer Full AI Visibility Report is on its way. We\'ll email it to the address you provided at checkout.';
+      });
+  })();
+  </script>
 </body>
 </html>

@@ -21,6 +21,13 @@ export async function handler(event) {
     return { statusCode: 500, headers, body: JSON.stringify({ error: 'STRIPE_SECRET_KEY is not configured' }) };
   }
 
+  // Domain the customer is purchasing a report for (sent by startCheckout()).
+  let domain = '';
+  try {
+    const body = JSON.parse(event.body || '{}');
+    domain = (body.domain || '').trim();
+  } catch (_) {}
+
   const stripe = new Stripe(secretKey);
   const siteUrl = process.env.URL || 'https://rankfixer.co';
   const successUrl = process.env.SUCCESS_URL || (siteUrl + '/success.html');
@@ -39,10 +46,14 @@ export async function handler(event) {
           quantity: 1,
         }];
 
+    // Pass the session id through the success redirect so success.html can look it up.
+    const sep = successUrl.includes('?') ? '&' : '?';
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',
       line_items: lineItems,
-      success_url: successUrl,
+      client_reference_id: domain || undefined,
+      metadata: { domain },
+      success_url: successUrl + sep + 'session_id={CHECKOUT_SESSION_ID}',
       cancel_url: cancelUrl,
       allow_promotion_codes: true,
     });

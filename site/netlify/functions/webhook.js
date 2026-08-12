@@ -2,6 +2,7 @@
 // Path: site/netlify/functions/webhook.js
 // Requires env: STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET.
 import Stripe from 'stripe';
+import { getStore } from '@netlify/blobs';
 
 export async function handler(event) {
   if (event.httpMethod !== 'POST') {
@@ -26,16 +27,26 @@ export async function handler(event) {
 
   if (stripeEvent.type === 'checkout.session.completed') {
     const session = stripeEvent.data.object;
-    // TODO: mark the report as fulfilled for this customer.
-    // Write to Netlify Blobs, a KV store, or your existing docs/js/auth.js
-    // recordPayment() endpoint. Store: customer_email, session.id,
-    // amount_total, payment_status, created.
-    console.log('PAYMENT_COMPLETE', JSON.stringify({
+    const record = {
       session_id: session.id,
       customer_email: session.customer_details && session.customer_details.email,
+      domain: session.client_reference_id || (session.metadata && session.metadata.domain) || '',
       amount_total: session.amount_total,
       payment_status: session.payment_status,
-    }));
+      status: 'PAID',
+      created: Math.floor(Date.now() / 1000),
+    };
+
+    // Durable fulfillment record. Idempotent: set() overwrites by key, so Stripe retries are safe.
+    try {
+      const store = getStore('checkout_sessions');
+      await store.set(session.id, JSON.stringify(record));
+      console.log('PAYMENT_STORED', JSON.stringify(record));
+    } catch (e) {
+      console.error('BLOB_WRITE_FAILED', String((e && e.message) || e));
+    }
+
+    console.log('PAYMENT_COMPLETE', JSON.stringify(record));
   }
 
   return { statusCode: 200, body: JSON.stringify({ received: true }) };

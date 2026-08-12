@@ -9,13 +9,14 @@ This branch (`fix/pricing-integrity-reconcile`) ships a real Stripe Checkout flo
 ```
 Buy button ("Get the Report → $99")
    → startCheckout()  (site/checkout.js)
-   → POST /.netlify/functions/create-checkout
+   → POST /.netlify/functions/create-checkout  (attaches domain to the session)
    → Stripe Checkout session created (server-side)
    → browser redirects to checkout.stripe.com
    → user pays
-   → Stripe redirects to /success.html  (or /cancel.html)
-   → Stripe POSTs checkout.session.completed to /.netlify/functions/webhook
-   → webhook verifies signature + logs PAYMENT_COMPLETE
+   → Stripe redirects to /success.html?session_id=cs_xxx
+   → success.html calls /.netlify/functions/get-session → shows domain + email
+   → (in parallel) Stripe POSTs checkout.session.completed to /.netlify/functions/webhook
+   → webhook verifies signature + stores the paid session to Netlify Blobs
 ```
 
 **Functions** (per `netlify.toml`: `base = "site"`, `functions.directory = "netlify/functions"`):
@@ -23,6 +24,7 @@ Buy button ("Get the Report → $99")
 | Function | Endpoint URL |
 | :--- | :--- |
 | `create-checkout` | `https://<site>/.netlify/functions/create-checkout` |
+| `get-session` | `https://<site>/.netlify/functions/get-session?session_id=cs_...` |
 | `webhook` | `https://<site>/.netlify/functions/webhook` |
 
 > ⚠️ The webhook endpoint is `/.netlify/functions/webhook` — **not** `/api/webhook`.
@@ -109,9 +111,9 @@ git push origin fix/pricing-integrity-reconcile
 
 ## 6. What currently happens on payment (important)
 
-`webhook.js` **verifies the Stripe signature and logs** `PAYMENT_COMPLETE`, but it does **not yet deliver the report or record the customer**. The `TODO` in `webhook.js` marks this as the next step: write the payment to Netlify Blobs / a KV store / the existing `docs/js/auth.js` recordPayment() endpoint, then email or unlock the report.
+`webhook.js` verifies the Stripe signature and writes the paid session to **Netlify Blobs** (store `checkout_sessions`, keyed by `session_id`) with the customer's domain, email, amount, and `status: "PAID"`. `success.html` reads `?session_id=` and calls `get-session` (which retrieves the session from Stripe) to show "Report for <domain> is being prepared — we emailed <email>".
 
-So a successful test proves **checkout + payment + webhook verification** work. **Report delivery is still a manual step** until the fulfillment code is added.
+**Still not automated: report generation.** The paid session is now durably recorded, but no report is generated or emailed yet — that is the next step (run the analyzer against the customer's domain and send the result). A successful test proves **checkout + payment + webhook verification + fulfillment record** all work; actual report delivery is still manual until generation is wired up.
 
 ---
 
