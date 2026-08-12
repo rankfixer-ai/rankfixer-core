@@ -94,11 +94,19 @@ function buildSummary(results) {
   const top = sorted.slice(0, 10).map((r, i) => ({ rank: i + 1, domain: r.domain, score: r.score, tier: r.tier }));
   const bottom = sorted.slice(-10).map((r, i) => ({ rank: n - 9 + i, domain: r.domain, score: r.score, tier: r.tier }));
 
+  const SIG = [
+    ['schema', 0.25, 'schema'],
+    ['entity', 0.20, 'entity'],
+    ['content', 0.20, 'content'],
+    ['structure', 0.15, 'structure'],
+    ['crawlable', 0.10, 'crawlable'],
+    ['llms_txt', 0.10, 'llms_txt'],
+  ];
   const signal_breakdown = {};
-  for (const sig of Object.keys(WEIGHTS)) {
-    const vals = sorted.map(r => r[sig]).filter(v => typeof v === 'number');
-    const a = Math.round((vals.reduce((x, y) => x + y, 0) / vals.length) * 10) / 10;
-    signal_breakdown[sig] = { weight: WEIGHTS[sig], average: a };
+  for (const [key, weight, field] of SIG) {
+    const vals = sorted.map(r => r[field]).filter(v => typeof v === 'number');
+    const a = vals.length ? Math.round((vals.reduce((x, y) => x + y, 0) / vals.length) * 10) / 10 : 0;
+    signal_breakdown[key] = { weight, average: a };
   }
 
   return { analyzed: sorted, blocked, error, avg, median, dist, top, bottom, signal_breakdown };

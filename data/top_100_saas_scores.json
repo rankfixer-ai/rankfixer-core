@@ -162,9 +162,9 @@
       "weight": 0.1,
       "average": 80
     },
-    "llmsTxt": {
+    "llms_txt": {
       "weight": 0.1,
-      "average": null
+      "average": 72.2
     }
   },
   "excluded_domains": [
