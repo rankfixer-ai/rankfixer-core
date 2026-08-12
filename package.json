@@ -5,7 +5,7 @@
   "description": "Site Mapper v2 — Classify-First Autonomous Site Audit Engine",
   "main": "audit-report-v2.js",
   "scripts": {
-    "test": "node test-v2.js",
+    "test": "node rankfixer-mapper/test-v2.js",
     "start": "node test-v2.js"
   },
   "dependencies": {

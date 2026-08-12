@@ -53,6 +53,38 @@
             word-break: break-all;
         }
 
+        /* SCAN SECTION */
+        .scan-section {
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+            padding: 1.75rem; margin-bottom: 1.5rem;
+        }
+        .scan-section h2 { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.75rem; }
+        .scan-section p { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 1rem; }
+        .scan-wrapper { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+        .scan-wrapper input[type="text"] {
+            flex: 1; min-width: 220px; background: var(--bg-input); border: 1px solid var(--border);
+            color: var(--text); padding: 14px 16px; border-radius: var(--radius-sm); font-size: 1rem;
+            font-family: var(--font);
+        }
+        .scan-wrapper input[type="text"]::placeholder { color: #6b6b85; }
+        .scan-wrapper button {
+            background: var(--brand); color: #fff; border: none; padding: 14px 28px;
+            border-radius: var(--radius-sm); font-size: 1rem; font-weight: 700; cursor: pointer;
+            font-family: var(--font); transition: background 0.2s;
+        }
+        .scan-wrapper button:hover { background: var(--brand-hover); }
+        .scan-wrapper button:disabled { opacity: 0.7; cursor: not-allowed; }
+        .scan-helper { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.6rem; }
+        .scan-error { font-size: 0.85rem; color: var(--bad); margin-top: 0.5rem; min-height: 1.2em; }
+
+        /* LOADING */
+        .loading-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.75rem; color: var(--brand); }
+        .loading-steps { list-style: none; padding: 0; margin: 0; }
+        .loading-steps li { padding: 0.5rem 0; color: var(--text-muted); font-size: 0.95rem; }
+        .loading-steps li.active { color: var(--text); }
+        .loading-steps li.done { color: var(--good); }
+
+        /* RESULTS */
         .card {
             background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
             padding: 1.75rem; margin-bottom: 1.5rem;
@@ -141,17 +173,42 @@
         <header class="hero">
             <div class="hero-badge">Free AI Visibility Diagnosis</div>
             <h1>Your AI Visibility Diagnosis</h1>
-            <p>Real gaps. Real competitors. Real traffic loss. Everything below is derived from your actual site scan and current market data.</p>
-            <div class="domain-badge" id="domain-badge">Loading…</div>
+            <p>Real gaps. Real competitors. Real traffic loss. Scan your site or view the sample diagnosis below.</p>
         </header>
 
+        <!-- SCAN INPUT -->
+        <section class="scan-section" id="scan-section">
+            <h2>Scan Your Site</h2>
+            <p>Enter your domain to get a personalized diagnosis. Uses the same mapper audit as our paid reports.</p>
+            <div class="scan-wrapper">
+                <input type="text" id="domain-input" placeholder="Enter your domain" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-label="Enter your domain name">
+                <button id="scan-button">Scan My Site</button>
+            </div>
+            <p class="scan-helper">No signup required. Analysis runs in 30–60 seconds.</p>
+            <div class="scan-error" id="scan-error"></div>
+        </section>
+
+        <!-- LOADING -->
+        <div id="loading-screen" class="card" style="display:none;" aria-live="polite">
+            <div class="loading-title" id="loading-title">Scanning yourdomain.com...</div>
+            <ul class="loading-steps">
+                <li id="step-1">● Discovering URLs...</li>
+                <li id="step-2">● Classifying templates...</li>
+                <li id="step-3">● Building link graph...</li>
+                <li id="step-4">● Detecting contradictions...</li>
+                <li id="step-5">● Calculating AI Visibility Score...</li>
+            </ul>
+        </div>
+
+        <div id="domain-badge" class="domain-badge" style="display:none;"></div>
+
         <!-- SCORE -->
-        <div class="card">
+        <div class="card" id="score-card">
             <div class="score-section">
                 <div class="score-number" id="score-number" style="color: var(--brand);">--</div>
                 <p style="color: var(--text-muted);">/ 100 AI Visibility Score</p>
                 <div class="score-label" id="score-label">--</div>
-                <div class="rank-pill" id="rank-pill"></div>
+                <div class="rank-pill" id="rank-pill">Sample diagnosis — run a scan for your real score</div>
             </div>
         </div>
 
@@ -159,23 +216,23 @@
         <div class="card">
             <h2>Top Gaps Blocking AI Citations</h2>
             <ul class="gap-list" id="gap-list">
-                <li><span class="gap-icon">⏳</span><span>Analyzing your scan data…</span></li>
+                <li><span class="gap-icon">⏳</span><span>Run a scan to see your personalized gaps.</span></li>
             </ul>
         </div>
 
         <!-- COMPETITORS -->
         <div class="card">
             <h2>What Competitors Are Doing Better</h2>
-            <p style="margin-bottom:1rem;">Based on the current SEO/GEO tool competitive map.</p>
+            <p style="margin-bottom:1rem;" id="competitor-intro">Based on the current SEO/GEO tool competitive map.</p>
             <div class="competitor-grid" id="competitor-grid">
-                <div class="competitor-card"><h4>Loading…</h4></div>
+                <div class="competitor-card"><h4>Run a scan</h4><p>Personalized competitor comparison will appear here.</p></div>
             </div>
         </div>
 
         <!-- TRAFFIC LOSS -->
         <div class="card">
             <h2>Estimated Traffic at Risk</h2>
-            <p id="traffic-loss">Loading market signals…</p>
+            <p id="traffic-loss">Run a scan to see your personalized traffic-at-risk estimate.</p>
             <p style="font-size:0.85rem; color:var(--text-muted);">Estimate based on AI search share, current score, and industry benchmarks. Actuals vary by domain authority and content volume.</p>
         </div>
 
@@ -201,51 +258,201 @@
 
     <script>
         (function() {
-            var params = new URLSearchParams(window.location.search);
-            var domain = params.get('domain') || '';
-            var score = params.get('score') || '';
-            var label = params.get('label') || '';
+            var scanSection = document.getElementById('scan-section');
+            var loadingScreen = document.getElementById('loading-screen');
+            var domainInput = document.getElementById('domain-input');
+            var scanButton = document.getElementById('scan-button');
+            var scanError = document.getElementById('scan-error');
+            var loadingTitle = document.getElementById('loading-title');
+            var domainBadge = document.getElementById('domain-badge');
 
-            document.getElementById('domain-badge').textContent = domain || 'Direct visit';
-            if (score) {
-                document.getElementById('score-number').textContent = score;
-                document.getElementById('score-label').textContent = label || 'AI Visibility Score';
-                var color = score >= 80 ? 'var(--good)' : score >= 60 ? 'var(--warn)' : 'var(--bad)';
-                document.getElementById('score-number').style.color = color;
+            var scoreNumber = document.getElementById('score-number');
+            var scoreLabel = document.getElementById('score-label');
+            var rankPill = document.getElementById('rank-pill');
+            var gapList = document.getElementById('gap-list');
+            var competitorGrid = document.getElementById('competitor-grid');
+            var competitorIntro = document.getElementById('competitor-intro');
+            var trafficLoss = document.getElementById('traffic-loss');
+
+            var currentDomain = '';
+            var currentScore = null;
+
+            function isValidDomain(str) {
+                var c = str.trim().replace(/^https?:\/\//i,'').replace(/\/.*$/,'').replace(/^www\./i,'');
+                return /^[a-zA-Z0-9][a-zA-Z0-9-]{0,61}[a-zA-Z0-9]\.[a-zA-Z]{2,}$/.test(c);
+            }
+            function cleanDomain(str) {
+                return str.trim().replace(/^https?:\/\//i,'').replace(/\/.*$/,'').replace(/^www\./i,'');
             }
 
-            var gaps = [
-                { icon: '🔐', text: 'Schema completeness gap — missing or weak JSON-LD, FAQPage, Organization markup' },
-                { icon: '🧠', text: 'Entity density gap — brand not clearly defined to AI crawlers' },
-                { icon: '📄', text: 'Content answer gap — lacks direct-answer structure for LLM extraction' },
-                { icon: '🤖', text: 'AI crawler access gap — robots.txt or llms.txt blocks or missing' },
-                { icon: '🔗', text: 'Backlink/citation gap — low authority sources referencing this domain' },
-            ];
-            var gapList = document.getElementById('gap-list');
-            gapList.innerHTML = gaps.slice(0, 3).map(function(g) {
-                return '<li><span class="gap-icon">' + g.icon + '</span><span>' + g.text + '</span></li>';
-            }).join('');
+            function setStepState(ids, state) {
+                ids.forEach(function(id) {
+                    var el = document.getElementById(id);
+                    if (!el) return;
+                    el.classList.remove('active', 'done');
+                    if (state) el.classList.add(state);
+                });
+            }
 
-            var competitors = [
-                { name: 'Surfer SEO', threat: 'MEDIUM', note: 'AI content editor + SERP analyzer' },
-                { name: 'SE Ranking', threat: 'MEDIUM', note: 'AI overviews tracking + rank tracking' },
-                { name: 'Semrush', threat: 'LOW', note: 'Broad SEO suite with AI visibility module' },
-                { name: 'Ahrefs', threat: 'LOW', note: 'Backlink + rank tracking, slower on AI' },
-                { name: 'MarketMuse', threat: 'LOW', note: 'Content planning, not real-time AI verification' },
-            ];
-            var compGrid = document.getElementById('competitor-grid');
-            compGrid.innerHTML = competitors.map(function(c) {
-                return '<div class="competitor-card"><h4>' + c.name + '</h4><div class="threat ' + c.threat.toLowerCase() + '">' + c.threat + '</div><p>' + c.note + '</p></div>';
-            }).join('');
+            function buildExplanation(data) {
+                var d = data.dimensions || {};
+                var weak = [];
+                if ((d.schema || 0) < 50) weak.push('schema markup is thin');
+                if ((d.entity || 0) < 50) weak.push('your brand entity is not clearly defined');
+                if ((d.content || 0) < 50) weak.push('content lacks clear answer structures');
+                if ((d.crawlable || 0) < 70) weak.push('pages may be hard for AI crawlers to access');
+                if ((d.llmsTxt || 0) < 50) weak.push('no llms.txt for AI crawlers');
+                if (weak.length === 0) return 'Strong AI visibility — your site is well-structured for LLM citation.';
+                return 'Key gaps: ' + weak.join(', ') + '.';
+            }
 
-            var trafficLoss = document.getElementById('traffic-loss');
-            if (score) {
+            function gapsFromDimensions(data) {
+                var d = data.dimensions || {};
+                var items = [];
+                if ((d.schema || 0) < 50) items.push({ icon: '🔐', text: 'Schema completeness gap — missing or weak JSON-LD, FAQPage, Organization markup' });
+                if ((d.entity || 0) < 50) items.push({ icon: '🧠', text: 'Entity density gap — brand not clearly defined to AI crawlers' });
+                if ((d.content || 0) < 50) items.push({ icon: '📄', text: 'Content answer gap — lacks direct-answer structure for LLM extraction' });
+                if ((d.crawlable || 0) < 70) items.push({ icon: '🤖', text: 'AI crawler access gap — robots.txt or llms.txt blocks or missing' });
+                if ((d.llmsTxt || 0) < 50) items.push({ icon: '🔗', text: 'Backlink/citation gap — low authority sources referencing this domain' });
+                if (items.length === 0) items.push({ icon: '✅', text: 'No major gaps detected in this scan.' });
+                return items.slice(0, 5);
+            }
+
+            function competitorsForScore(score) {
                 var s = parseInt(score, 10);
+                var base = [
+                    { name: 'Surfer SEO', threat: 'MEDIUM', note: 'AI content editor + SERP analyzer' },
+                    { name: 'SE Ranking', threat: 'MEDIUM', note: 'AI overviews tracking + rank tracking' },
+                    { name: 'Semrush', threat: 'LOW', note: 'Broad SEO suite with AI visibility module' },
+                    { name: 'Ahrefs', threat: 'LOW', note: 'Backlink + rank tracking, slower on AI' },
+                    { name: 'MarketMuse', threat: 'LOW', note: 'Content planning, not real-time AI verification' },
+                ];
+                if (s < 50) {
+                    return base.map(function(c) {
+                        return { name: c.name, threat: c.threat === 'LOW' ? 'MEDIUM' : c.threat, note: c.note };
+                    });
+                }
+                return base;
+            }
+
+            function renderDemo() {
+                currentDomain = '';
+                currentScore = null;
+                domainBadge.style.display = 'none';
+                scoreNumber.textContent = '--';
+                scoreNumber.style.color = 'var(--brand)';
+                scoreLabel.textContent = '--';
+                rankPill.textContent = 'Sample diagnosis — run a scan for your real score';
+
+                var demoGaps = [
+                    { icon: '🔐', text: 'Schema completeness gap — missing or weak JSON-LD, FAQPage, Organization markup' },
+                    { icon: '🧠', text: 'Entity density gap — brand not clearly defined to AI crawlers' },
+                    { icon: '📄', text: 'Content answer gap — lacks direct-answer structure for LLM extraction' },
+                ];
+                gapList.innerHTML = demoGaps.map(function(g) {
+                    return '<li><span class="gap-icon">' + g.icon + '</span><span>' + g.text + '</span></li>';
+                }).join('');
+
+                var demoCompetitors = [
+                    { name: 'Surfer SEO', threat: 'MEDIUM', note: 'AI content editor + SERP analyzer' },
+                    { name: 'SE Ranking', threat: 'MEDIUM', note: 'AI overviews tracking + rank tracking' },
+                    { name: 'Semrush', threat: 'LOW', note: 'Broad SEO suite with AI visibility module' },
+                ];
+                competitorIntro.textContent = 'Based on the current SEO/GEO tool competitive map.';
+                competitorGrid.innerHTML = demoCompetitors.map(function(c) {
+                    return '<div class="competitor-card"><h4>' + c.name + '</h4><div class="threat ' + c.threat.toLowerCase() + '">' + c.threat + '</div><p>' + c.note + '</p></div>';
+                }).join('');
+
+                trafficLoss.textContent = 'Run a free scan to see your personalized traffic-at-risk estimate. AI search engines now answer 42% of queries without sending a click.';
+            }
+
+            function renderResults(data, domain) {
+                currentDomain = domain;
+                currentScore = data.score;
+                domainBadge.style.display = 'inline-block';
+                domainBadge.textContent = domain;
+
+                var color = data.score >= 80 ? 'var(--good)' : data.score >= 60 ? 'var(--warn)' : 'var(--bad)';
+                scoreNumber.textContent = data.score;
+                scoreNumber.style.color = color;
+                scoreLabel.textContent = data.label || 'AI Visibility Score';
+                rankPill.textContent = '📊 ' + data.score + '/100 AI Visibility Score';
+
+                var gaps = gapsFromDimensions(data);
+                gapList.innerHTML = gaps.map(function(g) {
+                    return '<li><span class="gap-icon">' + g.icon + '</span><span>' + g.text + '</span></li>';
+                }).join('');
+
+                var competitors = competitorsForScore(data.score);
+                competitorIntro.textContent = 'Top competitors and feature gaps for ' + domain + '.';
+                competitorGrid.innerHTML = competitors.map(function(c) {
+                    return '<div class="competitor-card"><h4>' + c.name + '</h4><div class="threat ' + c.threat.toLowerCase() + '">' + c.threat + '</div><p>' + c.note + '</p></div>';
+                }).join('');
+
+                var s = parseInt(data.score, 10);
                 var estimatedLoss = s < 50 ? '30–50% of AI-search referral traffic' : s < 70 ? '15–30% of AI-search referral traffic' : '5–15% of AI-search referral traffic';
                 trafficLoss.textContent = 'Estimated at-risk traffic: ' + estimatedLoss + '. AI search engines now answer 42% of queries without sending a click. A sub-70 score means your brand is likely invisible in that channel.';
-            } else {
-                trafficLoss.textContent = 'Run the free scan first to see your personalized traffic-at-risk estimate.';
             }
+
+            scanButton.addEventListener('click', function() {
+                var raw = domainInput.value;
+                if (!raw.trim() || !isValidDomain(raw)) {
+                    scanError.textContent = 'Please enter a valid domain, e.g. yourdomain.com';
+                    return;
+                }
+                scanError.textContent = '';
+                currentDomain = cleanDomain(raw);
+
+                // Loading state
+                scanSection.style.display = 'none';
+                loadingScreen.style.display = 'block';
+                loadingTitle.textContent = 'Scanning ' + currentDomain + '...';
+                setStepState(['step-1','step-2','step-3','step-4','step-5'], null);
+                document.getElementById('step-1').classList.add('active');
+
+                var steps = ['step-1','step-2','step-3','step-4','step-5'];
+                steps.forEach(function(id, i) {
+                    setTimeout(function() {
+                        if (i > 0) {
+                            var prev = document.getElementById(steps[i-1]);
+                            prev.classList.remove('active');
+                            prev.classList.add('done');
+                        }
+                        document.getElementById(id).classList.add('active');
+                    }, (i + 1) * 700);
+                });
+
+                // Call existing analysis endpoint
+                setTimeout(function() {
+                    fetch('/.netlify/functions/score', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ domain: currentDomain })
+                    }).then(function (r) { return r.json(); }).then(function (data) {
+                        loadingScreen.style.display = 'none';
+                        if (data.error || typeof data.score !== 'number') {
+                            scanError.textContent = 'Analysis unavailable — site may block crawlers or the service is busy. Try again.';
+                            scanSection.style.display = 'block';
+                            setStepState(steps, null);
+                            return;
+                        }
+                        renderResults(data, currentDomain);
+                    }).catch(function () {
+                        loadingScreen.style.display = 'none';
+                        scanError.textContent = 'The analysis service could not be reached. Please try again.';
+                        scanSection.style.display = 'block';
+                        setStepState(steps, null);
+                    });
+                }, 3900);
+            });
+
+            domainInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') scanButton.click();
+                scanError.textContent = '';
+            });
+
+            // If no query params, show demo
+            renderDemo();
         })();
     </script>
 

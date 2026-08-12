@@ -299,6 +299,17 @@
             <a href="/blog/ai-readiness-100-saas">Read the open-source analysis →</a>
         </div>
 
+        <!-- DIAGNOSIS LINK -->
+        <div id="diagnosis-link-box" class="upgrade-box" style="display:none; text-align:center; border-color: var(--good);">
+            <h3>See your full diagnosis</h3>
+            <p style="color:var(--text-muted); margin:0.5rem 0 1rem;">
+                Gaps. Competitors. Traffic at risk. All personalized to your domain.
+            </p>
+            <a class="upgrade-cta" id="diagnosis-link" href="/diagnosis" style="display:inline-block; max-width:320px; background: var(--good);">
+                View Full Diagnosis →
+            </a>
+        </div>
+
         <!-- POST-SCAN CTA -->
         <div class="upgrade-box" id="post-scan-cta" style="display:none; text-align:center;">
             <h3>Want this monitored 24/7 with automatic alerts?</h3>
@@ -456,6 +467,12 @@
 
                 dataBanner.style.display = 'block';
                 resultsScreen.classList.add('active');
+
+                // Diagnosis link
+                document.getElementById('diagnosis-link').href =
+                    '/diagnosis/?domain=' + encodeURIComponent(scannedDomain) + '&score=' + encodeURIComponent(r.score) + '&label=' + encodeURIComponent(r.label || '');
+                document.getElementById('diagnosis-link-box').style.display = 'block';
+
                 var postScanCta = document.getElementById('post-scan-cta');
                 if (postScanCta) postScanCta.style.display = 'block';
                 resultsScreen.scrollIntoView({ behavior: 'smooth' });
