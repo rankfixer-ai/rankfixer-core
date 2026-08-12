@@ -180,3 +180,14 @@ stripe listen --forward-to localhost:8888/.netlify/functions/webhook
 ```
 
 Note: the scheduled function (`process-queue`) runs on Netlify's cron and is not part of `netlify dev`. To test the queue locally, invoke its logic directly (or trigger it from the Netlify dashboard's function editor).
+---
+
+## 10. Deploying a feature branch (branch deploys)
+
+Netlify auto-deploys only the production branch (main) by default. To deploy fix/pricing-integrity-reconcile before merging:
+
+1. Site configuration -> Build & deploy -> Branches and deploy contexts -> Branch deploys -> "Let me add individual branches".
+2. Add fix/pricing-integrity-reconcile -> Save.
+3. Push a commit (auto-publish fires) or Deploys -> Trigger deploy -> Deploy branch -> select the branch.
+
+Caveat: Netlify scheduled functions (process-queue) run against the production deploy. On a branch deploy they will not fire on the cron schedule - trigger them manually to test (dashboard Functions -> process-queue -> trigger, or `netlify functions:invoke process-queue`) or merge to main to test the full loop.
