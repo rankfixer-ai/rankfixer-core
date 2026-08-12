@@ -17,19 +17,18 @@ RankFixer is an open-source AI Website Recommendation Engine for Generative Engi
 
 ---
 
-## CORE METHODOLOGY: 7-SIGNAL SCORING
+## CORE METHODOLOGY: 6-SIGNAL SCORING
 
-RankFixer scores every website on 7 weighted signals producing a composite 0-100 AI Visibility Score.
+RankFixer scores every website on 6 weighted signals producing a composite 0-100 AI Visibility Score.
 
 | # | Signal | Weight | What It Measures |
 |---|--------|--------|------------------|
 | 1 | Schema Completeness | 25% | JSON-LD, Microdata, RDFa; presence of Organization, FAQPage, Article, Product schemas |
-| 2 | Entity Density | 20% | Brand mentions, @id references, semantic clustering on key pages |
-| 3 | Content Answer Density | 20% | Direct answers vs. marketing fluff; ratio of clear definitions to marketing language |
-| 4 | Technical Signals | 15% | Core Web Vitals, mobile readiness, HTTPS, robots.txt AI crawler access |
-| 5 | Backlink Quality | 10% | Domain Authority, citation flow, trust flow of referring domains |
-| 6 | Brand Entity Recognition | 5% | Is your brand defined as a schema.org Organization with sameAs links? |
-| 7 | Freshness | 5% | How recently was content updated? dateModified in schema? |
+| 2 | Entity Consistency | 20% | @id references, sameAs links, brand definition, OG/Twitter meta |
+| 3 | Content Structure | 20% | Substantial text, FAQ-style questions, lists/tables, meta description |
+| 4 | Technical Structure | 15% | H1/H2 hierarchy, nav/main landmarks, microdata |
+| 5 | Crawlability | 10% | AI crawler access (GPTBot, ClaudeBot, PerplexityBot) + robots.txt |
+| 6 | llms.txt | 10% | Dedicated llms.txt file for AI crawler discovery |
 
 ### Score Tiers
 
@@ -215,7 +214,7 @@ rankfixer compare example.com competitor.com
 ## FAQ
 
 **Q: How do I check if ChatGPT can cite my website?**
-A: Enter your domain at rankfixer.co/ai-visibility-checker for a free 7-signal analysis.
+A: Enter your domain at rankfixer.co/ai-visibility-checker for a free 6-signal analysis.
 
 **Q: What is an AI visibility score?**
 A: It measures how well LLMs like ChatGPT, Perplexity, and Gemini can extract and cite your content.

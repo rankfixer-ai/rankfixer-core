@@ -40,7 +40,7 @@
                 Free AI Visibility Audit
             </div>
             <h1>Is Your Brand <span class="highlight">Invisible</span> to AI?</h1>
-            <p>AI search engines answer 42% of all queries without sending a single click. If ChatGPT, Perplexity, and Google AI Overviews don't mention your brand, <strong>you don't exist</strong> to 400M+ users.</p>
+            <p>In our scan of 90 top SaaS domains, the average AI-readiness score was <strong>62.7 out of 100</strong> &mdash; and only 6% reached the Excellent tier. Most sites are invisible to AI answer engines without realizing it.</p>
             <p>Run a free scan. Instant Score. Enter your email to unlock your step-by-step fixes.</p>
         </header>
 
@@ -266,12 +266,11 @@
             wrapper.innerHTML = '';
             var names = {
                 schema: 'Schema',
-                entity_density: 'Entity Density',
-                answer_density: 'Answer Density',
-                technical: 'Technical',
-                backlinks: 'Backlinks',
-                brand_entity: 'Brand Entity',
-                freshness: 'Freshness'
+                entity: 'Entity Consistency',
+                content: 'Content Structure',
+                structure: 'Technical Structure',
+                crawlable: 'Crawlability',
+                llmsTxt: 'llms.txt',
             };
             Object.keys(pillars).forEach(function(key) {
                 var value = Math.max(0, Math.min(100, Number(pillars[key]) || 0));

@@ -15,21 +15,18 @@ COMPETITORS FOUND: 9
 GAPS IDENTIFIED:
   Surfer SEO does not offer: governance proof
   Surfer SEO does not offer: autonomous sales pipeline
-  Surfer SEO does not offer: 31-pillar verification
   Surfer SEO does not offer: ai-readiness verification pipeline
   Surfer SEO does not offer: website authority auditing
   Surfer SEO does not offer: citation governance
   Surfer SEO does not offer: predictive roadmap
   SE Ranking does not offer: governance proof
   SE Ranking does not offer: autonomous sales pipeline
-  SE Ranking does not offer: 31-pillar verification
   SE Ranking does not offer: ai-readiness verification pipeline
   SE Ranking does not offer: website authority auditing
   SE Ranking does not offer: citation governance
   SE Ranking does not offer: predictive roadmap
   Semrush does not offer: governance proof
   Semrush does not offer: autonomous sales pipeline
-  Semrush does not offer: 31-pillar verification
   Semrush does not offer: ai-readiness verification pipeline
   Semrush does not offer: website authority auditing
   Semrush does not offer: citation governance

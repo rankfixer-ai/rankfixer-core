@@ -13,7 +13,7 @@ Reviewer: audit relevance. Deployer: prioritize D1–D5 + G1–G4 for quick wins
 - D7. There's An AI For That — https://theresanaiforthat.com — submit under SEO/Marketing.
 
 ## Communities & Q&A (authority + referral)
-- C1. Reddit r/SEO, r/bigseo, r/marketing — share the 7-signals post (no spam; add value).
+- C1. Reddit r/SEO, r/bigseo, r/marketing — share the 6-signals post (no spam; add value).
 - C2. LinkedIn GEO / AI Marketing groups — post the blog breakdowns.
 - C3. GrowthHackers — https://growthhackers.com — submit blog posts.
 - C4. Indie Hackers — https://www.indiehackers.com — builder audience, share launch.

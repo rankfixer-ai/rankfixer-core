@@ -12,7 +12,6 @@ Most SEO platforms stop at rankings. That's not proof of AI visibility.
 
 - Surfer SEO does not offer: governance proof
 - Surfer SEO does not offer: autonomous sales pipeline
-- Surfer SEO does not offer: 31-pillar verification
 - Surfer SEO does not offer: ai-readiness verification pipeline
 - Surfer SEO does not offer: website authority auditing
 - Surfer SEO does not offer: citation governance
@@ -21,7 +20,6 @@ Most SEO platforms stop at rankings. That's not proof of AI visibility.
 
 ## What RankFixer does differently
 
-- 31-pillar verification
 - Governance proof
 - Autonomous sales pipeline
 

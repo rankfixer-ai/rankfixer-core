@@ -250,7 +250,6 @@
         <footer class="site-footer">
             <p>RankFixer — Know Your AI Visibility Score</p>
             <p><a href="/">Home</a> · <a href="/tools">Tools</a> · <a href="/research">Research</a> · <a href="https://github.com/rankfixer-ai/rankfixer-core">GitHub</a></p>
-            <p style="margin-top:0.5rem;">Governed by 31-pillar verification. <a href="https://pruweba.com/#pillars" target="_blank" rel="noopener">View Live Proof</a></p>
         </footer>
     </div>
 
@@ -361,7 +360,7 @@
                     return '<div class="competitor-card"><h4>' + c.name + '</h4><div class="threat ' + c.threat.toLowerCase() + '">' + c.threat + '</div><p>' + c.note + '</p></div>';
                 }).join('');
 
-                trafficLoss.textContent = 'Run a free scan to see your personalized traffic-at-risk estimate. AI search engines now answer 42% of queries without sending a click.';
+                trafficLoss.textContent = 'Run a free scan to see your personalized traffic-at-risk estimate.';
             }
 
             function renderResults(data, domain) {
@@ -389,7 +388,7 @@
 
                 var s = parseInt(data.score, 10);
                 var estimatedLoss = s < 50 ? '30–50% of AI-search referral traffic' : s < 70 ? '15–30% of AI-search referral traffic' : '5–15% of AI-search referral traffic';
-                trafficLoss.textContent = 'Estimated at-risk traffic: ' + estimatedLoss + '. AI search engines now answer 42% of queries without sending a click. A sub-70 score means your brand is likely invisible in that channel.';
+                trafficLoss.textContent = 'Estimated at-risk traffic: ' + estimatedLoss + '. A sub-70 score means your brand is likely invisible in AI answer engines.';
             }
 
             scanButton.addEventListener('click', function() {

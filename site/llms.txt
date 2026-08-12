@@ -9,9 +9,8 @@ RankFixer analyzes websites for LLM readability and generates actionable recomme
 2. Entity density and semantic clustering — 20% weight
 3. Content answer density (direct answers vs. marketing fluff) — 20% weight
 4. Technical SEO (Core Web Vitals, HTTPS, mobile readiness) — 15% weight
-5. Backlink authority signals — 10% weight
-6. Brand entity recognition (schema.org Organization + sameAs) — 5% weight
-7. Content freshness (dateModified signals) — 5% weight
+5. Crawlability — 10% weight (AI crawler access via robots.txt)
+6. llms.txt presence — 10% weight (dedicated AI crawler map)
 
 ## Architecture
 RankFixer operates on a 3-step pipeline:

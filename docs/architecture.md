@@ -123,12 +123,11 @@ class TechnicalAnalyzer:
 | Signal | Weight | Measurement Method |
 |--------|--------|-------------------|
 | Schema Completeness | 25% | Count and quality of schema.org types present |
-| Entity Density | 20% | Named entities per 1000 words + @id linkage |
-| Content Answer Density | 20% | Declarative sentences / total sentences |
-| Technical Signals | 15% | Core Web Vitals pass/fail + security + crawlability |
-| Backlink Quality | 10% | Moz DA / Ahrefs DR + .edu/.gov ratio |
-| Brand Entity Recognition | 5% | Organization schema + sameAs links present |
-| Freshness | 5% | dateModified in schema or HTTP Last-Modified |
+| Entity Consistency | 20% | @id linkage, sameAs, brand definition, OG/Twitter meta |
+| Content Structure | 20% | Substantial text, FAQ questions, lists/tables, meta description |
+| Technical Structure | 15% | H1/H2 hierarchy, nav/main landmarks, microdata |
+| Crawlability | 10% | AI crawler access (GPTBot, ClaudeBot, PerplexityBot) + robots.txt |
+| llms.txt | 10% | Dedicated llms.txt file for AI crawler discovery |
 
 ### 2.2 Scoring Formula
 

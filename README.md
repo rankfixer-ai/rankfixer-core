@@ -4,7 +4,6 @@
 >
 > RankFixer analyzes website architecture, schema markup, and content structure to generate actionable recommendations for improving visibility in Large Language Models (ChatGPT, Perplexity, Gemini, Claude) and AI Overviews.
 
-[![GitHub stars](https://img.shields.io/github/stars/rankfixer-ai/rankfixer-core)](https://github.com/rankfixer-ai/rankfixer-core/stargazers)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 
@@ -36,17 +35,16 @@ RankFixer operates on a **3-step pipeline** that evaluates your site through the
 - llms.txt and llms-full.txt discovery
 
 ### Step 2: LLM-Readiness Scoring
-> Evaluates 7 key signals that determine if an LLM will cite your content.
+> Evaluates 6 key signals that determine if an LLM will cite your content.
 
 | Signal | Weight | Why It Matters |
 | :--- | :--- | :--- |
 | **Schema Completeness** | 25% | LLMs extract structured data more reliably than unstructured text |
-| **Entity Density** | 20% | Clear entity definitions with @id references = higher citation probability |
-| **Content Answer Density** | 20% | Direct, concise answers beat marketing fluff for LLM extraction |
-| **Technical Signals** | 15% | Load speed, mobile readiness, HTTPS, Core Web Vitals |
-| **Backlink Quality** | 10% | LLMs weigh backlinks as "authority votes" in training data |
-| **Brand Entity Recognition** | 5% | Is your brand defined as a schema.org Organization with sameAs links? |
-| **Freshness** | 5% | How recently was content updated? dateModified in schema matters |
+| **Entity Consistency** | 20% | @id linkage, sameAs links, brand definition, OG/Twitter meta |
+| **Content Structure** | 20% | Substantial text, FAQ-style questions, lists/tables, meta description |
+| **Technical Structure** | 15% | H1/H2 hierarchy, nav/main landmarks, microdata |
+| **Crawlability** | 10% | AI crawler access (GPTBot, ClaudeBot, PerplexityBot) + robots.txt |
+| **llms.txt** | 10% | Dedicated llms.txt file for AI crawler discovery |
 
 ### Step 3: Recommendation Engine
 > Generates a prioritized list of actionable fixes to improve your AI visibility score.
@@ -125,7 +123,7 @@ RankFixer is the bridge between these two worlds. We've found that many well-ran
 
 We've open-sourced our research data to help the community understand AI visibility:
 
-- **📈 `/data/top_100_saas_scores.json`** — AI Readiness scores of the top 100 SaaS companies, analyzed across all 7 signals
+- **📈 `/data/top_100_saas_scores.json`** — AI Readiness scores of the top 100 SaaS companies, analyzed across all 6 signals
 - **📋 `/data/benchmark_report.md`** — Full analysis with industry breakdowns, quartile distributions, and actionable insights
 
 ---
@@ -136,7 +134,7 @@ We maintain a research folder for cutting-edge GEO experiments:
 
 - **📓 `/experiments/schema-impact.ipynb`** — Measuring the impact of schema.org markup on LLM extraction accuracy
 - **📓 `/experiments/backlink-correlation.ipynb`** — Do LLMs weigh backlinks similarly to Google's PageRank?
-- **📓 `/experiments/llm_readiness_analysis.ipynb`** — Full benchmark analysis of 100 SaaS domains across 7 signals
+- **📓 `/experiments/llm_readiness_analysis.ipynb`** — Full benchmark analysis of 100 SaaS domains across 6 signals
 
 ---
 

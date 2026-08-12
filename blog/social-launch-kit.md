@@ -17,11 +17,11 @@ The results shocked us:
 
 Teamwork.com leads at 91. The average? 62.7.
 
-Here's the thing: most SaaS companies are optimizing for 2015 Google algorithms while 400M+ people are asking ChatGPT, Perplexity, and Claude for recommendations.
+Here's the thing: most SaaS companies are optimizing for 2015 Google algorithms while millions of people are asking ChatGPT, Perplexity, and Claude for recommendations.
 
 Your Google ranking doesn't mean AI models can cleanly parse and cite you.
 
-We're open-sourcing the entire dataset — all 100 domains, all 7 signals, all scores. Plus the analysis code.
+We're open-sourcing the entire dataset — all 90 scorable domains, all 6 signals, all scores. Plus the analysis code.
 
 📂 GitHub: https://github.com/rankfixer-ai/rankfixer-core
 📝 Full analysis: https://rankfixer.co/blog/ai-readiness-100-saas
@@ -47,7 +47,7 @@ Here's what we found. 🧵
 
 It's not SEO. It's how easily ChatGPT, Perplexity, and Claude can extract and cite your website as a factual source.
 
-We scored each site on 7 signals: Schema, Entity Density, Content Structure, Technical, Backlinks, Brand Entity, Freshness.
+We scored each site on 6 signals: Schema, Entity, Content, Structure, Crawlability, llms.txt.
 
 3/10 The top 5:
 
@@ -128,7 +128,7 @@ That's the playbook. 🚀
 
 My team built an open-source AI Website Recommendation Engine (think: PageSpeed Insights but for "will ChatGPT cite you?").
 
-We ran it against the top 100 SaaS websites across 7 signals: schema completeness, entity density, content structure, technical SEO, backlinks, brand entity recognition, and freshness.
+We ran it against the top 100 SaaS websites across 6 signals: schema completeness, entity consistency, content structure, technical structure, crawlability, and llms.txt.
 
 **Key findings:**
 
@@ -146,7 +146,7 @@ We found essentially zero correlation between Google rankings and AI visibility.
 **The #1 fix for most sites:** Unblock AI crawlers in robots.txt + add FAQPage schema. 5-minute fix. 10-15 point gain on average.
 
 Everything is open source under MIT:
-- Full dataset (100 domains, all 7 signals): [GitHub link]
+- Full dataset (90 scorable domains, all 6 signals): [GitHub link]
 - Analysis notebook (Jupyter): [GitHub link]
 - Free scanner (no signup): [Link]
 

@@ -68,16 +68,13 @@ Schema Completeness     25%  █████████████████
 Entity Density          20%  ████████████████████████████████████████
 Content Answer Density  20%  ████████████████████████████████████████
 Technical Signals       15%  ██████████████████████████
-Backlink Quality        10%  ████████████████████
-Brand Entity Recognition 5%  ██████████
-Freshness                5%  ██████████
 ```
 
 **Design:**
 - Dark background
 - Weight percentages as labels
 - Bars in gradient purple (#6C5CE7 → #A29BFE)
-- Title: "What Makes an LLM Cite You? (7 Signals, Weighted)"
+- Title: "What Makes an LLM Cite You? (6 Signals, Weighted)"
 - Size: 800x500
 
 ---

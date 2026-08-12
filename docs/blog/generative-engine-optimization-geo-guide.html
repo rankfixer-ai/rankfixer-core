@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Ultimate Guide to Generative Engine Optimization (GEO) in 2024 | RankFixer</title>
-    <meta name="description" content="A practical deep dive on Generative Engine Optimization (GEO): how LLMs parse content, the 7 signals that matter, and how to audit your AI visibility.">
+    <meta name="description" content="A practical deep dive on Generative Engine Optimization (GEO): how LLMs parse content, the 6 signals that matter, and how to audit your AI visibility.">
     <meta property="og:title" content="The Ultimate Guide to Generative Engine Optimization (GEO) in 2024">
-    <meta property="og:description" content="A practical deep dive on Generative Engine Optimization (GEO): how LLMs parse content, the 7 signals that matter, and how to audit your AI visibility.">
+    <meta property="og:description" content="A practical deep dive on Generative Engine Optimization (GEO): how LLMs parse content, the 6 signals that matter, and how to audit your AI visibility.">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://rankfixer.co/blog/generative-engine-optimization-geo-guide">
     <meta property="og:image" content="https://rankfixer.co/images/og-home.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="The Ultimate Guide to Generative Engine Optimization (GEO) in 2024">
-    <meta name="twitter:description" content="A practical deep dive on Generative Engine Optimization (GEO): how LLMs parse content, the 7 signals that matter, and how to audit your AI visibility.">
+    <meta name="twitter:description" content="A practical deep dive on Generative Engine Optimization (GEO): how LLMs parse content, the 6 signals that matter, and how to audit your AI visibility.">
     <meta name="twitter:image" content="https://rankfixer.co/images/og-home.png">
     <link rel="canonical" href="https://rankfixer.co/blog/generative-engine-optimization-geo-guide">
     <script type="application/ld+json">
@@ -20,7 +20,7 @@
       "@context": "https://schema.org",
       "@type": "BlogPosting",
       "headline": "The Ultimate Guide to Generative Engine Optimization (GEO) in 2024",
-      "description": "A practical deep dive on Generative Engine Optimization (GEO): how LLMs parse content, the 7 signals that matter, and how to audit your AI visibility.",
+      "description": "A practical deep dive on Generative Engine Optimization (GEO): how LLMs parse content, the 6 signals that matter, and how to audit your AI visibility.",
       "author": {"@type": "Organization", "name": "RankFixer", "url": "https://rankfixer.co"},
       "publisher": {"@type": "Organization", "name": "RankFixer", "url": "https://rankfixer.co"},
       "datePublished": "2026-08-11",
@@ -55,30 +55,25 @@
 <h2>II. How LLMs Parse Content (The 7 Working Theories)</h2>
 <p>AI models don't read the web like traditional crawlers. They look for specific structural and contextual signals to extract information efficiently.</p>
 
-<p>When we built the open-source RankFixer engine, we structured it around 7 signals. Here is how they work—and what we actually know vs. what we are still testing:</p>
+<p>When we built the open-source RankFixer engine, we structured it around 6 signals. Here is how they work—and what we actually know vs. what we are still testing:</p>
 
 <h3>1. Schema Completeness (Known Standard)</h3>
 <p>JSON-LD schema (like FAQPage or SoftwareApplication) is a standardized way to tell machines exactly what your content is. While we can't see ChatGPT's exact ranking algorithm, we know LLMs use structured data to reduce parsing ambiguity. If your schema is complete, the AI has to do less guessing.</p>
 
-<h3>2. Entity Density (Working Theory)</h3>
-<p>LLMs use Named Entity Recognition (NER) to map relationships between people, places, and concepts. The theory is that clearly defining entities in your text—rather than using vague pronouns—reduces the cognitive load on the model, making it easier to extract and cite your specific point.</p>
+<h3>2. Entity Consistency (Working Theory)</h3>
+<p>LLMs use Named Entity Recognition (NER) to map relationships between people, places, and concepts. The theory is that clearly defining entities in your text&mdash;rather than using vague pronouns&mdash;reduces the cognitive load on the model, making it easier to extract and cite your specific point. @id and sameAs links in your schema reinforce this.</p>
 
-<h3>3. Content Answer Density (Observation)</h3>
-<p>Generative engines aim to answer questions. Content structured in direct Q&A formats or concise, summary-driven paragraphs is easier for an LLM to extract as a snippet than long, narrative preamble.</p>
+<h3>3. Content Structure (Observation)</h3>
+<p>Generative engines aim to answer questions. Content structured in direct Q&A formats or concise, summary-driven paragraphs is easier for an LLM to extract as a snippet than long, narrative preamble. Substantial text with lists, tables, and a meta description helps too.</p>
 
-<h3>4. Technical Signals (Known Standard)</h3>
-<p>The baseline rules still apply. If a crawler can't fetch your page cleanly, or if it's burdened by massive layout shifts and slow load times, the content is harder to parse.</p>
+<h3>4. Technical Structure (Known Standard)</h3>
+<p>The baseline rules still apply. If a crawler can't fetch your page cleanly, or if it's missing a single H1, a clear H2 hierarchy, or nav/main landmarks, the content is harder to parse.</p>
 
-<h3>5. Backlink Quality (Plausible Inference)</h3>
-<p><strong>Known Standard:</strong> Traditional search engines use authority links as a proxy for trust to filter spam.</p>
-<p style="margin-top:8px"><strong>The Inference:</strong> While AI models rely heavily on their training data, it is highly plausible that search-based generative agents (like Perplexity) apply similar authority heuristics when retrieving real-time sources to answer a query.</p>
+<h3>5. Crawlability (Known Standard)</h3>
+<p>If your robots.txt blocks GPTBot, ClaudeBot, or PerplexityBot, you've opted out of being cited. Allow AI crawlers so they can read the same content humans see.</p>
 
-<h3>6. Brand Entity Recognition (Working Theory)</h3>
-<p>If your brand is consistently mentioned across the web in relation to specific topics, it strengthens your presence in the LLM's training data. The theory is that building a strong "off-site" entity footprint increases the probability that the model will naturally generate your brand name when asked about your niche.</p>
-
-<h3>7. Freshness (Context Dependent)</h3>
-<p>While LLMs have training cutoffs, search-retrieval agents (like ChatGPT browsing or Perplexity) prioritize fresh content for dynamic queries. Keeping your core pages recently updated signals that the information is still active and relevant.</p>
-
+<h3>6. llms.txt (Observation)</h3>
+<p>A dedicated llms.txt file gives AI crawlers a curated map of your site. In our scan of 90 top SaaS domains, 72% published one &mdash; it's becoming the standard handshake for AI-readable sites.</p>
 <h2>III. Traditional SEO vs. GEO</h2>
 <p><strong>Old:</strong> Keyword optimization and exact-match anchors.<br>
 <strong>New:</strong> Semantic clarity, structured JSON-LD, and direct answer formatting.</p>
@@ -86,7 +81,7 @@
 <strong>New:</strong> Building entity mentions for training data inclusion.</p>
 
 <h2>IV. How to Audit Your AI Visibility</h2>
-<p>You can guess if your site is LLM-ready, or you can test it. We open-sourced a Python engine that analyzes your site across these exact 7 pillars.</p>
+<p>You can guess if your site is LLM-ready, or you can test it. We open-sourced a Python engine that analyzes your site across these exact 6 signals.</p>
 
 <a class="cta" href="/ai-visibility-checker/">Run a Free AI Visibility Scan Now</a>
 
@@ -103,7 +98,7 @@
   <h3 style="margin-top:0">E2E Verification Checklist</h3>
   <ol>
     <li>Go to the live RankFixer site and open DevTools &rarr; Network.</li>
-    <li>Enter a real domain and click Scan. Confirm the score and 7-pillar breakdown render instantly.</li>
+    <li>Enter a real domain and click Scan. Confirm the score and 6-signal breakdown render instantly.</li>
     <li>In the Network tab, inspect the <code>/api/scan</code> JSON response. Confirm it contains only scores—zero fix text or recommendations.</li>
     <li>Enter a real email and click Unlock. Confirm <code>/api/unlock-fixes</code> returns the fixes payload with <strong>200 OK</strong>.</li>
     <li>Open Supabase and verify the row was written to <code>scan_leads</code>.</li>

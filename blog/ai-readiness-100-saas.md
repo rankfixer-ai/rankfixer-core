@@ -16,7 +16,6 @@ schema_type: "ScholarlyArticle"
 
 We're open-sourcing the entire dataset, the methodology, and the analysis code.
 
-[![GitHub stars](https://img.shields.io/github/stars/rankfixer-ai/rankfixer-core)](https://github.com/rankfixer-ai/rankfixer-core)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ---
