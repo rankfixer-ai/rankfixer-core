@@ -380,17 +380,22 @@
             const gh = feeds.github || {};
             const gdelt = feeds.gdelt || {};
 
+            // A feed that returned an error has no usable value -> show N/A for its field(s)
+            const hasError = (f) => f && typeof f.error !== 'undefined';
+
             const macroCard = document.getElementById('macroCard');
+            const gdp = (!hasError(wb) && wb.value != null) ? '$' + Number(wb.value).toLocaleString() : 'N/A';
+            const fredVal = (!hasError(fred) && fred.value != null) ? fred.value + '%' : 'N/A';
             macroCard.innerHTML = `
-                <div class="signal-row"><span class="signal-name">GDP (PH)</span><span class="signal-value">${wb.value != null ? '$' + Number(wb.value).toLocaleString() : 'N/A'}</span></div>
-                <div class="signal-row"><span class="signal-name">Unemployment</span><span class="signal-value">${fred.value != null ? fred.value + '%' : 'N/A'}</span></div>
-                <div class="signal-row"><span class="signal-name">Interest Rate</span><span class="signal-value">${fred.value != null ? fred.value + '%' : 'N/A'}</span></div>
+                <div class="signal-row"><span class="signal-name">GDP (PH)</span><span class="signal-value">${gdp}</span></div>
+                <div class="signal-row"><span class="signal-name">Unemployment</span><span class="signal-value">${fredVal}</span></div>
+                <div class="signal-row"><span class="signal-name">Interest Rate</span><span class="signal-value">${fredVal}</span></div>
             `;
 
             const techCard = document.getElementById('techCard');
-            const topStory = (hn.stories && hn.stories[0]) ? hn.stories[0].title : 'N/A';
-            const topRepo = (gh.repos && gh.repos[0]) ? gh.repos[0].name : 'N/A';
-            const topLang = (gh.repos && gh.repos[0]) ? (gh.repos[0].language || 'N/A') : 'N/A';
+            const topStory = (!hasError(hn) && hn.stories && hn.stories[0]) ? hn.stories[0].title : 'N/A';
+            const topRepo = (!hasError(gh) && gh.repos && gh.repos[0]) ? gh.repos[0].name : 'N/A';
+            const topLang = (!hasError(gh) && gh.repos && gh.repos[0] && gh.repos[0].language) ? gh.repos[0].language : 'N/A';
             techCard.innerHTML = `
                 <div class="signal-row"><span class="signal-name">Top Story</span><span class="signal-value">${topStory}</span></div>
                 <div class="signal-row"><span class="signal-name">Trending Repo</span><span class="signal-value">${topRepo}</span></div>
@@ -398,7 +403,7 @@
             `;
 
             const sentimentCard = document.getElementById('sentimentCard');
-            const article = (gdelt.articles && gdelt.articles[0]) ? gdelt.articles[0] : null;
+            const article = (!hasError(gdelt) && gdelt.articles && gdelt.articles[0]) ? gdelt.articles[0] : null;
             sentimentCard.innerHTML = `
                 <div class="signal-row"><span class="signal-name">Headline</span><span class="signal-value">${article ? article.title : 'N/A'}</span></div>
                 <div class="signal-row"><span class="signal-name">Source</span><span class="signal-value">${article ? article.source : 'N/A'}</span></div>
@@ -407,12 +412,12 @@
 
             const signalsList = document.getElementById('signalsList');
             const signals = [];
-            if (wb.value != null) signals.push({ color: 'green', text: 'World Bank GDP data active' });
-            if (fred.value != null) signals.push({ color: 'green', text: 'FRED labor data active' });
-            if (hn.stories && hn.stories.length) signals.push({ color: 'green', text: 'Hacker News trending loaded' });
-            if (gh.repos && gh.repos.length) signals.push({ color: 'yellow', text: 'GitHub trending data present' });
-            if (gdelt.articles && gdelt.articles.length) signals.push({ color: 'green', text: 'GDELT news stream active' });
-            if (!wb.value && !fred.value && (!hn.stories || !hn.stories.length) && (!gh.repos || !gh.repos.length) && (!gdelt.articles || !gdelt.articles.length)) {
+            if (!hasError(wb) && wb.value != null) signals.push({ color: 'green', text: 'World Bank GDP data active' });
+            if (!hasError(fred) && fred.value != null) signals.push({ color: 'green', text: 'FRED labor data active' });
+            if (!hasError(hn) && hn.stories && hn.stories.length) signals.push({ color: 'green', text: 'Hacker News trending loaded' });
+            if (!hasError(gh) && gh.repos && gh.repos.length) signals.push({ color: 'yellow', text: 'GitHub trending data present' });
+            if (!hasError(gdelt) && gdelt.articles && gdelt.articles.length) signals.push({ color: 'green', text: 'GDELT news stream active' });
+            if (!signals.length) {
                 signals.push({ color: 'red', text: 'No live data sources returned values' });
             }
 

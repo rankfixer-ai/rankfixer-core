@@ -1,19 +1,107 @@
 {
-  "timestamp": "2026-08-12T12:31:25.197540+00:00",
-  "domain": "macro_signal",
-  "source": "allbirds",
-  "prompt": "Extract macro indicators from this economic text.\n\nDomain: macro_signal\nSource: allbirds\nRequired shape: gdp_growth_rate, inflation_trend, interest_rate_direction, unemployment_rate, trade_balance, geopolitical_stability, region, currency, evidence.\n\nRaw input:\n-----\n[worldbank]\n{\"indicator\": \"NY.GDP.MKTP.CD\", \"country\": \"PH\", \"value\": 487086123720.417, \"fetched_at\": \"2026-08-12T12:30:21.959855\"}\n\n[hackernews]\n{\"count\": 10, \"stories\": [{\"title\": \"2026 Eclipse Webcams\", \"score\": 50, \"url\": \"https://jonty.github.io/2026_eclipse_webcams/\"}, {\"title\": \"What sort of maths are LLMs good at?\", \"score\": 106, \"url\": \"https://gowers.wordpress.com/2026/08/12/what-sort-of-maths-are-llms-good-at/\"}, {\"title\": \"Show HN: Woxi - Open-source Mathematica / Wolfram Language reimplementation\", \"score\": 95, \"url\": \"https://woxi.ad-si.com\"}, {\"title\": \"LinkedIn CringeBot 3000\", \"score\": 318, \"url\": \"https://www.cringebot3000.com/\"}, {\"title\": \"I hate packaging my software for Linux\", \"score\": 32, \"url\": \"https://getfresh.dev/docs/blog/packaging-for-linux/\"}, {\"title\": \"High-Res Photo Shows Sand-Capped Butte Rising from Mars Plain of Polygons\", \"score\": 41, \"url\": \"https://petapixel.com/2026/08/04/amazing-high-res-photo-shows-a-butte-rising-from-mars/\"}, {\"title\": \"Facebook is paying controversial creators to produce rage-bait content\", \"score\": 196, \"url\": \"https://www.abc.net.au/news/2026-08-06/ragebait-how-face\n\n[github]\n{\"query\": \"AI+agent\", \"repos\": [{\"name\": \"langflow-ai/langflow\", \"stars\": 153079, \"language\": \"Python\"}, {\"name\": \"langgenius/dify\", \"stars\": 152201, \"language\": \"TypeScript\"}, {\"name\": \"msitarzewski/agency-agents\", \"stars\": 144236, \"language\": \"Shell\"}, {\"name\": \"x1xhlol/system-prompts-and-models-of-ai-tools\", \"stars\": 142750, \"language\": null}, {\"name\": \"Shubhamsaboo/awesome-llm-apps\", \"stars\": 132271, \"language\": \"Python\"}], \"fetched_at\": \"2026-08-12T12:30:31.220463\"}\n-----\n\nRespond ONLY with JSON.",
-  "extracted": {
-    "result": "\n\n```json\n{\n  \"gdp_growth_rate\": {\n    \"value\": 487086123720.417\n  },\n  \"trade_balance\": {\n    \"value\": 487086123720.417\n  }\n}\n```",
-    "status": "success"
-  },
-  "oracle": {
-    "governance_decision": "APPROVE_DEPLOY",
-    "risk_level": "none",
-    "confidence": 0.95,
-    "reasoning": "placeholder oracle result",
-    "requires_human_review": false,
-    "conditions": []
-  },
-  "run_id": "20260812T123125Z"
+  "timestamp": "2026-08-12T14:27:58.765722",
+  "feeds": {
+    "worldbank": {
+      "indicator": "NY.GDP.MKTP.CD",
+      "country": "PH",
+      "value": 487086123720.417,
+      "fetched_at": "2026-08-12T14:27:58.925758"
+    },
+    "fred": {
+      "error": "HTTP Error 400: Bad Request"
+    },
+    "hackernews": {
+      "count": 10,
+      "stories": [
+        {
+          "title": "2026 Eclipse Webcams",
+          "score": 235,
+          "url": "https://jonty.github.io/2026_eclipse_webcams/"
+        },
+        {
+          "title": "Obituary: AmigaDOS developer Dr. Tim King has passed away",
+          "score": 12,
+          "url": "https://amiga-news.de/en/news/AN-2026-08-00070-EN.html"
+        },
+        {
+          "title": "Why Tiny JPEGs Look Different in Chrome",
+          "score": 28,
+          "url": "https://guillaumetech.github.io/posts/jpg-scaling-chrome/"
+        },
+        {
+          "title": "What sort of maths are LLMs good at?",
+          "score": 160,
+          "url": "https://gowers.wordpress.com/2026/08/12/what-sort-of-maths-are-llms-good-at/"
+        },
+        {
+          "title": "AI is removing the middle class of software engineering",
+          "score": 28,
+          "url": "https://blog.florianherrengt.com/ai-removing-middle-class-software-engineering.html"
+        },
+        {
+          "title": "LinkedIn CringeBot 3000",
+          "score": 427,
+          "url": "https://www.cringebot3000.com/"
+        },
+        {
+          "title": "Qwen 3.8-27B goes openweight in 2 days",
+          "score": 11,
+          "url": "https://huggingface.co/Qwen/Qwen3.8-27B"
+        },
+        {
+          "title": "Show HN: Woxi - Open-source Mathematica / Wolfram Language reimplementation",
+          "score": 147,
+          "url": "https://woxi.ad-si.com"
+        },
+        {
+          "title": "Automatic1111 for Apple metal, 40% speed up sd1.5",
+          "score": 10,
+          "url": "https://therad.ninja/from-8-10-seconds-to-3-7-teaching-automatic1111-to-speak-metal-on-an-m3-pro/"
+        },
+        {
+          "title": "Delphi 13 Community Edition Is Now Available",
+          "score": 72,
+          "url": "https://blogs.embarcadero.com/delphi-13-community-edition-is-now-available/"
+        }
+      ],
+      "fetched_at": "2026-08-12T14:28:05.755372"
+    },
+    "wikipedia": {
+      "error": "HTTP Error 403: Forbidden"
+    },
+    "github": {
+      "query": "AI+agent",
+      "repos": [
+        {
+          "name": "langflow-ai/langflow",
+          "stars": 153089,
+          "language": "Python"
+        },
+        {
+          "name": "langgenius/dify",
+          "stars": 152208,
+          "language": "TypeScript"
+        },
+        {
+          "name": "msitarzewski/agency-agents",
+          "stars": 144318,
+          "language": "Shell"
+        },
+        {
+          "name": "x1xhlol/system-prompts-and-models-of-ai-tools",
+          "stars": 142754,
+          "language": null
+        },
+        {
+          "name": "Shubhamsaboo/awesome-llm-apps",
+          "stars": 132283,
+          "language": "Python"
+        }
+      ],
+      "fetched_at": "2026-08-12T14:28:06.309497"
+    },
+    "gdelt": {
+      "error": "Expecting value: line 1 column 1 (char 0)"
+    }
+  }
 }

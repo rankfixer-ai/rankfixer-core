@@ -125,3 +125,113 @@
 - oracle: APPROVE_DEPLOY | confidence=0.95
 
 - extracted: {"result": "\n\n```json\n{\n  \"gdp_growth_rate\": {\n    \"value\": 487086123720.417\n  },\n  \"trade_balance\": {\n    \"value\": 487086123720.417\n  }\n}\n```", "status": "success"}
+
+## 20260812T130648Z | industry_signal | seo_tools_market
+
+- timestamp: 2026-08-12T13:06:48.110735+00:00
+
+- oracle: APPROVE_DEPLOY | confidence=0.95
+
+- extracted: {"domain": "industry_signal", "source": "seo_tools_market", "raw_text_excerpt": "[worldbank]\n{\"indicator\": \"NY.GDP.MKTP.CD\", \"country\": \"PH\", \"value\": 487086123720.417, \"fetched_at\": \"2026-08-12T13:06:24.226279\"}\n\n[hackernews]\n{\"count\": 10, \"stories\": [{\"title\": \"2026 Eclipse Webcams\", \"score\": 105, \"url\": \"https://jonty.github.io/2026_eclipse_webcams/\"}, {\"title\": \"What sort of maths are LLMs good at?\", \"score\": 123, \"url\": \"https://gowers.wordpress.com/2026/08/12/what-sort-of-maths-are-llms-good-at/\"}, {\"title\": \"Show HN: Woxi - Open-source Mathematica / Wolfram Language r", "note": "fallback stub; connect reasoning server for real extraction", "error": "HTTP Error 404: Not Found"}
+
+## 20260812T130711Z | news_signal | ai_visibility_trends
+
+- timestamp: 2026-08-12T13:07:11.141832+00:00
+
+- oracle: APPROVE_DEPLOY | confidence=0.95
+
+- extracted: {"domain": "news_signal", "source": "ai_visibility_trends", "raw_text_excerpt": "[worldbank]\n{\"indicator\": \"NY.GDP.MKTP.CD\", \"country\": \"PH\", \"value\": 487086123720.417, \"fetched_at\": \"2026-08-12T13:06:48.637592\"}\n\n[hackernews]\n{\"count\": 10, \"stories\": [{\"title\": \"2026 Eclipse Webcams\", \"score\": 106, \"url\": \"https://jonty.github.io/2026_eclipse_webcams/\"}, {\"title\": \"What sort of maths are LLMs good at?\", \"score\": 123, \"url\": \"https://gowers.wordpress.com/2026/08/12/what-sort-of-maths-are-llms-good-at/\"}, {\"title\": \"Show HN: Woxi - Open-source Mathematica / Wolfram Language r", "note": "fallback stub; connect reasoning server for real extraction", "error": "HTTP Error 404: Not Found"}
+
+## 20260812T130735Z | company_intel | seo_competitors
+
+- timestamp: 2026-08-12T13:07:35.701561+00:00
+
+- oracle: APPROVE_DEPLOY | confidence=0.95
+
+- extracted: {"domain": "company_intel", "source": "seo_competitors", "raw_text_excerpt": "[worldbank]\n{\"indicator\": \"NY.GDP.MKTP.CD\", \"country\": \"PH\", \"value\": 487086123720.417, \"fetched_at\": \"2026-08-12T13:07:11.699521\"}\n\n[hackernews]\n{\"count\": 10, \"stories\": [{\"title\": \"2026 Eclipse Webcams\", \"score\": 106, \"url\": \"https://jonty.github.io/2026_eclipse_webcams/\"}, {\"title\": \"What sort of maths are LLMs good at?\", \"score\": 123, \"url\": \"https://gowers.wordpress.com/2026/08/12/what-sort-of-maths-are-llms-good-at/\"}, {\"title\": \"Show HN: Woxi - Open-source Mathematica / Wolfram Language r", "note": "fallback stub; connect reasoning server for real extraction", "error": "HTTP Error 404: Not Found"}
+
+## 20260812T131158Z | industry_signal | seo_tools_market
+
+- timestamp: 2026-08-12T13:11:58.863599+00:00
+
+- oracle: APPROVE_DEPLOY | confidence=0.95
+
+- extracted: {"domain": "industry_signal", "source": "seo_tools_market", "raw_text_excerpt": "[worldbank]\n{\"indicator\": \"NY.GDP.MKTP.CD\", \"country\": \"PH\", \"value\": 487086123720.417, \"fetched_at\": \"2026-08-12T13:11:36.111113\"}\n\n[hackernews]\n{\"count\": 10, \"stories\": [{\"title\": \"2026 Eclipse Webcams\", \"score\": 116, \"url\": \"https://jonty.github.io/2026_eclipse_webcams/\"}, {\"title\": \"What sort of maths are LLMs good at?\", \"score\": 124, \"url\": \"https://gowers.wordpress.com/2026/08/12/what-sort-of-maths-are-llms-good-at/\"}, {\"title\": \"Show HN: Woxi - Open-source Mathematica / Wolfram Language r", "note": "fallback stub; connect reasoning server for real extraction", "error": "HTTP Error 404: Not Found"}
+
+## 20260812T131223Z | news_signal | ai_visibility_trends
+
+- timestamp: 2026-08-12T13:12:23.524240+00:00
+
+- oracle: APPROVE_DEPLOY | confidence=0.95
+
+- extracted: {"domain": "news_signal", "source": "ai_visibility_trends", "raw_text_excerpt": "[worldbank]\n{\"indicator\": \"NY.GDP.MKTP.CD\", \"country\": \"PH\", \"value\": 487086123720.417, \"fetched_at\": \"2026-08-12T13:11:59.181218\"}\n\n[hackernews]\n{\"count\": 10, \"stories\": [{\"title\": \"2026 Eclipse Webcams\", \"score\": 116, \"url\": \"https://jonty.github.io/2026_eclipse_webcams/\"}, {\"title\": \"What sort of maths are LLMs good at?\", \"score\": 124, \"url\": \"https://gowers.wordpress.com/2026/08/12/what-sort-of-maths-are-llms-good-at/\"}, {\"title\": \"Show HN: Woxi - Open-source Mathematica / Wolfram Language r", "note": "fallback stub; connect reasoning server for real extraction", "error": "HTTP Error 404: Not Found"}
+
+## 20260812T131246Z | company_intel | seo_competitors
+
+- timestamp: 2026-08-12T13:12:46.201834+00:00
+
+- oracle: APPROVE_DEPLOY | confidence=0.95
+
+- extracted: {"domain": "company_intel", "source": "seo_competitors", "raw_text_excerpt": "[worldbank]\n{\"indicator\": \"NY.GDP.MKTP.CD\", \"country\": \"PH\", \"value\": 487086123720.417, \"fetched_at\": \"2026-08-12T13:12:23.833886\"}\n\n[hackernews]\n{\"count\": 10, \"stories\": [{\"title\": \"2026 Eclipse Webcams\", \"score\": 117, \"url\": \"https://jonty.github.io/2026_eclipse_webcams/\"}, {\"title\": \"What sort of maths are LLMs good at?\", \"score\": 124, \"url\": \"https://gowers.wordpress.com/2026/08/12/what-sort-of-maths-are-llms-good-at/\"}, {\"title\": \"Show HN: Woxi - Open-source Mathematica / Wolfram Language r", "note": "fallback stub; connect reasoning server for real extraction", "error": "HTTP Error 404: Not Found"}
+
+# RANKFIXER MARKET RESEARCH — 2026-08-12
+
+## 1. VISITOR INTELLIGENCE
+Source: Umami Analytics (paste_12_210652.txt, paste_13_210725.txt)
+- Last 6 months: 47 visitors, 71 visits, 163 views
+- Bounce rate: 21%
+- Visit duration: 2m 13s
+- Top pages: / (34 visitors), /ai-visibility-checker/ (15), /schema-generator/ (5), /report/ (4), /tools/ (2)
+- Geography: US 22, PH 17, CA 5, NL 2, HK 1
+- Device: Chrome/iOS 45%, Chrome 23%, Edge 17%, iOS 11%, Firefox 2%
+- One visitor from Facebook
+- 2 active users right now
+- Source evidence: pastes in Hermes profile paste_12_210652.txt, paste_13_210725.txt
+
+## 2. COMPETITIVE INTELLIGENCE
+Source: competitive-system/data/analysis-fc725147-81a7-42b0-89ec-f8a4fdf130b8.json
+- 9 competitors mapped
+- Direct threats: Surfer SEO, SE Ranking (MEDIUM), Semrush, Ahrefs, MarketMuse (LOW)
+- Adjacent threats: Clearscope, Copy.ai, Jasper AI, Writesonic (NONE)
+- None offer governance proof, autonomous sales pipeline, 31-pillar verification, ai-readiness verification pipeline, website authority auditing, citation governance, predictive roadmap
+- Pricing opportunity index: 0.78
+- Content gap index: 0.78
+- Market saturation: 0.56
+- Competitive density score: 0.44
+- Moat score: 100.0
+- Research confidence: 1.0
+- Oracle: ALL CHECKS PASSED
+
+## 3. MARKET SIGNALS
+Source: research/ledger/research/20260812T130648Z.json, 20260812T130711Z.json, 20260812T130735Z.json
+- Reasoning server endpoint returns HTTP 404 on /reason in current run state
+- Live feed JSON still generated and copied to site/research/latest.json via research_to_site.ps1
+- World Bank GDP (PH): $487,086,123,720.417
+- Hacker News top stories include AI/math/LLM topics
+- GitHub trending: langflow, dify, agency-agents, system-prompts-and-models-of-ai-tools, awesome-llm-apps
+- GDELT news stream active
+- Market signal: AI tooling is dominant in developer/consumer attention
+
+## 4. LEAD MAGNET INSIGHT
+- /ai-visibility-checker: highest intent page after home
+- /schema-generator: second-highest intent tool
+- /report/: converts from free scan to $99 paid report
+- 21% bounce rate indicates content/tool relevance
+- 2m13s duration indicates research/consideration behavior
+- Mobile-heavy traffic: 45% Chrome on iOS, 11% iOS native
+- Free scan should be the first action, not just reading
+
+## 5. GAP-BASED POSITIONING
+Primary gap: governance proof
+- No competitor shows verification lineage, Oracle decision trail, or anti-corruption guarantees
+- RankFixer can own "proven AI visibility" vs "guesswork SEO"
+Secondary gap: autonomous workflow
+- Competitors are dashboards; RankFixer is a pipeline
+- From scan → diagnosis → action → verification → report
+
+## 6. NEXT ACTIONS
+1. Fix reasoning server route mismatch so extract.py returns structured JSON instead of fallback
+2. Route /research page to latest.json with proper 404 fallback messaging
+3. Build free scan flow: domain input → mapper audit → research engine diagnosis → email capture
+4. Publish /vs comparison page from competitive system output
+5. Publish governance-proofing blog post from competitive system output
