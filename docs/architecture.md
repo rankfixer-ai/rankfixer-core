@@ -140,13 +140,13 @@ tier = categorize(final_score)
 
 ### 2.3 Tier System
 
-| Score Range | Tier | Label | % of Domains (from our 10K study) |
+| Score Range | Tier | Label | % of Domains (90 SaaS, Aug 2026) |
 |-------------|------|-------|-----------------------------------|
-| 0-20 | Tier 5 | Critical — Invisible to AI | 78% |
-| 21-40 | Tier 4 | Poor — Occasional mentions | 7% |
-| 41-60 | Tier 3 | Fair — Present but not prominent | 3% |
-| 61-80 | Tier 2 | Good — Consistently cited | 1.5% |
-| 81-100 | Tier 1 | Excellent — AI-first brand | 0.5% |
+| 0-20 | Tier 5 | Critical — Invisible to AI | 0% |
+| 21-40 | Tier 4 | Poor — Occasional mentions | 2.2% |
+| 41-60 | Tier 3 | Fair — Present but not prominent | 41.1% |
+| 61-80 | Tier 2 | Good — Consistently cited | 50.0% |
+| 81-100 | Tier 1 | Excellent — AI-first brand | 6.7% |
 
 ---
 
