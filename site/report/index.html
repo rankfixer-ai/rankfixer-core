@@ -184,7 +184,7 @@
                 <li>✓ PDF + presentation deck</li>
                 <li>✓ 30-minute strategy call included</li>
             </ul>
-            <a class="btn-primary" id="cta-button" href="mailto:acibronjan@gmail.com?subject=RankFixer%20Paid%20Report%20Inquiry&body=Domain%3A%20%0AEmail%3A%20%0AInterested%20in%3A%20Full%20AI%20Visibility%20Report%20(%2499%20one-time)%0A%0AQuestions%2Fnotes%3A%20">
+            <a class="btn-primary" id="cta-button" href="/report/" onclick="startCheckout(); return false;">
                 Get Full Report → $99
             </a>
             <p style="font-size:0.8rem;color:var(--text-muted);margin-top:0.75rem;">We'll email you to confirm your domain and any specific questions before starting.</p>
@@ -225,7 +225,7 @@
                 'Interested in: Full AI Visibility Report ($99 one-time)\n' +
                 '\nQuestions/notes: '
             );
-            cta.href = 'mailto:acibronjan@gmail.com?subject=' + subj + '&body=' + body;
+            // CTA uses startCheckout(); domain/email are passed via the /report/ URL.
         }
 
         // Event tracking
@@ -263,5 +263,6 @@
     })();
     </script>
 
+<script src="/checkout.js"></script>
 </body>
 </html>
