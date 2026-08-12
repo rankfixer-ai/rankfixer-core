@@ -1,0 +1,19 @@
+{
+  "timestamp": "2026-08-12T12:31:25.197540+00:00",
+  "domain": "macro_signal",
+  "source": "allbirds",
+  "prompt": "Extract macro indicators from this economic text.\n\nDomain: macro_signal\nSource: allbirds\nRequired shape: gdp_growth_rate, inflation_trend, interest_rate_direction, unemployment_rate, trade_balance, geopolitical_stability, region, currency, evidence.\n\nRaw input:\n-----\n[worldbank]\n{\"indicator\": \"NY.GDP.MKTP.CD\", \"country\": \"PH\", \"value\": 487086123720.417, \"fetched_at\": \"2026-08-12T12:30:21.959855\"}\n\n[hackernews]\n{\"count\": 10, \"stories\": [{\"title\": \"2026 Eclipse Webcams\", \"score\": 50, \"url\": \"https://jonty.github.io/2026_eclipse_webcams/\"}, {\"title\": \"What sort of maths are LLMs good at?\", \"score\": 106, \"url\": \"https://gowers.wordpress.com/2026/08/12/what-sort-of-maths-are-llms-good-at/\"}, {\"title\": \"Show HN: Woxi - Open-source Mathematica / Wolfram Language reimplementation\", \"score\": 95, \"url\": \"https://woxi.ad-si.com\"}, {\"title\": \"LinkedIn CringeBot 3000\", \"score\": 318, \"url\": \"https://www.cringebot3000.com/\"}, {\"title\": \"I hate packaging my software for Linux\", \"score\": 32, \"url\": \"https://getfresh.dev/docs/blog/packaging-for-linux/\"}, {\"title\": \"High-Res Photo Shows Sand-Capped Butte Rising from Mars Plain of Polygons\", \"score\": 41, \"url\": \"https://petapixel.com/2026/08/04/amazing-high-res-photo-shows-a-butte-rising-from-mars/\"}, {\"title\": \"Facebook is paying controversial creators to produce rage-bait content\", \"score\": 196, \"url\": \"https://www.abc.net.au/news/2026-08-06/ragebait-how-face\n\n[github]\n{\"query\": \"AI+agent\", \"repos\": [{\"name\": \"langflow-ai/langflow\", \"stars\": 153079, \"language\": \"Python\"}, {\"name\": \"langgenius/dify\", \"stars\": 152201, \"language\": \"TypeScript\"}, {\"name\": \"msitarzewski/agency-agents\", \"stars\": 144236, \"language\": \"Shell\"}, {\"name\": \"x1xhlol/system-prompts-and-models-of-ai-tools\", \"stars\": 142750, \"language\": null}, {\"name\": \"Shubhamsaboo/awesome-llm-apps\", \"stars\": 132271, \"language\": \"Python\"}], \"fetched_at\": \"2026-08-12T12:30:31.220463\"}\n-----\n\nRespond ONLY with JSON.",
+  "extracted": {
+    "result": "\n\n```json\n{\n  \"gdp_growth_rate\": {\n    \"value\": 487086123720.417\n  },\n  \"trade_balance\": {\n    \"value\": 487086123720.417\n  }\n}\n```",
+    "status": "success"
+  },
+  "oracle": {
+    "governance_decision": "APPROVE_DEPLOY",
+    "risk_level": "none",
+    "confidence": 0.95,
+    "reasoning": "placeholder oracle result",
+    "requires_human_review": false,
+    "conditions": []
+  },
+  "run_id": "20260812T123125Z"
+}

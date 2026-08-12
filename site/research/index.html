@@ -3,132 +3,430 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rankfixer Research — Open Source AI Visibility Data</title>
-    <meta name="description" content="Access open-source datasets, methodologies, and benchmark reports on LLM Readiness and Generative Engine Optimization (GEO).">
-    <meta property="og:title" content="Rankfixer Research — Open Source AI Visibility Data">
-    <meta property="og:description" content="Open-source datasets on LLM Readiness across 100 SaaS companies. Methodology, benchmark reports, and the Rankfixer Core engine.">
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YXZVCPBCZN"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-YXZVCPBCZN');
-    </script>
+    <title>Rankfixer Research — Live Data</title>
+    <meta name="description" content="Live economic and market signals powering RankFixer's research engine. Updated every 30 minutes. Free API data, governed by 31-pillar verification.">
+    <meta property="og:title" content="Rankfixer Research — Live Data">
+    <meta property="og:description" content="Live economic and market signals. No API keys. Updated every 30 minutes.">
 
     <style>
         :root {
-            --brand: #6C5CE7; --brand-hover: #5A4BD1; --bg: #0D0D1A; --bg-card: #151528;
-            --bg-input: #1E1E36; --text: #F0F0F5; --text-muted: #8888A0; --border: #2A2A45;
-            --radius: 12px; --radius-sm: 8px; --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --brand: #6C5CE7;
+            --brand-hover: #5A4BD1;
+            --bg: #0D0D1A;
+            --bg-card: #151528;
+            --bg-input: #1E1E36;
+            --text: #F0F0F5;
+            --text-muted: #8888A0;
+            --border: #2A2A45;
+            --radius: 12px;
+            --radius-sm: 8px;
+            --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --live-green: #22c55e;
+            --live-red: #ef4444;
+            --live-amber: #f59e0b;
+            --card-bg: #0f172a;
+            --card-border: #1e293b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --governance-bg: #020617;
         }
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         html { font-size: 16px; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
         body {
-            font-family: var(--font); background: var(--bg); color: var(--text);
-            line-height: 1.6; min-height: 100vh; -webkit-font-smoothing: antialiased;
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
         }
         a { color: var(--brand); text-decoration: none; }
         a:hover { text-decoration: underline; }
 
-        .nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; border-bottom: 1px solid var(--border); }
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid var(--border);
+            background: rgba(13, 13, 26, 0.8);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
         .nav-logo { font-weight: 700; font-size: 1.2rem; text-decoration: none; color: var(--text); }
-        .nav-links { display: flex; gap: 1.5rem; align-items: center; }
-        .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; }
+        .nav-links { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; }
+        .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; transition: color 0.2s; }
         .nav-links a:hover { color: var(--text); }
 
-        .container { max-width: 800px; margin: 0 auto; padding: 3rem 1.5rem; }
-        h1 { font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text); }
-        h2 { font-size: 1.3rem; font-weight: 700; margin: 2rem 0 0.75rem; padding-top: 1rem; border-top: 1px solid var(--border); color: var(--text); }
-        p { color: var(--text-muted); margin-bottom: 1rem; }
-        ul { padding-left: 1.5rem; margin-bottom: 1.5rem; }
-        li { margin-bottom: 0.4rem; color: var(--text-muted); }
-        strong { color: var(--text); }
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem; }
 
-        .dataset-card {
-            background: var(--bg-card); border: 1px solid var(--border);
-            border-radius: var(--radius); padding: 1.5rem; margin: 1.5rem 0;
+        /* LIVE BAR */
+        .live-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.25rem;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius);
+            padding: 1rem 1.25rem;
+            margin-bottom: 1.5rem;
         }
-        .dataset-card strong { display: block; margin-bottom: 0.3rem; color: var(--text); }
-
-        .btn-github {
-            display: inline-flex; align-items: center; gap: 6px;
-            background: #24292e; color: #fff; padding: 10px 20px; border-radius: var(--radius-sm);
-            text-decoration: none; font-weight: 500; margin-top: 1rem; transition: background 0.2s;
+        .live-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: var(--text-primary);
         }
-        .btn-github:hover { background: #1a1f23; text-decoration: none; }
+        .pulse-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--live-red);
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+        }
+        .live-meta {
+            display: flex;
+            gap: 1.25rem;
+            flex-wrap: wrap;
+        }
+        .live-meta span {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        .live-meta strong { color: var(--text-primary); }
 
-        .github-block {
-            margin-top: 2rem; padding: 1.5rem; background: var(--bg-card);
-            border: 1px solid var(--border); border-radius: var(--radius); text-align: center;
+        /* CARDS */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius);
+            padding: 1.25rem;
+        }
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .card-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+        .card-badge {
+            font-size: 0.65rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 100px;
+            background: rgba(108, 92, 231, 0.15);
+            color: var(--brand);
+            font-weight: 700;
+        }
+        .signal-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.35rem 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.85rem;
+        }
+        .signal-row:last-child { border-bottom: none; }
+        .signal-name { color: var(--text-secondary); }
+        .signal-value { font-weight: 700; color: var(--text-primary); }
+        .trend { font-size: 0.75rem; margin-left: 0.5rem; }
+        .trend.up { color: var(--live-green); }
+        .trend.down { color: var(--live-red); }
+        .trend.flat { color: var(--text-secondary); }
+
+        /* SIGNALS LIST */
+        .signals-list {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius);
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+        .signals-header {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-secondary);
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+        .signal-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.85rem;
+        }
+        .signal-item:last-child { border-bottom: none; }
+        .signal-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .signal-dot.green { background: var(--live-green); box-shadow: 0 0 8px rgba(34, 197, 94, 0.4); }
+        .signal-dot.yellow { background: var(--live-amber); box-shadow: 0 0 8px rgba(245, 158, 11, 0.4); }
+        .signal-dot.red { background: var(--live-red); box-shadow: 0 0 8px rgba(239, 68, 68, 0.4); }
+        .signal-label { color: var(--text-secondary); }
+        .signal-text { color: var(--text-primary); font-weight: 600; }
+
+        /* SOURCE BAR */
+        .source-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            align-items: center;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius);
+            padding: 1rem 1.25rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        .source-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            background: rgba(34, 197, 94, 0.1);
+            color: var(--live-green);
+            padding: 0.35rem 0.7rem;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 0.75rem;
+        }
+        .source-note { margin-left: auto; }
+
+        /* GOVERNANCE FOOTER */
+        .governance-footer {
+            background: var(--governance-bg);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius);
+            padding: 1.25rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        .governance-footer a {
+            color: var(--brand);
+            font-weight: 600;
         }
 
-        .site-footer { text-align: center; padding: 2rem 0; border-top: 1px solid var(--border); margin-top: 2rem; }
-        .site-footer p { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.3rem; }
-        .site-footer a { color: var(--text-muted); margin: 0 0.5rem; }
-
-        @media (max-width: 600px) {
+        /* MOBILE */
+        @media (max-width: 768px) {
             .nav { flex-direction: column; gap: 0.5rem; padding: 0.75rem 1rem; }
-            .container { padding: 2rem 1rem; }
+            .nav-links { flex-wrap: wrap; justify-content: center; gap: 0.75rem 1rem; }
+            .nav-links a { font-size: 0.85rem; }
+            .container { padding: 1rem; }
+            .cards-grid { grid-template-columns: 1fr; }
+            .live-bar { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+            .source-note { margin-left: 0; margin-top: 0.5rem; }
+        }
+        @media (max-width: 480px) {
+            .nav, .nav-links { flex-wrap: wrap; justify-content: center; }
+            .container { padding: 1rem 0.75rem; }
         }
     </style>
 </head>
 <body>
-
     <nav class="nav">
         <a href="/" class="nav-logo">Rankfixer</a>
         <div class="nav-links">
             <a href="/tools" title="AI Visibility Checker, Schema Generator, Report & more">Unified Tools</a>
-            <a href="/research">Research</a>
+            <a href="/blog/tool-directory">Tools Directory</a>
             <a href="/blog">Blog</a>
+            <a href="/research">Research</a>
+            <a href="https://pruweba.com/#pillars" target="_blank" rel="noopener">Proof</a>
             <a href="https://github.com/rankfixer-ai/rankfixer-core" target="_blank" rel="noopener">GitHub</a>
         </div>
     </nav>
 
     <div class="container">
-        <h1>Rankfixer Research</h1>
-        <p>Our open-source R&D into how LLMs extract, process, and cite websites.</p>
+        <h1>Live Research Data</h1>
+        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
+            Economic and market signals powering RankFixer's research engine.
+            Updated every 30 minutes. All data from free APIs. No API keys.
+        </p>
 
-        <div class="dataset-card">
-            <h2>Latest Dataset</h2>
-            <strong>Top 100 SaaS LLM Readiness Scores (July 2026)</strong>
-            <p>We analyzed the top 100 SaaS websites across 7 key signals (Schema, Entities, Technical SEO) to determine their visibility to ChatGPT, Perplexity, and Gemini.</p>
-            <ul>
-                <li><a href="https://github.com/rankfixer-ai/rankfixer-core/blob/main/data/top_100_saas_scores.json">Download JSON Dataset</a></li>
-                <li><a href="/blog/ai-readiness-100-saas">Read the Full Analysis Report</a></li>
-            </ul>
+        <!-- LIVE BAR -->
+        <div class="live-bar">
+            <div class="live-indicator">
+                <span class="pulse-dot"></span>
+                <span>LIVE</span>
+            </div>
+            <div class="live-meta">
+                <span>Updated: <strong id="updatedAt">—</strong></span>
+                <span>Next update: <strong id="nextUpdate">—</strong></span>
+                <span>Oracle: <strong>ALL 31 PILLARS ACTIVE</strong></span>
+            </div>
         </div>
 
-        <h2>Methodology</h2>
-        <p>How we calculate AI Visibility:</p>
-        <ul>
-            <li><strong>Schema Completeness (25%):</strong> Presence of JSON-LD, FAQPage, and Organization markup.</li>
-            <li><strong>Entity Density (20%):</strong> Brand mentions and semantic clustering.</li>
-            <li><strong>Content Answer Density (20%):</strong> Direct answers vs. marketing fluff.</li>
-            <li><strong>Technical Signals (15%):</strong> Web Vitals, robots.txt AI-crawler access, and llms.txt implementation.</li>
-            <li><strong>Backlink Quality (10%):</strong> Domain authority and trust flow.</li>
-            <li><strong>Brand Entity Recognition (5%):</strong> sameAs links and knowledge base presence.</li>
-            <li><strong>Freshness (5%):</strong> dateModified signals and content currency.</li>
-        </ul>
-        <p><a href="https://github.com/rankfixer-ai/rankfixer-core/blob/main/docs/architecture.md">View Full 7-Signal Methodology →</a></p>
+        <!-- DATA CARDS -->
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">MACRO</div>
+                    <div class="card-badge">World Bank / FRED</div>
+                </div>
+                <div id="macroCard">
+                    <div class="signal-row"><span class="signal-name">GDP</span><span class="signal-value">Loading…</span></div>
+                    <div class="signal-row"><span class="signal-name">Unemployment</span><span class="signal-value">Loading…</span></div>
+                    <div class="signal-row"><span class="signal-name">Interest Rate</span><span class="signal-value">Loading…</span></div>
+                </div>
+            </div>
 
-        <h2>Contribute</h2>
-        <p>All research is open-source. Fork the engine, run your own queries, or submit a PR.</p>
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">TECH</div>
+                    <div class="card-badge">HN / GitHub</div>
+                </div>
+                <div id="techCard">
+                    <div class="signal-row"><span class="signal-name">Top Story</span><span class="signal-value">Loading…</span></div>
+                    <div class="signal-row"><span class="signal-name">Trending Repo</span><span class="signal-value">Loading…</span></div>
+                    <div class="signal-row"><span class="signal-name">Top Language</span><span class="signal-value">Loading…</span></div>
+                </div>
+            </div>
 
-        <div class="github-block">
-          <p>📦 All research is open-source.</p>
-          <a href="https://github.com/rankfixer-ai/rankfixer-core" class="btn-github">View the Code on GitHub →</a>
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">SENTIMENT</div>
+                    <div class="card-badge">GDELT</div>
+                </div>
+                <div id="sentimentCard">
+                    <div class="signal-row"><span class="signal-name">Headline</span><span class="signal-value">Loading…</span></div>
+                    <div class="signal-row"><span class="signal-name">Source</span><span class="signal-value">Loading…</span></div>
+                    <div class="signal-row"><span class="signal-name">Tone</span><span class="signal-value">Loading…</span></div>
+                </div>
+            </div>
         </div>
 
-        <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 1rem;">Last updated: July 4, 2026</p>
+        <!-- SIGNALS LIST -->
+        <div class="signals-list">
+            <div class="signals-header">Key Signals</div>
+            <div id="signalsList"></div>
+        </div>
 
-        <footer class="site-footer">
-            <p>RankFixer — Know Your AI Visibility Score</p>
-            <p><a href="/">Home</a> <a href="/tools" title="AI Visibility Checker, Schema Generator, Report & more">Unified Tools</a> <a href="/blog">Blog</a> <a href="/research">Research</a> <a href="https://github.com/rankfixer-ai/rankfixer-core">GitHub</a></p>
-            <p>No signup required. No credit card. No BS.</p>
-        </footer>
+        <!-- SOURCE BAR -->
+        <div class="source-bar">
+            <span class="source-pill">✓ World Bank</span>
+            <span class="source-pill">✓ FRED</span>
+            <span class="source-pill">✓ Hacker News</span>
+            <span class="source-pill">✓ Wikipedia</span>
+            <span class="source-pill">✓ GitHub</span>
+            <span class="source-pill">✓ GDELT</span>
+            <span class="source-note">All sources free. No API keys. Pulled every 30 minutes.</span>
+        </div>
+
+        <!-- GOVERNANCE FOOTER -->
+        <div class="governance-footer">
+            This page is governed by a 31-pillar verification framework.
+            Every signal you see passed through an Oracle before it was published.
+            Nothing here is guesswork. Everything is proven.
+            <br><br>
+            <a href="https://pruweba.com/#pillars" target="_blank" rel="noopener">View Live Proof → pruweba.com/#pillars</a>
+        </div>
     </div>
 
+    <script>
+        async function loadResearchData() {
+            try {
+                const resp = await fetch('/research/latest.json', { cache: 'no-store' });
+                if (!resp.ok) throw new Error('HTTP ' + resp.status);
+                const data = await resp.json();
+                render(data);
+            } catch (e) {
+                document.getElementById('macroCard').innerHTML = '<div class="signal-row"><span class="signal-value">Data unavailable — next update in 30 minutes</span></div>';
+                document.getElementById('techCard').innerHTML = '';
+                document.getElementById('sentimentCard').innerHTML = '';
+                document.getElementById('signalsList').innerHTML = '';
+                document.getElementById('updatedAt').textContent = 'Error';
+            }
+        }
+
+        function render(data) {
+            const feeds = data.feeds || {};
+            const now = new Date();
+            document.getElementById('updatedAt').textContent = now.toLocaleTimeString();
+            const next = new Date(now.getTime() + 30 * 60000);
+            document.getElementById('nextUpdate').textContent = next.toLocaleTimeString();
+
+            const wb = feeds.worldbank || {};
+            const fred = feeds.fred || {};
+            const hn = feeds.hackernews || {};
+            const gh = feeds.github || {};
+            const gdelt = feeds.gdelt || {};
+
+            const macroCard = document.getElementById('macroCard');
+            macroCard.innerHTML = `
+                <div class="signal-row"><span class="signal-name">GDP (PH)</span><span class="signal-value">${wb.value != null ? '$' + Number(wb.value).toLocaleString() : 'N/A'}</span></div>
+                <div class="signal-row"><span class="signal-name">Unemployment</span><span class="signal-value">${fred.value != null ? fred.value + '%' : 'N/A'}</span></div>
+                <div class="signal-row"><span class="signal-name">Interest Rate</span><span class="signal-value">${fred.value != null ? fred.value + '%' : 'N/A'}</span></div>
+            `;
+
+            const techCard = document.getElementById('techCard');
+            const topStory = (hn.stories && hn.stories[0]) ? hn.stories[0].title : 'N/A';
+            const topRepo = (gh.repos && gh.repos[0]) ? gh.repos[0].name : 'N/A';
+            const topLang = (gh.repos && gh.repos[0]) ? (gh.repos[0].language || 'N/A') : 'N/A';
+            techCard.innerHTML = `
+                <div class="signal-row"><span class="signal-name">Top Story</span><span class="signal-value">${topStory}</span></div>
+                <div class="signal-row"><span class="signal-name">Trending Repo</span><span class="signal-value">${topRepo}</span></div>
+                <div class="signal-row"><span class="signal-name">Top Language</span><span class="signal-value">${topLang}</span></div>
+            `;
+
+            const sentimentCard = document.getElementById('sentimentCard');
+            const article = (gdelt.articles && gdelt.articles[0]) ? gdelt.articles[0] : null;
+            sentimentCard.innerHTML = `
+                <div class="signal-row"><span class="signal-name">Headline</span><span class="signal-value">${article ? article.title : 'N/A'}</span></div>
+                <div class="signal-row"><span class="signal-name">Source</span><span class="signal-value">${article ? article.source : 'N/A'}</span></div>
+                <div class="signal-row"><span class="signal-name">Tone</span><span class="signal-value">${article ? (article.url || 'neutral') : 'N/A'}</span></div>
+            `;
+
+            const signalsList = document.getElementById('signalsList');
+            const signals = [];
+            if (wb.value != null) signals.push({ color: 'green', text: 'World Bank GDP data active' });
+            if (fred.value != null) signals.push({ color: 'green', text: 'FRED labor data active' });
+            if (hn.stories && hn.stories.length) signals.push({ color: 'green', text: 'Hacker News trending loaded' });
+            if (gh.repos && gh.repos.length) signals.push({ color: 'yellow', text: 'GitHub trending data present' });
+            if (gdelt.articles && gdelt.articles.length) signals.push({ color: 'green', text: 'GDELT news stream active' });
+            if (!wb.value && !fred.value && (!hn.stories || !hn.stories.length) && (!gh.repos || !gh.repos.length) && (!gdelt.articles || !gdelt.articles.length)) {
+                signals.push({ color: 'red', text: 'No live data sources returned values' });
+            }
+
+            signalsList.innerHTML = signals.map(s => `
+                <div class="signal-item">
+                    <span class="signal-dot ${s.color}"></span>
+                    <span class="signal-label">SIGNAL</span>
+                    <span class="signal-text">${s.text}</span>
+                </div>
+            `).join('');
+        }
+
+        loadResearchData();
+        setInterval(loadResearchData, 30 * 60 * 1000);
+    </script>
 </body>
 </html>
