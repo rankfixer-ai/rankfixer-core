@@ -16,7 +16,7 @@ RankFixer analyzes websites for LLM readability and generates actionable recomme
 ## Architecture
 RankFixer operates on a 3-step pipeline:
 1. Extraction: Ingest HTML, JSON-LD, structured data from target URL
-2. LLM-Readiness Scoring: Evaluate 7 signals producing a 0-100 score
+2. LLM-Readiness Scoring: Evaluate 6 signals producing a 0-100 score
 3. Recommendation Engine: Generate prioritized, actionable fixes with time estimates
 
 ## Free Tools

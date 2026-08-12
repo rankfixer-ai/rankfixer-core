@@ -133,7 +133,7 @@ class TechnicalAnalyzer:
 ### 2.2 Scoring Formula
 
 ```
-raw_score = Σ (signal_score × weight) for all 7 signals
+raw_score = Σ (signal_score × weight) for all 6 signals
 final_score = clamp(raw_score, 0, 100)
 tier = categorize(final_score)
 ```

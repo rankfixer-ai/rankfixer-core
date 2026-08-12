@@ -44,7 +44,7 @@ RankFixer scores every website on 7 weighted signals producing a composite 0-100
 ### Scoring Formula
 
 ```
-raw_score = Σ (signal_score × weight) for all 7 signals
+raw_score = Σ (signal_score × weight) for all 6 signals
 final_score = clamp(raw_score, 0, 100)
 tier = categorize(final_score)
 ```
@@ -64,7 +64,7 @@ RankFixer operates on a 3-step pipeline:
 
 ### Step 2: LLM-Readiness Scoring Engine
 
-Calculates weighted composite score from 7 signals. Normalized to 0-100. Categorized into 5 tiers.
+Calculates weighted composite score from 6 signals. Normalized to 0-100. Categorized into 5 tiers.
 
 ### Step 3: Recommendation Engine
 
