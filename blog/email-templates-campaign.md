@@ -22,7 +22,7 @@ We just finished something I think you'll find interesting.
 We ran the top 100 SaaS websites through our AI Visibility engine.
 The results surprised even us:
 
-• 67% score below 40/100
+• Average score 62.7/100
 • Only 3 companies score above 80 (HubSpot, Salesforce, Stripe)
 • 96% don't have an llms.txt file
 • 82% are missing FAQPage schema
@@ -57,7 +57,7 @@ Start with the free scan — 30 seconds, no signup needed.
 | `{{first_name}}` | Email capture | "Sarah" |
 | `{{domain}}` | Last scanned domain | "acmecorp.com" |
 | `{{score}}` | Last scan result | "34" |
-| `{{score_comparison_text}}` | Logic: score vs 48.7 avg | "You're 14.7 points below the SaaS average. Your #1 Quick Win: unblock AI crawlers." |
+| `{{score_comparison_text}}` | Logic: score vs 62.7 avg | "You're 14.7 points below the SaaS average. Your #1 Quick Win: unblock AI crawlers." |
 
 ---
 
@@ -72,7 +72,7 @@ Subject: Your {{domain}} score vs. the top 100 SaaS companies
 Hi {{first_name}},
 
 When we analyzed 100 top SaaS websites, the average AI visibility
-score was 48.7/100.
+score was 62.7/100.
 
 Your last scan for {{domain}}: {{score}}/100
 
@@ -86,11 +86,11 @@ improve 10-15 points with a single 5-minute fix.
 
 Here's how you compare to the top 5:
 
-HubSpot:     91.2
-Salesforce:  88.7
-Stripe:      86.4
-Shopify:     82.1
-Zapier:      79.8
+Teamwork.com:  91
+HubSpot:       83
+WooCommerce:   83
+Heroku:        83
+Zapier:        81
 {{domain}}:    {{score}}  ← you
 
 {{#if score_below_60}}

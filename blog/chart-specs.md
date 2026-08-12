@@ -12,11 +12,11 @@
 
 **Data:**
 ```
-Excellent (81-100):  3 sites  ███
-Good (61-80):        8 sites  ████████
-Fair (41-60):       22 sites  ██████████████████████
-Poor (21-40):       31 sites  ███████████████████████████████
-Critical (0-20):    36 sites  ████████████████████████████████████
+Excellent (81-100):  6 sites  ███
+Good (61-80):        45 sites  ████████
+Fair (41-60):       37 sites  ██████████████████████
+Poor (21-40):       2 sites  ███████████████████████████████
+Critical (0-20):    0 sites  ████████████████████████████████████
 ```
 
 **Design:**
@@ -24,10 +24,10 @@ Critical (0-20):    36 sites  ████████████████�
 - Bars color-coded by tier (Critical=#E17055, Poor=#FDCB6E, Fair=#74B9FF, Good=#00B894, Excellent=#A29BFE)
 - White labels
 - Title: "AI Visibility Scores — 100 SaaS Companies"
-- Subtitle: "67% score below 40/100"
+- Subtitle: "Average 62.7/100"
 - Size: 1200x630 (blog OG), 800x400 (inline)
 
-**Alt text:** "Bar chart showing distribution of AI visibility scores across 100 SaaS companies. 36 score Critical (0-20), 31 Poor (21-40), 22 Fair (41-60), 8 Good (61-80), and 3 Excellent (81-100)."
+**Alt text:** "Bar chart showing distribution of AI visibility scores across 100 SaaS companies. 0 score Critical (0-20), 2 Poor (21-40), 37 Fair (41-60), 45 Good (61-80), and 6 Excellent (81-100)."
 
 ---
 
@@ -37,16 +37,16 @@ Critical (0-20):    36 sites  ████████████████�
 
 **Data:**
 ```
- 1. hubspot.com      91.2  ██████████████████████████████████████████████
- 2. salesforce.com   88.7  ████████████████████████████████████████████
- 3. stripe.com       86.4  ███████████████████████████████████████████
- 4. shopify.com      82.1  ████████████████████████████████████████
- 5. zapier.com       79.8  ███████████████████████████████████████
- 6. notion.so        78.3  ██████████████████████████████████████
- 7. atlassian.com    77.5  █████████████████████████████████████
- 8. slack.com        76.9  █████████████████████████████████████
- 9. dropbox.com      74.2  ███████████████████████████████████
-10. mailchimp.com    72.8  ██████████████████████████████████
+ 1. teamwork.com      91   Excellent
+ 2. hubspot.com       83   Excellent
+ 3. woocommerce.com   83   Excellent
+ 4. heroku.com        83   Excellent
+ 5. zapier.com        81   Excellent
+ 6. twilio.com        81   Excellent
+ 7. pagerduty.com     80   Good
+ 8. stripe.com        78   Good
+ 9. cursor.com        78   Good
+10. intercom.com      78   Good
 ```
 
 **Design:**
@@ -103,10 +103,10 @@ Security                 38.9  ████████████████�
 
 **Design:**
 - Dark background
-- Category names left, average dotted line at 48.7
+- Category names left, average dotted line at 62.7
 - Bars: green above average (#00B894), red below (#E17055)
 - Title: "AI Visibility by SaaS Category"
-- Subtitle: "CRM leads. Security lags. Average: 48.7/100"
+- Subtitle: "Average: 62.7/100"
 - Size: 800x500
 
 ---
@@ -140,7 +140,7 @@ Score Range      Relative Citation Rate
 
 **Data:**
 ```
-Current avg:    48.7  ████████████████████████████████████████████████
+Current avg:    62.7  ████████████████████████████████████████████████
 After 1 fix:    56.8  ██████████████████████████████████████████████████████████
 After 3 fixes:  68.2  ██████████████████████████████████████████████████████████████████████
 After all:      78.4  ██████████████████████████████████████████████████████████████████████████████
@@ -229,7 +229,7 @@ new Chart(document.getElementById('scoreDistribution'), {
       },
       subtitle: {
         display: true,
-        text: '67% score below 40/100',
+        text: 'Average 62.7/100',
         color: '#8888A0',
         font: { size: 12 }
       }

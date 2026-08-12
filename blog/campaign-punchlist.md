@@ -90,7 +90,7 @@ Copy this into the blog post's `<head>`:
   "@context": "https://schema.org",
   "@type": "ScholarlyArticle",
   "headline": "We Analyzed the AI Readiness of 100 Top SaaS Websites (Data + Open Source Code)",
-  "description": "We ran the top 100 B2B SaaS websites through RankFixer's AI Visibility engine. 67% scored below 40/100. Here's the full dataset, methodology, and open-source code.",
+  "description": "We ran the top 100 B2B SaaS websites through RankFixer's AI Visibility engine. average score 62.7/100. Here's the full dataset, methodology, and open-source code.",
   "author": {
     "@type": "Organization",
     "name": "RankFixer",
@@ -142,7 +142,7 @@ Add to blog post `<head>`:
 
 ```html
 <meta property="og:title" content="We Analyzed the AI Readiness of 100 Top SaaS Websites (Data + Open Source Code)">
-<meta property="og:description" content="We ran the top 100 B2B SaaS websites through RankFixer's AI Visibility engine. 67% scored below 40/100. Full dataset open-sourced.">
+<meta property="og:description" content="We ran the top 100 B2B SaaS websites through RankFixer's AI Visibility engine. average score 62.7/100. Full dataset open-sourced.">
 <meta property="og:image" content="https://rankfixer.co/images/blog/saas-ai-readiness-2026.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -151,7 +151,7 @@ Add to blog post `<head>`:
 <meta property="og:site_name" content="RankFixer">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="We Analyzed the AI Readiness of 100 Top SaaS Websites (Data + Open Source Code)">
-<meta name="twitter:description" content="67% of top SaaS sites score below 40/100 on AI visibility. We analyzed 100 domains and open-sourced everything.">
+<meta name="twitter:description" content="top SaaS sites average 62.7/100 on AI visibility. We analyzed 100 domains and open-sourced everything.">
 <meta name="twitter:image" content="https://rankfixer.co/images/blog/saas-ai-readiness-2026.png">
 ```
 

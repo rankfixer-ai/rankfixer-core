@@ -82,63 +82,42 @@ Recommendation categories:
 ## RESEARCH FINDINGS: 100 SaaS AI READINESS ANALYSIS
 
 ### Key Statistics
-- **Average AI Readiness Score:** 48.7/100
-- **Median Score:** 45.0/100
-- **Sites Below 40 ("Poor"/"Critical"):** 67%
-- **Sites Above 80 ("Excellent"):** 3%
-- **Highest Score:** 91.2 (HubSpot)
-- **Lowest Score:** 1.9
+- **Average AI Readiness Score:** 62.7/100
+- **Median Score:** 63/100
+- **Sites Below 40 ("Poor"):** 2.2%
+- **Sites Above 80 ("Excellent"):** 6.7%
+- **Highest Score:** 91 (Teamwork.com)
+- **Lowest Score:** 25 (Ramp)
+- **Excluded from stats:** 9 blocked (HTTP 403) + 1 unreachable
 
 ### Score Distribution
-- 81-100 (Excellent): 3 sites — 3%
-- 61-80 (Good): 8 sites — 8%
-- 41-60 (Fair): 22 sites — 22%
-- 21-40 (Poor): 31 sites — 31%
-- 0-20 (Critical): 36 sites — 36%
+- 81-100 (Excellent): 6 sites — 6.7%
+- 61-80 (Good): 45 sites — 50%
+- 41-60 (Fair): 37 sites — 41.1%
+- 21-40 (Poor): 2 sites — 2.2%
+- 0-20 (Critical): 0 sites — 0%
 
 ### Three Key Findings
 
-#### 1. The "Schema Ceiling"
-Only 11% of top SaaS companies use FAQPage schema. 68% lack basic Organization schema. Adding FAQPage schema increases AI Visibility Score by 8-12 points on average.
+#### 1. Schema Markup Is the Biggest Gap
+The average schema score is 26.6/100 — the lowest of all six signals. Most SaaS homepages ship little or no structured schema.
 
-#### 2. The "Wall of Text" Penalty
-Sites with dense, unbroken paragraphs (>300 words without sub-headers) score significantly lower. Bulleted/list content correlates strongly with higher scores (r = 0.61).
+#### 2. llms.txt Has Gone Mainstream
+72% of analyzed domains publish an llms.txt file. Adoption has clearly tipped.
 
-#### 3. The Opportunity Window
-The gap between top quartile (68.7) and bottom quartile (36.2) is 32 points — closable with basic optimizations. The barrier to dominating AI search is low right now but won't be in 18 months.
+#### 3. The Floor Has Risen
+The median score is 63/100, and no analyzed domain scored below 21. The remaining gap is structured data and entity linking.
 
 ### Top 5 Performers
-1. hubspot.com — 91.2 (Complete schema suite, high entity density, strong knowledge base)
-2. salesforce.com — 88.7 (Enterprise structured data, Wikipedia presence, freshness signals)
-3. stripe.com — 86.4 (Developer docs as structured content, exceptional technical signals)
-4. shopify.com — 82.1 (Comprehensive product schema, strong backlink profile)
-5. zapier.com — 79.8 (Integration directory as structured data, high entity count)
+1. teamwork.com — 91
+2. hubspot.com — 83
+3. woocommerce.com — 83
+4. heroku.com — 83
+5. zapier.com — 81
 
 ### What Top Performers Have in Common
-- 5+ schema types (Organization, FAQPage, Article, Product, HowTo)
-- Brand mentioned as schema.org entity with @id references
-- sameAs links to Wikipedia, Crunchbase, LinkedIn, Twitter
-- Weekly content updates with dateModified signals
-- AI crawlers explicitly allowed in robots.txt
-- Core Web Vitals passing (LCP < 2.5s)
-
-### Citation Correlation
-*(Citation-frequency data is not part of the current scoring engine and is not claimed.)*
-
-### Category Breakdown
-| Category | Average Score | Top Performer |
-|----------|---------------|---------------|
-| CRM | 63.4 | Salesforce (88.7) |
-| Marketing Automation | 58.2 | HubSpot (91.2) |
-| Project Management | 52.7 | Notion (78.3) |
-| Collaboration | 51.2 | Slack (76.9) |
-| E-commerce | 48.1 | Shopify (82.1) |
-| Analytics | 46.3 | Amplitude (61.2) |
-| Customer Support | 45.6 | Intercom (67.3) |
-| Developer Tools | 44.8 | Stripe (86.4) |
-| Finance & Accounting | 42.1 | — |
-| HR & Recruiting | 39.5 | — |
-| Security | 38.9 | — |
+- Strong content depth and structure
+- A published llms.txt file
 
 ---
 

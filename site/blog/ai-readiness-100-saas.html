@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>We Analyzed the AI Readiness of 100 Top SaaS Websites (Data + Open Source Code) | Rankfixer</title>
-    <meta name="description" content="We ran the top 100 B2B SaaS websites through Rankfixer's AI Visibility engine. 67% scored below 40/100. Here's the full dataset, methodology, and open-source code.">
+    <meta name="description" content="We ran the top 100 B2B SaaS websites through Rankfixer's AI Visibility engine. average score 62.7/100. Here's the full dataset, methodology, and open-source code.">
 
     <!-- Open Graph -->
     <meta property="og:title" content="We Analyzed the AI Readiness of 100 Top SaaS Websites (Data + Open Source Code)">
-    <meta property="og:description" content="67% of top SaaS sites score below 40/100 on AI visibility. We analyzed 100 domains and open-sourced everything.">
+    <meta property="og:description" content="top SaaS sites average 62.7/100 on AI visibility. We analyzed 100 domains and open-sourced everything.">
     <meta property="og:image" content="https://rankfixer.co/images/blog/saas-ai-readiness-2026.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -17,7 +17,7 @@
     <meta property="og:site_name" content="RankFixer">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="We Analyzed the AI Readiness of 100 Top SaaS Websites (Data + Open Source Code)">
-    <meta name="twitter:description" content="67% of top SaaS sites score below 40/100 on AI visibility. Full dataset open-sourced.">
+    <meta name="twitter:description" content="top SaaS sites average 62.7/100 on AI visibility. Full dataset open-sourced.">
     <meta name="twitter:image" content="https://rankfixer.co/images/blog/saas-ai-readiness-2026.png">
     <link rel="canonical" href="https://rankfixer.co/blog/ai-readiness-100-saas">
 
@@ -27,7 +27,7 @@
       "@context": "https://schema.org",
       "@type": "ScholarlyArticle",
       "headline": "We Analyzed the AI Readiness of 100 Top SaaS Websites (Data + Open Source Code)",
-      "description": "We ran the top 100 B2B SaaS websites through RankFixer's AI Visibility engine. 67% scored below 40/100.",
+      "description": "We ran the top 100 B2B SaaS websites through RankFixer's AI Visibility engine. average score 62.7/100.",
       "author": {"@type": "Organization", "name": "RankFixer", "url": "https://rankfixer.co"},
       "datePublished": "2026-07-04",
       "dateModified": "2026-07-04",
@@ -121,7 +121,7 @@
 
         <h1>We Analyzed the AI Readiness of 100 Top SaaS Websites (Data + Open Source Code)</h1>
 
-        <p><strong>Executive Summary:</strong> We ran the websites of the top 100 B2B SaaS companies through RankFixer's AI recommendation engine. The result? <strong>67% scored below 40/100 for AI Visibility.</strong> Most are still optimizing for 2015 Google algorithms — leaving them invisible to ChatGPT, Perplexity, Claude, and Gemini.</p>
+        <p><strong>Executive Summary:</strong> We ran the websites of the top 100 B2B SaaS companies through RankFixer's AI recommendation engine. The result? <strong>an average score of 62.7/100.</strong> Most are doing the fundamentals well — the remaining gap is structured schema markup.</p>
 
         <p>We're open-sourcing the entire dataset, the methodology, and the analysis code.</p>
 
@@ -133,68 +133,66 @@
 
         <table>
             <tr><th>Metric</th><th>Value</th></tr>
-            <tr><td><strong>Average AI Readiness Score</strong></td><td>48.7/100</td></tr>
-            <tr><td><strong>Median Score</strong></td><td>45.0/100</td></tr>
-            <tr><td><strong>Sites Scoring Below 40</strong></td><td><strong>67%</strong></td></tr>
-            <tr><td><strong>Sites Scoring Above 80</strong></td><td>3%</td></tr>
-            <tr><td><strong>Highest Score</strong></td><td>91.2 (HubSpot)</td></tr>
-            <tr><td><strong>Lowest Score</strong></td><td>1.9</td></tr>
+            <tr><td><strong>Average AI Readiness Score</strong></td><td>62.7/100</td></tr>
+            <tr><td><strong>Median Score</strong></td><td>63/100</td></tr>
+            <tr><td><strong>Sites Scoring Below 40</strong></td><td><strong>2.2%</strong></td></tr>
+            <tr><td><strong>Sites Scoring Above 80</strong></td><td>6.7%</td></tr>
+            <tr><td><strong>Highest Score</strong></td><td>91 (Teamwork.com)</td></tr>
+            <tr><td><strong>Lowest Score</strong></td><td>25 (Ramp)</td></tr>
         </table>
 
         <p><strong>Score Distribution:</strong></p>
         <ul>
-            <li><strong>81-100 (Excellent):</strong> 3 sites — 3%</li>
-            <li><strong>61-80 (Good):</strong> 8 sites — 8%</li>
-            <li><strong>41-60 (Fair):</strong> 22 sites — 22%</li>
-            <li><strong>21-40 (Poor):</strong> 31 sites — 31%</li>
-            <li><strong>0-20 (Critical):</strong> 36 sites — 36%</li>
+            <li><strong>81-100 (Excellent):</strong> 6 sites — 6.7%</li>
+            <li><strong>61-80 (Good):</strong> 45 sites — 50%</li>
+            <li><strong>41-60 (Fair):</strong> 37 sites — 41.1%</li>
+            <li><strong>21-40 (Poor):</strong> 2 sites — 2.2%</li>
+            <li><strong>0-20 (Critical):</strong> 0 sites — 0%</li>
         </ul>
 
         <h2>What is "AI Readiness"? (The Methodology)</h2>
 
         <p>Traditional SEO measures keywords and backlinks. <strong>AI Readiness — Generative Engine Optimization (GEO)</strong> — measures how easily a Large Language Model can extract, comprehend, and cite your website as a factual source.</p>
 
-        <p>Using the open-source <strong><a href="https://github.com/rankfixer-ai/rankfixer-core">RankFixer Core engine</a></strong>, we scored each of the 100 SaaS websites on <strong>7 primary LLM citation signals:</strong></p>
+        <p>Using the open-source <strong><a href="https://github.com/rankfixer-ai/rankfixer-core">RankFixer Core engine</a></strong>, we scored each of the 100 SaaS websites on <strong>6 measured signals:</strong></p>
 
         <table>
             <tr><th>Signal</th><th>Weight</th><th>What We Measured</th></tr>
-            <tr><td><strong>Schema Completeness</strong></td><td>25%</td><td>JSON-LD, Microdata, RDFa; FAQPage, Article, Product schemas</td></tr>
-            <tr><td><strong>Entity Density</strong></td><td>20%</td><td>Brand mentions, @id references, semantic clustering</td></tr>
-            <tr><td><strong>Content Answer Density</strong></td><td>20%</td><td>Direct answers vs. fluff; declarative sentences</td></tr>
-            <tr><td><strong>Technical Signals</strong></td><td>15%</td><td>Core Web Vitals, robots.txt AI crawler access</td></tr>
-            <tr><td><strong>Backlink Quality</strong></td><td>10%</td><td>Domain Authority, trust flow</td></tr>
-            <tr><td><strong>Brand Entity Recognition</strong></td><td>5%</td><td>Organization schema with sameAs links</td></tr>
-            <tr><td><strong>Freshness</strong></td><td>5%</td><td>dateModified in schema</td></tr>
+            <tr><td><strong>Schema Markup</strong></td><td>25%</td><td>JSON-LD blocks and @type markers (Organization, FAQPage, WebSite, Product, Article, HowTo)</td></tr>
+            <tr><td><strong>Entity Signals</strong></td><td>20%</td><td>@id references, sameAs links, brand markup, Open Graph / Twitter Card tags</td></tr>
+            <tr><td><strong>Content Depth</strong></td><td>20%</td><td>Word count, FAQ-style headings, lists/tables, meta description</td></tr>
+            <tr><td><strong>Structure</strong></td><td>15%</td><td>Heading hierarchy, nav/main landmarks, microdata markers</td></tr>
+            <tr><td><strong>Crawlability</strong></td><td>10%</td><td>Homepage HTTP 200 + robots.txt presence</td></tr>
+            <tr><td><strong>llms.txt</strong></td><td>10%</td><td>Presence of an llms.txt file at the domain root</td></tr>
+            
         </table>
 
-        <h2>3 Shocking Findings</h2>
+        <h2>3 Findings</h2>
 
-        <h3>1. The "Schema Ceiling" is Real</h3>
-        <p>Most SaaS companies have basic <code>Organization</code> schema. But only <strong>~11%</strong> utilize <code>FAQPage</code>, and almost none use <code>HowTo</code> or <code>SoftwareApplication</code>.</p>
-        <p><strong>The Fix:</strong> Add <code>FAQPage</code> schema to your top 10 pages. 5 minutes. 8-12 point gain.</p>
+        <h3>1. Schema Markup Is the Biggest Gap</h3>
+        <p>The average schema score is just <strong>26.6/100</strong> — the lowest of all six signals. Most SaaS homepages ship little or no structured schema, even as content, structure, and crawlability all score 80+.</p>
+        <p><strong>The Fix:</strong> Add JSON-LD <code>Organization</code> + <code>WebSite</code> schema (and <code>FAQPage</code> where relevant) to your homepage.</p>
 
-        <h3>2. The "Wall of Text" Penalty</h3>
-        <p>Sites with dense, unbroken paragraphs score significantly lower than sites with structured, scannable content. LLMs process in tokens — if your value prop is buried in a 500-word essay, the AI won't extract it.</p>
+        <h3>2. llms.txt Has Gone Mainstream</h3>
+        <p><strong>72% of analyzed domains</strong> now publish an <code>llms.txt</code> file — a lightweight map for AI crawlers. Adoption among top SaaS has clearly tipped; the 28% that still lack one are falling behind.</p>
 
-        <h3>3. The "Average" is Dangerously Low</h3>
-        <p>The median score across 100 top SaaS companies was just <strong>45.0/100.</strong> This is your opportunity — a 32-point gap between top and bottom quartiles, closable with basic optimizations.</p>
+        <h3>3. The Floor Has Risen</h3>
+        <p>The median score is <strong>63/100</strong>, and no analyzed domain scored below 21. The weakest sites score "Poor" (21–40), not "Critical" (0–20). The remaining gap is structured data and entity linking.</p>
 
         <h2>The Top 5 Performers</h2>
         <table>
             <tr><th>Rank</th><th>Domain</th><th>Score</th><th>Why They Win</th></tr>
-            <tr><td>1</td><td><strong>hubspot.com</strong></td><td>91.2</td><td>Complete schema suite, strong knowledge base</td></tr>
-            <tr><td>2</td><td><strong>salesforce.com</strong></td><td>88.7</td><td>Enterprise structured data, Wikipedia presence</td></tr>
-            <tr><td>3</td><td><strong>stripe.com</strong></td><td>86.4</td><td>Dev docs as structured content, exceptional technical signals</td></tr>
-            <tr><td>4</td><td><strong>shopify.com</strong></td><td>82.1</td><td>Comprehensive product schema, strong backlink profile</td></tr>
-            <tr><td>5</td><td><strong>zapier.com</strong></td><td>79.8</td><td>Integration directory as structured data</td></tr>
+            <tr><td>1</td><td><strong>teamwork.com</strong></td><td>91</td><td>Excellent</td></tr>
+            <tr><td>2</td><td><strong>hubspot.com</strong></td><td>83</td><td>Excellent</td></tr>
+            <tr><td>3</td><td><strong>woocommerce.com</strong></td><td>83</td><td>Excellent</td></tr>
+            <tr><td>4</td><td><strong>heroku.com</strong></td><td>83</td><td>Excellent</td></tr>
+            <tr><td>5</td><td><strong>zapier.com</strong></td><td>81</td><td>Excellent</td></tr>
         </table>
 
         <p><strong>What the Top 5 Have in Common:</strong></p>
         <ul>
-            <li>✅ 5+ schema types</li>
-            <li>✅ AI crawlers explicitly allowed</li>
-            <li>✅ Weekly content updates</li>
-            <li>✅ sameAs links to knowledge bases</li>
+            <li>Strong content depth and structure</li>
+            <li>A published llms.txt file</li>
         </ul>
 
         <h2>How to Improve Your Score</h2>
@@ -236,7 +234,7 @@
         </section>
 
         <p style="text-align: center; margin-top: 2rem; font-size: 0.85rem; color: var(--text-muted);">
-            Last Updated: July 4, 2026 · Data Source: <a href="https://github.com/rankfixer-ai/rankfixer-core">RankFixer Core v1.0.0</a>
+            Last Updated: August 13, 2026 · Data Source: <a href="https://github.com/rankfixer-ai/rankfixer-core">RankFixer Core v1.0.0</a>
         </p>
 
     </article>
