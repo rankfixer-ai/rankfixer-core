@@ -178,6 +178,15 @@ function detectClaimEvolution(triples) {
 // =============================================================================
 
 function calculateTripleConfidence(claim, evidence, inference, contradictions = []) {
+    // Guardrail: failed extraction (404 / empty / fallback stub) must never
+    // produce meaningful confidence. Returns 0.0 and never APPROVE_DEPLOY.
+    const claimText = (claim && claim.text) ? claim.text : '';
+    const evidenceText = Array.isArray(evidence) ? evidence.map(e => (e && e.text) || '').join(' ') : '';
+    const failureMarker = /fallback stub|http error 404|not found|insufficient data|extraction failed|no data available/i;
+    if (!claimText.trim() || failureMarker.test(claimText) || failureMarker.test(evidenceText)) {
+        return 0.0;
+    }
+
     let score = 0.5;
     
     if (evidence.length > 0) {
