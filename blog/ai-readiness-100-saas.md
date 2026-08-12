@@ -1,7 +1,7 @@
 ---
 title: "We Analyzed the AI Readiness of 100 Top SaaS Websites (Data + Open Source Code)"
-description: "We ran the top 100 B2B SaaS websites through RankFixer's AI Visibility engine. 78% scored below 40/100. Here's the full dataset, methodology, and open-source code."
-date: 2026-07-04
+description: "We ran 100 B2B SaaS websites through RankFixer's AI Visibility engine. Average score 62.7/100; schema markup is the biggest gap. Full dataset, methodology, and open-source code."
+date: 2026-08-13
 author: "RankFixer Team"
 tags: ["GEO", "AI Visibility", "SaaS", "LLM", "Open Source", "Data", "Research"]
 category: "Research"
@@ -12,7 +12,7 @@ schema_type: "ScholarlyArticle"
 
 # We Analyzed the AI Readiness of 100 Top SaaS Websites (Data + Open Source Code)
 
-**Executive Summary:** We ran the websites of the top 100 B2B SaaS companies through RankFixer's AI recommendation engine. The result? **78% scored below 40/100 for AI Visibility.** Most are still optimizing for 2015 Google algorithms — leaving them invisible to ChatGPT, Perplexity, Claude, and Gemini.
+**Executive Summary:** We ran the websites of 100 B2B SaaS companies through RankFixer's AI Visibility engine. Of those, **90 were fully analyzed** (9 blocked our crawler, 1 was unreachable). The result: an **average score of 62.7/100** — and the biggest gap is structured schema markup, not content or technical foundations.
 
 We're open-sourcing the entire dataset, the methodology, and the analysis code.
 
@@ -25,61 +25,51 @@ We're open-sourcing the entire dataset, the methodology, and the analysis code.
 
 | Metric | Value |
 | :--- | :--- |
-| **Average AI Readiness Score** | 48.7/100 |
-| **Median Score** | 45.0/100 |
-| **Sites Scoring Below 40 ("Poor" or "Critical")** | **67%** |
-| **Sites Scoring Above 80 ("Excellent")** | 3% |
-| **Highest Score** | 91.2 (HubSpot) |
-| **Lowest Score** | 1.9 |
+| **Domains Analyzed** | 90 (of 100; 9 blocked + 1 unreachable) |
+| **Average AI Visibility Score** | 62.7/100 |
+| **Median Score** | 63/100 |
+| **Sites Scoring 81+ ("Excellent")** | 6 (6.7%) |
+| **Sites Scoring 61–80 ("Good")** | 45 (50%) |
+| **Highest Score** | 91 (Teamwork.com) |
+| **Lowest Score** | 25 (Ramp) |
 
 **Score Distribution:**
-- **81-100 (Excellent):** 3 sites — 3%
-- **61-80 (Good):** 8 sites — 8%
-- **41-60 (Fair):** 22 sites — 22%
-- **21-40 (Poor):** 31 sites — 31%
-- **0-20 (Critical):** 36 sites — 36%
+- **81–100 (Excellent):** 6 sites — 6.7%
+- **61–80 (Good):** 45 sites — 50%
+- **41–60 (Fair):** 37 sites — 41.1%
+- **21–40 (Poor):** 2 sites — 2.2%
+- **0–20 (Critical):** 0 sites — 0%
 
 ---
 
-## What is "AI Readiness"? (The Methodology)
+## What is "AI Visibility"? (The Methodology)
 
-Traditional SEO measures keywords and backlinks. **AI Readiness — Generative Engine Optimization (GEO)** — measures how easily a Large Language Model can extract, comprehend, and cite your website as a factual source.
+Traditional SEO measures keywords and backlinks. **AI Visibility — Generative Engine Optimization (GEO)** — measures how easily a Large Language Model can extract, comprehend, and cite your website as a factual source.
 
-Using the open-source **[RankFixer Core engine](https://github.com/rankfixer-ai/rankfixer-core)**, we scored each of the 100 SaaS websites on **7 primary LLM citation signals:**
+Using the open-source **[RankFixer Core engine](https://github.com/rankfixer-ai/rankfixer-core)**, we scored each domain on **6 measured signals:**
 
 | Signal | Weight | What We Measured |
 | :--- | :--- | :--- |
-| **Schema Completeness** | 25% | JSON-LD, Microdata, RDFa; presence of Organization, FAQPage, Article, Product schemas |
-| **Entity Density** | 20% | Brand mentions, @id references, semantic clustering on key pages |
-| **Content Answer Density** | 20% | Direct answers vs. fluff; ratio of clear definitions to marketing language |
-| **Technical Signals** | 15% | Core Web Vitals, mobile readiness, HTTPS, robots.txt AI crawler access |
-| **Backlink Quality** | 10% | Domain Authority, citation flow, trust flow of referring domains |
-| **Brand Entity Recognition** | 5% | Is your brand defined as a schema.org Organization with sameAs links? |
-| **Freshness** | 5% | How recently was content updated? dateModified in schema? |
+| **Schema Markup** | 25% | JSON-LD blocks and `@type` markers (Organization, FAQPage, WebSite, Product, Article, HowTo) |
+| **Entity Signals** | 20% | `@id` references, `sameAs` links, brand markup, Open Graph / Twitter Card tags |
+| **Content Depth** | 20% | Word count, FAQ-style headings, lists/tables, meta description |
+| **Structure** | 15% | Heading hierarchy, `nav`/`main` landmarks, microdata markers |
+| **Crawlability** | 10% | Homepage HTTP 200 + `robots.txt` presence |
+| **llms.txt** | 10% | Presence of an `llms.txt` file at the domain root |
 
-Each site received a composite score from 0-100.
+Each site received a composite 0–100 score.
 
 ---
 
-## 3 Shocking Findings from the Data
+## 3 Findings from the Data
 
-### 1. The "Schema Ceiling" is Real
+### 1. Schema Markup Is the Biggest Gap
 
-**Finding:** Most SaaS companies have basic `Organization` schema. But only **11%** utilize `FAQPage`, and almost none use `HowTo` or `SoftwareApplication`.
+**Finding:** The average schema score is just **26.6/100** — the lowest of all six signals. Most SaaS homepages ship little or no structured schema, even as content, structure, and crawlability all score 80+.
 
-| Schema Type | % of Sites Using It |
-| :--- | :--- |
-| Organization | 32% (68% missing this basic type) |
-| Website | ~60% |
-| BreadcrumbList | ~50% |
-| Article | ~40% |
-| FAQPage | **~11%** |
-| Product | < 10% |
-| HowTo | < 5% |
+**What this means for AI:** LLMs rely on specific schema types to generate step-by-step answers and feature comparisons. Without `Organization`, `WebSite`, and `FAQPage` markup, your content is harder for models to parse and cite.
 
-**What this means for AI:** LLMs rely on specific schema types to generate step-by-step answers or feature comparisons. Without `FAQPage` and `HowTo` schema, LLMs bypass your content and cite a competitor who has clearly structured theirs.
-
-**The Fix:** Add `FAQPage` schema to your top 10 pages. It takes 5 minutes and increases your AI Visibility Score by an average of **8-12 points.**
+**The Fix:** Add JSON-LD `Organization` + `WebSite` schema (and `FAQPage` where relevant) to your homepage.
 
 ```html
 <script type="application/ld+json">
@@ -98,134 +88,92 @@ Each site received a composite score from 0-100.
 </script>
 ```
 
-**[Check your site's schema now — free →](https://rankfixer.co/ai-visibility-checker)**
+**[Check your site's schema now — free](https://rankfixer.co/ai-visibility-checker)**
 
 ---
 
-### 2. The "Wall of Text" Penalty
+### 2. llms.txt Has Gone Mainstream
 
-**Finding:** Sites with dense, unbroken paragraphs (over 300 words without a sub-header) scored significantly lower than sites with structured, scannable content.
+**Finding:** **65 of 90 domains (72%)** now publish an `llms.txt` file — a lightweight map for AI crawlers that was nearly nonexistent two years ago. Adoption among top SaaS has clearly tipped.
 
-| Content Structure | Correlation with Score |
-| :--- | :--- |
-| Bulleted/Listed Content | Strong positive (r = 0.61) |
-| Short Paragraphs (<150 words) | Moderate positive |
-| Long Paragraphs (>300 words) | Strong negative |
+**What this means:** llms.txt is no longer a differentiator; it's table stakes. The 28% that still lack one are falling behind.
 
-**What this means for AI:** LLMs process text in chunks (tokens). If your core value proposition is buried in a 500-word "About Us" essay, the AI will not extract it. It will extract a competitor's bulleted list instead.
-
-**The Fix:** Break up your content. Use H2/H3 headers, bullet points, and short paragraphs. Write for AI extraction, not just human skimming. Target: one idea per paragraph, declarative sentences, direct answers.
+**The Fix:** Publish an `llms.txt` at your domain root. It's a plain-text file that points AI crawlers at your key pages and content.
 
 ---
 
-### 3. The "Average" is Dangerously Low — And That's Your Opportunity
+### 3. The Floor Has Risen
 
-**Finding:** The median AI Readiness score across the top 100 SaaS companies was just **45.0/100.** Two-thirds score below 40.
+**Finding:** The median score is **63/100**, and **no analyzed domain scored below 21**. The weakest sites score "Poor" (21–40), not "Critical" (0–20). The days of "one-third of SaaS is invisible to AI" are over for this cohort — most of the gap is now in the last 20–30 points of schema and entity work.
 
-| Score Range | # of Sites | Tier |
-| :--- | :--- | :--- |
-| 81-100 | 3 | Excellent — AI-first brand |
-| 61-80 | 8 | Good — Consistently cited |
-| 41-60 | 22 | Fair — Present but not prominent |
-| 21-40 | 31 | Poor — Occasional mentions |
-| 0-20 | 36 | Critical — Invisible to AI |
-
-**What this means for you:** The barrier to dominating AI search is incredibly low right now. You don't need massive domain authority; you need to structure your data better than the incumbent. The top quartile scores above 68.7. The bottom quartile scores below 36.2. That's a **32-point gap** closable with basic optimizations.
-
-**The window is open. It won't be in 18 months.**
+**What this means for you:** The barrier to strong AI visibility has moved up. The remaining gap is structured data and entity linking, not the fundamentals.
 
 ---
 
 ## The Top 5 Performers
 
-| Rank | Domain | Score | Why They Win |
+| Rank | Domain | Score | Tier |
 | :--- | :--- | :--- | :--- |
-| 1 | **hubspot.com** | 91.2 | Complete schema suite across all types, high entity density, strong knowledge base presence |
-| 2 | **salesforce.com** | 88.7 | Enterprise-grade structured data, Wikipedia presence, freshness signals on all pages |
-| 3 | **stripe.com** | 86.4 | Developer docs as structured content, exceptional technical signals |
-| 4 | **shopify.com** | 82.1 | Comprehensive product schema, strong backlink profile, entity consistency |
-| 5 | **zapier.com** | 79.8 | Integration directory as structured data, high entity count per page |
-
-**What the Top 5 Have in Common:**
-- ✅ **5+ schema types** (Organization, FAQPage, Article, Product, HowTo)
-- ✅ **Brand mentioned as schema.org entity** with @id references
-- ✅ **sameAs links** to Wikipedia, Crunchbase, LinkedIn, Twitter
-- ✅ **Weekly content updates** with dateModified signals
-- ✅ **AI crawlers explicitly allowed** in robots.txt
-- ✅ **Core Web Vitals passing** (LCP < 2.5s)
+| 1 | **teamwork.com** | 91 | Excellent |
+| 2 | **hubspot.com** | 83 | Excellent |
+| 3 | **woocommerce.com** | 83 | Excellent |
+| 4 | **heroku.com** | 83 | Excellent |
+| 5 | **zapier.com** | 81 | Excellent |
 
 ---
 
-## The Bottom 5 Performers
+## The Bottom 5 (of the analyzed set)
 
-| Rank | Domain | Score | Why They Struggle |
-| :--- | :--- | :--- | :--- |
-| 96 | (anon) | 7.3 | No schema markup detected, AI crawlers blocked |
-| 97 | (anon) | 5.1 | JavaScript-only rendering, no SSR fallback |
-| 98 | (anon) | 4.8 | No knowledge base presence, thin content |
-| 99 | (anon) | 3.2 | Missing HTTPS, no structured data |
-| 100 | (anon) | 1.9 | All of the above — effectively invisible |
-
-**Common Patterns in Low Performers:**
-- ❌ **0-1 schema types** present
-- ❌ **AI crawlers blocked** in robots.txt (GPTBot, ClaudeBot)
-- ❌ **No `llms.txt`** file (96% of all domains lack one)
-- ❌ **Slow Core Web Vitals** (LCP > 4s)
-- ❌ **Content updated < quarterly** with no dateModified
-- ❌ **No knowledge base presence** (Wikipedia, Crunchbase)
-
----
-
-## The Citation Correlation
-
-We tracked how often each domain was cited by ChatGPT, Perplexity, and Claude across category-relevant queries:
-
-| Score Range | Relative Citation Rate | What This Means |
+| Domain | Score | Tier |
 | :--- | :--- | :--- |
-| **81-100** | **~4x** above average | Routinely cited as category leader |
-| **61-80** | ~2x above average | Frequently mentioned, rarely primary |
-| **41-60** | Average | Mentioned occasionally |
-| **21-40** | ~0.4x below average | Rarely mentioned |
-| **0-20** | ~0.1x below average | Effectively invisible |
+| ramp.com | 25 | Poor |
+| dropbox.com | 29 | Poor |
+| cloud.google.com | 43 | Fair |
+| dbt.com | 44 | Fair |
+| airtable.com | 44 | Fair |
 
-**Key Finding:** Breaking the 80-point threshold dramatically increases citation frequency. The jump from 79 to 81 is worth more than the jump from 40 to 60.
+> Note: a few domains show intermittent anti-bot behavior between runs — dropbox.com scored 71 in one pass and 29 in another. See the methodology note below.
+
+---
+
+## Excluded Domains (could not analyze)
+
+These 10 domains returned an access-denied or timeout response to the RankFixerBot and are excluded from the statistics rather than assigned a misleading low score:
+
+- **Blocked (HTTP 403):** perplexity.ai, midjourney.com, canva.com, freshworks.com, convertkit.com, tableau.com, gusto.com, zendesk.com, udemy.com
+- **Unreachable (timeout):** coursera.com
 
 ---
 
 ## How to Improve Your AI Visibility Score
 
 ### The 5-Minute Fix (Do This Today)
-1. **Unblock AI crawlers** in robots.txt — add `Allow: /` for GPTBot, ClaudeBot, PerplexityBot
-2. **Create `llms.txt`** at your domain root (see [our template](https://github.com/rankfixer-ai/rankfixer-core/blob/main/llms.txt))
-3. **Update your copyright year** — "© 2024" signals staleness to LLMs
+1. **Create `llms.txt`** at your domain root if you don't have one (28% still don't)
+2. **Keep AI crawlers reachable** — 10 domains in this set block us entirely
+3. **Add `Organization` + `WebSite` schema** to your homepage
 
 ### The 1-Hour Fix
-4. **Add Organization + WebSite schema** with sameAs links to social profiles
-5. **Add FAQPage schema** to your top 5 pages
-6. **Fix your largest Core Web Vital offender** (usually image optimization)
+4. **Add `FAQPage` schema** to your top 5 pages
+5. **Add `@id`/`sameAs` entity links** to connect your brand to authoritative sources
 
 ### The Full Optimization
-7. **Add Product, Article, and HowTo schemas** across your site
-8. **Build a knowledge graph** with @id references linking entities across pages
-9. **Claim Wikipedia + Crunchbase profiles** — these are LLM training data anchors
-10. **Publish original research** — AI models disproportionately cite data-backed content
-11. **Monitor weekly** — AI models update frequently; your score changes with them
+6. **Add `Product`, `Article`, and `HowTo` schemas** across your site
+7. **Build a knowledge graph** with `@id` references linking entities across pages
+8. **Publish original research** — AI models disproportionately cite data-backed content
+9. **Monitor weekly** — your score changes as both your site and the models evolve
 
-**[Get your personalized Quick Win — free 30-second scan →](https://rankfixer.co/ai-visibility-checker)**
+**[Get your personalized Quick Win — free 30-second scan](https://rankfixer.co/ai-visibility-checker)**
 
 ---
 
 ## Download the Open-Source Dataset
 
-Transparency is core to our mission. The complete dataset, methodology, and analysis code are fully open-source under MIT license.
+Transparency is core to our mission. The complete dataset, methodology, and analysis code are fully open-source under the MIT license.
 
-📊 **[View `top_100_saas_scores.json` on GitHub](https://github.com/rankfixer-ai/rankfixer-core/blob/main/data/top_100_saas_scores.json)** — Full 100-domain dataset with per-signal scores
-
-📋 **[Read the Full Benchmark Report](https://github.com/rankfixer-ai/rankfixer-core/blob/main/data/benchmark_report.md)** — Executive summary, category breakdowns, signal-by-signal analysis
-
-🔬 **[Explore the Analysis Notebook](https://github.com/rankfixer-ai/rankfixer-core/blob/main/experiments/llm_readiness_analysis.ipynb)** — Jupyter notebook with statistical analysis, correlation charts, and Quick Win simulation
-
-🛠️ **[Fork `rankfixer-core`](https://github.com/rankfixer-ai/rankfixer-core)** — Run your own analyses, contribute new signals, or build on top of the engine
+- **[View `top_100_saas_scores.json` on GitHub](https://github.com/rankfixer-ai/rankfixer-core/blob/main/data/top_100_saas_scores.json)** — full dataset with per-signal scores
+- **[Read the Full Benchmark Report](https://github.com/rankfixer-ai/rankfixer-core/blob/main/data/benchmark_report.md)** — executive summary, signal-by-signal analysis
+- **[Run the batch analyzer](https://github.com/rankfixer-ai/rankfixer-core/blob/main/tools/batch-analyze.js)** — reproduce the scores yourself
+- **[Fork `rankfixer-core`](https://github.com/rankfixer-ai/rankfixer-core)** — run your own analyses or build on the engine
 
 *If you're a developer, data scientist, or SEO researcher: fork the repo, run your own queries against any domain, and contribute to the engine.*
 
@@ -233,85 +181,29 @@ Transparency is core to our mission. The complete dataset, methodology, and anal
 
 ## Signal-by-Signal Breakdown
 
-### Schema Completeness (25% weight)
-- **Average score:** 59.3% of maximum
-- **Top quartile:** 92.1% | **Bottom quartile:** 24.7%
-- **Most common issue:** Missing FAQPage schema (82% of domains)
-- **Quickest fix:** Add JSON-LD Organization + WebSite schema to homepage (1 hour, 10-15 point gain)
-
-### Entity Density (20% weight)
-- **Average score:** 44.2% of maximum
-- **Top quartile:** 78.5% | **Bottom quartile:** 15.8%
-- **Most common issue:** Low entity mentions per 1000 words (average 3.2, target > 8)
-- **Quickest fix:** Tag brand name as schema.org Organization entity with @id, link all mentions
-
-### Content Answer Density (20% weight)
-- **Average score:** 51.7% of maximum
-- **Top quartile:** 72.3% | **Bottom quartile:** 31.2%
-- **Most common issue:** Marketing-heavy copy with low declarative sentence ratio
-- **Quickest fix:** Add FAQ sections using semantic HTML + FAQPage schema on top 5 pages
-
-### Technical Signals (15% weight)
-- **Average score:** 62.4% of maximum
-- **Top quartile:** 88.9% | **Bottom quartile:** 35.1%
-- **Most common issues:** GPTBot blocked (39%), ClaudeBot blocked (41%), no llms.txt (96%)
-- **Quickest fix:** Unblock AI crawlers + create llms.txt (5 minutes, 10-15 point gain)
-
-### Backlink Quality (10% weight)
-- **Average score:** 38.1% of maximum
-- **Top quartile:** 65.4% | **Bottom quartile:** 14.2%
-- **Most common issue:** Low domain authority relative to category leaders
-
-### Brand Entity Recognition (5% weight)
-- **Average score:** 33.6% of maximum
-- **Top quartile:** 71.8% | **Bottom quartile:** 8.4%
-- **Most common issues:** No Wikipedia page (91%), no Crunchbase profile (76%)
-
-### Freshness (5% weight)
-- **Average score:** 52.9% of maximum
-- **Top quartile:** 84.2% | **Bottom quartile:** 22.6%
-- **Most common issue:** No dateModified in schema.org Article markup
-
----
-
-## Category Breakdown
-
-| Category | Average Score | Top Performer |
+| Signal | Weight | Average Score |
 | :--- | :--- | :--- |
-| **CRM** | 63.4 | Salesforce (88.7) |
-| **Marketing Automation** | 58.2 | HubSpot (91.2) |
-| **Project Management** | 52.7 | Notion (78.3) |
-| **Collaboration** | 51.2 | Slack (76.9) |
-| **E-commerce** | 48.1 | Shopify (82.1) |
-| **Analytics** | 46.3 | Amplitude (61.2) |
-| **Customer Support** | 45.6 | Intercom (67.3) |
-| **Developer Tools** | 44.8 | Stripe (86.4) |
-| **Finance & Accounting** | 42.1 | — |
-| **HR & Recruiting** | 39.5 | — |
-| **Security** | 38.9 | — |
+| Schema Markup | 25% | 26.6 |
+| Entity Signals | 20% | 61.3 |
+| Content Depth | 20% | 80.3 |
+| Structure | 15% | 82.5 |
+| Crawlability | 10% | 80.0 |
+| llms.txt | 10% | 72.2 |
 
-**Insight:** CRM and Marketing Automation lead because their business models reward heavy content marketing investment — which correlates with structured data implementation. Developer Tools and Security lag despite technical sophistication — proving that technical skill doesn't automatically translate to AI-friendly content structure.
+**The story in one table:** fundamentals (content, structure, crawlability) are strong across the board. The gap is concentrated in schema markup (26.6) — the highest-weighted signal — and, to a lesser degree, entity linking (61.3).
 
 ---
 
 ## Methodology Details
 
-- **Tool:** [RankFixer Core v1.0.0](https://github.com/rankfixer-ai/rankfixer-core)
-- **Date Analyzed:** July 2026
-- **Sample:** 100 SaaS domains from Crunchbase, BuiltWith, and Ahrefs top rankings
-- **Signals Evaluated:** 7 weighted signals (see methodology above)
-- **Scoring:** Weighted composite, normalized to 0-100
-- **Platforms Queried:** ChatGPT (GPT-4), Perplexity, Google AI Overviews
-- **Limitations:** English-language only, desktop-focused, point-in-time snapshot
-
----
-
-## Related Resources
-
-- [The Anatomy of an AI Citation](#) — How LLMs decide which sources to cite
-- [How to Engineer Your Site for ChatGPT](#) — Technical guide to GEO optimization
-- [GEO vs. SEO: What's the Difference?](#) — Why both matter in 2026
-- [Full Architecture Documentation](https://github.com/rankfixer-ai/rankfixer-core/blob/main/docs/architecture.md) — Deep dive into the 3-step pipeline
+- **Engine:** [RankFixer Core](https://github.com/rankfixer-ai/rankfixer-core) (`site/netlify/functions/score.js`)
+- **Date Analyzed:** August 2026
+- **Sample:** 100 curated SaaS domains (`data/domains_to_analyze.txt`)
+- **Signals Evaluated:** 6 weighted signals (see methodology above)
+- **Scoring:** Weighted composite, normalized to 0–100
+- **Method:** fetch homepage + `robots.txt` + `llms.txt` (RankFixerBot user agent), parse HTML, score
+- **Exclusions:** blocked (HTTP 401/403/406/418/429) and unreachable domains are marked and excluded from averages
+- **Limitations:** English-language only, point-in-time snapshot, single-pass crawl
 
 ---
 
@@ -319,31 +211,29 @@ Transparency is core to our mission. The complete dataset, methodology, and anal
 
 If you found this analysis useful, please share it:
 
-**LinkedIn:** *"We analyzed 100 SaaS companies' AI readiness. Only 3% scored above 80/100. Here's the full open-source dataset."*
+**LinkedIn:** *"We analyzed 100 SaaS companies' AI visibility. Average score: 62.7/100 — schema markup is the biggest gap. Here's the full open-source dataset."*
 
-**Twitter/X:** *"67% of top SaaS sites score below 40/100 on AI visibility. We analyzed 100 domains and open-sourced everything. 🧵"*
+**Twitter/X:** *"We scored 100 SaaS sites for AI visibility and open-sourced everything. Schema markup is the #1 gap (avg 26.6/100)."*
 
 **Cite the data:**
-> RankFixer. (2026). *Top 100 SaaS LLM Readiness Scores.* Retrieved from https://github.com/rankfixer-ai/rankfixer-core
+> RankFixer. (2026). *Top 100 SaaS AI Visibility Scores.* Retrieved from https://github.com/rankfixer-ai/rankfixer-core
 
 ---
 
 ## How Does Your Site Compare?
 
-Most SaaS companies are invisible to AI. The ones who fix this now will own their category in AI search results for the next 5 years.
+The remaining gap in AI visibility is structured data and entity linking — both cheap to fix and highly weighted. Don't guess whether ChatGPT understands your site.
 
-Don't guess whether ChatGPT understands your site.
-
-**[Run Your Free AI Visibility Scan →](https://rankfixer.co/ai-visibility-checker)**
+**[Run Your Free AI Visibility Scan](https://rankfixer.co/ai-visibility-checker)**
 
 *Get your exact score in 30 seconds, plus a prioritized Quick Win. No signup. No credit card.*
 
 ---
 
-*Built with ❤️ by the RankFixer team. If this helped you understand AI visibility, give us a [star on GitHub](https://github.com/rankfixer-ai/rankfixer-core).*
+*Built by the RankFixer team. If this helped you understand AI visibility, give us a [star on GitHub](https://github.com/rankfixer-ai/rankfixer-core).*
 
 ---
 
-**Last Updated:** July 4, 2026
-**Data Source:** [RankFixer Core v1.0.0](https://github.com/rankfixer-ai/rankfixer-core)
-**License:** MIT — Free to use, modify, and distribute with attribution.
+**Last Updated:** August 13, 2026
+**Data Source:** [RankFixer Core](https://github.com/rankfixer-ai/rankfixer-core)
+**License:** MIT — free to use, modify, and distribute with attribution.
