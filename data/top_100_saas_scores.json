@@ -1,18 +1,21 @@
 {
   "title": "Top 100 SaaS AI Visibility Scores — RankFixer Core Analysis",
   "description": "AI Visibility scores of SaaS websites, measured by the RankFixer scoring engine across 6 signals: Schema Markup, Entity Density, Content Depth, Structure, Crawlability, and llms.txt presence.",
-  "methodology": "For each domain, the homepage, robots.txt, and llms.txt are fetched (RankFixerBot user agent). Schema, entity, content, and structure are parsed from homepage HTML; crawlability from HTTP status; llms.txt from presence. Signals are weighted (schema 0.25, entity 0.20, content 0.20, structure 0.15, crawlable 0.10, llms.txt 0.10) into a 0-100 score.",
+  "methodology": "For each domain, the homepage, robots.txt, and llms.txt are fetched (RankFixerBot user agent). Schema, entity, content, and structure are parsed from homepage HTML; crawlability from HTTP status; llms.txt from presence. Signals are weighted (schema 0.25, entity 0.20, content 0.20, structure 0.15, crawlable 0.10, llms.txt 0.10) into a 0-100 score. Domains that block the crawler or are unreachable are excluded from summary statistics.",
   "date_analyzed": "2026-08-12",
   "analyzer_version": "score.js (site/netlify/functions/score.js)",
   "total_domains": 100,
-  "average_score": 57.2,
-  "median_score": 62,
+  "analyzed_domains": 90,
+  "blocked_domains": 9,
+  "error_domains": 1,
+  "average_score": 62.7,
+  "median_score": 63,
   "score_distribution": {
     "tier_1_excellent_81_100": 6,
-    "tier_2_good_61_80": 46,
+    "tier_2_good_61_80": 45,
     "tier_3_fair_41_60": 37,
-    "tier_4_poor_21_40": 1,
-    "tier_5_critical_0_20": 10
+    "tier_4_poor_21_40": 2,
+    "tier_5_critical_0_20": 0
   },
   "top_performers": [
     {
@@ -78,95 +81,148 @@
   ],
   "bottom_performers": [
     {
-      "rank": 91,
-      "domain": "freshworks.com",
-      "score": 12,
-      "tier": "Critical"
+      "rank": 81,
+      "domain": "digitalocean.com",
+      "score": 47,
+      "tier": "Fair"
     },
     {
-      "rank": 92,
-      "domain": "coursera.com",
-      "score": 5,
-      "tier": "Critical"
+      "rank": 82,
+      "domain": "aws.amazon.com",
+      "score": 47,
+      "tier": "Fair"
     },
     {
-      "rank": 93,
-      "domain": "perplexity.ai",
-      "score": 2,
-      "tier": "Critical"
+      "rank": 83,
+      "domain": "snowflake.com",
+      "score": 45,
+      "tier": "Fair"
     },
     {
-      "rank": 94,
-      "domain": "midjourney.com",
-      "score": 2,
-      "tier": "Critical"
+      "rank": 84,
+      "domain": "anthropic.com",
+      "score": 44,
+      "tier": "Fair"
     },
     {
-      "rank": 95,
-      "domain": "canva.com",
-      "score": 2,
-      "tier": "Critical"
+      "rank": 85,
+      "domain": "huggingface.co",
+      "score": 44,
+      "tier": "Fair"
     },
     {
-      "rank": 96,
-      "domain": "convertkit.com",
-      "score": 2,
-      "tier": "Critical"
+      "rank": 86,
+      "domain": "airtable.com",
+      "score": 44,
+      "tier": "Fair"
     },
     {
-      "rank": 97,
-      "domain": "tableau.com",
-      "score": 2,
-      "tier": "Critical"
+      "rank": 87,
+      "domain": "dbt.com",
+      "score": 44,
+      "tier": "Fair"
     },
     {
-      "rank": 98,
-      "domain": "gusto.com",
-      "score": 2,
-      "tier": "Critical"
+      "rank": 88,
+      "domain": "cloud.google.com",
+      "score": 43,
+      "tier": "Fair"
     },
     {
-      "rank": 99,
-      "domain": "zendesk.com",
-      "score": 2,
-      "tier": "Critical"
+      "rank": 89,
+      "domain": "dropbox.com",
+      "score": 29,
+      "tier": "Poor"
     },
     {
-      "rank": 100,
-      "domain": "udemy.com",
-      "score": 2,
-      "tier": "Critical"
+      "rank": 90,
+      "domain": "ramp.com",
+      "score": 25,
+      "tier": "Poor"
     }
   ],
   "signal_breakdown": {
     "schema": {
       "weight": 0.25,
-      "average": 24.5
+      "average": 26.6
     },
     "entity": {
       "weight": 0.2,
-      "average": 55.6
+      "average": 61.3
     },
     "content": {
       "weight": 0.2,
-      "average": 72.9
+      "average": 80.3
     },
     "structure": {
       "weight": 0.15,
-      "average": 74.9
+      "average": 82.5
     },
     "crawlable": {
       "weight": 0.1,
-      "average": 74.3
+      "average": 80
     },
     "llmsTxt": {
       "weight": 0.1,
       "average": null
     }
   },
+  "excluded_domains": [
+    {
+      "domain": "perplexity.ai",
+      "status": "blocked",
+      "http": "403"
+    },
+    {
+      "domain": "midjourney.com",
+      "status": "blocked",
+      "http": "403"
+    },
+    {
+      "domain": "canva.com",
+      "status": "blocked",
+      "http": "403"
+    },
+    {
+      "domain": "freshworks.com",
+      "status": "blocked",
+      "http": "403"
+    },
+    {
+      "domain": "convertkit.com",
+      "status": "blocked",
+      "http": "403"
+    },
+    {
+      "domain": "tableau.com",
+      "status": "blocked",
+      "http": "403"
+    },
+    {
+      "domain": "gusto.com",
+      "status": "blocked",
+      "http": "403"
+    },
+    {
+      "domain": "zendesk.com",
+      "status": "blocked",
+      "http": "403"
+    },
+    {
+      "domain": "udemy.com",
+      "status": "blocked",
+      "http": "403"
+    },
+    {
+      "domain": "coursera.com",
+      "status": "error",
+      "http": "network error / timeout"
+    }
+  ],
   "raw_data": [
     {
       "domain": "teamwork.com",
+      "status": "ok",
       "score": 91,
       "tier": "Excellent",
       "schema": 85,
@@ -178,6 +234,7 @@
     },
     {
       "domain": "hubspot.com",
+      "status": "ok",
       "score": 83,
       "tier": "Excellent",
       "schema": 50,
@@ -189,6 +246,7 @@
     },
     {
       "domain": "woocommerce.com",
+      "status": "ok",
       "score": 83,
       "tier": "Excellent",
       "schema": 50,
@@ -200,6 +258,7 @@
     },
     {
       "domain": "heroku.com",
+      "status": "ok",
       "score": 83,
       "tier": "Excellent",
       "schema": 50,
@@ -211,6 +270,7 @@
     },
     {
       "domain": "zapier.com",
+      "status": "ok",
       "score": 81,
       "tier": "Excellent",
       "schema": 60,
@@ -222,6 +282,7 @@
     },
     {
       "domain": "twilio.com",
+      "status": "ok",
       "score": 81,
       "tier": "Excellent",
       "schema": 60,
@@ -233,6 +294,7 @@
     },
     {
       "domain": "pagerduty.com",
+      "status": "ok",
       "score": 80,
       "tier": "Good",
       "schema": 50,
@@ -244,6 +306,7 @@
     },
     {
       "domain": "stripe.com",
+      "status": "ok",
       "score": 78,
       "tier": "Good",
       "schema": 40,
@@ -255,6 +318,7 @@
     },
     {
       "domain": "cursor.com",
+      "status": "ok",
       "score": 78,
       "tier": "Good",
       "schema": 60,
@@ -266,6 +330,7 @@
     },
     {
       "domain": "intercom.com",
+      "status": "ok",
       "score": 78,
       "tier": "Good",
       "schema": 50,
@@ -276,18 +341,8 @@
       "llms_txt": 100
     },
     {
-      "domain": "render.com",
-      "score": 78,
-      "tier": "Good",
-      "schema": 60,
-      "entity": 85,
-      "content": 75,
-      "structure": 85,
-      "crawlable": 80,
-      "llms_txt": 100
-    },
-    {
       "domain": "netlify.com",
+      "status": "ok",
       "score": 78,
       "tier": "Good",
       "schema": 40,
@@ -298,7 +353,20 @@
       "llms_txt": 100
     },
     {
+      "domain": "render.com",
+      "status": "ok",
+      "score": 78,
+      "tier": "Good",
+      "schema": 60,
+      "entity": 85,
+      "content": 75,
+      "structure": 85,
+      "crawlable": 80,
+      "llms_txt": 100
+    },
+    {
       "domain": "close.com",
+      "status": "ok",
       "score": 78,
       "tier": "Good",
       "schema": 40,
@@ -310,6 +378,7 @@
     },
     {
       "domain": "pipedrive.com",
+      "status": "ok",
       "score": 77,
       "tier": "Good",
       "schema": 55,
@@ -321,6 +390,7 @@
     },
     {
       "domain": "klaviyo.com",
+      "status": "ok",
       "score": 77,
       "tier": "Good",
       "schema": 55,
@@ -332,6 +402,7 @@
     },
     {
       "domain": "metabase.com",
+      "status": "ok",
       "score": 77,
       "tier": "Good",
       "schema": 40,
@@ -343,6 +414,7 @@
     },
     {
       "domain": "bamboohr.com",
+      "status": "ok",
       "score": 75,
       "tier": "Good",
       "schema": 30,
@@ -354,6 +426,7 @@
     },
     {
       "domain": "asana.com",
+      "status": "ok",
       "score": 74,
       "tier": "Good",
       "schema": 40,
@@ -365,6 +438,7 @@
     },
     {
       "domain": "atlassian.com",
+      "status": "ok",
       "score": 73,
       "tier": "Good",
       "schema": 40,
@@ -376,6 +450,7 @@
     },
     {
       "domain": "sentry.io",
+      "status": "ok",
       "score": 73,
       "tier": "Good",
       "schema": 50,
@@ -387,6 +462,7 @@
     },
     {
       "domain": "webflow.com",
+      "status": "ok",
       "score": 73,
       "tier": "Good",
       "schema": 40,
@@ -398,6 +474,7 @@
     },
     {
       "domain": "edx.org",
+      "status": "ok",
       "score": 72,
       "tier": "Good",
       "schema": 50,
@@ -409,6 +486,7 @@
     },
     {
       "domain": "calendly.com",
+      "status": "ok",
       "score": 72,
       "tier": "Good",
       "schema": 50,
@@ -420,6 +498,7 @@
     },
     {
       "domain": "salesforce.com",
+      "status": "ok",
       "score": 71,
       "tier": "Good",
       "schema": 55,
@@ -430,18 +509,8 @@
       "llms_txt": 100
     },
     {
-      "domain": "dropbox.com",
-      "score": 71,
-      "tier": "Good",
-      "schema": 50,
-      "entity": 65,
-      "content": 75,
-      "structure": 85,
-      "crawlable": 80,
-      "llms_txt": 100
-    },
-    {
       "domain": "datadoghq.com",
+      "status": "ok",
       "score": 71,
       "tier": "Good",
       "schema": 40,
@@ -453,6 +522,7 @@
     },
     {
       "domain": "monday.com",
+      "status": "ok",
       "score": 71,
       "tier": "Good",
       "schema": 40,
@@ -464,6 +534,7 @@
     },
     {
       "domain": "railway.app",
+      "status": "ok",
       "score": 71,
       "tier": "Good",
       "schema": 60,
@@ -475,6 +546,7 @@
     },
     {
       "domain": "bigcommerce.com",
+      "status": "ok",
       "score": 71,
       "tier": "Good",
       "schema": 40,
@@ -486,6 +558,7 @@
     },
     {
       "domain": "cloudflare.com",
+      "status": "ok",
       "score": 70,
       "tier": "Good",
       "schema": 60,
@@ -497,6 +570,7 @@
     },
     {
       "domain": "mongodb.com",
+      "status": "ok",
       "score": 70,
       "tier": "Good",
       "schema": 30,
@@ -508,6 +582,7 @@
     },
     {
       "domain": "adobe.com",
+      "status": "ok",
       "score": 69,
       "tier": "Good",
       "schema": 40,
@@ -519,6 +594,7 @@
     },
     {
       "domain": "amplitude.com",
+      "status": "ok",
       "score": 68,
       "tier": "Good",
       "schema": 40,
@@ -530,6 +606,7 @@
     },
     {
       "domain": "activecampaign.com",
+      "status": "ok",
       "score": 68,
       "tier": "Good",
       "schema": 40,
@@ -541,6 +618,7 @@
     },
     {
       "domain": "clickup.com",
+      "status": "ok",
       "score": 67,
       "tier": "Good",
       "schema": 30,
@@ -552,6 +630,7 @@
     },
     {
       "domain": "lever.co",
+      "status": "ok",
       "score": 67,
       "tier": "Good",
       "schema": 75,
@@ -563,6 +642,7 @@
     },
     {
       "domain": "newrelic.com",
+      "status": "ok",
       "score": 67,
       "tier": "Good",
       "schema": 40,
@@ -574,6 +654,7 @@
     },
     {
       "domain": "smartsheet.com",
+      "status": "ok",
       "score": 66,
       "tier": "Good",
       "schema": 30,
@@ -585,6 +666,7 @@
     },
     {
       "domain": "front.com",
+      "status": "ok",
       "score": 66,
       "tier": "Good",
       "schema": 40,
@@ -596,6 +678,7 @@
     },
     {
       "domain": "adyen.com",
+      "status": "ok",
       "score": 65,
       "tier": "Good",
       "schema": 30,
@@ -607,6 +690,7 @@
     },
     {
       "domain": "workday.com",
+      "status": "ok",
       "score": 65,
       "tier": "Good",
       "schema": 40,
@@ -618,6 +702,7 @@
     },
     {
       "domain": "circleci.com",
+      "status": "ok",
       "score": 65,
       "tier": "Good",
       "schema": 30,
@@ -629,6 +714,7 @@
     },
     {
       "domain": "vercel.com",
+      "status": "ok",
       "score": 64,
       "tier": "Good",
       "schema": 40,
@@ -640,6 +726,7 @@
     },
     {
       "domain": "basecamp.com",
+      "status": "ok",
       "score": 64,
       "tier": "Good",
       "schema": 40,
@@ -651,6 +738,7 @@
     },
     {
       "domain": "sketch.com",
+      "status": "ok",
       "score": 64,
       "tier": "Good",
       "schema": 30,
@@ -662,6 +750,7 @@
     },
     {
       "domain": "shopify.com",
+      "status": "ok",
       "score": 63,
       "tier": "Good",
       "schema": 10,
@@ -673,6 +762,7 @@
     },
     {
       "domain": "planetscale.com",
+      "status": "ok",
       "score": 63,
       "tier": "Good",
       "schema": 30,
@@ -684,6 +774,7 @@
     },
     {
       "domain": "gitlab.com",
+      "status": "ok",
       "score": 63,
       "tier": "Good",
       "schema": 40,
@@ -695,6 +786,7 @@
     },
     {
       "domain": "waveapps.com",
+      "status": "ok",
       "score": 63,
       "tier": "Good",
       "schema": 20,
@@ -706,6 +798,7 @@
     },
     {
       "domain": "zoho.com",
+      "status": "ok",
       "score": 62,
       "tier": "Good",
       "schema": 40,
@@ -717,6 +810,7 @@
     },
     {
       "domain": "typeform.com",
+      "status": "ok",
       "score": 62,
       "tier": "Good",
       "schema": 30,
@@ -728,6 +822,7 @@
     },
     {
       "domain": "brex.com",
+      "status": "ok",
       "score": 61,
       "tier": "Good",
       "schema": 10,
@@ -739,6 +834,7 @@
     },
     {
       "domain": "replit.com",
+      "status": "ok",
       "score": 60,
       "tier": "Fair",
       "schema": 0,
@@ -750,6 +846,7 @@
     },
     {
       "domain": "mailchimp.com",
+      "status": "ok",
       "score": 59,
       "tier": "Fair",
       "schema": 30,
@@ -761,6 +858,7 @@
     },
     {
       "domain": "freshdesk.com",
+      "status": "ok",
       "score": 59,
       "tier": "Fair",
       "schema": 40,
@@ -772,6 +870,7 @@
     },
     {
       "domain": "figma.com",
+      "status": "ok",
       "score": 58,
       "tier": "Fair",
       "schema": 40,
@@ -783,6 +882,7 @@
     },
     {
       "domain": "freshbooks.com",
+      "status": "ok",
       "score": 58,
       "tier": "Fair",
       "schema": 20,
@@ -794,6 +894,7 @@
     },
     {
       "domain": "docker.com",
+      "status": "ok",
       "score": 58,
       "tier": "Fair",
       "schema": 20,
@@ -805,6 +906,7 @@
     },
     {
       "domain": "segment.com",
+      "status": "ok",
       "score": 57,
       "tier": "Fair",
       "schema": 0,
@@ -816,6 +918,7 @@
     },
     {
       "domain": "sendgrid.com",
+      "status": "ok",
       "score": 57,
       "tier": "Fair",
       "schema": 0,
@@ -827,6 +930,7 @@
     },
     {
       "domain": "fastly.com",
+      "status": "ok",
       "score": 57,
       "tier": "Fair",
       "schema": 0,
@@ -838,6 +942,7 @@
     },
     {
       "domain": "xero.com",
+      "status": "ok",
       "score": 57,
       "tier": "Fair",
       "schema": 0,
@@ -849,6 +954,7 @@
     },
     {
       "domain": "invisionapp.com",
+      "status": "ok",
       "score": 57,
       "tier": "Fair",
       "schema": 0,
@@ -860,6 +966,7 @@
     },
     {
       "domain": "neon.tech",
+      "status": "ok",
       "score": 56,
       "tier": "Fair",
       "schema": 10,
@@ -871,6 +978,7 @@
     },
     {
       "domain": "gocardless.com",
+      "status": "ok",
       "score": 56,
       "tier": "Fair",
       "schema": 20,
@@ -882,6 +990,7 @@
     },
     {
       "domain": "azure.microsoft.com",
+      "status": "ok",
       "score": 56,
       "tier": "Fair",
       "schema": 0,
@@ -893,6 +1002,7 @@
     },
     {
       "domain": "windsurf.com",
+      "status": "ok",
       "score": 55,
       "tier": "Fair",
       "schema": 10,
@@ -904,17 +1014,7 @@
     },
     {
       "domain": "slack.com",
-      "score": 54,
-      "tier": "Fair",
-      "schema": 0,
-      "entity": 40,
-      "content": 75,
-      "structure": 85,
-      "crawlable": 80,
-      "llms_txt": 100
-    },
-    {
-      "domain": "linear.app",
+      "status": "ok",
       "score": 54,
       "tier": "Fair",
       "schema": 0,
@@ -926,6 +1026,19 @@
     },
     {
       "domain": "supabase.com",
+      "status": "ok",
+      "score": 54,
+      "tier": "Fair",
+      "schema": 0,
+      "entity": 40,
+      "content": 75,
+      "structure": 85,
+      "crawlable": 80,
+      "llms_txt": 100
+    },
+    {
+      "domain": "linear.app",
+      "status": "ok",
       "score": 54,
       "tier": "Fair",
       "schema": 0,
@@ -937,6 +1050,7 @@
     },
     {
       "domain": "databricks.com",
+      "status": "ok",
       "score": 54,
       "tier": "Fair",
       "schema": 0,
@@ -948,6 +1062,7 @@
     },
     {
       "domain": "squareup.com",
+      "status": "ok",
       "score": 54,
       "tier": "Fair",
       "schema": 0,
@@ -959,6 +1074,7 @@
     },
     {
       "domain": "looker.com",
+      "status": "ok",
       "score": 53,
       "tier": "Fair",
       "schema": 0,
@@ -969,18 +1085,8 @@
       "llms_txt": 100
     },
     {
-      "domain": "fly.io",
-      "score": 52,
-      "tier": "Fair",
-      "schema": 0,
-      "entity": 40,
-      "content": 65,
-      "structure": 85,
-      "crawlable": 80,
-      "llms_txt": 100
-    },
-    {
       "domain": "notion.so",
+      "status": "ok",
       "score": 52,
       "tier": "Fair",
       "schema": 0,
@@ -991,7 +1097,20 @@
       "llms_txt": 100
     },
     {
+      "domain": "fly.io",
+      "status": "ok",
+      "score": 52,
+      "tier": "Fair",
+      "schema": 0,
+      "entity": 40,
+      "content": 65,
+      "structure": 85,
+      "crawlable": 80,
+      "llms_txt": 100
+    },
+    {
       "domain": "quickbooks.com",
+      "status": "ok",
       "score": 52,
       "tier": "Fair",
       "schema": 0,
@@ -1003,6 +1122,7 @@
     },
     {
       "domain": "elastic.co",
+      "status": "ok",
       "score": 51,
       "tier": "Fair",
       "schema": 10,
@@ -1014,6 +1134,7 @@
     },
     {
       "domain": "grammarly.com",
+      "status": "ok",
       "score": 49,
       "tier": "Fair",
       "schema": 0,
@@ -1025,6 +1146,7 @@
     },
     {
       "domain": "helpscout.com",
+      "status": "ok",
       "score": 49,
       "tier": "Fair",
       "schema": 0,
@@ -1036,6 +1158,7 @@
     },
     {
       "domain": "miro.com",
+      "status": "ok",
       "score": 47,
       "tier": "Fair",
       "schema": 0,
@@ -1047,6 +1170,7 @@
     },
     {
       "domain": "trello.com",
+      "status": "ok",
       "score": 47,
       "tier": "Fair",
       "schema": 0,
@@ -1058,6 +1182,7 @@
     },
     {
       "domain": "digitalocean.com",
+      "status": "ok",
       "score": 47,
       "tier": "Fair",
       "schema": 0,
@@ -1069,6 +1194,7 @@
     },
     {
       "domain": "aws.amazon.com",
+      "status": "ok",
       "score": 47,
       "tier": "Fair",
       "schema": 0,
@@ -1080,6 +1206,7 @@
     },
     {
       "domain": "snowflake.com",
+      "status": "ok",
       "score": 45,
       "tier": "Fair",
       "schema": 0,
@@ -1090,7 +1217,8 @@
       "llms_txt": 0
     },
     {
-      "domain": "huggingface.co",
+      "domain": "anthropic.com",
+      "status": "ok",
       "score": 44,
       "tier": "Fair",
       "schema": 0,
@@ -1101,7 +1229,8 @@
       "llms_txt": 0
     },
     {
-      "domain": "anthropic.com",
+      "domain": "huggingface.co",
+      "status": "ok",
       "score": 44,
       "tier": "Fair",
       "schema": 0,
@@ -1113,6 +1242,7 @@
     },
     {
       "domain": "airtable.com",
+      "status": "ok",
       "score": 44,
       "tier": "Fair",
       "schema": 0,
@@ -1124,6 +1254,7 @@
     },
     {
       "domain": "dbt.com",
+      "status": "ok",
       "score": 44,
       "tier": "Fair",
       "schema": 0,
@@ -1135,6 +1266,7 @@
     },
     {
       "domain": "cloud.google.com",
+      "status": "ok",
       "score": 43,
       "tier": "Fair",
       "schema": 0,
@@ -1145,7 +1277,20 @@
       "llms_txt": 0
     },
     {
+      "domain": "dropbox.com",
+      "status": "ok",
+      "score": 29,
+      "tier": "Poor",
+      "schema": 0,
+      "entity": 20,
+      "content": 20,
+      "structure": 20,
+      "crawlable": 80,
+      "llms_txt": 100
+    },
+    {
       "domain": "ramp.com",
+      "status": "ok",
       "score": 25,
       "tier": "Poor",
       "schema": 0,
@@ -1154,120 +1299,10 @@
       "structure": 20,
       "crawlable": 80,
       "llms_txt": 0
-    },
-    {
-      "domain": "freshworks.com",
-      "score": 12,
-      "tier": "Critical",
-      "schema": 0,
-      "entity": 0,
-      "content": 0,
-      "structure": 0,
-      "crawlable": 20,
-      "llms_txt": 100
-    },
-    {
-      "domain": "coursera.com",
-      "score": 5,
-      "tier": "Critical",
-      "schema": 0,
-      "entity": 0,
-      "content": 0,
-      "structure": 0,
-      "crawlable": 50,
-      "llms_txt": 0
-    },
-    {
-      "domain": "perplexity.ai",
-      "score": 2,
-      "tier": "Critical",
-      "schema": 0,
-      "entity": 0,
-      "content": 0,
-      "structure": 0,
-      "crawlable": 20,
-      "llms_txt": 0
-    },
-    {
-      "domain": "midjourney.com",
-      "score": 2,
-      "tier": "Critical",
-      "schema": 0,
-      "entity": 0,
-      "content": 0,
-      "structure": 0,
-      "crawlable": 20,
-      "llms_txt": 0
-    },
-    {
-      "domain": "canva.com",
-      "score": 2,
-      "tier": "Critical",
-      "schema": 0,
-      "entity": 0,
-      "content": 0,
-      "structure": 0,
-      "crawlable": 20,
-      "llms_txt": 0
-    },
-    {
-      "domain": "convertkit.com",
-      "score": 2,
-      "tier": "Critical",
-      "schema": 0,
-      "entity": 0,
-      "content": 0,
-      "structure": 0,
-      "crawlable": 20,
-      "llms_txt": 0
-    },
-    {
-      "domain": "tableau.com",
-      "score": 2,
-      "tier": "Critical",
-      "schema": 0,
-      "entity": 0,
-      "content": 0,
-      "structure": 0,
-      "crawlable": 20,
-      "llms_txt": 0
-    },
-    {
-      "domain": "gusto.com",
-      "score": 2,
-      "tier": "Critical",
-      "schema": 0,
-      "entity": 0,
-      "content": 0,
-      "structure": 0,
-      "crawlable": 20,
-      "llms_txt": 0
-    },
-    {
-      "domain": "zendesk.com",
-      "score": 2,
-      "tier": "Critical",
-      "schema": 0,
-      "entity": 0,
-      "content": 0,
-      "structure": 0,
-      "crawlable": 20,
-      "llms_txt": 0
-    },
-    {
-      "domain": "udemy.com",
-      "score": 2,
-      "tier": "Critical",
-      "schema": 0,
-      "entity": 0,
-      "content": 0,
-      "structure": 0,
-      "crawlable": 20,
-      "llms_txt": 0
     }
   ],
   "data_integrity": {
-    "note": "Regenerated on real domains with the deployed score.js engine. The prior 7-signal breakdown (backlink_quality, brand_entity_recognition, freshness, Lighthouse-based technical_signals) was removed because no code in the repo computes those signals. category_breakdown and industry_insights (previously hand-authored) were also removed. All domains are verified real and unique.",
+    "note": "Regenerated on real domains with the deployed score.js engine. Domains that blocked the crawler (HTTP 401/403/406/418/429) or were unreachable are listed in excluded_domains and excluded from average, median, and score_distribution. The prior 7-signal breakdown (backlink_quality, brand_entity_recognition, freshness, Lighthouse-based technical_signals) was removed because no code computes them; category_breakdown and industry_insights were removed as hand-authored.",
     "removed_signals": [
       "backlink_quality",
       "brand_entity_recognition",
@@ -1276,7 +1311,6 @@
     "removed_sections": [
       "category_breakdown",
       "industry_insights"
-    ],
-    "failed_domains": []
+    ]
   }
 }

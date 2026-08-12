@@ -35,6 +35,12 @@ export async function handler(event) {
       html = await htmlRes.value.text();
     }
     results.dimensions.crawlable = scoreCrawlable(htmlRes, robotsRes);
+    results.status = detectStatus(htmlRes);
+    if (results.status !== 'ok') {
+      results.score = null;
+      results.label = results.status === 'blocked' ? 'Blocked' : 'Unreachable';
+      return { statusCode: 200, headers, body: JSON.stringify(results) };
+    }
 
     if (html) {
       results.dimensions.schema = scoreSchema(html);
@@ -72,6 +78,16 @@ export async function handler(event) {
   } catch (e) {
     return { statusCode: 200, headers, body: JSON.stringify({ domain, error: 'analysis_failed', detail: String(e).slice(0, 200), score: 0, label: 'Unknown', dimensions: {} }) };
   }
+}
+
+export function detectStatus(htmlRes) {
+  if (htmlRes.status === 'fulfilled' && htmlRes.value.ok) return 'ok';
+  if (htmlRes.status === 'fulfilled') {
+    const st = htmlRes.value.status;
+    if (st === 401 || st === 403 || st === 406 || st === 418 || st === 429) return 'blocked';
+    return 'error';
+  }
+  return 'error';
 }
 
 export function scoreCrawlable(htmlRes, robotsRes) {

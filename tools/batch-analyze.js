@@ -1,10 +1,12 @@
 // tools/batch-analyze.js
 // Batch-run the deployed RankFixer scoring engine against data/domains_to_analyze.txt
 // Usage: node tools/batch-analyze.js [limit]   (limit = N domains for smoke test; omit for full run)
+// Domains that block the crawler (HTTP 401/403/406/418/429) or are unreachable are marked
+// "blocked"/"error" and excluded from average/median/distribution.
 import { readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
-import { scoreCrawlable, scoreSchema, scoreEntity, scoreContent, scoreStructure } from '../site/netlify/functions/score.js';
+import { scoreCrawlable, scoreSchema, scoreEntity, scoreContent, scoreStructure, detectStatus } from '../site/netlify/functions/score.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
@@ -29,9 +31,7 @@ async function fetchT(url) {
   const t = setTimeout(() => ctrl.abort(), TIMEOUT_MS);
   try {
     return await fetch(url, { headers: UA, redirect: 'follow', signal: ctrl.signal });
-  } finally {
-    clearTimeout(t);
-  }
+  } finally { clearTimeout(t); }
 }
 
 async function analyze(domain) {
@@ -41,10 +41,13 @@ async function analyze(domain) {
     fetchT(base + '/robots.txt'),
     fetchT(base + '/llms.txt'),
   ]);
-  let html = '';
-  if (htmlRes.status === 'fulfilled' && htmlRes.value.ok) {
-    try { html = await htmlRes.value.text(); } catch (_) {}
+  const status = detectStatus(htmlRes);
+  if (status !== 'ok') {
+    const http = htmlRes.status === 'fulfilled' ? String(htmlRes.value.status) : 'network error / timeout';
+    return { domain, status, http, score: null, tier: null };
   }
+  let html = '';
+  try { html = await htmlRes.value.text(); } catch (_) {}
   const dims = {};
   dims.crawlable = scoreCrawlable(htmlRes, robotsRes);
   if (html) {
@@ -61,20 +64,23 @@ async function analyze(domain) {
   for (const k in WEIGHTS) { total += (dims[k] || 0) * WEIGHTS[k]; wsum += WEIGHTS[k]; }
   const score = Math.round(total / wsum);
   return {
-    domain, score, tier: tierOf(score),
+    domain, status: 'ok', score, tier: tierOf(score),
     schema: dims.schema, entity: dims.entity, content: dims.content,
     structure: dims.structure, crawlable: dims.crawlable, llms_txt: dims.llmsTxt,
   };
 }
 
 function buildSummary(results) {
-  const sorted = [...results].sort((a, b) => b.score - a.score);
+  const analyzed = results.filter(r => r.status === 'ok');
+  const blocked = results.filter(r => r.status === 'blocked');
+  const error = results.filter(r => r.status === 'error');
+  const sorted = [...analyzed].sort((a, b) => b.score - a.score);
   const n = sorted.length;
   const sum = sorted.reduce((s, r) => s + r.score, 0);
-  const avg = Math.round((sum / n) * 10) / 10;
+  const avg = n ? Math.round((sum / n) * 10) / 10 : 0;
   const median = n % 2 === 1
     ? sorted[Math.floor(n / 2)].score
-    : Math.round(((sorted[n / 2 - 1].score + sorted[n / 2].score) / 2) * 10) / 10;
+    : (n ? Math.round(((sorted[n / 2 - 1].score + sorted[n / 2].score) / 2) * 10) / 10 : 0);
 
   const dist = { tier_1_excellent_81_100: 0, tier_2_good_61_80: 0, tier_3_fair_41_60: 0, tier_4_poor_21_40: 0, tier_5_critical_0_20: 0 };
   for (const r of sorted) {
@@ -95,7 +101,7 @@ function buildSummary(results) {
     signal_breakdown[sig] = { weight: WEIGHTS[sig], average: a };
   }
 
-  return { sorted, avg, median, dist, top, bottom, signal_breakdown };
+  return { analyzed: sorted, blocked, error, avg, median, dist, top, bottom, signal_breakdown };
 }
 
 async function main() {
@@ -104,7 +110,6 @@ async function main() {
   const domains = limit ? all.slice(0, limit) : all;
 
   const results = [];
-  const errors = [];
   let done = 0;
   const queue = [...domains];
   const workers = Array.from({ length: CONCURRENCY }, async () => {
@@ -115,11 +120,11 @@ async function main() {
       try {
         const r = await analyze(d);
         results.push(r);
-        console.log(`[${String(n).padStart(3)}/${domains.length}] ${d.padEnd(24)} ${String(r.score).padStart(5)}  ${r.tier}`);
+        if (r.status === 'ok') console.log(`[${String(n).padStart(3)}/${domains.length}] ${d.padEnd(24)} ${String(r.score).padStart(5)}  ${r.tier}`);
+        else console.log(`[${String(n).padStart(3)}/${domains.length}] ${d.padEnd(24)} ${r.status.toUpperCase().padEnd(8)} ${r.http}`);
       } catch (e) {
-        errors.push({ domain: d, error: String(e).slice(0, 120) });
-        results.push({ domain: d, score: 0, tier: 'Critical', schema: 0, entity: 0, content: 0, structure: 0, crawlable: 0, llms_txt: 0 });
-        console.log(`[${String(n).padStart(3)}/${domains.length}] ${d.padEnd(24)} ERROR  ${String(e).slice(0, 60)}`);
+        results.push({ domain: d, status: 'error', http: String(e).slice(0, 60), score: null, tier: null });
+        console.log(`[${String(n).padStart(3)}/${domains.length}] ${d.padEnd(24)} ERROR   ${String(e).slice(0, 60)}`);
       }
       await new Promise(r => setTimeout(r, 80));
     }
@@ -127,34 +132,38 @@ async function main() {
   await Promise.all(workers);
 
   const s = buildSummary(results);
+  const excluded = [...s.blocked, ...s.error].map(r => ({ domain: r.domain, status: r.status, http: r.http }));
   const out = {
     title: 'Top 100 SaaS AI Visibility Scores — RankFixer Core Analysis',
     description: 'AI Visibility scores of SaaS websites, measured by the RankFixer scoring engine across 6 signals: Schema Markup, Entity Density, Content Depth, Structure, Crawlability, and llms.txt presence.',
-    methodology: 'For each domain, the homepage, robots.txt, and llms.txt are fetched (RankFixerBot user agent). Schema, entity, content, and structure are parsed from homepage HTML; crawlability from HTTP status; llms.txt from presence. Signals are weighted (schema 0.25, entity 0.20, content 0.20, structure 0.15, crawlable 0.10, llms.txt 0.10) into a 0-100 score.',
+    methodology: 'For each domain, the homepage, robots.txt, and llms.txt are fetched (RankFixerBot user agent). Schema, entity, content, and structure are parsed from homepage HTML; crawlability from HTTP status; llms.txt from presence. Signals are weighted (schema 0.25, entity 0.20, content 0.20, structure 0.15, crawlable 0.10, llms.txt 0.10) into a 0-100 score. Domains that block the crawler or are unreachable are excluded from summary statistics.',
     date_analyzed: new Date().toISOString().slice(0, 10),
     analyzer_version: 'score.js (site/netlify/functions/score.js)',
-    total_domains: s.sorted.length,
+    total_domains: results.length,
+    analyzed_domains: s.analyzed.length,
+    blocked_domains: s.blocked.length,
+    error_domains: s.error.length,
     average_score: s.avg,
     median_score: s.median,
     score_distribution: s.dist,
     top_performers: s.top,
     bottom_performers: s.bottom,
     signal_breakdown: s.signal_breakdown,
-    raw_data: s.sorted,
+    excluded_domains: excluded,
+    raw_data: s.analyzed,
     data_integrity: {
-      note: 'Regenerated on real domains with the deployed score.js engine. The prior 7-signal breakdown (backlink_quality, brand_entity_recognition, freshness, Lighthouse-based technical_signals) was removed because no code in the repo computes those signals. category_breakdown and industry_insights (previously hand-authored) were also removed. All domains are verified real and unique.',
+      note: 'Regenerated on real domains with the deployed score.js engine. Domains that blocked the crawler (HTTP 401/403/406/418/429) or were unreachable are listed in excluded_domains and excluded from average, median, and score_distribution. The prior 7-signal breakdown (backlink_quality, brand_entity_recognition, freshness, Lighthouse-based technical_signals) was removed because no code computes them; category_breakdown and industry_insights were removed as hand-authored.',
       removed_signals: ['backlink_quality', 'brand_entity_recognition', 'freshness'],
       removed_sections: ['category_breakdown', 'industry_insights'],
-      failed_domains: errors,
     },
   };
 
   if (limit) {
-    console.log(`\nSMOKE TEST — analyzed ${s.sorted.length} domains (no JSON written).`);
-    console.log(JSON.stringify({ avg: s.avg, median: s.median, dist: s.dist }, null, 2));
+    console.log(`\nSMOKE TEST — ${results.length} domains (no JSON written).`);
+    console.log(JSON.stringify({ analyzed: s.analyzed.length, blocked: s.blocked.length, error: s.error.length, avg: s.avg, median: s.median, dist: s.dist }, null, 2));
   } else {
     writeFileSync(OUT_PATH, JSON.stringify(out, null, 2) + '\n', 'utf8');
-    console.log(`\nWrote ${OUT_PATH} (${s.sorted.length} domains, avg=${s.avg}, median=${s.median}, errors=${errors.length})`);
+    console.log(`\nWrote ${OUT_PATH} (total=${results.length}, analyzed=${s.analyzed.length}, blocked=${s.blocked.length}, error=${s.error.length}, avg=${s.avg}, median=${s.median})`);
   }
 }
 
