@@ -1,0 +1,60 @@
+{
+  "generated_by": "competitive-system/research.py",
+  "generated_at": "2026-08-12T00:00:00+00:00",
+  "sources": [
+    {
+      "id": "semrush",
+      "name": "Semrush",
+      "domain": "semrush.com",
+      "types": ["direct"]
+    },
+    {
+      "id": "ahrefs",
+      "name": "Ahrefs",
+      "domain": "ahrefs.com",
+      "types": ["direct"]
+    },
+    {
+      "id": "surfer-seo",
+      "name": "Surfer SEO",
+      "domain": "surferseo.com",
+      "types": ["direct"]
+    },
+    {
+      "id": "clearscope",
+      "name": "Clearscope",
+      "domain": "clearscope.io",
+      "types": ["adjacent"]
+    },
+    {
+      "id": "marketmuse",
+      "name": "MarketMuse",
+      "domain": "marketmuse.com",
+      "types": ["direct"]
+    },
+    {
+      "id": "se-ranking",
+      "name": "SE Ranking",
+      "domain": "seranking.com",
+      "types": ["direct"]
+    },
+    {
+      "id": "copy-ai",
+      "name": "Copy.ai",
+      "domain": "copy.ai",
+      "types": ["adjacent"]
+    },
+    {
+      "id": "jasper-ai",
+      "name": "Jasper AI",
+      "domain": "jasper.ai",
+      "types": ["adjacent"]
+    },
+    {
+      "id": "writesonic",
+      "name": "Writesonic",
+      "domain": "writesonic.com",
+      "types": ["adjacent"]
+    }
+  ]
+}
