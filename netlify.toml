@@ -5,8 +5,10 @@
 [functions]
   directory = "netlify/functions"
 
+[functions."process-queue"]
+  schedule = "*/5 * * * *"
+
 [[redirects]]
   from = "/report"
   to = "/report/"
   status = 301
-

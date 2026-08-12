@@ -1,6 +1,8 @@
 // Netlify Function: Stripe webhook handler.
 // Path: site/netlify/functions/webhook.js
 // Requires env: STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET.
+// On checkout.session.completed: stores a PROCESSING record in Netlify Blobs and
+// returns 200 fast. process-queue.js (scheduled) later generates + emails the report.
 import Stripe from 'stripe';
 import { getStore } from '@netlify/blobs';
 
@@ -33,11 +35,12 @@ export async function handler(event) {
       domain: session.client_reference_id || (session.metadata && session.metadata.domain) || '',
       amount_total: session.amount_total,
       payment_status: session.payment_status,
-      status: 'PAID',
+      status: 'PROCESSING',
       created: Math.floor(Date.now() / 1000),
+      createdAt: Date.now(),
+      attempts: 0,
     };
 
-    // Durable fulfillment record. Idempotent: set() overwrites by key, so Stripe retries are safe.
     try {
       const store = getStore('checkout_sessions');
       await store.set(session.id, JSON.stringify(record));

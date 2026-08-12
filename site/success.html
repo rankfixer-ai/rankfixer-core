@@ -3,59 +3,107 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Payment Confirmed — RankFixer</title>
+<title>Payment Confirmed - RankFixer</title>
 <style>
   :root { --brand:#6C5CE7; --bg:#0D0D1A; --bg-card:#151528; --text:#F0F0F5; --text-muted:#8888A0; --border:#2A2A45; }
   * { box-sizing:border-box; margin:0; padding:0; }
   body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; background:var(--bg); color:var(--text); min-height:100vh; display:flex; align-items:center; justify-content:center; padding:2rem; -webkit-font-smoothing:antialiased; }
   .card { background:var(--bg-card); border:1px solid var(--border); border-radius:16px; padding:3rem 2rem; max-width:480px; width:100%; text-align:center; }
   .check { width:64px; height:64px; border-radius:50%; background:rgba(108,92,231,.15); color:var(--brand); display:flex; align-items:center; justify-content:center; font-size:2rem; margin:0 auto 1.5rem; }
+  .spinner { width:64px; height:64px; border-radius:50%; border:4px solid rgba(108,92,231,.15); border-top-color:var(--brand); margin:0 auto 1.5rem; animation:spin 1s linear infinite; }
+  @keyframes spin { to { transform:rotate(360deg); } }
   h1 { font-size:1.6rem; font-weight:800; margin-bottom:.75rem; }
   p { color:var(--text-muted); line-height:1.6; margin-bottom:1.5rem; }
-  a.btn { display:inline-block; background:var(--brand); color:#fff; padding:.8rem 1.6rem; border-radius:100px; text-decoration:none; font-weight:700; }
+  a.btn, a.report-link { display:inline-block; background:var(--brand); color:#fff; padding:.85rem 1.7rem; border-radius:100px; text-decoration:none; font-weight:700; }
+  a.btn:hover, a.report-link:hover { opacity:.9; }
   .note { font-size:.85rem; color:var(--text-muted); margin-top:1.5rem; }
   .domain { color:var(--text); font-weight:700; }
 </style>
 </head>
 <body>
   <div class="card">
-    <div class="check">&#10003;</div>
+    <div id="icon" class="check">&#10003;</div>
     <h1 id="title">Payment confirmed</h1>
-    <p id="detail">Thanks — your RankFixer Full AI Visibility Report is on its way. We will email the report to the address you provided at checkout.</p>
-    <a class="btn" href="/">Back to Rankfixer</a>
+    <p id="detail">Thanks - your RankFixer Full AI Visibility Report is on its way. We will email the report to the address you provided at checkout.</p>
+    <div id="action"></div>
     <p class="note">Questions? Email <a href="mailto:acibronjan@gmail.com" style="color:var(--brand)">acibronjan@gmail.com</a></p>
   </div>
   <script>
   (function () {
     var params = new URLSearchParams(window.location.search);
     var sessionId = params.get('session_id');
-    if (!sessionId) return; // direct visit without a session: keep the generic message above
-
     var title = document.getElementById('title');
     var detail = document.getElementById('detail');
-    title.textContent = 'Looking up your order…';
-    detail.textContent = 'One moment while we confirm your payment.';
+    var icon = document.getElementById('icon');
+    var action = document.getElementById('action');
 
-    fetch('/.netlify/functions/get-session?session_id=' + encodeURIComponent(sessionId))
-      .then(function (r) { return r.json(); })
-      .then(function (data) {
-        if (data && data.paid) {
-          title.textContent = 'Payment confirmed';
-          var email = data.email || 'your checkout address';
-          if (data.domain) {
-            detail.innerHTML = 'Your RankFixer Full AI Visibility Report for <span class="domain">' + data.domain + '</span> is being prepared. We\'ll email it to ' + email + ' when it\'s ready.';
-          } else {
-            detail.textContent = 'Your RankFixer Full AI Visibility Report is being prepared. We\'ll email it to ' + email + ' when it\'s ready.';
-          }
-        } else {
-          title.textContent = 'We\'re preparing your report';
-          detail.textContent = 'Your payment is being finalized. Check your email in a few minutes for your report.';
-        }
-      })
-      .catch(function () {
-        title.textContent = 'Payment confirmed';
-        detail.textContent = 'Thanks — your RankFixer Full AI Visibility Report is on its way. We\'ll email it to the address you provided at checkout.';
+    function escapeHtml(s) {
+      return String(s || '').replace(/[&<>"']/g, function (c) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
       });
+    }
+    function showReport(reportUrl, domain) {
+      icon.className = 'check';
+      icon.innerHTML = '&#10003;';
+      title.textContent = 'Your report is ready';
+      detail.innerHTML = 'Your RankFixer Full AI Visibility Report for <span class="domain">' + escapeHtml(domain) + '</span> is ready to view.';
+      action.innerHTML = '<a class="report-link" href="' + escapeHtml(reportUrl) + '">View my report</a>';
+    }
+    function showPreparing(domain) {
+      icon.className = 'spinner';
+      icon.innerHTML = '';
+      title.textContent = 'Preparing your report';
+      var d = domain ? ' for <span class="domain">' + escapeHtml(domain) + '</span>' : '';
+      detail.innerHTML = 'We\'re analyzing' + d + ' now. This usually takes a couple of minutes - we\'ll also email it to you when it\'s ready.';
+      action.innerHTML = '<a class="btn" href="/">Back to Rankfixer</a>';
+    }
+    function showError() {
+      icon.className = 'check';
+      icon.innerHTML = '&#10003;';
+      title.textContent = 'Payment confirmed';
+      detail.textContent = 'Your payment went through, but we hit a snag generating the report. Please email acibronjan@gmail.com and we\'ll sort it out right away.';
+      action.innerHTML = '<a class="btn" href="/">Back to Rankfixer</a>';
+    }
+
+    if (!sessionId) return; // direct visit without a session: keep the generic message
+
+    showPreparing(null);
+    var attempts = 0;
+    var MAX = 20;
+
+    function poll() {
+      fetch('/.netlify/functions/get-session?session_id=' + encodeURIComponent(sessionId))
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          if (data && data.status === 'COMPLETED' && data.report_url) {
+            showReport(data.report_url, data.domain);
+            return;
+          }
+          if (data && data.status === 'FAILED') {
+            showError();
+            return;
+          }
+          if (data && data.domain) {
+            showPreparing(data.domain);
+          }
+          attempts += 1;
+          if (attempts < MAX) {
+            setTimeout(poll, 8000);
+          } else {
+            showPreparing(data && data.domain ? data.domain : null);
+          }
+        })
+        .catch(function () {
+          attempts += 1;
+          if (attempts < MAX) {
+            setTimeout(poll, 8000);
+          } else {
+            showError();
+          }
+        });
+    }
+
+    poll();
   })();
   </script>
 </body>

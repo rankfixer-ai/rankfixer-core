@@ -1,9 +1,10 @@
-// Netlify Function: retrieve a completed checkout session for the success page.
+// Netlify Function: retrieve checkout status + report for the success page.
 // Path: site/netlify/functions/get-session.js
 // Requires env: STRIPE_SECRET_KEY.
-// Reads the session from Stripe directly (authoritative + instant) to avoid the
-// race where success.html loads before the webhook has written the Blob.
+// Identity (email/domain/paid) comes from Stripe (instant); status + report_url
+// come from Netlify Blobs (written by webhook.js and process-queue.js).
 import Stripe from 'stripe';
+import { getStore } from '@netlify/blobs';
 
 export async function handler(event) {
   const headers = {
@@ -25,23 +26,27 @@ export async function handler(event) {
   }
 
   const stripe = new Stripe(secretKey);
+  let stripeSession = null;
   try {
-    const session = await stripe.checkout.sessions.retrieve(sessionId);
-    const email = session.customer_details && session.customer_details.email;
-    const domain = session.client_reference_id || (session.metadata && session.metadata.domain) || '';
-    const paid = session.payment_status === 'paid';
-    return {
-      statusCode: 200,
-      headers,
-      body: JSON.stringify({
-        session_id: session.id,
-        domain,
-        email,
-        paid,
-        amount_total: session.amount_total,
-      }),
-    };
-  } catch (e) {
-    return { statusCode: 404, headers, body: JSON.stringify({ error: 'session_not_found' }) };
-  }
+    stripeSession = await stripe.checkout.sessions.retrieve(sessionId);
+  } catch (_) {}
+
+  let record = null;
+  try {
+    const store = getStore('checkout_sessions');
+    const raw = await store.get(sessionId);
+    record = raw ? JSON.parse(raw) : null;
+  } catch (_) {}
+
+  const domain = (stripeSession && (stripeSession.client_reference_id || (stripeSession.metadata && stripeSession.metadata.domain))) || (record && record.domain) || '';
+  const email = (stripeSession && stripeSession.customer_details && stripeSession.customer_details.email) || (record && record.customer_email) || '';
+  const paid = !!(stripeSession && stripeSession.payment_status === 'paid');
+  const status = (record && record.status) || (paid ? 'PROCESSING' : 'UNKNOWN');
+  const report_url = (record && record.report_url) || null;
+
+  return {
+    statusCode: 200,
+    headers,
+    body: JSON.stringify({ session_id: sessionId, domain, email, paid, status, report_url }),
+  };
 }
