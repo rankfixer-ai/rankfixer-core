@@ -4,8 +4,9 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "stripe": "^16.0.0",
     "@netlify/blobs": "^8.0.0",
-    "resend": "^4.0.0"
+    "resend": "^4.0.0",
+    "site-mapper": "file:..",
+    "stripe": "^16.0.0"
   }
 }
