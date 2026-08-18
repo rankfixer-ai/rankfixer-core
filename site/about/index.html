@@ -101,7 +101,7 @@ footer{padding:28px 0 50px;text-align:center;color:#687386;font-size:11px}
   <a class="logo" href="#top">JAN MICHAEL ACIBRON</a>
   <div class="navlinks">
     <a href="#about">About</a>
-    <a href="#cosmos">CosmosOS</a>
+    <a href="#pmos">PMOS</a>
     <a href="#systems">Systems</a>
     <a href="#experience">Experience</a>
     <a href="#contact">Contact</a>
@@ -201,21 +201,34 @@ footer{padding:28px 0 50px;text-align:center;color:#687386;font-size:11px}
 </div>
 </section>
 
-<section id="cosmos">
+<section id="pmos">
 <div class="container">
   <div class="section-title">
-    <h2>CosmosOS</h2>
-    <p class="section-intro">A governance and verification dashboard I'm building as part of a larger project.</p>
+    <h2>PMOS &mdash; Governed Execution</h2>
+    <p class="section-intro">A provenance-managed, fail-closed governance layer controlling how work becomes authorized, released, and deployed.</p>
   </div>
   <div class="card" style="padding:24px">
-    <p style="margin:0 0 12px;">
-      CosmosOS is a project that brings verification, system-health monitoring, and event visibility
-      into a single dashboard. It is one component of a broader system I'm developing &mdash; not a finished
-      product, and not a claim about any currently running service.
+    <p style="margin:0 0 14px;">
+      <strong>No evidence &rarr; no authority. No authority &rarr; no execution.</strong>
+    </p>
+    <p style="margin:0 0 14px;">
+      PMOS (Provenance-Managed Operating System) sits around the execution system and governs the full
+      path from objective through execution, evidence, validation, decision, and authorization, to
+      release and deployment. Execution results do not automatically become governance decisions:
+      evidence must pass explicit gates before authority is granted.
+    </p>
+    <p style="margin:0 0 14px;">
+      It is deliberately fail-closed. Missing or corrupt governance state stops execution rather than
+      silently recovering into an unsafe state. It refuses to invent evidence, promote incomplete
+      evidence, bypass authority, overwrite decisions, or treat an external result as a governed
+      decision without an explicit governance act. Governance decisions are records, not mutable
+      configuration.
     </p>
     <p style="margin:0;">
-      Any metrics it shows are treated as system observations tied to specific tests and definitions,
-      not blanket statements of security or correctness.
+      CosmosOS is the dashboard component of this project &mdash; the surface where verification, system
+      health, and governance events become observable. The governing rule is the same one RankFixer
+      follows: truth before persuasion. If evidence does not establish that something is safe,
+      authorized, or verified, the system stops rather than filling the gap with assumptions.
     </p>
   </div>
 </div>
@@ -264,16 +277,8 @@ footer{padding:28px 0 50px;text-align:center;color:#687386;font-size:11px}
     <p class="section-intro">16+ years across BPO, technical support, QA, digital operations, web systems, automation, and business development.</p>
   </div>
   <div class="experience">
-    <div class="exp">
-      <div class="date">August 2022 - Present</div>
-      <h3>YouTube Manager / Digital Operations &middot; MineBlox</h3>
-      <p>Manage digital production workflows, remote teams, quality control, operational data, schedules, and process improvements.</p>
-    </div>
-    <div class="exp">
-      <div class="date">Remote / Freelance</div>
-      <h3>QA &middot; Business Development &middot; Technical Operations</h3>
-      <p>Managed QA, teams, client workflows, project systems, documentation, troubleshooting, and operational improvement.</p>
-    </div>
+    
+    
     <div class="exp">
       <div class="date">16+ Years Combined</div>
       <h3>BPO &middot; Customer Support &middot; Technical Operations</h3>
