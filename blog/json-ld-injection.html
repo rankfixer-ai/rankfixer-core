@@ -1,11 +1,35 @@
-<!-- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JSON-LD Snippet — Rankfixer</title>
+<style>
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0D0D1A;color:#F0F0F5;padding:2rem;line-height:1.6;max-width:900px;margin:0 auto;}
+pre{background:#151528;border:1px solid #2A2A45;border-radius:8px;padding:1rem;overflow-x:auto;}
+code{font-family:'SF Mono',Monaco,Consolas,monospace;font-size:0.85rem;}
+footer{text-align:center;padding:2rem;border-top:1px solid #2A2A45;color:#8888A0;font-size:0.8rem;margin-top:2rem;}
+</style>
+</head>
+<body>
+<nav style="display:flex;justify-content:space-between;align-items:center;padding:1rem 2rem;background:rgba(13,13,26,0.8);border-bottom:1px solid #2A2A45;">
+    <a href="/" style="font-weight:700;font-size:1.2rem;text-decoration:none;color:#F0F0F5;">Rankfixer</a>
+    <div style="display:flex;gap:1.5rem;align-items:center;">
+        <a href="/ai-visibility-checker" style="text-decoration:none;color:#8888A0;font-size:0.9rem;">Checker</a>
+        <a href="/blog" style="text-decoration:none;color:#8888A0;font-size:0.9rem;">Blog</a>
+        <a href="/tools" style="text-decoration:none;color:#8888A0;font-size:0.9rem;">Tools</a>
+    </div>
+</nav>
+<h1>JSON-LD Schema Injection Snippet</h1>
+<p>Copy the following block into the <code>&lt;head&gt;</code> of your blog post page:</p>
+<pre><code>&lt;!-- 
   JSON-LD Schema Injection for /blog/ai-readiness-100-saas
-  Copy this entire block into the <head> of the blog post page.
+  Copy this entire block into the &lt;head&gt; of the blog post page.
   Also copy the Open Graph meta tags below.
--->
+--&gt;
 
-<!-- JSON-LD ScholarlyArticle Schema -->
-<script type="application/ld+json">
+&lt;!-- JSON-LD ScholarlyArticle Schema --&gt;
+&lt;script type="application/ld+json"&gt;
 {
   "@context": "https://schema.org",
   "@type": "ScholarlyArticle",
@@ -53,152 +77,157 @@
   "isAccessibleForFree": true,
   "license": "https://opensource.org/licenses/MIT"
 }
-</script>
+&lt;/script&gt;
 
-<!-- Open Graph / Social Meta Tags -->
-<meta property="og:title" content="We Analyzed the AI Readiness of 100 Top SaaS Websites (Data + Open Source Code)">
-<meta property="og:description" content="We scored 90 top SaaS domains with RankFixer's open-source engine. Average score: 62.7/100. Full dataset open-sourced.">
-<meta property="og:image" content="https://rankfixer.co/images/blog/saas-ai-readiness-2026.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:url" content="https://rankfixer.co/blog/ai-readiness-100-saas">
-<meta property="og:type" content="article">
-<meta property="og:site_name" content="RankFixer">
+&lt;!-- Open Graph / Social Meta Tags --&gt;
+&lt;meta property="og:title" content="We Analyzed the AI Readiness of 100 Top SaaS Websites (Data + Open Source Code)"&gt;
+&lt;meta property="og:description" content="We scored 90 top SaaS domains with RankFixer's open-source engine. Average score: 62.7/100. Full dataset open-sourced."&gt;
+&lt;meta property="og:image" content="https://rankfixer.co/images/blog/saas-ai-readiness-2026.png"&gt;
+&lt;meta property="og:image:width" content="1200"&gt;
+&lt;meta property="og:image:height" content="630"&gt;
+&lt;meta property="og:url" content="https://rankfixer.co/blog/ai-readiness-100-saas"&gt;
+&lt;meta property="og:type" content="article"&gt;
+&lt;meta property="og:site_name" content="RankFixer"&gt;
 
-<!-- Twitter Card -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="We Analyzed the AI Readiness of 100 Top SaaS Websites (Data + Open Source Code)">
-<meta name="twitter:description" content="top SaaS sites average 62.7/100 on AI visibility. We analyzed 100 domains and open-sourced everything.">
-<meta name="twitter:image" content="https://rankfixer.co/images/blog/saas-ai-readiness-2026.png">
-<meta name="twitter:site" content="@bronJIQ">
+&lt;!-- Twitter Card --&gt;
+&lt;meta name="twitter:card" content="summary_large_image"&gt;
+&lt;meta name="twitter:title" content="We Analyzed the AI Readiness of 100 Top SaaS Websites (Data + Open Source Code)"&gt;
+&lt;meta name="twitter:description" content="top SaaS sites average 62.7/100 on AI visibility. We analyzed 100 domains and open-sourced everything."&gt;
+&lt;meta name="twitter:image" content="https://rankfixer.co/images/blog/saas-ai-readiness-2026.png"&gt;
+&lt;meta name="twitter:site" content="@bronJIQ"&gt;
 
-<!-- Article Meta -->
-<meta name="author" content="RankFixer Team">
-<meta name="article:published_time" content="2026-07-04">
-<meta name="article:tag" content="GEO">
-<meta name="article:tag" content="AI Visibility">
-<meta name="article:tag" content="SaaS">
-<meta name="article:tag" content="Open Source">
+&lt;!-- Article Meta --&gt;
+&lt;meta name="author" content="RankFixer Team"&gt;
+&lt;meta name="article:published_time" content="2026-07-04"&gt;
+&lt;meta name="article:tag" content="GEO"&gt;
+&lt;meta name="article:tag" content="AI Visibility"&gt;
+&lt;meta name="article:tag" content="SaaS"&gt;
+&lt;meta name="article:tag" content="Open Source"&gt;
 
-<div class="ai-visibility-checker-page">
-  <header class="checker-hero">
-    <h1>Free AI Visibility Checker — See How ChatGPT, Perplexity & Gemini See Your Site</h1>
-    <p>Run your domain through RankFixer's AI audit engine and get your FREE personalized AI Visibility Score. We analyze your site across 40+ GEO signals — entity density, schema markup, LLM accessibility, citeability, and more — to show exactly where you rank in the AI ecosystem.</p>
-    <div class="checker-cta">
-      <a href="#free-tool" class="btn-primary">Get Your AI Visibility Score Now</a>
-      <a href="#methodology" class="btn-secondary">How We Audit Your Site</a>
-    </div>
-  </header>
+&lt;div class="ai-visibility-checker-page"&gt;
+  &lt;header class="checker-hero"&gt;
+    &lt;h1&gt;Free AI Visibility Checker — See How ChatGPT, Perplexity & Gemini See Your Site&lt;/h1&gt;
+    &lt;p&gt;Run your domain through RankFixer's AI audit engine and get your FREE personalized AI Visibility Score. We analyze your site across 40+ GEO signals — entity density, schema markup, LLM accessibility, citeability, and more — to show exactly where you rank in the AI ecosystem.&lt;/p&gt;
+    &lt;div class="checker-cta"&gt;
+      &lt;a href="#free-tool" class="btn-primary"&gt;Get Your AI Visibility Score Now&lt;/a&gt;
+      &lt;a href="#methodology" class="btn-secondary"&gt;How We Audit Your Site&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/header&gt;
 
-  <section id="free-tool" class="tool-container" aria-label="AI Visibility Checker Tool">
-    <div class="tool-embed">
-      <!-- Embedded interactive tool will render here -->
-      <div class="tool-placeholder" data-tool="ai-visibility-checker">
-        <h2>Enter Your URL</h2>
-        <form id="url-check-form" action="/check" method="post">
-          <input type="url" name="domain" placeholder="https://yourdomain.com" required>
-          <button type="submit">Check My AI Visibility</button>
-        </form>
-      </div>
-    </div>
-    <p class="tool-note">🔒 100% free, no signup required. Your results are generated instantly and remain private.</p>
-  </section>
+  &lt;section id="free-tool" class="tool-container" aria-label="AI Visibility Checker Tool"&gt;
+    &lt;div class="tool-embed"&gt;
+      &lt;!-- Embedded interactive tool will render here --&gt;
+      &lt;div class="tool-placeholder" data-tool="ai-visibility-checker"&gt;
+        &lt;h2&gt;Enter Your URL&lt;/h2&gt;
+        &lt;form id="url-check-form" action="/check" method="post"&gt;
+          &lt;input type="url" name="domain" placeholder="https://yourdomain.com" required&gt;
+          &lt;button type="submit"&gt;Check My AI Visibility&lt;/button&gt;
+        &lt;/form&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;p class="tool-note"&gt;🔒 100% free, no signup required. Your results are generated instantly and remain private.&lt;/p&gt;
+  &lt;/section&gt;
 
-  <section id="what-is-ai-visibility" class="info-section">
-    <h2>What Is an AI Visibility Score?</h2>
-    <p>Your AI Visibility Score is a quantitative measure of how likely your website is to be <strong>cited, referenced, or recommended</strong> by generative AI engines like ChatGPT, Perplexity, Claude, Google Gemini, and Microsoft Copilot. In the era of AI-powered search, appearing in AI-generated answers is often worth more than traditional SEO.</p>
-    <p>Unlike traditional SEO tools that only look at keywords and backlinks, our checker evaluates your site's <em>AI Accessibility</em> — whether LLMs can parse your content, understand your entities, and confidently cite you as an authority.</p>
-  </section>
+  &lt;section id="what-is-ai-visibility" class="info-section"&gt;
+    &lt;h2&gt;What Is an AI Visibility Score?&lt;/h2&gt;
+    &lt;p&gt;Your AI Visibility Score is a quantitative measure of how likely your website is to be &lt;strong&gt;cited, referenced, or recommended&lt;/strong&gt; by generative AI engines like ChatGPT, Perplexity, Claude, Google Gemini, and Microsoft Copilot. In the era of AI-powered search, appearing in AI-generated answers is often worth more than traditional SEO.&lt;/p&gt;
+    &lt;p&gt;Unlike traditional SEO tools that only look at keywords and backlinks, our checker evaluates your site's &lt;em&gt;AI Accessibility&lt;/em&gt; — whether LLMs can parse your content, understand your entities, and confidently cite you as an authority.&lt;/p&gt;
+  &lt;/section&gt;
 
-  <section id="methodology" class="info-section">
-    <h2>The 40+ Signals Behind Your Score</h2>
-    <p>RankFixer's engine runs an automated, deep audit of your site across the key GEO (Generative Engine Optimization) pillars:</p>
-    <div class="method-grid">
-      <div class="method-card">
-        <h3>🧠 Schema & Structured Data</h3>
-        <p>Are you using Schema.org JSON-LD properly? We check for entity clarity, product/org/FAQ markup, and whether LLMs can extract your key facts.</p>
-      </div>
-      <div class="method-card">
-        <h3>📝 Content Entity Density</h3>
-        <p>How well do you define and connect core entities (people, products, concepts)? High entity clarity = higher recommendation confidence.</p>
-      </div>
-      <div class="method-card">
-        <h3>🔗 LLM Crawl Accessibility</h3>
-        <p>Is your content crawlable without JavaScript rendering? Are internal links clean and descriptive? LLMs prefer clean HTML with meaningful anchor text.</p>
-      </div>
-      <div class="method-card">
-        <h3>💬 Citeability Quotient</h3>
-        <p>Do you include verifiable statistics, quotes from experts, and unique data? AI engines love content with proven claims.</p>
-      </div>
-    </div>
-    <p><a href="#full-methodology">The results you receive include a full breakdown of all 40+ signals.</a></p>
-  </section>
+  &lt;section id="methodology" class="info-section"&gt;
+    &lt;h2&gt;The 40+ Signals Behind Your Score&lt;/h2&gt;
+    &lt;p&gt;RankFixer's engine runs an automated, deep audit of your site across the key GEO (Generative Engine Optimization) pillars:&lt;/p&gt;
+    &lt;div class="method-grid"&gt;
+      &lt;div class="method-card"&gt;
+        &lt;h3&gt;🧠 Schema & Structured Data&lt;/h3&gt;
+        &lt;p&gt;Are you using Schema.org JSON-LD properly? We check for entity clarity, product/org/FAQ markup, and whether LLMs can extract your key facts.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class="method-card"&gt;
+        &lt;h3&gt;📝 Content Entity Density&lt;/h3&gt;
+        &lt;p&gt;How well do you define and connect core entities (people, products, concepts)? High entity clarity = higher recommendation confidence.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class="method-card"&gt;
+        &lt;h3&gt;🔗 LLM Crawl Accessibility&lt;/h3&gt;
+        &lt;p&gt;Is your content crawlable without JavaScript rendering? Are internal links clean and descriptive? LLMs prefer clean HTML with meaningful anchor text.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class="method-card"&gt;
+        &lt;h3&gt;💬 Citeability Quotient&lt;/h3&gt;
+        &lt;p&gt;Do you include verifiable statistics, quotes from experts, and unique data? AI engines love content with proven claims.&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;p&gt;&lt;a href="#full-methodology"&gt;The results you receive include a full breakdown of all 40+ signals.&lt;/a&gt;&lt;/p&gt;
+  &lt;/section&gt;
 
-  <section class="sample-report">
-    <h2>How Your AI Visibility Report Looks</h2>
-    <p>After running the check, you'll get an instant, downloadable report like this:</p>
-    <!-- Sample visual report mockup -->
-    <div class="report-preview" aria-label="Sample AI Visibility Report">
-      <div class="report-header">
-        <span class="domain">rankfixer.co</span>
-        <div class="score-circle">
-          <span class="score-number">82</span>
-          <span class="score-label">/100</span>
-        </div>
-        <span class="grade">Excellent</span>
-      </div>
-      <div class="report-chart">
-        <div class="chart-row">
-          <span>Schema Markup</span>
-          <div class="bar" style="width: 90%"></div>
-          <span>90/100</span>
-        </div>
-        <div class="chart-row">
-          <span>Entity Density</span>
-          <div class="bar" style="width: 78%"></div>
-          <span>78/100</span>
-        </div>
-        <div class="chart-row">
-          <span>LLM Crawlability</span>
-          <div class="bar" style="width: 85%"></div>
-          <span>85/100</span>
-        </div>
-        <div class="chart-row">
-          <span>Citeability</span>
-          <div class="bar" style="width: 72%"></div>
-          <span>72/100</span>
-        </div>
-      </div>
-    </div>
-    <p>Your personalized report will include <strong>actionable next steps</strong> to fix any weaknesses — from schema patches to content enhancements.</p>
-  </section>
+  &lt;section class="sample-report"&gt;
+    &lt;h2&gt;How Your AI Visibility Report Looks&lt;/h2&gt;
+    &lt;p&gt;After running the check, you'll get an instant, downloadable report like this:&lt;/p&gt;
+    &lt;!-- Sample visual report mockup --&gt;
+    &lt;div class="report-preview" aria-label="Sample AI Visibility Report"&gt;
+      &lt;div class="report-header"&gt;
+        &lt;span class="domain"&gt;rankfixer.co&lt;/span&gt;
+        &lt;div class="score-circle"&gt;
+          &lt;span class="score-number"&gt;82&lt;/span&gt;
+          &lt;span class="score-label"&gt;/100&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;span class="grade"&gt;Excellent&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div class="report-chart"&gt;
+        &lt;div class="chart-row"&gt;
+          &lt;span&gt;Schema Markup&lt;/span&gt;
+          &lt;div class="bar" style="width: 90%"&gt;&lt;/div&gt;
+          &lt;span&gt;90/100&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;div class="chart-row"&gt;
+          &lt;span&gt;Entity Density&lt;/span&gt;
+          &lt;div class="bar" style="width: 78%"&gt;&lt;/div&gt;
+          &lt;span&gt;78/100&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;div class="chart-row"&gt;
+          &lt;span&gt;LLM Crawlability&lt;/span&gt;
+          &lt;div class="bar" style="width: 85%"&gt;&lt;/div&gt;
+          &lt;span&gt;85/100&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;div class="chart-row"&gt;
+          &lt;span&gt;Citeability&lt;/span&gt;
+          &lt;div class="bar" style="width: 72%"&gt;&lt;/div&gt;
+          &lt;span&gt;72/100&lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;p&gt;Your personalized report will include &lt;strong&gt;actionable next steps&lt;/strong&gt; to fix any weaknesses — from schema patches to content enhancements.&lt;/p&gt;
+  &lt;/section&gt;
 
-  <section class="faq-section">
-    <h2>Frequently Asked Questions about AI Visibility</h2>
+  &lt;section class="faq-section"&gt;
+    &lt;h2&gt;Frequently Asked Questions about AI Visibility&lt;/h2&gt;
 
-    <details>
-      <summary>Why does my AI Visibility Score matter more than my Google ranking?</summary>
-      <p>Google captures about 28% of web searches today. The other 72% are now AI-driven: ChatGPT users get direct answers, Perplexity cites sources, and Copilot suggests vendors. If your site is invisible to LLMs, you're missing most of your potential traffic.</p>
-    </details>
+    &lt;details&gt;
+      &lt;summary&gt;Why does my AI Visibility Score matter more than my Google ranking?&lt;/summary&gt;
+      &lt;p&gt;Google captures about 28% of web searches today. The other 72% are now AI-driven: ChatGPT users get direct answers, Perplexity cites sources, and Copilot suggests vendors. If your site is invisible to LLMs, you're missing most of your potential traffic.&lt;/p&gt;
+    &lt;/details&gt;
 
-    <details>
-      <summary>How is the AI Visibility Score different from a traditional SEO score?</summary>
-      <p>Traditional SEO focuses on keyword rankings and backlinks. AI Visibility evaluates how clearly an LLM can parse your content, extract entities, and trust your information. You can rank #1 in Google and still score poorly with AI engines.</p>
-    </details>
+    &lt;details&gt;
+      &lt;summary&gt;How is the AI Visibility Score different from a traditional SEO score?&lt;/summary&gt;
+      &lt;p&gt;Traditional SEO focuses on keyword rankings and backlinks. AI Visibility evaluates how clearly an LLM can parse your content, extract entities, and trust your information. You can rank #1 in Google and still score poorly with AI engines.&lt;/p&gt;
+    &lt;/details&gt;
 
-    <details>
-      <summary>Can I improve my AI Visibility Score myself?</summary>
-      <p>Yes! Our checker provides a full methodology report that any technical marketer can follow. For deeper fixes, consider our RankFixer PRO solution that offers content generation, schema injection, and auto-monitoring.</p>
-    </details>
-  </section>
+    &lt;details&gt;
+      &lt;summary&gt;Can I improve my AI Visibility Score myself?&lt;/summary&gt;
+      &lt;p&gt;Yes! Our checker provides a full methodology report that any technical marketer can follow. For deeper fixes, consider our RankFixer PRO solution that offers content generation, schema injection, and auto-monitoring.&lt;/p&gt;
+    &lt;/details&gt;
+  &lt;/section&gt;
 
-  <section class="internal-links">
-    <h2>Go Deeper: AI & GEO Resources</h2>
-    <ul>
-      <li><a href="/blog/ai-readiness-100-saas">We Analyzed the AI Readiness of 100 Top SaaS Websites (Data + Open Source)</a></li>
-      <li><a href="/blog/geo-strategies-2026">7 Generative Engine Optimization Strategies for 2026</a></li>
-      <li><a href="/blog/schema-injection-guide">The Complete Schema.org Injection Guide for GEO</a></li>
-      <li><a href="/pricing">Compare RankFixer PRO vs. Other GEO tools</a></li>
-    </ul>
-  </section>
-</div>
+  &lt;section class="internal-links"&gt;
+    &lt;h2&gt;Go Deeper: AI & GEO Resources&lt;/h2&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href="/blog/ai-readiness-100-saas"&gt;We Analyzed the AI Readiness of 100 Top SaaS Websites (Data + Open Source)&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="/blog/geo-strategies-2026"&gt;7 Generative Engine Optimization Strategies for 2026&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="/blog/schema-injection-guide"&gt;The Complete Schema.org Injection Guide for GEO&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="/pricing"&gt;Compare RankFixer PRO vs. Other GEO tools&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/section&gt;
+&lt;/div&gt;</code></pre>
+<footer>
+    <p>&copy; 2026 Rankfixer. All rights reserved.</p>
+</footer>
+</body>
+</html>
