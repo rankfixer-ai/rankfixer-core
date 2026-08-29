@@ -16,7 +16,14 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
 @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
 .spinner { animation: spin 1s linear infinite; width: 20px; height: 20px; border: 3px solid #e5e7eb; border-top-color: #3b82f6; border-radius: 50%; display: inline-block; }
-</style>
+
+<style>
+@media (max-width: 480px) {
+    .nav { flex-wrap: wrap; justify-content: center; gap: 0.5rem; padding: 0.75rem 1rem; }
+    .nav-links { flex-wrap: wrap; justify-content: center; gap: 0.75rem; font-size: 0.8rem; }
+    footer { padding: 1rem; font-size: 0.75rem; }
+}
+</style></style>
 </head>
 <body>
 <nav style="display:flex;justify-content:space-between;align-items:center;padding:1rem 2rem;background:#f9fafb;border-bottom:1px solid #e5e7eb;font-family:Inter,sans-serif;">

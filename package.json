@@ -12,7 +12,15 @@
     "puppeteer": "^22.0.0"
   },
   "optional-dependencies": {
-    "competitive": ["pydantic>=2.7.0"]
+    "competitive": [
+      "pydantic>=2.7.0"
+    ]
   },
-  "packages": ["src/rankfixer_core", "competitive-system"]
+  "packages": [
+    "src/rankfixer_core",
+    "competitive-system"
+  ],
+  "devDependencies": {
+    "netlify-cli": "^27.1.1"
+  }
 }

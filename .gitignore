@@ -4,3 +4,6 @@ competitive-intel/
 rankfixer-internal/
 # never commit credential store copies
 *.git-credentials*
+
+# Local Netlify folder
+.netlify
