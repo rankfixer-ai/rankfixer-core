@@ -1,0 +1,1070 @@
+{
+  "run_id": "08182228-8064-48ae-9d8a-0aad49bce69e",
+  "competitors_found": 9,
+  "threats": [
+    {
+      "id": "surfer-seo",
+      "name": "Surfer SEO",
+      "domain": "surferseo.com",
+      "threat": "MEDIUM",
+      "score": 3.75,
+      "type": "direct"
+    },
+    {
+      "id": "se-ranking",
+      "name": "SE Ranking",
+      "domain": "seranking.com",
+      "threat": "MEDIUM",
+      "score": 3.75,
+      "type": "direct"
+    },
+    {
+      "id": "semrush",
+      "name": "Semrush",
+      "domain": "semrush.com",
+      "threat": "LOW",
+      "score": 2.75,
+      "type": "direct"
+    },
+    {
+      "id": "ahrefs",
+      "name": "Ahrefs",
+      "domain": "ahrefs.com",
+      "threat": "LOW",
+      "score": 2.75,
+      "type": "direct"
+    },
+    {
+      "id": "marketmuse",
+      "name": "MarketMuse",
+      "domain": "marketmuse.com",
+      "threat": "LOW",
+      "score": 2.75,
+      "type": "direct"
+    },
+    {
+      "id": "clearscope",
+      "name": "Clearscope",
+      "domain": "clearscope.io",
+      "threat": "NONE",
+      "score": 1.75,
+      "type": "adjacent"
+    },
+    {
+      "id": "copy-ai",
+      "name": "Copy.ai",
+      "domain": "copy.ai",
+      "threat": "NONE",
+      "score": 1.75,
+      "type": "adjacent"
+    },
+    {
+      "id": "jasper-ai",
+      "name": "Jasper AI",
+      "domain": "jasper.ai",
+      "threat": "NONE",
+      "score": 1.75,
+      "type": "adjacent"
+    },
+    {
+      "id": "writesonic",
+      "name": "Writesonic",
+      "domain": "writesonic.com",
+      "threat": "NONE",
+      "score": 1.75,
+      "type": "adjacent"
+    }
+  ],
+  "gap_matrix": {
+    "universal_features": [
+      "action center",
+      "ai agents",
+      "ai articles",
+      "ai content editor",
+      "ai content generation",
+      "ai content grader",
+      "ai content outlines",
+      "ai detection",
+      "ai overviews tracking",
+      "ai search tracking",
+      "ai visibility",
+      "ai visibility tracking",
+      "ai writing",
+      "audience insights",
+      "backlink analysis",
+      "backlink checker",
+      "brand voice",
+      "campaign management",
+      "competitive analysis",
+      "competitor analysis",
+      "content briefs",
+      "content creation",
+      "content explorer",
+      "content generation",
+      "content grading",
+      "content monitoring",
+      "content optimization",
+      "content planner",
+      "content planning",
+      "content strategy",
+      "geo optimization",
+      "gtm workflows",
+      "integrations",
+      "internal linking suggestions",
+      "keyword research",
+      "lead processing",
+      "marketing workflows",
+      "plagiarism checker",
+      "ppc analytics",
+      "prospecting",
+      "rank tracking",
+      "reporting",
+      "sentiment analysis",
+      "seo mode",
+      "serp analytics",
+      "serp analyzer",
+      "site audit",
+      "social media management",
+      "topic modeling",
+      "traffic analytics"
+    ],
+    "by_competitor": {
+      "surfer-seo": {
+        "name": "Surfer SEO",
+        "features": [
+          "ai content editor",
+          "ai detection",
+          "content optimization",
+          "content planner",
+          "internal linking suggestions",
+          "keyword research",
+          "plagiarism checker",
+          "serp analyzer"
+        ],
+        "coverage_pct": 15.09
+      },
+      "se-ranking": {
+        "name": "SE Ranking",
+        "features": [
+          "ai overviews tracking",
+          "backlink checker",
+          "competitor analysis",
+          "keyword research",
+          "rank tracking",
+          "social media management",
+          "website audit",
+          "white label reporting"
+        ],
+        "coverage_pct": 15.09
+      },
+      "semrush": {
+        "name": "Semrush",
+        "features": [
+          "ai visibility tracking",
+          "backlink analysis",
+          "competitor analysis",
+          "content optimization",
+          "keyword research",
+          "ppc analytics",
+          "rank tracking",
+          "reporting",
+          "site audit",
+          "social media management"
+        ],
+        "coverage_pct": 18.87
+      },
+      "ahrefs": {
+        "name": "Ahrefs",
+        "features": [
+          "ai content grader",
+          "backlink analysis",
+          "competitor analysis",
+          "content explorer",
+          "keyword research",
+          "rank tracking",
+          "site audit",
+          "traffic analytics"
+        ],
+        "coverage_pct": 15.09
+      },
+      "marketmuse": {
+        "name": "MarketMuse",
+        "features": [
+          "competitive analysis",
+          "content briefs",
+          "content optimization",
+          "content planning",
+          "content strategy",
+          "topic modeling"
+        ],
+        "coverage_pct": 11.32
+      },
+      "clearscope": {
+        "name": "Clearscope",
+        "features": [
+          "ai content outlines",
+          "content grading",
+          "content monitoring",
+          "content optimization",
+          "keyword research",
+          "serp analytics"
+        ],
+        "coverage_pct": 11.32
+      },
+      "copy-ai": {
+        "name": "Copy.ai",
+        "features": [
+          "ai content generation",
+          "brand voice",
+          "content creation",
+          "gtm workflows",
+          "integrations",
+          "lead processing",
+          "prospecting",
+          "workflow automation"
+        ],
+        "coverage_pct": 15.09
+      },
+      "jasper-ai": {
+        "name": "Jasper AI",
+        "features": [
+          "ai agents",
+          "ai writing",
+          "audience insights",
+          "brand voice",
+          "campaign management",
+          "content creation",
+          "marketing workflows",
+          "seo mode"
+        ],
+        "coverage_pct": 15.09
+      },
+      "writesonic": {
+        "name": "Writesonic",
+        "features": [
+          "action center",
+          "ai articles",
+          "ai search tracking",
+          "ai visibility",
+          "content generation",
+          "geo optimization",
+          "sentiment analysis",
+          "site audit"
+        ],
+        "coverage_pct": 15.09
+      }
+    }
+  },
+  "moat": {
+    "overall_moat": 100.0,
+    "by_competitor": {
+      "surfer-seo": {
+        "name": "Surfer SEO",
+        "overlap_count": 0,
+        "overlapping_features": [],
+        "moat_score": 100.0,
+        "verdict": "STRONG"
+      },
+      "se-ranking": {
+        "name": "SE Ranking",
+        "overlap_count": 0,
+        "overlapping_features": [],
+        "moat_score": 100.0,
+        "verdict": "STRONG"
+      },
+      "semrush": {
+        "name": "Semrush",
+        "overlap_count": 0,
+        "overlapping_features": [],
+        "moat_score": 100.0,
+        "verdict": "STRONG"
+      },
+      "ahrefs": {
+        "name": "Ahrefs",
+        "overlap_count": 0,
+        "overlapping_features": [],
+        "moat_score": 100.0,
+        "verdict": "STRONG"
+      },
+      "marketmuse": {
+        "name": "MarketMuse",
+        "overlap_count": 0,
+        "overlapping_features": [],
+        "moat_score": 100.0,
+        "verdict": "STRONG"
+      },
+      "clearscope": {
+        "name": "Clearscope",
+        "overlap_count": 0,
+        "overlapping_features": [],
+        "moat_score": 100.0,
+        "verdict": "STRONG"
+      },
+      "copy-ai": {
+        "name": "Copy.ai",
+        "overlap_count": 0,
+        "overlapping_features": [],
+        "moat_score": 100.0,
+        "verdict": "STRONG"
+      },
+      "jasper-ai": {
+        "name": "Jasper AI",
+        "overlap_count": 0,
+        "overlapping_features": [],
+        "moat_score": 100.0,
+        "verdict": "STRONG"
+      },
+      "writesonic": {
+        "name": "Writesonic",
+        "overlap_count": 0,
+        "overlapping_features": [],
+        "moat_score": 100.0,
+        "verdict": "STRONG"
+      }
+    }
+  },
+  "equations_summary": {
+    "total_competitors": 9,
+    "direct_count": 5,
+    "adjacent_count": 4,
+    "partner_count": 0,
+    "threat_distribution": {
+      "NONE": 4,
+      "LOW": 3,
+      "MEDIUM": 2,
+      "HIGH": 0
+    },
+    "avg_competitor_score": 2.53,
+    "max_gap_count": 7,
+    "moat_score": 100.0,
+    "pricing_opportunity_index": 0.78,
+    "content_gap_index": 0.78,
+    "partnership_readiness": 0.0,
+    "market_saturation": 0.56,
+    "competitive_density_score": 0.44,
+    "research_confidence": 1.0,
+    "oracle_pass": true
+  },
+  "gaps": [
+    {
+      "gap_id": "gap-001",
+      "competitor_id": "surfer-seo",
+      "category": "capability",
+      "description": "Surfer SEO does not offer: governance proof",
+      "rankfixer_advantage": "RankFixer covers governance proof via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:Surfer SEO"
+      ]
+    },
+    {
+      "gap_id": "gap-002",
+      "competitor_id": "surfer-seo",
+      "category": "capability",
+      "description": "Surfer SEO does not offer: autonomous sales pipeline",
+      "rankfixer_advantage": "RankFixer covers autonomous sales pipeline via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:Surfer SEO"
+      ]
+    },
+    {
+      "gap_id": "gap-003",
+      "competitor_id": "surfer-seo",
+      "category": "capability",
+      "description": "Surfer SEO does not offer: 31-pillar verification",
+      "rankfixer_advantage": "RankFixer covers 31-pillar verification via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:Surfer SEO"
+      ]
+    },
+    {
+      "gap_id": "gap-004",
+      "competitor_id": "surfer-seo",
+      "category": "capability",
+      "description": "Surfer SEO does not offer: ai-readiness verification pipeline",
+      "rankfixer_advantage": "RankFixer covers ai-readiness verification pipeline via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:Surfer SEO"
+      ]
+    },
+    {
+      "gap_id": "gap-005",
+      "competitor_id": "surfer-seo",
+      "category": "capability",
+      "description": "Surfer SEO does not offer: website authority auditing",
+      "rankfixer_advantage": "RankFixer covers website authority auditing via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:Surfer SEO"
+      ]
+    },
+    {
+      "gap_id": "gap-006",
+      "competitor_id": "surfer-seo",
+      "category": "capability",
+      "description": "Surfer SEO does not offer: citation governance",
+      "rankfixer_advantage": "RankFixer covers citation governance via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:Surfer SEO"
+      ]
+    },
+    {
+      "gap_id": "gap-007",
+      "competitor_id": "surfer-seo",
+      "category": "capability",
+      "description": "Surfer SEO does not offer: predictive roadmap",
+      "rankfixer_advantage": "RankFixer covers predictive roadmap via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:Surfer SEO"
+      ]
+    },
+    {
+      "gap_id": "gap-008",
+      "competitor_id": "se-ranking",
+      "category": "capability",
+      "description": "SE Ranking does not offer: governance proof",
+      "rankfixer_advantage": "RankFixer covers governance proof via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:SE Ranking"
+      ]
+    },
+    {
+      "gap_id": "gap-009",
+      "competitor_id": "se-ranking",
+      "category": "capability",
+      "description": "SE Ranking does not offer: autonomous sales pipeline",
+      "rankfixer_advantage": "RankFixer covers autonomous sales pipeline via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:SE Ranking"
+      ]
+    },
+    {
+      "gap_id": "gap-010",
+      "competitor_id": "se-ranking",
+      "category": "capability",
+      "description": "SE Ranking does not offer: 31-pillar verification",
+      "rankfixer_advantage": "RankFixer covers 31-pillar verification via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:SE Ranking"
+      ]
+    },
+    {
+      "gap_id": "gap-011",
+      "competitor_id": "se-ranking",
+      "category": "capability",
+      "description": "SE Ranking does not offer: ai-readiness verification pipeline",
+      "rankfixer_advantage": "RankFixer covers ai-readiness verification pipeline via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:SE Ranking"
+      ]
+    },
+    {
+      "gap_id": "gap-012",
+      "competitor_id": "se-ranking",
+      "category": "capability",
+      "description": "SE Ranking does not offer: website authority auditing",
+      "rankfixer_advantage": "RankFixer covers website authority auditing via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:SE Ranking"
+      ]
+    },
+    {
+      "gap_id": "gap-013",
+      "competitor_id": "se-ranking",
+      "category": "capability",
+      "description": "SE Ranking does not offer: citation governance",
+      "rankfixer_advantage": "RankFixer covers citation governance via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:SE Ranking"
+      ]
+    },
+    {
+      "gap_id": "gap-014",
+      "competitor_id": "se-ranking",
+      "category": "capability",
+      "description": "SE Ranking does not offer: predictive roadmap",
+      "rankfixer_advantage": "RankFixer covers predictive roadmap via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:SE Ranking"
+      ]
+    },
+    {
+      "gap_id": "gap-015",
+      "competitor_id": "semrush",
+      "category": "capability",
+      "description": "Semrush does not offer: governance proof",
+      "rankfixer_advantage": "RankFixer covers governance proof via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:Semrush"
+      ]
+    },
+    {
+      "gap_id": "gap-016",
+      "competitor_id": "semrush",
+      "category": "capability",
+      "description": "Semrush does not offer: autonomous sales pipeline",
+      "rankfixer_advantage": "RankFixer covers autonomous sales pipeline via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:Semrush"
+      ]
+    },
+    {
+      "gap_id": "gap-017",
+      "competitor_id": "semrush",
+      "category": "capability",
+      "description": "Semrush does not offer: 31-pillar verification",
+      "rankfixer_advantage": "RankFixer covers 31-pillar verification via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:Semrush"
+      ]
+    },
+    {
+      "gap_id": "gap-018",
+      "competitor_id": "semrush",
+      "category": "capability",
+      "description": "Semrush does not offer: ai-readiness verification pipeline",
+      "rankfixer_advantage": "RankFixer covers ai-readiness verification pipeline via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:Semrush"
+      ]
+    },
+    {
+      "gap_id": "gap-019",
+      "competitor_id": "semrush",
+      "category": "capability",
+      "description": "Semrush does not offer: website authority auditing",
+      "rankfixer_advantage": "RankFixer covers website authority auditing via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:Semrush"
+      ]
+    },
+    {
+      "gap_id": "gap-020",
+      "competitor_id": "semrush",
+      "category": "capability",
+      "description": "Semrush does not offer: citation governance",
+      "rankfixer_advantage": "RankFixer covers citation governance via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:Semrush"
+      ]
+    },
+    {
+      "gap_id": "gap-021",
+      "competitor_id": "semrush",
+      "category": "capability",
+      "description": "Semrush does not offer: predictive roadmap",
+      "rankfixer_advantage": "RankFixer covers predictive roadmap via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:Semrush"
+      ]
+    },
+    {
+      "gap_id": "gap-022",
+      "competitor_id": "ahrefs",
+      "category": "capability",
+      "description": "Ahrefs does not offer: governance proof",
+      "rankfixer_advantage": "RankFixer covers governance proof via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:Ahrefs"
+      ]
+    },
+    {
+      "gap_id": "gap-023",
+      "competitor_id": "ahrefs",
+      "category": "capability",
+      "description": "Ahrefs does not offer: autonomous sales pipeline",
+      "rankfixer_advantage": "RankFixer covers autonomous sales pipeline via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:Ahrefs"
+      ]
+    },
+    {
+      "gap_id": "gap-024",
+      "competitor_id": "ahrefs",
+      "category": "capability",
+      "description": "Ahrefs does not offer: 31-pillar verification",
+      "rankfixer_advantage": "RankFixer covers 31-pillar verification via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:Ahrefs"
+      ]
+    },
+    {
+      "gap_id": "gap-025",
+      "competitor_id": "ahrefs",
+      "category": "capability",
+      "description": "Ahrefs does not offer: ai-readiness verification pipeline",
+      "rankfixer_advantage": "RankFixer covers ai-readiness verification pipeline via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:Ahrefs"
+      ]
+    },
+    {
+      "gap_id": "gap-026",
+      "competitor_id": "ahrefs",
+      "category": "capability",
+      "description": "Ahrefs does not offer: website authority auditing",
+      "rankfixer_advantage": "RankFixer covers website authority auditing via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:Ahrefs"
+      ]
+    },
+    {
+      "gap_id": "gap-027",
+      "competitor_id": "ahrefs",
+      "category": "capability",
+      "description": "Ahrefs does not offer: citation governance",
+      "rankfixer_advantage": "RankFixer covers citation governance via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:Ahrefs"
+      ]
+    },
+    {
+      "gap_id": "gap-028",
+      "competitor_id": "ahrefs",
+      "category": "capability",
+      "description": "Ahrefs does not offer: predictive roadmap",
+      "rankfixer_advantage": "RankFixer covers predictive roadmap via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:Ahrefs"
+      ]
+    },
+    {
+      "gap_id": "gap-029",
+      "competitor_id": "marketmuse",
+      "category": "capability",
+      "description": "MarketMuse does not offer: governance proof",
+      "rankfixer_advantage": "RankFixer covers governance proof via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:MarketMuse"
+      ]
+    },
+    {
+      "gap_id": "gap-030",
+      "competitor_id": "marketmuse",
+      "category": "capability",
+      "description": "MarketMuse does not offer: autonomous sales pipeline",
+      "rankfixer_advantage": "RankFixer covers autonomous sales pipeline via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:MarketMuse"
+      ]
+    },
+    {
+      "gap_id": "gap-031",
+      "competitor_id": "marketmuse",
+      "category": "capability",
+      "description": "MarketMuse does not offer: 31-pillar verification",
+      "rankfixer_advantage": "RankFixer covers 31-pillar verification via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:MarketMuse"
+      ]
+    },
+    {
+      "gap_id": "gap-032",
+      "competitor_id": "marketmuse",
+      "category": "capability",
+      "description": "MarketMuse does not offer: ai-readiness verification pipeline",
+      "rankfixer_advantage": "RankFixer covers ai-readiness verification pipeline via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:MarketMuse"
+      ]
+    },
+    {
+      "gap_id": "gap-033",
+      "competitor_id": "marketmuse",
+      "category": "capability",
+      "description": "MarketMuse does not offer: website authority auditing",
+      "rankfixer_advantage": "RankFixer covers website authority auditing via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:MarketMuse"
+      ]
+    },
+    {
+      "gap_id": "gap-034",
+      "competitor_id": "marketmuse",
+      "category": "capability",
+      "description": "MarketMuse does not offer: citation governance",
+      "rankfixer_advantage": "RankFixer covers citation governance via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:MarketMuse"
+      ]
+    },
+    {
+      "gap_id": "gap-035",
+      "competitor_id": "marketmuse",
+      "category": "capability",
+      "description": "MarketMuse does not offer: predictive roadmap",
+      "rankfixer_advantage": "RankFixer covers predictive roadmap via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:MarketMuse"
+      ]
+    },
+    {
+      "gap_id": "gap-036",
+      "competitor_id": "clearscope",
+      "category": "capability",
+      "description": "Clearscope does not offer: governance proof",
+      "rankfixer_advantage": "RankFixer covers governance proof via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:Clearscope"
+      ]
+    },
+    {
+      "gap_id": "gap-037",
+      "competitor_id": "clearscope",
+      "category": "capability",
+      "description": "Clearscope does not offer: autonomous sales pipeline",
+      "rankfixer_advantage": "RankFixer covers autonomous sales pipeline via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:Clearscope"
+      ]
+    },
+    {
+      "gap_id": "gap-038",
+      "competitor_id": "clearscope",
+      "category": "capability",
+      "description": "Clearscope does not offer: 31-pillar verification",
+      "rankfixer_advantage": "RankFixer covers 31-pillar verification via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:Clearscope"
+      ]
+    },
+    {
+      "gap_id": "gap-039",
+      "competitor_id": "clearscope",
+      "category": "capability",
+      "description": "Clearscope does not offer: ai-readiness verification pipeline",
+      "rankfixer_advantage": "RankFixer covers ai-readiness verification pipeline via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:Clearscope"
+      ]
+    },
+    {
+      "gap_id": "gap-040",
+      "competitor_id": "clearscope",
+      "category": "capability",
+      "description": "Clearscope does not offer: website authority auditing",
+      "rankfixer_advantage": "RankFixer covers website authority auditing via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:Clearscope"
+      ]
+    },
+    {
+      "gap_id": "gap-041",
+      "competitor_id": "clearscope",
+      "category": "capability",
+      "description": "Clearscope does not offer: citation governance",
+      "rankfixer_advantage": "RankFixer covers citation governance via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:Clearscope"
+      ]
+    },
+    {
+      "gap_id": "gap-042",
+      "competitor_id": "clearscope",
+      "category": "capability",
+      "description": "Clearscope does not offer: predictive roadmap",
+      "rankfixer_advantage": "RankFixer covers predictive roadmap via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:Clearscope"
+      ]
+    },
+    {
+      "gap_id": "gap-043",
+      "competitor_id": "copy-ai",
+      "category": "capability",
+      "description": "Copy.ai does not offer: governance proof",
+      "rankfixer_advantage": "RankFixer covers governance proof via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:Copy.ai"
+      ]
+    },
+    {
+      "gap_id": "gap-044",
+      "competitor_id": "copy-ai",
+      "category": "capability",
+      "description": "Copy.ai does not offer: autonomous sales pipeline",
+      "rankfixer_advantage": "RankFixer covers autonomous sales pipeline via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:Copy.ai"
+      ]
+    },
+    {
+      "gap_id": "gap-045",
+      "competitor_id": "copy-ai",
+      "category": "capability",
+      "description": "Copy.ai does not offer: 31-pillar verification",
+      "rankfixer_advantage": "RankFixer covers 31-pillar verification via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:Copy.ai"
+      ]
+    },
+    {
+      "gap_id": "gap-046",
+      "competitor_id": "copy-ai",
+      "category": "capability",
+      "description": "Copy.ai does not offer: ai-readiness verification pipeline",
+      "rankfixer_advantage": "RankFixer covers ai-readiness verification pipeline via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:Copy.ai"
+      ]
+    },
+    {
+      "gap_id": "gap-047",
+      "competitor_id": "copy-ai",
+      "category": "capability",
+      "description": "Copy.ai does not offer: website authority auditing",
+      "rankfixer_advantage": "RankFixer covers website authority auditing via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:Copy.ai"
+      ]
+    },
+    {
+      "gap_id": "gap-048",
+      "competitor_id": "copy-ai",
+      "category": "capability",
+      "description": "Copy.ai does not offer: citation governance",
+      "rankfixer_advantage": "RankFixer covers citation governance via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:Copy.ai"
+      ]
+    },
+    {
+      "gap_id": "gap-049",
+      "competitor_id": "copy-ai",
+      "category": "capability",
+      "description": "Copy.ai does not offer: predictive roadmap",
+      "rankfixer_advantage": "RankFixer covers predictive roadmap via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:Copy.ai"
+      ]
+    },
+    {
+      "gap_id": "gap-050",
+      "competitor_id": "jasper-ai",
+      "category": "capability",
+      "description": "Jasper AI does not offer: governance proof",
+      "rankfixer_advantage": "RankFixer covers governance proof via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:Jasper AI"
+      ]
+    },
+    {
+      "gap_id": "gap-051",
+      "competitor_id": "jasper-ai",
+      "category": "capability",
+      "description": "Jasper AI does not offer: autonomous sales pipeline",
+      "rankfixer_advantage": "RankFixer covers autonomous sales pipeline via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:Jasper AI"
+      ]
+    },
+    {
+      "gap_id": "gap-052",
+      "competitor_id": "jasper-ai",
+      "category": "capability",
+      "description": "Jasper AI does not offer: 31-pillar verification",
+      "rankfixer_advantage": "RankFixer covers 31-pillar verification via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:Jasper AI"
+      ]
+    },
+    {
+      "gap_id": "gap-053",
+      "competitor_id": "jasper-ai",
+      "category": "capability",
+      "description": "Jasper AI does not offer: ai-readiness verification pipeline",
+      "rankfixer_advantage": "RankFixer covers ai-readiness verification pipeline via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:Jasper AI"
+      ]
+    },
+    {
+      "gap_id": "gap-054",
+      "competitor_id": "jasper-ai",
+      "category": "capability",
+      "description": "Jasper AI does not offer: website authority auditing",
+      "rankfixer_advantage": "RankFixer covers website authority auditing via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:Jasper AI"
+      ]
+    },
+    {
+      "gap_id": "gap-055",
+      "competitor_id": "jasper-ai",
+      "category": "capability",
+      "description": "Jasper AI does not offer: citation governance",
+      "rankfixer_advantage": "RankFixer covers citation governance via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:Jasper AI"
+      ]
+    },
+    {
+      "gap_id": "gap-056",
+      "competitor_id": "jasper-ai",
+      "category": "capability",
+      "description": "Jasper AI does not offer: predictive roadmap",
+      "rankfixer_advantage": "RankFixer covers predictive roadmap via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:Jasper AI"
+      ]
+    },
+    {
+      "gap_id": "gap-057",
+      "competitor_id": "writesonic",
+      "category": "capability",
+      "description": "Writesonic does not offer: governance proof",
+      "rankfixer_advantage": "RankFixer covers governance proof via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:Writesonic"
+      ]
+    },
+    {
+      "gap_id": "gap-058",
+      "competitor_id": "writesonic",
+      "category": "capability",
+      "description": "Writesonic does not offer: autonomous sales pipeline",
+      "rankfixer_advantage": "RankFixer covers autonomous sales pipeline via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:Writesonic"
+      ]
+    },
+    {
+      "gap_id": "gap-059",
+      "competitor_id": "writesonic",
+      "category": "capability",
+      "description": "Writesonic does not offer: 31-pillar verification",
+      "rankfixer_advantage": "RankFixer covers 31-pillar verification via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:Writesonic"
+      ]
+    },
+    {
+      "gap_id": "gap-060",
+      "competitor_id": "writesonic",
+      "category": "capability",
+      "description": "Writesonic does not offer: ai-readiness verification pipeline",
+      "rankfixer_advantage": "RankFixer covers ai-readiness verification pipeline via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:Writesonic"
+      ]
+    },
+    {
+      "gap_id": "gap-061",
+      "competitor_id": "writesonic",
+      "category": "capability",
+      "description": "Writesonic does not offer: website authority auditing",
+      "rankfixer_advantage": "RankFixer covers website authority auditing via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:Writesonic"
+      ]
+    },
+    {
+      "gap_id": "gap-062",
+      "competitor_id": "writesonic",
+      "category": "capability",
+      "description": "Writesonic does not offer: citation governance",
+      "rankfixer_advantage": "RankFixer covers citation governance via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:Writesonic"
+      ]
+    },
+    {
+      "gap_id": "gap-063",
+      "competitor_id": "writesonic",
+      "category": "capability",
+      "description": "Writesonic does not offer: predictive roadmap",
+      "rankfixer_advantage": "RankFixer covers predictive roadmap via engineered citation workflow",
+      "severity": "medium",
+      "evidence": [
+        "curated_feature_set:Writesonic"
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "type": "content",
+      "label": "Publish /vs comparison page",
+      "target": "site",
+      "prompt": "Create a RankFixer vs competitors comparison page."
+    },
+    {
+      "type": "content",
+      "label": "Blog: governance-proofing gap",
+      "target": "blog",
+      "prompt": "Write blog post exposing missing governance proof in competitor tools."
+    },
+    {
+      "type": "intel",
+      "label": "Flag Surfer SEO for job-market intel",
+      "target": "surfer-seo",
+      "prompt": "Monitor surferseo.com hiring signals."
+    },
+    {
+      "type": "intel",
+      "label": "Flag SE Ranking for job-market intel",
+      "target": "se-ranking",
+      "prompt": "Monitor seranking.com hiring signals."
+    }
+  ],
+  "oracle": "ALL CHECKS PASSED"
+}

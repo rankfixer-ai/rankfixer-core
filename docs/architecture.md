@@ -1,81 +1,229 @@
-# RankFixer Architecture
+# RankFixer Core Architecture
 
-> How the live AI Visibility Checker actually works.
+> Deep dive into the 3-step pipeline: Extraction → LLM-Readiness Scoring → Recommendation Engine.
 
 ---
 
-## Live Architecture
-
-The deployed product is a single **Netlify Function** with zero dependencies:
+## System Overview
 
 ```
-site/netlify/functions/score.js
+┌──────────────┐     ┌──────────────────┐     ┌────────────────────┐
+│   TARGET     │     │    EXTRACTION    │     │   LLM-READINESS    │
+│   WEBSITE    │────▶│    PIPELINE      │────▶│   SCORING ENGINE   │
+│   (URL)      │     │                  │     │                    │
+└──────────────┘     └──────────────────┘     └─────────┬──────────┘
+                       │                                │
+                       │ HTML, JSON-LD,                  │ Score (0-100)
+                       │ Microdata, RDFa,               │ Signal breakdowns
+                       │ Core Web Vitals                │ Entity analysis
+                       │                                │
+                       ▼                                ▼
+              ┌──────────────────┐     ┌────────────────────────┐
+              │   NORMALIZED     │     │   RECOMMENDATION       │
+              │   DATA MODEL     │────▶│   ENGINE               │
+              │                  │     │                        │
+              └──────────────────┘     │ Prioritized fixes      │
+                                       │ Time estimates         │
+                                       │ Expected impact        │
+                                       └────────────────────────┘
 ```
 
-```mermaid
-flowchart LR
-    A[User submits domain] --> B[Netlify Function: score.js]
-    B --> C[Fetch target URL + robots.txt + llms.txt]
-    C --> D[Run 6 scoring functions]
-    D --> E[Weighted average → score 0-100]
-    E --> F[Return JSON: score, label, dimensions]
+---
+
+## Step 1: Extraction Pipeline
+
+### 1.1 URL Resolution & Fetching
+
+```python
+class URLExtractor:
+    """
+    Resolves and fetches target URL with AI crawler simulation.
+    
+    - Follows redirects (max 5 hops)
+    - Respects robots.txt (but logs blocks for AI crawlers specifically)
+    - Sets User-Agent to emulate GPTBot/ClaudeBot for accurate rendering
+    - Falls back to headless browser for JS-heavy sites
+    """
 ```
 
-**Key facts:**
-- No database — results are ephemeral
-- No imports from `platform/`, `rankfixer-mapper/`, or `src/`
-- No external APIs — uses Node.js global `fetch`
-- Deployed via `netlify.toml` → `site/netlify/functions/`
+**Key behaviors:**
+- Timeout: 30 seconds for fetch, 60 seconds for JS-rendered fallback
+- Max page size: 10MB (pages larger than this are truncated with a warning)
+- Respects `X-Robots-Tag: noindex` and `<meta name="robots" content="noindex">`
+- Detects and warns on JavaScript-only rendering (empty `<body>` after fetch)
+
+### 1.2 Schema.org Extraction
+
+```python
+class SchemaExtractor:
+    """
+    Extracts all schema.org markup from a page.
+    
+    Supported formats:
+    - JSON-LD (primary — most LLM-friendly)
+    - Microdata (extracted but scored lower)
+    - RDFa (extracted but scored lower)
+    
+    Supported types:
+    - Organization, WebSite, WebPage, Article
+    - FAQPage, QAPage, HowTo
+    - Product, Review, AggregateRating
+    - BreadcrumbList, SiteNavigationElement
+    - Person, Event, JobPosting
+    """
+```
+
+**Scoring implications:**
+- JSON-LD is preferred over Microdata (LLMs parse it more reliably)
+- Nested entities with `@id` references score higher than flat definitions
+- `sameAs` links to authoritative sources (Wikipedia, Crunchbase, LinkedIn) boost entity recognition
+- Missing `@type` declarations are flagged as errors
+
+### 1.3 Content Structure Analysis
+
+```python
+class ContentAnalyzer:
+    """
+    Analyzes semantic HTML structure and content quality.
+    
+    Metrics:
+    - Heading hierarchy (H1-H6) completeness and nesting
+    - Answer density: ratio of declarative sentences to total text
+    - Entity mentions per 1000 words
+    - Readability (Flesch-Kincaid, target Grade 8-10)
+    - Content-to-HTML ratio
+    - Internal link structure and anchor text diversity
+    """
+```
+
+### 1.4 Technical Signal Extraction
+
+```python
+class TechnicalAnalyzer:
+    """
+    Measures technical SEO and performance signals.
+    
+    Signals:
+    - Core Web Vitals: LCP, INP, CLS (via Lighthouse API)
+    - HTTPS enforcement (redirect, HSTS header)
+    - Mobile responsiveness (viewport meta, responsive CSS)
+    - robots.txt directives for AI crawlers
+    - Sitemap.xml presence and lastmod dates
+    - Canonical URL consistency
+    - Page load time (Time to First Byte, DOMContentLoaded)
+    """
+```
 
 ---
 
-## Scoring Model (Live)
+## Step 2: LLM-Readiness Scoring Engine
 
-| Signal | Weight | Function | What It Measures |
-| :--- | :--- | :--- | :--- |
-| Schema | 25% | `scoreSchema()` | JSON-LD `@type` count, specific types (Organization, FAQPage, etc.) |
-| Entity | 20% | `scoreEntity()` | `@id` references, `sameAs`, `brand`, Open Graph tags |
-| Content | 20% | `scoreContent()` | Word count, FAQ structure, lists/tables, meta description |
-| Structure | 15% | `scoreStructure()` | H1/H2 headings, microdata, `<nav>`, `<main>` |
-| Crawlable | 10% | `scoreCrawlable()` | HTTP status, robots.txt presence |
-| llms.txt | 10% | inline | Presence of `/llms.txt` |
+### 2.1 Signal Weights & Calculation
 
-**Score = Σ(signal_score × weight)**
+| Signal | Weight | Measurement Method |
+|--------|--------|-------------------|
+| Schema Completeness | 25% | Count and quality of schema.org types present |
+| Entity Consistency | 20% | @id linkage, sameAs, brand definition, OG/Twitter meta |
+| Content Structure | 20% | Substantial text, FAQ questions, lists/tables, meta description |
+| Technical Structure | 15% | H1/H2 hierarchy, nav/main landmarks, microdata |
+| Crawlability | 10% | AI crawler access (GPTBot, ClaudeBot, PerplexityBot) + robots.txt |
+| llms.txt | 10% | Dedicated llms.txt file for AI crawler discovery |
 
-**Labels:**
-- 80–100: Strong
-- 60–79: Fair
-- 40–59: Weak
-- 0–39: Poor
+### 2.2 Scoring Formula
 
----
+```
+raw_score = Σ (signal_score × weight) for all 6 signals
+final_score = clamp(raw_score, 0, 100)
+tier = categorize(final_score)
+```
 
-## What This Repo Contains
+### 2.3 Tier System
 
-| Path | Status | Description |
-|---|---|---|
-| `site/netlify/functions/score.js` | **Live** | The scoring engine |
-| `site/` | Live | Static frontend (checker UI, landing page) |
-| `.archive/platform/` | Archived | Earlier platform architecture (never wired) |
-| `.archive/rankfixer-mapper/` | Archived | Earlier mapping/audit pipeline (never wired) |
-| `.archive/src/` | Archived | Python bridge (never wired) |
-| `data/` | Live | Research datasets (top 100 SaaS scores) |
-| `GOVERNANCE.md` | Governance | RPES governance thresholds (not yet implemented in live code) |
+| Score Range | Tier | Label | % of Domains (90 SaaS, Aug 2026) |
+|-------------|------|-------|-----------------------------------|
+| 0-20 | Tier 5 | Critical — Invisible to AI | 0% |
+| 21-40 | Tier 4 | Poor — Occasional mentions | 2.2% |
+| 41-60 | Tier 3 | Fair — Present but not prominent | 41.1% |
+| 61-80 | Tier 2 | Good — Consistently cited | 50.0% |
+| 81-100 | Tier 1 | Excellent — AI-first brand | 6.7% |
 
 ---
 
-## Archived Code
+## Step 3: Recommendation Engine
 
-See `.archive/README.md` for details. The archived code represents an earlier vision for a multi-layer platform with a worker process, engine bridge, and RPES governance. None of it was ever connected to the live Netlify function.
+### 3.1 Prioritization Algorithm
+
+```python
+def prioritize_recommendations(issues, current_score):
+    """
+    Ranks issues by: (impact × speed) / difficulty
+    
+    Priority factors:
+    - Higher impact on score gets higher priority
+    - Faster fixes are preferred for low-scoring domains (momentum)
+    - Longer-term fixes are surfaced for high-scoring domains
+    - No more than 5 recommendations returned (avoid overwhelm)
+    - #1 recommendation is always the "Quick Win"
+    """
+```
+
+### 3.2 Recommendation Categories
+
+| Category | Example | Typical Impact | Typical Fix Time |
+|----------|---------|---------------|-----------------|
+| Critical | AI crawlers blocked in robots.txt | +10-15 pts | 5 minutes |
+| High | Missing Organization/WebSite schema | +8-12 pts | 1-2 hours |
+| Medium | Low entity density | +5-10 pts | 2-4 hours |
+| Enhancement | Add FAQPage schema | +5-8 pts | 1-3 hours |
+| Strategic | Build knowledge base presence | +15-25 pts | 2-8 weeks |
+
+### 3.3 Output Format
+
+```json
+{
+  "score": 34,
+  "tier": 4,
+  "tier_label": "Poor",
+  "signals": {
+    "schema_completeness": {"score": 15, "max": 25, "issues": ["Missing Organization schema"]},
+    "entity_density": {"score": 8, "max": 20, "issues": ["Only 2 entity mentions per 1000 words"]},
+    "content_answer_density": {"score": 12, "max": 20},
+    "technical_signals": {"score": 9, "max": 15, "issues": ["LCP > 4s"]},
+    "backlink_quality": {"score": 4, "max": 10},
+    "brand_entity_recognition": {"score": 1, "max": 5, "issues": ["No sameAs links"]},
+    "freshness": {"score": 3, "max": 5}
+  },
+  "recommendations": [
+    {
+      "priority": 1,
+      "title": "Implement Organization and WebSite Schema",
+      "category": "Critical",
+      "impact": 12,
+      "fix_time": "1-2 hours",
+      "is_quick_win": true,
+      "steps": ["Add JSON-LD Organization schema to homepage", "Include sameAs links to social profiles"]
+    }
+  ],
+  "competitors_mentioned": ["hubspot.com", "salesforce.com"],
+  "platforms_analyzed": ["chatgpt", "perplexity", "google_aio"]
+}
+```
 
 ---
 
-## Limits of the Current Model
+## Caching & Performance
 
-- **No backlink data** — requires external APIs (Moz, Ahrefs)
-- **No brand entity resolution** — requires knowledge graph lookup
-- **No Core Web Vitals measurement** — would require Lighthouse or CrUX
-- **No citation tracking** — would require monitoring AI engine outputs
-- **No content freshness signal** — `scoreContent()` doesn't check `dateModified`
+- **TTL:** Analysis results cached for 24 hours per URL
+- **Rate Limiting:** Max 60 requests/minute for batch analysis
+- **Parallel Processing:** Up to 5 URLs analyzed simultaneously in batch mode
+- **Fallback:** If Lighthouse API is unavailable, Core Web Vitals are estimated from page metrics
 
-These are intentional scope choices for a free tool. The archived code may be useful if RankFixer ever builds a backend platform.
+---
+
+## Privacy & Data Handling
+
+- Scan results are ephemeral by default (not stored server-side)
+- Users opt in to persistent tracking via email capture
+- No PII is extracted from analyzed domains
+- robots.txt directives are respected for all crawler simulation
+- Analysis does not store page content — only extracted signals and scores

@@ -89,8 +89,8 @@ After the results screen renders (below the score circle, above the accordion).
 │  📊 NEW RESEARCH                                       │
 │                                                       │
 │  We analyzed 100 top SaaS websites for AI visibility.  │
-│  See how your score compares to HubSpot (91.2),        │
-│  Salesforce (88.7), and Stripe (86.4).                │
+│  See how your score compares to Teamwork.com (91),        │
+│  HubSpot (83), and Zapier (81).                │
 │                                                       │
 │  [ SEE THE FULL REPORT → ]    [ ✕ ]                   │
 └──────────────────────────────────────────────────────┘
@@ -104,7 +104,7 @@ After the results screen renders (below the score circle, above the accordion).
     <span class="research-badge">📊 NEW RESEARCH</span>
     <p class="research-text">
       We analyzed <strong>100 top SaaS websites</strong> for AI visibility.
-      See how your score compares to HubSpot (91.2), Salesforce (88.7), and Stripe (86.4).
+      See how your score compares to Teamwork.com (91), HubSpot (83), and Zapier (81).
     </p>
     <a href="/blog/ai-readiness-100-saas" class="research-cta">SEE THE FULL REPORT →</a>
   </div>

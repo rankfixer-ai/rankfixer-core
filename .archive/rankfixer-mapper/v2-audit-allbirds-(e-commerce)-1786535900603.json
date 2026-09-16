@@ -1,0 +1,284 @@
+{
+  "meta": {
+    "scanDate": "2026-08-12T11:58:20.601Z",
+    "entryUrl": "https://www.allbirds.com",
+    "duration": "18.6s",
+    "version": "2.0.0"
+  },
+  "site": {
+    "archetype": "ecommerce",
+    "requiresJSRendering": false,
+    "totalPages": 2136,
+    "templatesDiscovered": 4,
+    "pagesSampled": 10,
+    "pagesCrawledSuccessfully": 10
+  },
+  "templates": [
+    {
+      "pattern": "/{slug}/{slug}",
+      "pageType": "product",
+      "instanceCount": 1811,
+      "samplesCrawled": 3,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "sitemap",
+          "severity": "info",
+          "message": "10 crawled pages are not in the sitemap",
+          "confidence": "high",
+          "estimatedAffectedPages": 1811,
+          "recommendation": "Consider adding important pages to the sitemap."
+        },
+        {
+          "type": "missing-meta-description",
+          "severity": "warning",
+          "message": "2/3 samples missing meta description",
+          "confidence": "high",
+          "estimatedAffectedPages": 1449,
+          "recommendation": "Add meta descriptions to this template."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/products/mens-wool-runners-natural-white has 3 H1 tags (should have exactly one)",
+          "affectedUrls": [
+            "https://www.allbirds.com/products/mens-wool-runners-natural-white"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/collections/mens-wool-cardi-loop has 16827 words but is orphaned (no internal links point here)",
+          "affectedUrls": [
+            "https://www.allbirds.com/collections/mens-wool-cardi-loop"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/{slug}/{slug}/{slug}",
+      "pageType": "article",
+      "instanceCount": 321,
+      "samplesCrawled": 3,
+      "confidence": "refined",
+      "templateIssues": [
+        {
+          "type": "sitemap",
+          "severity": "info",
+          "message": "10 crawled pages are not in the sitemap",
+          "confidence": "high",
+          "estimatedAffectedPages": 321,
+          "recommendation": "Consider adding important pages to the sitemap."
+        },
+        {
+          "type": "missing-meta-description",
+          "severity": "warning",
+          "message": "2/3 samples missing meta description",
+          "confidence": "high",
+          "estimatedAffectedPages": 257,
+          "recommendation": "Add meta descriptions to this template."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/blogs/the-perch/what-s-trending-fall-shoe-trends-for-2024 has 16737 words but is orphaned (no internal links point here)",
+          "affectedUrls": [
+            "https://www.allbirds.com/blogs/the-perch/what-s-trending-fall-shoe-trends-for-2024"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/pages/menu-image-list/nav-tile-mens-mobile-3-12-march-promo has 16696 words but is orphaned (no internal links point here)",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/menu-image-list/nav-tile-mens-mobile-3-12-march-promo"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/pages/stores/yaegers-shoes-toledo has 16783 words but is orphaned (no internal links point here)",
+          "affectedUrls": [
+            "https://www.allbirds.com/pages/stores/yaegers-shoes-toledo"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "/",
+      "pageType": "homepage",
+      "instanceCount": 1,
+      "samplesCrawled": 1,
+      "confidence": "high",
+      "templateIssues": [],
+      "pageIssues": [
+        {
+          "type": "sitemap",
+          "severity": "info",
+          "message": "10 crawled pages are not in the sitemap",
+          "affectedUrls": [
+            "https://www.allbirds.com/products/mens-wool-runners-natural-white",
+            "https://www.allbirds.com/collections/mens-wool-cardi-loop",
+            "https://www.allbirds.com/blogs/news",
+            "https://www.allbirds.com/blogs/the-perch/what-s-trending-fall-shoe-trends-for-2024",
+            "https://www.allbirds.com/pages/menu-image-list/nav-tile-mens-mobile-3-12-march-promo",
+            "https://www.allbirds.com/pages/stores/yaegers-shoes-toledo",
+            "https://www.allbirds.com/",
+            "https://www.allbirds.com/agents.md",
+            "https://www.allbirds.com/search",
+            "https://www.allbirds.com/collections/98"
+          ]
+        }
+      ]
+    },
+    {
+      "pattern": "(individual pages)",
+      "pageType": "static-page",
+      "instanceCount": 3,
+      "samplesCrawled": 3,
+      "confidence": "high",
+      "templateIssues": [
+        {
+          "type": "sitemap",
+          "severity": "info",
+          "message": "10 crawled pages are not in the sitemap",
+          "confidence": "high",
+          "estimatedAffectedPages": 3,
+          "recommendation": "Consider adding important pages to the sitemap."
+        },
+        {
+          "type": "missing-h1",
+          "severity": "critical",
+          "message": "2/3 samples missing H1 tag",
+          "confidence": "high",
+          "estimatedAffectedPages": 3,
+          "recommendation": "Add H1 tag to this template."
+        },
+        {
+          "type": "missing-meta-description",
+          "severity": "warning",
+          "message": "3/3 samples missing meta description",
+          "confidence": "high",
+          "estimatedAffectedPages": 3,
+          "recommendation": "Add meta descriptions to this template."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/agents.md has 534 words but is orphaned (no internal links point here)",
+          "affectedUrls": [
+            "https://www.allbirds.com/agents.md"
+          ]
+        },
+        {
+          "type": "indexability",
+          "severity": "warning",
+          "message": "https://www.allbirds.com/search noindexed but has 9 inlinks",
+          "affectedUrls": [
+            "https://www.allbirds.com/search"
+          ]
+        },
+        {
+          "type": "content",
+          "severity": "critical",
+          "message": "https://www.allbirds.com/collections/98 has 16801 words but is orphaned (no internal links point here)",
+          "affectedUrls": [
+            "https://www.allbirds.com/collections/98"
+          ]
+        }
+      ]
+    }
+  ],
+  "globalContradictions": [
+    {
+      "type": "multiple-h1",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/products/mens-wool-runners-natural-white has 3 H1 tags (should have exactly one)",
+      "affectedUrls": [
+        "https://www.allbirds.com/products/mens-wool-runners-natural-white"
+      ],
+      "recommendation": "Use exactly one H1 tag per page."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/collections/mens-wool-cardi-loop has 16827 words but is orphaned (no internal links point here)",
+      "affectedUrls": [
+        "https://www.allbirds.com/collections/mens-wool-cardi-loop"
+      ],
+      "recommendation": "Add internal links to this valuable content."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/blogs/the-perch/what-s-trending-fall-shoe-trends-for-2024 has 16737 words but is orphaned (no internal links point here)",
+      "affectedUrls": [
+        "https://www.allbirds.com/blogs/the-perch/what-s-trending-fall-shoe-trends-for-2024"
+      ],
+      "recommendation": "Add internal links to this valuable content."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/pages/menu-image-list/nav-tile-mens-mobile-3-12-march-promo has 16696 words but is orphaned (no internal links point here)",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/menu-image-list/nav-tile-mens-mobile-3-12-march-promo"
+      ],
+      "recommendation": "Add internal links to this valuable content."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/pages/stores/yaegers-shoes-toledo has 16783 words but is orphaned (no internal links point here)",
+      "affectedUrls": [
+        "https://www.allbirds.com/pages/stores/yaegers-shoes-toledo"
+      ],
+      "recommendation": "Add internal links to this valuable content."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/agents.md has 534 words but is orphaned (no internal links point here)",
+      "affectedUrls": [
+        "https://www.allbirds.com/agents.md"
+      ],
+      "recommendation": "Add internal links to this valuable content."
+    },
+    {
+      "type": "noindex-linked",
+      "severity": "warning",
+      "message": "https://www.allbirds.com/search noindexed but has 9 inlinks",
+      "affectedUrls": [
+        "https://www.allbirds.com/search"
+      ],
+      "recommendation": "Remove noindex or remove links."
+    },
+    {
+      "type": "deep-content-orphan",
+      "severity": "critical",
+      "message": "https://www.allbirds.com/collections/98 has 16801 words but is orphaned (no internal links point here)",
+      "affectedUrls": [
+        "https://www.allbirds.com/collections/98"
+      ],
+      "recommendation": "Add internal links to this valuable content."
+    }
+  ],
+  "graphSummary": {
+    "nodeCount": 10,
+    "edgeCount": 477,
+    "orphanCount": 6
+  },
+  "discovery": {
+    "sitemapUrls": 2136,
+    "crawlUrls": 20,
+    "sitemapOnly": 2116,
+    "crawlOnly": 1,
+    "overlap": 19
+  }
+}

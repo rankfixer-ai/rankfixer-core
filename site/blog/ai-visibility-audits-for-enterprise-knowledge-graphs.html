@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ai Visibility Audits For Enterprise Knowledge Graphs — RankFixer</title>
+<style>
+    :root {
+        --brand: #6C5CE7; --brand-hover: #5A4BD1; --bg: #0D0D1A; --bg-card: #151528;
+        --text: #F0F0F5; --text-muted: #8888A0; --border: #2A2A45;
+        --radius: 12px; --radius-sm: 8px; --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.7; overflow-x: hidden; width: 100%; }
+    a { color: var(--brand); }
+    .nav { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; padding: 1rem 2rem; border-bottom: 1px solid var(--border); }
+    .nav-logo { font-weight: 700; font-size: 1.2rem; text-decoration: none; color: var(--text); }
+    .nav-links { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; }
+    .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; }
+    .nav-links a:hover { color: var(--text); }
+    .container { max-width: 720px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+    .article h1 { font-size: 2rem; font-weight: 800; letter-spacing: -0.02em; margin: 0 0 1rem; }
+    .article h2 { font-size: 1.4rem; font-weight: 700; margin: 2rem 0 0.75rem; }
+    .article h3 { font-size: 1.15rem; font-weight: 700; margin: 1.5rem 0 0.5rem; }
+    .article p { margin-bottom: 1rem; }
+    .article ul, .article ol { margin: 0 0 1rem 1.4rem; }
+    .article li { margin-bottom: 0.35rem; }
+    .article blockquote { border-left: 3px solid var(--brand); padding: 0.5rem 1rem; color: var(--text-muted); margin-bottom: 1rem; }
+    .article code { background: var(--bg-card); border: 1px solid var(--border); padding: 0.1rem 0.35rem; border-radius: 4px; font-size: 0.9em; }
+    .article pre { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 1rem; overflow-x: auto; margin-bottom: 1rem; }
+    .article pre code { background: none; border: none; padding: 0; }
+    .article hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
+    footer { text-align: center; padding: 2rem; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.8rem; }
+    footer a { color: var(--text-muted); margin: 0 0.5rem; }
+    @media (max-width: 480px) {
+        nav, .nav { flex-wrap: wrap; justify-content: center; gap: 5px; font-size: 0.8rem; padding: 0 10px; }
+        .container { padding: 1rem; max-width: 100%; }
+        .article h1 { font-size: 1.5rem; }
+        .article pre { max-width: 100%; }
+    }
+/* Rankfixer - modern smooth nav */
+
+/* Smooth scrolling + sticky-nav offset */
+html{
+  scroll-behavior:smooth;
+  scroll-padding-top:5rem;
+}
+
+/* Frosted sticky nav + scroll border/shadow */
+.nav{
+  position:sticky;
+  top:0;
+  z-index:40;
+  background:rgba(13,13,26,0.82);
+  -webkit-backdrop-filter:blur(12px) saturate(160%);
+  backdrop-filter:blur(12px) saturate(160%);
+  border-bottom:1px solid transparent;
+  transition:box-shadow .35s ease, border-color .35s ease;
+}
+.nav.nav-scrolled{
+  box-shadow:0 6px 24px rgba(0,0,0,.35);
+  border-bottom-color:var(--border);
+}
+
+/* Logo gentle hover */
+.nav-logo{
+  transition:opacity .25s ease, transform .25s ease;
+}
+.nav-logo:hover{
+  opacity:.85;
+  transform:translateY(-1px);
+}
+
+/* Links: smooth color + animated underline */
+.nav-links a{
+  position:relative;
+  transition:color .25s ease;
+}
+.nav-links a::after{
+  content:"";
+  position:absolute;
+  left:0;right:0;bottom:-4px;
+  height:2px;
+  border-radius:2px;
+  background:var(--brand);
+  transform:scaleX(0);
+  transform-origin:center;
+  transition:transform .3s ease;
+}
+.nav-links a:hover{
+  color:var(--text);
+}
+.nav-links a:hover::after,
+.nav-links a:focus-visible::after,
+.nav-links a[aria-current="page"]::after{
+  transform:scaleX(1);
+}
+
+/* Focus visibility */
+.nav-toggle:focus-visible,
+.nav-links a:focus-visible{
+  outline:2px solid var(--brand);
+  outline-offset:3px;
+  border-radius:4px;
+}
+
+/* Backdrop behind the open mobile menu */
+.nav-backdrop{
+  position:fixed;
+  inset:0;
+  z-index:30;
+  background:rgba(0,0,0,.5);
+  opacity:0;
+  visibility:hidden;
+  transition:opacity .3s ease, visibility 0s linear .3s;
+}
+.nav-backdrop.open{
+  opacity:1;
+  visibility:visible;
+  transition:opacity .3s ease, visibility 0s;
+}
+
+/* Hamburger: hidden on desktop */
+.nav-toggle{
+  display:none;
+  background:none;
+  border:none;
+  cursor:pointer;
+  padding:.55rem .5rem;
+  color:var(--text);
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+}
+.nav-toggle-bar{
+  display:block;
+  width:1.4rem;
+  height:2px;
+  border-radius:2px;
+  background:currentColor;
+  transition:transform .3s ease, opacity .25s ease;
+}
+.nav-toggle.open .nav-toggle-bar:nth-child(1){
+  transform:translateY(7px) rotate(45deg);
+}
+.nav-toggle.open .nav-toggle-bar:nth-child(2){
+  opacity:0;
+  transform:translateX(-6px);
+}
+.nav-toggle.open .nav-toggle-bar:nth-child(3){
+  transform:translateY(-7px) rotate(-45deg);
+}
+
+@media (max-width:768px){
+  .nav{
+    flex-direction:row;
+    flex-wrap:wrap;
+    justify-content:space-between;
+    align-items:center;
+  }
+  .nav-toggle{
+    display:flex;
+    margin-left:auto;
+  }
+  /* Fluid dropdown */
+  .nav-links{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:.6rem;
+    width:100%;
+    max-height:0;
+    overflow:hidden;
+    padding:0;
+    opacity:0;
+    transform:translateY(-8px);
+    visibility:hidden;
+    transition:max-height .4s ease, opacity .3s ease, transform .3s ease,
+               padding .3s ease, visibility 0s linear .4s;
+  }
+  .nav-links.open{
+    max-height:560px;
+    padding:.75rem 0 .25rem;
+    opacity:1;
+    transform:translateY(0);
+    visibility:visible;
+    transition:max-height .4s ease, opacity .3s ease, transform .3s ease,
+               padding .3s ease, visibility 0s;
+  }
+  /* Link fade-in stagger */
+  .nav-links a{
+    opacity:0;
+    transform:translateY(6px);
+    transition:color .25s ease, opacity .3s ease, transform .3s ease;
+  }
+  .nav-links.open a{
+    opacity:1;
+    transform:translateY(0);
+  }
+  .nav-links.open a:nth-child(1){ transition-delay:.04s; }
+  .nav-links.open a:nth-child(2){ transition-delay:.08s; }
+  .nav-links.open a:nth-child(3){ transition-delay:.12s; }
+  .nav-links.open a:nth-child(4){ transition-delay:.16s; }
+  .nav-links.open a:nth-child(5){ transition-delay:.20s; }
+  .nav-links.open a:nth-child(6){ transition-delay:.24s; }
+}
+
+/* Reduced motion: disable transitions & smooth scroll */
+@media (prefers-reduced-motion:reduce){
+  html{ scroll-behavior:auto; }
+  .nav,
+  .nav-logo,
+  .nav-links,
+  .nav-links a,
+  .nav-links a::after,
+  .nav-toggle-bar,
+  .nav-backdrop{
+    transition:none !important;
+    transition-delay:0s !important;
+  }
+}
+</style>
+</head>
+<body>
+<nav class="nav">
+    <a href="/" class="nav-logo">Rankfixer</a><button type="button" class="nav-toggle" aria-label="Menu" aria-expanded="false"><span class="nav-toggle-bar" aria-hidden="true"></span><span class="nav-toggle-bar" aria-hidden="true"></span><span class="nav-toggle-bar" aria-hidden="true"></span></button>
+    <div class="nav-links">
+  <a href="/tools">Tools</a>
+  <a href="/blog" aria-current="page">Blog</a>
+  <a href="/research">Research</a>
+  <a href="/about">About</a>
+  <a href="https://github.com/rankfixer-ai/rankfixer-core" target="_blank" rel="noopener">GitHub</a>
+</div></nav>
+<main class="container article">
+<h1>AI Visibility Audits for Enterprise Knowledge Graphs: The Blind Spot Costing You Millions</h1>
+<p><strong>Meta Description:</strong> Enterprise knowledge graphs are invisible to AI search. Learn how RankFixer's open-source GEO tools audit, fix, and boost your entity visibility across ChatGPT, Perplexity, and Google AI Overviews.</p>
+<hr>
+<h1>The Silent Failure of Enterprise Knowledge Graphs in the Age of Generative Search</h1>
+<p>Your enterprise knowledge graph is a masterpiece of engineering. It contains millions of triples, perfectly curated ontologies, and real-time data pipelines. It powers your internal search, your recommendation engine, and your customer 360 view. But here is the uncomfortable truth: <strong>Generative AI cannot see it.</strong></p>
+<p>In the last 18 months, the search landscape has shifted from "crawling URLs" to "reasoning over entities." When a B2B buyer asks ChatGPT, "Which enterprise software vendors have the best supply chain visibility?"—your graph's answer is not being considered. Why? Because your knowledge graph was built for <em>internal</em> consumption, not for <em>external</em> AI extraction. It lacks the semantic signals, the schema markup, and the contextual bridges that LLMs require to trust and cite your entities.</p>
+<p>The pain is acute. You are spending millions on data infrastructure, yet your brand is invisible in AI-generated answers. Your competitors—who may have inferior data but superior AI visibility—are winning the "zero-click" market. Traditional SEO audits fail here because they measure page rank, not entity rank. You need a new discipline: <strong>AI Visibility Audits for Enterprise Knowledge Graphs.</strong></p>
+<p>This is not about tricking algorithms. It is about restructuring your graph's public-facing surface so that AI models can <em>prove</em> your authority. In this post, we will dissect the five critical failure points and show you exactly how RankFixer's open-source suite—built for the GEO (Generative Engine Optimization) era—turns your graph from a hidden asset into a cited authority.</p>
+<hr>
+<h2>H2: Why Traditional SEO Audits Fail to Measure Entity Authority</h2>
+<p>Standard SEO tools crawl your sitemap, check your meta tags, and score your backlinks. They are blind to the semantic layer. When your knowledge graph powers a public API or a data portal, traditional crawlers see a JavaScript shell or a JSON blob—they do not see the <em>relationships</em> between your products, people, and concepts.</p>
+<p><strong>The Failure:</strong> An SEO audit might tell you your domain authority is 70/100. But when an LLM is asked to list "top logistics platforms," it relies on its training data and live retrieval. If your graph's entities are not wrapped in <code>schema.org</code> (specifically <code>Dataset</code>, <code>Organization</code>, or <code>Product</code> types) with explicit <code>sameAs</code> links to Wikidata, the LLM cannot verify your existence.</p>
+<p><strong>The RankFixer Solution:</strong> Our open-source checker scores the <em>public surface</em> of your graph&mdash;the pages, schema, and llms.txt that an LLM can actually reach&mdash;across six signals: schema completeness, entity consistency, content structure, technical structure, crawlability, and llms.txt. You get a 0&ndash;100 AI visibility score and a concrete list of what an LLM can and cannot verify about your entities.</p>
+<hr>
+<h2>H2: The Top 5 Knowledge Graph Blind Spots in AI Search (And How to Fix Them)</h2>
+<p>From our benchmark of 90 top SaaS domains, five recurring blind spots stand out. Here they are, with honest fixes:</p>
+<ol>
+<li><strong>The "Siloed Schema" Problem:</strong> Your internal ontology uses proprietary terms (e.g., <code>cust_acct_id</code>). AI models read <code>schema.org</code>, not your private vocabulary. <strong>Fix:</strong> Publish JSON-LD that maps your key entities to <code>schema:Organization</code>, <code>schema:Product</code>, or <code>schema:Dataset</code> types&mdash;this is the highest-weighted signal in our scoring.</li>
+</ol>
+<ol>
+<li><strong>The "Hallucination Gap":</strong> You have the data, but the AI does not know you have it. <strong>Fix:</strong> Publish it where crawlers can reach it: a public llms.txt file that maps your key pages, and an HTML surface for every entity instead of only a SPARQL or JSON endpoint. llms.txt presence is a scored signal.</li>
+</ol>
+<ol>
+<li><strong>The "SPARQL Snobbery":</strong> You expose a SPARQL endpoint, but most LLMs cannot query SPARQL in real time. <strong>Fix:</strong> Render your entities as static HTML pages with clear headings, definitions, and links. Our content and structure signals measure exactly that surface.</li>
+</ol>
+<ol>
+<li><strong>The "Wikidata Disconnect":</strong> Without <code>sameAs</code> links to major knowledge bases, you are an orphan entity. <strong>Fix:</strong> Add <code>sameAs</code> links to Wikidata and industry registries in your Organization and Product schema&mdash;entity consistency is one of our six scored signals.</li>
+</ol>
+<ol>
+<li><strong>The "Stale Graph" Perception:</strong> AI models trust recency. If your graph&rsquo;s public pages are clearly out of date, they are deprioritized. <strong>Fix:</strong> Keep the pages LLMs actually read&mdash;your entity pages and llms.txt&mdash;current, with visible update dates.</li>
+</ol>
+<hr>
+<h2>H2: How RankFixer's Open-Source GEO Tools Automate the Audit Process</h2>
+<p>We believe AI visibility is a right, not a premium feature. That is why our core audit engine is <strong>100% open-source</strong> under the MIT license. You can run it on your own infrastructure without sending proprietary data to a third-party SaaS.</p>
+<p><strong>The Workflow:</strong> <strong>Step 1:</strong> Run the free checker on your public-facing domain, or run the open-source scoring engine from GitHub. <strong>Step 2:</strong> It fetches your homepage, robots.txt, and llms.txt, then scores six signals. <strong>Step 3:</strong> Read the 0&ndash;100 score, tier rating, and signal breakdown. <strong>Step 4:</strong> Order the $99 report for the prioritized fix list, delivered by email as an HTML report.</p>
+<p>Unlike expensive proprietary tools, this audit does not require a consultant to interpret. The output includes exact code snippets to patch your schema. It turns a month-long consulting engagement into a 2-hour engineering task.</p>
+<hr>
+
+<h2>H2: The 30-Day Enterprise Action Plan for GEO Readiness</h2>
+<p>You do not need to wait for a Q4 budget cycle. Here is a pragmatic roadmap to start your AI Visibility Audit today:</p>
+<ul>
+<li><strong>Week 1 (Discovery):</strong> Run the free AI Visibility Checker on your public-facing domain to get a baseline score. Identify your top 10 revenue-driving entities (products, people, or datasets).</li>
+<li><strong>Week 2 (Schema Alignment):</strong> Publish <code>schema.org</code> JSON-LD for those 10 entities (Organization, Product, or Dataset). Do not try to map the entire graph at once&mdash;focus on the crown jewels.</li>
+<li><strong>Week 3 (External Linking):</strong> Add <code>sameAs</code> links from your schema to Wikidata and industry ontologies (e.g., GS1 for retail, HL7 for health).</li>
+<li><strong>Week 4 (Validation &amp; Iteration):</strong> Re-run the free checker and track your six signals over time. Add a CI step that re-validates your schema and llms.txt on every deploy.</li>
+</ul>
+<p><strong>The Bottom Line:</strong> The era of "build it and they will come" is over. For enterprise knowledge graphs, you must <em>actively broadcast</em> your semantic authority to AI engines. RankFixer gives you the open-source tools to do this in-house, transparently, and at scale. The question is no longer "Do we have the data?" but "Can AI find the data we have?"</p>
+<hr>
+<p><strong>Ready to see your blind spots?</strong> Run the free checker on your public domain. Your data contains the answers&mdash;it is time the AI world knew it.</p>
+</main>
+<footer>
+    <p>RankFixer — Know Your AI Visibility Score</p>
+    <p><a href="/">Home</a> <a href="/ai-visibility-checker">Tools</a> <a href="/schema-generator">Schema Gen</a> <a href="/blog">Blog</a> <a href="/tools">Tools</a> <a href="/research">Research</a> <a href="#contact">Contact</a> <a href="/about">About</a> <a href="https://github.com/rankfixer-ai/rankfixer-core">GitHub</a> <a href="https://www.linkedin.com/in/janacibron/">LinkedIn</a></p>
+</footer>
+<script>
+(function(){
+  'use strict';
+  var nav=document.querySelector('.nav');
+  var toggle=document.querySelector('.nav-toggle');
+  var links=document.querySelector('.nav-links');
+  if(!nav||!toggle||!links){ return; }
+
+  var reduceMotion=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+  var backdrop=document.createElement('div');
+  backdrop.className='nav-backdrop';
+  backdrop.setAttribute('aria-hidden','true');
+  document.body.appendChild(backdrop);
+
+  var open=false;
+
+  function setOpen(state){
+    open=state;
+    toggle.classList.toggle('open',state);
+    links.classList.toggle('open',state);
+    backdrop.classList.toggle('open',state);
+    toggle.setAttribute('aria-expanded',state?'true':'false');
+    backdrop.setAttribute('aria-hidden',state?'false':'true');
+  }
+
+  toggle.addEventListener('click',function(){ setOpen(!open); });
+
+  backdrop.addEventListener('click',function(){ setOpen(false); });
+
+  links.addEventListener('click',function(e){
+    if(e.target&&e.target.closest&&e.target.closest('a')){ setOpen(false); }
+  });
+
+  document.addEventListener('keydown',function(e){
+    if((e.key==='Escape'||e.key==='Esc')&&open){ setOpen(false); toggle.focus(); }
+  });
+
+  var ticking=false;
+  function updateScrolled(){
+    nav.classList.toggle('nav-scrolled',window.scrollY>8);
+  }
+  function onScroll(){
+    if(reduceMotion){ updateScrolled(); return; }
+    if(ticking){ return; }
+    ticking=true;
+    window.requestAnimationFrame(function(){ updateScrolled(); ticking=false; });
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  updateScrolled();
+})();
+</script>
+</body>
+</html>

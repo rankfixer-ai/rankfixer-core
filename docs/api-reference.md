@@ -130,7 +130,7 @@ print(result.summary())
 
 ### `SignalResult`
 
-Represents the score for one of the 7 signals.
+Represents the score for one of the 6 signals.
 
 | Attribute | Type | Description |
 |-----------|------|-------------|

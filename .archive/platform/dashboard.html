@@ -16,9 +16,31 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
 @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
 .spinner { animation: spin 1s linear infinite; width: 20px; height: 20px; border: 3px solid #e5e7eb; border-top-color: #3b82f6; border-radius: 50%; display: inline-block; }
-</style>
+
+<style>
+@media (max-width: 480px) {
+    .nav { flex-wrap: wrap; justify-content: center; gap: 0.5rem; padding: 0.75rem 1rem; }
+    .nav-links { flex-wrap: wrap; justify-content: center; gap: 0.75rem; font-size: 0.8rem; }
+    footer { padding: 1rem; font-size: 0.75rem; }
+}
+</style></style>
 </head>
 <body>
+<nav class="nav">
+    <a href="/" class="nav-logo">Rankfixer</a>
+    <button type="button" class="nav-toggle" aria-label="Menu" aria-expanded="false">
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+    </button>
+    <div class="nav-links">
+        <a href="/tools">Tools</a>
+        <a href="/blog">Blog</a>
+        <a href="/research">Research</a>
+        <a href="/about">About</a>
+        <a href="https://github.com/rankfixer-ai/rankfixer-core" target="_blank" rel="noopener">GitHub</a>
+    </div>
+</nav>
 <div id="root"></div>
 
 <script type="text/babel" data-type="module">
@@ -604,5 +626,10 @@ function InteractiveDashboard() {
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(<InteractiveDashboard />);
 </script>
+<footer class="site-footer">
+    <p>RankFixer — Know Your AI Visibility Score</p>
+    <p><a href="/">Home</a> <a href="/tools">Tools</a> <a href="/blog">Blog</a> <a href="/research">Research</a> <a href="/about">About</a> <a href="https://github.com/rankfixer-ai/rankfixer-core" target="_blank" rel="noopener">GitHub</a></p>
+    <p>No signup required. No credit card. No BS.</p>
+</footer>
 </body>
 </html>

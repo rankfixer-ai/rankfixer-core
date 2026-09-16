@@ -1,0 +1,11 @@
+{
+  "recalibrated_at": "2026-08-12T11:57:12.553052+00:00",
+  "run_count": 4,
+  "signal_count": 0,
+  "oracle_pass_rate": 1.0,
+  "oracle_threshold": 0.9,
+  "next_cycle_adjustments": {
+    "increase_depth_if": "pass_rate < 0.7",
+    "reduce_noise_if": "signal_count > run_count * 20"
+  }
+}

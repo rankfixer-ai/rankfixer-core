@@ -7,7 +7,7 @@ setup(
     long_description=open("README.md", encoding="utf-8").read(),
     long_description_content_type="text/markdown",
     author="RankFixer",
-    author_email="hello@rankfixer.co",
+    author_email="acibronjan@gmail.com",
     url="https://rankfixer.co",
     license="MIT",
     package_dir={"": "src"},

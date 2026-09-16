@@ -27,9 +27,31 @@
       "mainEntityOfPage": "https://rankfixer.co/blog/what-is-geo"
     }
     </script>
-    <style>body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;max-width:720px;margin:40px auto;padding:0 20px;line-height:1.65;color:#1a1a2e}h1{font-size:2rem;color:#6C5CE7}a{color:#6C5CE7}.back{font-size:.9rem;margin-bottom:24px;display:inline-block}</style>
+    <style>body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;max-width:720px;margin:40px auto;padding:0 20px;line-height:1.65;color:#1a1a2e}h1{font-size:2rem;color:#6C5CE7}a{color:#6C5CE7}.back{font-size:.9rem;margin-bottom:24px;display:inline-block}
+<style>
+@media (max-width: 480px) {
+    .nav { flex-wrap: wrap; justify-content: center; gap: 0.5rem; padding: 0.75rem 1rem; }
+    .nav-links { flex-wrap: wrap; justify-content: center; gap: 0.75rem; font-size: 0.8rem; }
+    footer { padding: 1rem; font-size: 0.75rem; }
+}
+</style></style>
 </head>
 <body>
+<nav class="nav">
+    <a href="/" class="nav-logo">Rankfixer</a>
+    <button type="button" class="nav-toggle" aria-label="Menu" aria-expanded="false">
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+    </button>
+    <div class="nav-links">
+        <a href="/tools">Tools</a>
+        <a href="/blog">Blog</a>
+        <a href="/research">Research</a>
+        <a href="/about">About</a>
+        <a href="https://github.com/rankfixer-ai/rankfixer-core" target="_blank" rel="noopener">GitHub</a>
+    </div>
+</nav>
 <a class="back" href="/blog/">&larr; Back to Rankfixer blog</a>
 <h1>What Is GEO? Generative Engine Optimization Explained</h1>
 <p><em>Published 2026-07-11 · 5 min read</em></p>
@@ -46,7 +68,7 @@
 </ul>
 
 <h2>What LLMs actually look for</h2>
-<p>Models don't "read" like humans. They extract: clear answer-first writing, explicit entity definitions, well-formed schema markup, and consistent facts. A tool like <a href="/">Rankfixer</a> scores your site across the seven signals that predict whether you'll be cited.</p>
+<p>Models don't "read" like humans. They extract: clear answer-first writing, explicit entity definitions, well-formed schema markup, and consistent facts. A tool like <a href="/">Rankfixer</a> scores your site across the six signals that predict whether you'll be cited.</p>
 
 <h2>Getting started</h2>
 <ol>
@@ -58,5 +80,10 @@
 <p>GEO isn't about tricking models — it's about being unambiguously, usefully citable. Do that, and the citations follow.</p>
 
 <p><a href="/">Check your AI visibility score &rarr;</a></p>
+<footer class="site-footer">
+    <p>RankFixer — Know Your AI Visibility Score</p>
+    <p><a href="/">Home</a> <a href="/tools">Tools</a> <a href="/blog">Blog</a> <a href="/research">Research</a> <a href="/about">About</a> <a href="https://github.com/rankfixer-ai/rankfixer-core" target="_blank" rel="noopener">GitHub</a></p>
+    <p>No signup required. No credit card. No BS.</p>
+</footer>
 </body>
 </html>

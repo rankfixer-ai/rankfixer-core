@@ -1,0 +1,354 @@
+{
+  "generated_at": "2026-08-12T11:57:12.534048+00:00",
+  "competitors": [
+    {
+      "id": "surfer-seo",
+      "name": "Surfer SEO",
+      "domain": "surferseo.com",
+      "competitor_type": "direct",
+      "threat": "MEDIUM",
+      "pricing": [
+        {
+          "name": "See website",
+          "price": "Contact for pricing"
+        }
+      ],
+      "features": [
+        "Content Optimization",
+        "AI Content Editor",
+        "SERP Analyzer",
+        "Keyword Research",
+        "Content Planner",
+        "Plagiarism Checker",
+        "AI Detection",
+        "Internal Linking Suggestions"
+      ],
+      "gaps": [
+        "governance proof",
+        "autonomous sales pipeline",
+        "31-pillar verification",
+        "ai-readiness verification pipeline",
+        "website authority auditing",
+        "citation governance",
+        "predictive roadmap"
+      ],
+      "score": 3.75,
+      "raw": {
+        "seed_types": [
+          "direct"
+        ]
+      },
+      "discovered_at": "2026-08-12 11:57:12.533047"
+    },
+    {
+      "id": "se-ranking",
+      "name": "SE Ranking",
+      "domain": "seranking.com",
+      "competitor_type": "direct",
+      "threat": "MEDIUM",
+      "pricing": [
+        {
+          "name": "See website",
+          "price": "Contact for pricing"
+        }
+      ],
+      "features": [
+        "Rank Tracking",
+        "Keyword Research",
+        "Website Audit",
+        "Backlink Checker",
+        "Competitor Analysis",
+        "AI Overviews Tracking",
+        "White Label Reporting",
+        "Social Media Management"
+      ],
+      "gaps": [
+        "governance proof",
+        "autonomous sales pipeline",
+        "31-pillar verification",
+        "ai-readiness verification pipeline",
+        "website authority auditing",
+        "citation governance",
+        "predictive roadmap"
+      ],
+      "score": 3.75,
+      "raw": {
+        "seed_types": [
+          "direct"
+        ]
+      },
+      "discovered_at": "2026-08-12 11:57:12.534048"
+    },
+    {
+      "id": "semrush",
+      "name": "Semrush",
+      "domain": "semrush.com",
+      "competitor_type": "direct",
+      "threat": "LOW",
+      "pricing": [
+        {
+          "name": "See website",
+          "price": "Contact for pricing"
+        }
+      ],
+      "features": [
+        "Keyword Research",
+        "Rank Tracking",
+        "Site Audit",
+        "Backlink Analysis",
+        "Competitor Analysis",
+        "Content Optimization",
+        "AI Visibility Tracking",
+        "PPC Analytics",
+        "Social Media Management",
+        "Reporting"
+      ],
+      "gaps": [
+        "governance proof",
+        "autonomous sales pipeline",
+        "31-pillar verification",
+        "ai-readiness verification pipeline",
+        "website authority auditing",
+        "citation governance",
+        "predictive roadmap"
+      ],
+      "score": 2.75,
+      "raw": {
+        "seed_types": [
+          "direct"
+        ]
+      },
+      "discovered_at": "2026-08-12 11:57:12.533047"
+    },
+    {
+      "id": "ahrefs",
+      "name": "Ahrefs",
+      "domain": "ahrefs.com",
+      "competitor_type": "direct",
+      "threat": "LOW",
+      "pricing": [
+        {
+          "name": "See website",
+          "price": "Contact for pricing"
+        }
+      ],
+      "features": [
+        "Backlink Analysis",
+        "Keyword Research",
+        "Rank Tracking",
+        "Site Audit",
+        "Content Explorer",
+        "Competitor Analysis",
+        "AI Content Grader",
+        "Traffic Analytics"
+      ],
+      "gaps": [
+        "governance proof",
+        "autonomous sales pipeline",
+        "31-pillar verification",
+        "ai-readiness verification pipeline",
+        "website authority auditing",
+        "citation governance",
+        "predictive roadmap"
+      ],
+      "score": 2.75,
+      "raw": {
+        "seed_types": [
+          "direct"
+        ]
+      },
+      "discovered_at": "2026-08-12 11:57:12.533047"
+    },
+    {
+      "id": "marketmuse",
+      "name": "MarketMuse",
+      "domain": "marketmuse.com",
+      "competitor_type": "direct",
+      "threat": "LOW",
+      "pricing": [
+        {
+          "name": "See website",
+          "price": "Contact for pricing"
+        }
+      ],
+      "features": [
+        "Content Strategy",
+        "Content Briefs",
+        "Competitive Analysis",
+        "Content Planning",
+        "Content Optimization",
+        "Topic Modeling"
+      ],
+      "gaps": [
+        "governance proof",
+        "autonomous sales pipeline",
+        "31-pillar verification",
+        "ai-readiness verification pipeline",
+        "website authority auditing",
+        "citation governance",
+        "predictive roadmap"
+      ],
+      "score": 2.75,
+      "raw": {
+        "seed_types": [
+          "direct"
+        ]
+      },
+      "discovered_at": "2026-08-12 11:57:12.533047"
+    },
+    {
+      "id": "clearscope",
+      "name": "Clearscope",
+      "domain": "clearscope.io",
+      "competitor_type": "adjacent",
+      "threat": "NONE",
+      "pricing": [
+        {
+          "name": "See website",
+          "price": "Contact for pricing"
+        }
+      ],
+      "features": [
+        "Content Optimization",
+        "Keyword Research",
+        "Content Grading",
+        "AI Content Outlines",
+        "SERP Analytics",
+        "Content Monitoring"
+      ],
+      "gaps": [
+        "governance proof",
+        "autonomous sales pipeline",
+        "31-pillar verification",
+        "ai-readiness verification pipeline",
+        "website authority auditing",
+        "citation governance",
+        "predictive roadmap"
+      ],
+      "score": 1.75,
+      "raw": {
+        "seed_types": [
+          "adjacent"
+        ]
+      },
+      "discovered_at": "2026-08-12 11:57:12.533047"
+    },
+    {
+      "id": "copy-ai",
+      "name": "Copy.ai",
+      "domain": "copy.ai",
+      "competitor_type": "adjacent",
+      "threat": "NONE",
+      "pricing": [
+        {
+          "name": "See website",
+          "price": "Contact for pricing"
+        }
+      ],
+      "features": [
+        "AI Content Generation",
+        "Workflow Automation",
+        "GTM Workflows",
+        "Brand Voice",
+        "Content Creation",
+        "Prospecting",
+        "Integrations",
+        "Lead Processing"
+      ],
+      "gaps": [
+        "governance proof",
+        "autonomous sales pipeline",
+        "31-pillar verification",
+        "ai-readiness verification pipeline",
+        "website authority auditing",
+        "citation governance",
+        "predictive roadmap"
+      ],
+      "score": 1.75,
+      "raw": {
+        "seed_types": [
+          "adjacent"
+        ]
+      },
+      "discovered_at": "2026-08-12 11:57:12.534048"
+    },
+    {
+      "id": "jasper-ai",
+      "name": "Jasper AI",
+      "domain": "jasper.ai",
+      "competitor_type": "adjacent",
+      "threat": "NONE",
+      "pricing": [
+        {
+          "name": "See website",
+          "price": "Contact for pricing"
+        }
+      ],
+      "features": [
+        "AI Agents",
+        "Marketing Workflows",
+        "Brand Voice",
+        "Content Creation",
+        "Campaign Management",
+        "AI Writing",
+        "SEO Mode",
+        "Audience Insights"
+      ],
+      "gaps": [
+        "governance proof",
+        "autonomous sales pipeline",
+        "31-pillar verification",
+        "ai-readiness verification pipeline",
+        "website authority auditing",
+        "citation governance",
+        "predictive roadmap"
+      ],
+      "score": 1.75,
+      "raw": {
+        "seed_types": [
+          "adjacent"
+        ]
+      },
+      "discovered_at": "2026-08-12 11:57:12.534048"
+    },
+    {
+      "id": "writesonic",
+      "name": "Writesonic",
+      "domain": "writesonic.com",
+      "competitor_type": "adjacent",
+      "threat": "NONE",
+      "pricing": [
+        {
+          "name": "See website",
+          "price": "Contact for pricing"
+        }
+      ],
+      "features": [
+        "AI Search Tracking",
+        "Content Generation",
+        "AI Articles",
+        "GEO Optimization",
+        "Sentiment Analysis",
+        "AI Visibility",
+        "Site Audit",
+        "Action Center"
+      ],
+      "gaps": [
+        "governance proof",
+        "autonomous sales pipeline",
+        "31-pillar verification",
+        "ai-readiness verification pipeline",
+        "website authority auditing",
+        "citation governance",
+        "predictive roadmap"
+      ],
+      "score": 1.75,
+      "raw": {
+        "seed_types": [
+          "adjacent"
+        ]
+      },
+      "discovered_at": "2026-08-12 11:57:12.534048"
+    }
+  ]
+}

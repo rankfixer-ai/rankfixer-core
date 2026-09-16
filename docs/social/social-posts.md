@@ -8,13 +8,13 @@ Deployer: schedule via X/LinkedIn native scheduler or Buffer/Hootsuite.
 **X1**
 Headline: What is GEO?
 Body: SEO gets you ranked. GEO gets you *cited* by ChatGPT, Perplexity & Gemini.
-Same content, different optimization. Here's the 7-signal breakdown 👇
-https://rankfixer.co/blog/7-signals-llms-cite
+Same content, different optimization. Here's the 6-signal breakdown 👇
+https://rankfixer.co/blog/6-signals-llms-cite
 #GEO #AIVisibility #SEO
 
 **X2**
 Headline: Free AI visibility check
-Body: Type your domain. Get a 7-signal AI visibility score in 20 seconds. No signup wall.
+Body: Type your domain. Get a 6-signal AI visibility score in 20 seconds. No signup wall.
 → https://rankfixer.co
 #LLM #ChatGPT #Marketing
 
@@ -42,14 +42,14 @@ Try it → https://rankfixer.co
 **LI1**
 Headline: Your SEO is invisible to AI
 Body: 68% of buyers now start research with an AI assistant, not a search box. Yet most sites are optimized only for the ten blue links.
-Generative Engine Optimization (GEO) is how you get cited inside AI answers. We broke down the 7 structural signals LLMs weigh when deciding what to quote — schema, answer structure, entity density, crawlability, consistency, authority, freshness.
-Full breakdown: https://rankfixer.co/blog/7-signals-llms-cite
+Generative Engine Optimization (GEO) is how you get cited inside AI answers. We broke down the 6 structural signals LLMs weigh when deciding what to quote — schema, entity, content, structure, crawlability, llms.txt.
+Full breakdown: https://rankfixer.co/blog/6-signals-llms-cite
 What's your team doing for AI visibility this quarter?
 
 **LI2**
 Headline: We shipped a free AI visibility checker
 Body: Most "is my site AI-ready?" questions have no fast answer. So we built one.
-Paste a domain → get a 7-signal score (schema, structure, crawlability, authority) in 20 seconds. No credit card, no email gate.
+Paste a domain → get a 6-signal score (schema, structure, crawlability, authority) in 20 seconds. No credit card, no email gate.
 Try it: https://rankfixer.co
 Curious how your competitors score? Run a few and compare.
 

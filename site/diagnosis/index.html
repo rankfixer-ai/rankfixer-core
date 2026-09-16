@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Visibility Diagnosis — RankFixer</title>
+    <meta name="description" content="Your personalized AI visibility diagnosis. See exactly what's blocking AI search engines from citing your brand.">
+    <meta property="og:title" content="AI Visibility Diagnosis — RankFixer">
+    <meta property="og:description" content="Personalized diagnosis: your gaps, competitor gaps, and estimated traffic loss.">
+    <meta property="og:url" content="https://rankfixer.co/diagnosis/">
+
+    <style>
+        :root {
+            --brand: #6C5CE7; --brand-hover: #5A4BD1; --bg: #0D0D1A; --bg-card: #151528;
+            --bg-input: #1E1E36; --text: #F0F0F5; --text-muted: #8888A0; --border: #2A2A45;
+            --good: #00C853; --warn: #FFB300; --bad: #FF5252;
+            --radius: 12px; --radius-sm: 8px; --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { font-size: 16px; scroll-behavior: smooth; }
+        body {
+            font-family: var(--font); background: var(--bg); color: var(--text);
+            line-height: 1.6; min-height: 100vh; -webkit-font-smoothing: antialiased;
+        }
+        a { color: var(--brand); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        .nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1rem 2rem; border-bottom: 1px solid var(--border);
+            background: rgba(13, 13, 26, 0.8); backdrop-filter: blur(10px);
+            position: sticky; top: 0; z-index: 100;
+        }
+        .nav-logo { font-weight: 700; font-size: 1.2rem; text-decoration: none; color: var(--text); }
+        .nav-links { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; }
+        .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; }
+        .nav-links a:hover { color: var(--text); }
+
+        .container { max-width: 800px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+        .hero { text-align: center; padding: 2.5rem 0 1.5rem; }
+        .hero-badge {
+            display: inline-block; background: rgba(108, 92, 231, 0.15); color: var(--brand);
+            font-size: 0.8rem; font-weight: 600; padding: 0.35rem 0.85rem; border-radius: 100px;
+            margin-bottom: 1.25rem;
+        }
+        .hero h1 { font-size: clamp(1.7rem, 5vw, 2.4rem); font-weight: 800; line-height: 1.2; margin-bottom: 0.75rem; }
+        .hero p { font-size: 1.02rem; color: var(--text-muted); max-width: 540px; margin: 0 auto; }
+
+        .domain-badge {
+            display: inline-block; background: var(--bg-input); padding: 0.5rem 1.2rem;
+            border-radius: 100px; font-size: 0.9rem; color: var(--brand); margin-bottom: 1.5rem;
+            word-break: break-all;
+        }
+
+        /* SCAN SECTION */
+        .scan-section {
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+            padding: 1.75rem; margin-bottom: 1.5rem;
+        }
+        .scan-section h2 { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.75rem; }
+        .scan-section p { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 1rem; }
+        .scan-wrapper { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+        .scan-wrapper input[type="text"] {
+            flex: 1; min-width: 220px; background: var(--bg-input); border: 1px solid var(--border);
+            color: var(--text); padding: 14px 16px; border-radius: var(--radius-sm); font-size: 1rem;
+            font-family: var(--font);
+        }
+        .scan-wrapper input[type="text"]::placeholder { color: #6b6b85; }
+        .scan-wrapper button {
+            background: var(--brand); color: #fff; border: none; padding: 14px 28px;
+            border-radius: var(--radius-sm); font-size: 1rem; font-weight: 700; cursor: pointer;
+            font-family: var(--font); transition: background 0.2s;
+        }
+        .scan-wrapper button:hover { background: var(--brand-hover); }
+        .scan-wrapper button:disabled { opacity: 0.7; cursor: not-allowed; }
+        .scan-helper { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.6rem; }
+        .scan-error { font-size: 0.85rem; color: var(--bad); margin-top: 0.5rem; min-height: 1.2em; }
+
+        /* LOADING */
+        .loading-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.75rem; color: var(--brand); }
+        .loading-steps { list-style: none; padding: 0; margin: 0; }
+        .loading-steps li { padding: 0.5rem 0; color: var(--text-muted); font-size: 0.95rem; }
+        .loading-steps li.active { color: var(--text); }
+        .loading-steps li.done { color: var(--good); }
+
+        /* RESULTS */
+        .card {
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+            padding: 1.75rem; margin-bottom: 1.5rem;
+        }
+        .card h2 { font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem; color: var(--text); }
+        .card h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.75rem; color: var(--text); }
+        .card p { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 0.75rem; }
+
+        .score-section { text-align: center; padding: 1.5rem 0 1rem; }
+        .score-number { font-size: 3.2rem; font-weight: 800; }
+        .score-label { font-size: 0.95rem; font-weight: 700; margin-top: 0.2rem; }
+        .rank-pill {
+            display: inline-block; margin-top: 0.8rem; background: var(--bg-card);
+            border: 1px solid var(--border); border-radius: 100px;
+            padding: 0.35rem 0.9rem; font-size: 0.82rem; color: var(--text-muted);
+        }
+
+        .gap-list { list-style: none; padding: 0; margin: 0; }
+        .gap-list li {
+            padding: 0.75rem 0; border-bottom: 1px solid var(--border); font-size: 0.95rem;
+            color: var(--text-muted); display: flex; align-items: flex-start; gap: 0.6rem;
+        }
+        .gap-list li:last-child { border-bottom: none; }
+        .gap-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+
+        .competitor-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+        .competitor-card {
+            background: var(--bg-input); border: 1px solid var(--border); border-radius: var(--radius-sm);
+            padding: 1rem; text-align: center;
+        }
+        .competitor-card h4 { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.3rem; color: var(--text); }
+        .competitor-card .threat {
+            display: inline-block; padding: 0.25rem 0.6rem; border-radius: 100px;
+            font-size: 0.75rem; font-weight: 700; margin-bottom: 0.5rem;
+        }
+        .threat.medium { background: rgba(245, 158, 11, 0.15); color: var(--warn); }
+        .threat.low { background: rgba(108, 92, 231, 0.15); color: var(--brand); }
+        .threat.none { background: rgba(136,136,160,0.08); color: var(--text-muted); }
+        .competitor-card p { font-size: 0.8rem; color: var(--text-muted); margin: 0; }
+
+        .cta-card {
+            background: var(--bg-card); border: 2px solid var(--brand); border-radius: var(--radius);
+            padding: 2rem; text-align: center; margin: 2rem 0;
+        }
+        .cta-card h2 { font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .cta-card .price { font-size: 2.5rem; font-weight: 800; color: var(--brand); margin-bottom: 0.25rem; }
+        .cta-card .price-sub { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.5rem; }
+        .cta-card .checklist { list-style: none; padding: 0; margin: 0 auto 1.5rem; max-width: 400px; text-align: left; }
+        .cta-card .checklist li { font-size: 0.85rem; color: var(--text-muted); padding: 0.35rem 0; }
+        .btn-primary {
+            display: inline-block; background: var(--brand); color: #fff; border: none;
+            padding: 14px 32px; font-size: 1rem; font-weight: 700; cursor: pointer;
+            border-radius: var(--radius-sm); font-family: var(--font); text-decoration: none;
+            transition: background 0.2s;
+        }
+        .btn-primary:hover { background: var(--brand-hover); text-decoration: none; }
+
+        .site-footer { text-align: center; padding: 2rem 0; border-top: 1px solid var(--border); margin-top: 2rem; }
+        .site-footer p { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.3rem; }
+        .site-footer a { color: var(--text-muted); margin: 0 0.5rem; }
+
+        @media (max-width: 600px) {
+            .nav { flex-direction: column; gap: 0.5rem; padding: 0.75rem 1rem; }
+            .container { padding: 1rem; }
+            .hero { padding: 2rem 0 1.5rem; }
+            .hero h1 { font-size: 1.5rem; }
+            .card { padding: 1.25rem; }
+            .competitor-grid { grid-template-columns: 1fr; }
+        }
+    /* Rankfixer - modern smooth nav */
+
+/* Smooth scrolling + sticky-nav offset */
+html{
+  scroll-behavior:smooth;
+  scroll-padding-top:5rem;
+}
+
+/* Frosted sticky nav + scroll border/shadow */
+.nav{
+  position:sticky;
+  top:0;
+  z-index:40;
+  background:rgba(13,13,26,0.82);
+  -webkit-backdrop-filter:blur(12px) saturate(160%);
+  backdrop-filter:blur(12px) saturate(160%);
+  border-bottom:1px solid transparent;
+  transition:box-shadow .35s ease, border-color .35s ease;
+}
+.nav.nav-scrolled{
+  box-shadow:0 6px 24px rgba(0,0,0,.35);
+  border-bottom-color:var(--border);
+}
+
+/* Logo gentle hover */
+.nav-logo{
+  transition:opacity .25s ease, transform .25s ease;
+}
+.nav-logo:hover{
+  opacity:.85;
+  transform:translateY(-1px);
+}
+
+/* Links: smooth color + animated underline */
+.nav-links a{
+  position:relative;
+  transition:color .25s ease;
+}
+.nav-links a::after{
+  content:"";
+  position:absolute;
+  left:0;right:0;bottom:-4px;
+  height:2px;
+  border-radius:2px;
+  background:var(--brand);
+  transform:scaleX(0);
+  transform-origin:center;
+  transition:transform .3s ease;
+}
+.nav-links a:hover{
+  color:var(--text);
+}
+.nav-links a:hover::after,
+.nav-links a:focus-visible::after,
+.nav-links a[aria-current="page"]::after{
+  transform:scaleX(1);
+}
+
+/* Focus visibility */
+.nav-toggle:focus-visible,
+.nav-links a:focus-visible{
+  outline:2px solid var(--brand);
+  outline-offset:3px;
+  border-radius:4px;
+}
+
+/* Backdrop behind the open mobile menu */
+.nav-backdrop{
+  position:fixed;
+  inset:0;
+  z-index:30;
+  background:rgba(0,0,0,.5);
+  opacity:0;
+  visibility:hidden;
+  transition:opacity .3s ease, visibility 0s linear .3s;
+}
+.nav-backdrop.open{
+  opacity:1;
+  visibility:visible;
+  transition:opacity .3s ease, visibility 0s;
+}
+
+/* Hamburger: hidden on desktop */
+.nav-toggle{
+  display:none;
+  background:none;
+  border:none;
+  cursor:pointer;
+  padding:.55rem .5rem;
+  color:var(--text);
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+}
+.nav-toggle-bar{
+  display:block;
+  width:1.4rem;
+  height:2px;
+  border-radius:2px;
+  background:currentColor;
+  transition:transform .3s ease, opacity .25s ease;
+}
+.nav-toggle.open .nav-toggle-bar:nth-child(1){
+  transform:translateY(7px) rotate(45deg);
+}
+.nav-toggle.open .nav-toggle-bar:nth-child(2){
+  opacity:0;
+  transform:translateX(-6px);
+}
+.nav-toggle.open .nav-toggle-bar:nth-child(3){
+  transform:translateY(-7px) rotate(-45deg);
+}
+
+@media (max-width:768px){
+  .nav{
+    flex-direction:row;
+    flex-wrap:wrap;
+    justify-content:space-between;
+    align-items:center;
+  }
+  .nav-toggle{
+    display:flex;
+    margin-left:auto;
+  }
+  /* Fluid dropdown */
+  .nav-links{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:.6rem;
+    width:100%;
+    max-height:0;
+    overflow:hidden;
+    padding:0;
+    opacity:0;
+    transform:translateY(-8px);
+    visibility:hidden;
+    transition:max-height .4s ease, opacity .3s ease, transform .3s ease,
+               padding .3s ease, visibility 0s linear .4s;
+  }
+  .nav-links.open{
+    max-height:560px;
+    padding:.75rem 0 .25rem;
+    opacity:1;
+    transform:translateY(0);
+    visibility:visible;
+    transition:max-height .4s ease, opacity .3s ease, transform .3s ease,
+               padding .3s ease, visibility 0s;
+  }
+  /* Link fade-in stagger */
+  .nav-links a{
+    opacity:0;
+    transform:translateY(6px);
+    transition:color .25s ease, opacity .3s ease, transform .3s ease;
+  }
+  .nav-links.open a{
+    opacity:1;
+    transform:translateY(0);
+  }
+  .nav-links.open a:nth-child(1){ transition-delay:.04s; }
+  .nav-links.open a:nth-child(2){ transition-delay:.08s; }
+  .nav-links.open a:nth-child(3){ transition-delay:.12s; }
+  .nav-links.open a:nth-child(4){ transition-delay:.16s; }
+  .nav-links.open a:nth-child(5){ transition-delay:.20s; }
+  .nav-links.open a:nth-child(6){ transition-delay:.24s; }
+}
+
+/* Reduced motion: disable transitions & smooth scroll */
+@media (prefers-reduced-motion:reduce){
+  html{ scroll-behavior:auto; }
+  .nav,
+  .nav-logo,
+  .nav-links,
+  .nav-links a,
+  .nav-links a::after,
+  .nav-toggle-bar,
+  .nav-backdrop{
+    transition:none !important;
+    transition-delay:0s !important;
+  }
+}
+</style>
+</head>
+<body>
+
+    <nav class="nav">
+        <a href="/" class="nav-logo">Rankfixer</a><button type="button" class="nav-toggle" aria-label="Menu" aria-expanded="false"><span class="nav-toggle-bar" aria-hidden="true"></span><span class="nav-toggle-bar" aria-hidden="true"></span><span class="nav-toggle-bar" aria-hidden="true"></span></button>
+        <div class="nav-links">
+  <a href="/tools" aria-current="page">Tools</a>
+  <a href="/blog">Blog</a>
+  <a href="/research">Research</a>
+  <a href="/about">About</a>
+  <a href="https://github.com/rankfixer-ai/rankfixer-core" target="_blank" rel="noopener">GitHub</a>
+</div>
+    </nav>
+
+    <div class="container">
+
+        <header class="hero">
+            <div class="hero-badge">Free AI Visibility Diagnosis</div>
+            <h1>Your AI Visibility Diagnosis</h1>
+            <p>Real gaps. Real competitors. Real traffic loss. Scan your site or view the sample diagnosis below.</p>
+        </header>
+
+        <!-- SCAN INPUT -->
+        <section class="scan-section" id="scan-section">
+            <h2>Scan Your Site</h2>
+            <p>Enter your domain to get a personalized diagnosis. Uses the same mapper audit as our paid reports.</p>
+            <div class="scan-wrapper">
+                <input type="text" id="domain-input" placeholder="Enter your domain" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-label="Enter your domain name">
+                <button id="scan-button">Scan My Site</button>
+            </div>
+            <p class="scan-helper">No signup required. Analysis runs in 30–60 seconds.</p>
+            <div class="scan-error" id="scan-error"></div>
+        </section>
+
+        <!-- LOADING -->
+        <div id="loading-screen" class="card" style="display:none;" aria-live="polite">
+            <div class="loading-title" id="loading-title">Scanning yourdomain.com...</div>
+            <ul class="loading-steps">
+                <li id="step-1">● Discovering URLs...</li>
+                <li id="step-2">● Classifying templates...</li>
+                <li id="step-3">● Building link graph...</li>
+                <li id="step-4">● Detecting contradictions...</li>
+                <li id="step-5">● Calculating AI Visibility Score...</li>
+            </ul>
+        </div>
+
+        <div id="domain-badge" class="domain-badge" style="display:none;"></div>
+
+        <!-- SCORE -->
+        <div class="card" id="score-card">
+            <div class="score-section">
+                <div class="score-number" id="score-number" style="color: var(--brand);">--</div>
+                <p style="color: var(--text-muted);">/ 100 AI Visibility Score</p>
+                <div class="score-label" id="score-label">--</div>
+                <div class="rank-pill" id="rank-pill">Sample diagnosis — run a scan for your real score</div>
+            </div>
+        </div>
+
+        <!-- GAPS -->
+        <div class="card">
+            <h2>Top Gaps Blocking AI Citations</h2>
+            <ul class="gap-list" id="gap-list">
+                <li><span class="gap-icon">⏳</span><span>Run a scan to see your personalized gaps.</span></li>
+            </ul>
+        </div>
+
+        <!-- COMPETITORS -->
+        <div class="card">
+            <h2>What Competitors Are Doing Better</h2>
+            <p style="margin-bottom:1rem;" id="competitor-intro">Based on the current SEO/GEO tool competitive map.</p>
+            <div class="competitor-grid" id="competitor-grid">
+                <div class="competitor-card"><h4>Run a scan</h4><p>Personalized competitor comparison will appear here.</p></div>
+            </div>
+        </div>
+
+        <!-- TRAFFIC LOSS -->
+        <div class="card">
+            <h2>Estimated Traffic at Risk</h2>
+            <p id="traffic-loss">Run a scan to see your personalized traffic-at-risk estimate.</p>
+            <p style="font-size:0.85rem; color:var(--text-muted);">Estimate based on AI search share, current score, and industry benchmarks. Actuals vary by domain authority and content volume.</p>
+        </div>
+
+        <!-- CTA -->
+        <div class="cta-card">
+            <h2>Want This Monitored 24/7?</h2>
+            <p style="color:var(--text-muted); margin:0.5rem 0 1rem;">
+                I build governed systems that track AI visibility and alert you the moment your score drops.
+                Fixed-price. 90-day ROI. Proven before it ships.
+            </p>
+            <a class="btn-primary" href="/report/">Get your AI Readiness Report</a>
+            <p style="font-size:0.8rem;color:var(--text-muted);margin-top:0.75rem;">No spam. No sales team. Fixed-price scope. 90-day ROI guarantee.</p>
+        </div>
+
+        <footer class="site-footer">
+            <p>RankFixer — Know Your AI Visibility Score</p>
+            <p><a href="/">Home</a> · <a href="/tools">Tools</a> · <a href="/research">Research</a> · <a href="/about">About</a> <a href="https://github.com/rankfixer-ai/rankfixer-core">GitHub</a></p>
+        </footer>
+    </div>
+
+    <script>
+        (function() {
+            var scanSection = document.getElementById('scan-section');
+            var loadingScreen = document.getElementById('loading-screen');
+            var domainInput = document.getElementById('domain-input');
+            var scanButton = document.getElementById('scan-button');
+            var scanError = document.getElementById('scan-error');
+            var loadingTitle = document.getElementById('loading-title');
+            var domainBadge = document.getElementById('domain-badge');
+
+            var scoreNumber = document.getElementById('score-number');
+            var scoreLabel = document.getElementById('score-label');
+            var rankPill = document.getElementById('rank-pill');
+            var gapList = document.getElementById('gap-list');
+            var competitorGrid = document.getElementById('competitor-grid');
+            var competitorIntro = document.getElementById('competitor-intro');
+            var trafficLoss = document.getElementById('traffic-loss');
+
+            var currentDomain = '';
+            var currentScore = null;
+
+            function isValidDomain(str) {
+                var c = str.trim().replace(/^https?:\/\//i,'').replace(/\/.*$/,'').replace(/^www\./i,'');
+                return /^[a-zA-Z0-9][a-zA-Z0-9-]{0,61}[a-zA-Z0-9]\.[a-zA-Z]{2,}$/.test(c);
+            }
+            function cleanDomain(str) {
+                return str.trim().replace(/^https?:\/\//i,'').replace(/\/.*$/,'').replace(/^www\./i,'');
+            }
+
+            function setStepState(ids, state) {
+                ids.forEach(function(id) {
+                    var el = document.getElementById(id);
+                    if (!el) return;
+                    el.classList.remove('active', 'done');
+                    if (state) el.classList.add(state);
+                });
+            }
+
+            function buildExplanation(data) {
+                var d = data.dimensions || {};
+                var weak = [];
+                if ((d.schema || 0) < 50) weak.push('schema markup is thin');
+                if ((d.entity || 0) < 50) weak.push('your brand entity is not clearly defined');
+                if ((d.content || 0) < 50) weak.push('content lacks clear answer structures');
+                if ((d.crawlable || 0) < 70) weak.push('pages may be hard for AI crawlers to access');
+                if ((d.llmsTxt || 0) < 50) weak.push('no llms.txt for AI crawlers');
+                if (weak.length === 0) return 'Strong AI visibility — your site is well-structured for LLM citation.';
+                return 'Key gaps: ' + weak.join(', ') + '.';
+            }
+
+            function gapsFromDimensions(data) {
+                var d = data.dimensions || {};
+                var items = [];
+                if ((d.schema || 0) < 50) items.push({ icon: '🔐', text: 'Schema completeness gap — missing or weak JSON-LD, FAQPage, Organization markup' });
+                if ((d.entity || 0) < 50) items.push({ icon: '🧠', text: 'Entity density gap — brand not clearly defined to AI crawlers' });
+                if ((d.content || 0) < 50) items.push({ icon: '📄', text: 'Content answer gap — lacks direct-answer structure for LLM extraction' });
+                if ((d.crawlable || 0) < 70) items.push({ icon: '🤖', text: 'AI crawler access gap — robots.txt or llms.txt blocks or missing' });
+                if ((d.llmsTxt || 0) < 50) items.push({ icon: '🔗', text: 'Backlink/citation gap — low authority sources referencing this domain' });
+                if (items.length === 0) items.push({ icon: '✅', text: 'No major gaps detected in this scan.' });
+                return items.slice(0, 5);
+            }
+
+            function competitorsForScore(score) {
+                var s = parseInt(score, 10);
+                var base = [
+                    { name: 'Surfer SEO', threat: 'MEDIUM', note: 'AI content editor + SERP analyzer' },
+                    { name: 'SE Ranking', threat: 'MEDIUM', note: 'AI overviews tracking + rank tracking' },
+                    { name: 'Semrush', threat: 'LOW', note: 'Broad SEO suite with AI visibility module' },
+                    { name: 'Ahrefs', threat: 'LOW', note: 'Backlink + rank tracking, slower on AI' },
+                    { name: 'MarketMuse', threat: 'LOW', note: 'Content planning, not real-time AI verification' },
+                ];
+                if (s < 50) {
+                    return base.map(function(c) {
+                        return { name: c.name, threat: c.threat === 'LOW' ? 'MEDIUM' : c.threat, note: c.note };
+                    });
+                }
+                return base;
+            }
+
+            function renderDemo() {
+                currentDomain = '';
+                currentScore = null;
+                domainBadge.style.display = 'none';
+                scoreNumber.textContent = '--';
+                scoreNumber.style.color = 'var(--brand)';
+                scoreLabel.textContent = '--';
+                rankPill.textContent = 'Sample diagnosis — run a scan for your real score';
+
+                var demoGaps = [
+                    { icon: '🔐', text: 'Schema completeness gap — missing or weak JSON-LD, FAQPage, Organization markup' },
+                    { icon: '🧠', text: 'Entity density gap — brand not clearly defined to AI crawlers' },
+                    { icon: '📄', text: 'Content answer gap — lacks direct-answer structure for LLM extraction' },
+                ];
+                gapList.innerHTML = demoGaps.map(function(g) {
+                    return '<li><span class="gap-icon">' + g.icon + '</span><span>' + g.text + '</span></li>';
+                }).join('');
+
+                var demoCompetitors = [
+                    { name: 'Surfer SEO', threat: 'MEDIUM', note: 'AI content editor + SERP analyzer' },
+                    { name: 'SE Ranking', threat: 'MEDIUM', note: 'AI overviews tracking + rank tracking' },
+                    { name: 'Semrush', threat: 'LOW', note: 'Broad SEO suite with AI visibility module' },
+                ];
+                competitorIntro.textContent = 'Based on the current SEO/GEO tool competitive map.';
+                competitorGrid.innerHTML = demoCompetitors.map(function(c) {
+                    return '<div class="competitor-card"><h4>' + c.name + '</h4><div class="threat ' + c.threat.toLowerCase() + '">' + c.threat + '</div><p>' + c.note + '</p></div>';
+                }).join('');
+
+                trafficLoss.textContent = 'Run a free scan to see your personalized traffic-at-risk estimate.';
+            }
+
+            function renderResults(data, domain) {
+                currentDomain = domain;
+                currentScore = data.score;
+                domainBadge.style.display = 'inline-block';
+                domainBadge.textContent = domain;
+
+                var color = data.score >= 80 ? 'var(--good)' : data.score >= 60 ? 'var(--warn)' : 'var(--bad)';
+                scoreNumber.textContent = data.score;
+                scoreNumber.style.color = color;
+                scoreLabel.textContent = data.label || 'AI Visibility Score';
+                rankPill.textContent = '📊 ' + data.score + '/100 AI Visibility Score';
+
+                var gaps = gapsFromDimensions(data);
+                gapList.innerHTML = gaps.map(function(g) {
+                    return '<li><span class="gap-icon">' + g.icon + '</span><span>' + g.text + '</span></li>';
+                }).join('');
+
+                var competitors = competitorsForScore(data.score);
+                competitorIntro.textContent = 'Top competitors and feature gaps for ' + domain + '.';
+                competitorGrid.innerHTML = competitors.map(function(c) {
+                    return '<div class="competitor-card"><h4>' + c.name + '</h4><div class="threat ' + c.threat.toLowerCase() + '">' + c.threat + '</div><p>' + c.note + '</p></div>';
+                }).join('');
+
+                var s = parseInt(data.score, 10);
+                var estimatedLoss = s < 50 ? '30–50% of AI-search referral traffic' : s < 70 ? '15–30% of AI-search referral traffic' : '5–15% of AI-search referral traffic';
+                trafficLoss.textContent = 'Estimated at-risk traffic: ' + estimatedLoss + '. A sub-70 score means your brand is likely invisible in AI answer engines.';
+            }
+
+            scanButton.addEventListener('click', function() {
+                var raw = domainInput.value;
+                if (!raw.trim() || !isValidDomain(raw)) {
+                    scanError.textContent = 'Please enter a valid domain, e.g. yourdomain.com';
+                    return;
+                }
+                scanError.textContent = '';
+                currentDomain = cleanDomain(raw);
+
+                // Loading state
+                scanSection.style.display = 'none';
+                loadingScreen.style.display = 'block';
+                loadingTitle.textContent = 'Scanning ' + currentDomain + '...';
+                setStepState(['step-1','step-2','step-3','step-4','step-5'], null);
+                document.getElementById('step-1').classList.add('active');
+
+                var steps = ['step-1','step-2','step-3','step-4','step-5'];
+                steps.forEach(function(id, i) {
+                    setTimeout(function() {
+                        if (i > 0) {
+                            var prev = document.getElementById(steps[i-1]);
+                            prev.classList.remove('active');
+                            prev.classList.add('done');
+                        }
+                        document.getElementById(id).classList.add('active');
+                    }, (i + 1) * 700);
+                });
+
+                // Call existing analysis endpoint
+                setTimeout(function() {
+                    fetch('/.netlify/functions/score', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ domain: currentDomain })
+                    }).then(function (r) { return r.json(); }).then(function (data) {
+                        loadingScreen.style.display = 'none';
+                        if (data.error || typeof data.score !== 'number') {
+                            scanError.textContent = 'Analysis unavailable — site may block crawlers or the service is busy. Try again.';
+                            scanSection.style.display = 'block';
+                            setStepState(steps, null);
+                            return;
+                        }
+                        renderResults(data, currentDomain);
+                    }).catch(function () {
+                        loadingScreen.style.display = 'none';
+                        scanError.textContent = 'The analysis service could not be reached. Please try again.';
+                        scanSection.style.display = 'block';
+                        setStepState(steps, null);
+                    });
+                }, 3900);
+            });
+
+            domainInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') scanButton.click();
+                scanError.textContent = '';
+            });
+
+            // If no query params, show demo
+            renderDemo();
+        })();
+    </script>
+
+<script>
+(function(){
+  'use strict';
+  var nav=document.querySelector('.nav');
+  var toggle=document.querySelector('.nav-toggle');
+  var links=document.querySelector('.nav-links');
+  if(!nav||!toggle||!links){ return; }
+
+  var reduceMotion=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+  var backdrop=document.createElement('div');
+  backdrop.className='nav-backdrop';
+  backdrop.setAttribute('aria-hidden','true');
+  document.body.appendChild(backdrop);
+
+  var open=false;
+
+  function setOpen(state){
+    open=state;
+    toggle.classList.toggle('open',state);
+    links.classList.toggle('open',state);
+    backdrop.classList.toggle('open',state);
+    toggle.setAttribute('aria-expanded',state?'true':'false');
+    backdrop.setAttribute('aria-hidden',state?'false':'true');
+  }
+
+  toggle.addEventListener('click',function(){ setOpen(!open); });
+
+  backdrop.addEventListener('click',function(){ setOpen(false); });
+
+  links.addEventListener('click',function(e){
+    if(e.target&&e.target.closest&&e.target.closest('a')){ setOpen(false); }
+  });
+
+  document.addEventListener('keydown',function(e){
+    if((e.key==='Escape'||e.key==='Esc')&&open){ setOpen(false); toggle.focus(); }
+  });
+
+  var ticking=false;
+  function updateScrolled(){
+    nav.classList.toggle('nav-scrolled',window.scrollY>8);
+  }
+  function onScroll(){
+    if(reduceMotion){ updateScrolled(); return; }
+    if(ticking){ return; }
+    ticking=true;
+    window.requestAnimationFrame(function(){ updateScrolled(); ticking=false; });
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  updateScrolled();
+})();
+</script>
+</body>
+</html>

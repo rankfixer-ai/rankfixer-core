@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Visibility Report — RankFixer</title>
-    <meta name="description" content="Get your full AI Visibility Report with 15+ scoring factors, competitor comparison, and a custom 30-day optimization plan. $99 one-time.">
+    <meta name="description" content="Get your full AI Readiness Report: 6-signal score, evidence-backed breakdown, and prioritized fixes. $99 one-time, emailed in minutes.">
 
     <meta property="og:title" content="AI Visibility Report — RankFixer">
-    <meta property="og:description" content="Full competitive AI visibility audit with 15+ scoring factors. $99 one-time.">
+    <meta property="og:description" content="6-signal AI readiness audit with an evidence-backed breakdown. $99 one-time.">
     <meta property="og:url" content="https://rankfixer.co/report/">
     <meta property="og:type" content="website">
 
@@ -106,20 +106,201 @@
             .hero h1 { font-size: 1.5rem; }
             .card { padding: 1.25rem; }
         }
-    </style>
+    /* Rankfixer - modern smooth nav */
+
+/* Smooth scrolling + sticky-nav offset */
+html{
+  scroll-behavior:smooth;
+  scroll-padding-top:5rem;
+}
+
+/* Frosted sticky nav + scroll border/shadow */
+.nav{
+  position:sticky;
+  top:0;
+  z-index:40;
+  background:rgba(13,13,26,0.82);
+  -webkit-backdrop-filter:blur(12px) saturate(160%);
+  backdrop-filter:blur(12px) saturate(160%);
+  border-bottom:1px solid transparent;
+  transition:box-shadow .35s ease, border-color .35s ease;
+}
+.nav.nav-scrolled{
+  box-shadow:0 6px 24px rgba(0,0,0,.35);
+  border-bottom-color:var(--border);
+}
+
+/* Logo gentle hover */
+.nav-logo{
+  transition:opacity .25s ease, transform .25s ease;
+}
+.nav-logo:hover{
+  opacity:.85;
+  transform:translateY(-1px);
+}
+
+/* Links: smooth color + animated underline */
+.nav-links a{
+  position:relative;
+  transition:color .25s ease;
+}
+.nav-links a::after{
+  content:"";
+  position:absolute;
+  left:0;right:0;bottom:-4px;
+  height:2px;
+  border-radius:2px;
+  background:var(--brand);
+  transform:scaleX(0);
+  transform-origin:center;
+  transition:transform .3s ease;
+}
+.nav-links a:hover{
+  color:var(--text);
+}
+.nav-links a:hover::after,
+.nav-links a:focus-visible::after,
+.nav-links a[aria-current="page"]::after{
+  transform:scaleX(1);
+}
+
+/* Focus visibility */
+.nav-toggle:focus-visible,
+.nav-links a:focus-visible{
+  outline:2px solid var(--brand);
+  outline-offset:3px;
+  border-radius:4px;
+}
+
+/* Backdrop behind the open mobile menu */
+.nav-backdrop{
+  position:fixed;
+  inset:0;
+  z-index:30;
+  background:rgba(0,0,0,.5);
+  opacity:0;
+  visibility:hidden;
+  transition:opacity .3s ease, visibility 0s linear .3s;
+}
+.nav-backdrop.open{
+  opacity:1;
+  visibility:visible;
+  transition:opacity .3s ease, visibility 0s;
+}
+
+/* Hamburger: hidden on desktop */
+.nav-toggle{
+  display:none;
+  background:none;
+  border:none;
+  cursor:pointer;
+  padding:.55rem .5rem;
+  color:var(--text);
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+}
+.nav-toggle-bar{
+  display:block;
+  width:1.4rem;
+  height:2px;
+  border-radius:2px;
+  background:currentColor;
+  transition:transform .3s ease, opacity .25s ease;
+}
+.nav-toggle.open .nav-toggle-bar:nth-child(1){
+  transform:translateY(7px) rotate(45deg);
+}
+.nav-toggle.open .nav-toggle-bar:nth-child(2){
+  opacity:0;
+  transform:translateX(-6px);
+}
+.nav-toggle.open .nav-toggle-bar:nth-child(3){
+  transform:translateY(-7px) rotate(-45deg);
+}
+
+@media (max-width:768px){
+  .nav{
+    flex-direction:row;
+    flex-wrap:wrap;
+    justify-content:space-between;
+    align-items:center;
+  }
+  .nav-toggle{
+    display:flex;
+    margin-left:auto;
+  }
+  /* Fluid dropdown */
+  .nav-links{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:.6rem;
+    width:100%;
+    max-height:0;
+    overflow:hidden;
+    padding:0;
+    opacity:0;
+    transform:translateY(-8px);
+    visibility:hidden;
+    transition:max-height .4s ease, opacity .3s ease, transform .3s ease,
+               padding .3s ease, visibility 0s linear .4s;
+  }
+  .nav-links.open{
+    max-height:560px;
+    padding:.75rem 0 .25rem;
+    opacity:1;
+    transform:translateY(0);
+    visibility:visible;
+    transition:max-height .4s ease, opacity .3s ease, transform .3s ease,
+               padding .3s ease, visibility 0s;
+  }
+  /* Link fade-in stagger */
+  .nav-links a{
+    opacity:0;
+    transform:translateY(6px);
+    transition:color .25s ease, opacity .3s ease, transform .3s ease;
+  }
+  .nav-links.open a{
+    opacity:1;
+    transform:translateY(0);
+  }
+  .nav-links.open a:nth-child(1){ transition-delay:.04s; }
+  .nav-links.open a:nth-child(2){ transition-delay:.08s; }
+  .nav-links.open a:nth-child(3){ transition-delay:.12s; }
+  .nav-links.open a:nth-child(4){ transition-delay:.16s; }
+  .nav-links.open a:nth-child(5){ transition-delay:.20s; }
+  .nav-links.open a:nth-child(6){ transition-delay:.24s; }
+}
+
+/* Reduced motion: disable transitions & smooth scroll */
+@media (prefers-reduced-motion:reduce){
+  html{ scroll-behavior:auto; }
+  .nav,
+  .nav-logo,
+  .nav-links,
+  .nav-links a,
+  .nav-links a::after,
+  .nav-toggle-bar,
+  .nav-backdrop{
+    transition:none !important;
+    transition-delay:0s !important;
+  }
+}
+</style>
 </head>
 <body>
 
     <nav class="nav">
-        <a href="/" class="nav-logo">Rankfixer</a>
+        <a href="/" class="nav-logo">Rankfixer</a><button type="button" class="nav-toggle" aria-label="Menu" aria-expanded="false"><span class="nav-toggle-bar" aria-hidden="true"></span><span class="nav-toggle-bar" aria-hidden="true"></span><span class="nav-toggle-bar" aria-hidden="true"></span></button>
         <div class="nav-links">
-            <a href="/ai-visibility-checker">Free Checker</a>
-            <a href="/#pricing">Pricing</a>
-            <a href="/research">Research</a>
-            <a href="/blog">Blog</a>
-            <a href="https://github.com/rankfixer-ai/rankfixer-core" target="_blank" rel="noopener">GitHub</a>
-        </div>
-    </nav>
+  <a href="/tools" aria-current="page">Tools</a>
+  <a href="/blog">Blog</a>
+  <a href="/research">Research</a>
+  <a href="/about">About</a>
+  <a href="https://github.com/rankfixer-ai/rankfixer-core" target="_blank" rel="noopener">GitHub</a>
+</div></nav>
 
     <div class="container">
 
@@ -127,22 +308,20 @@
         <header class="hero">
             <div class="hero-badge">Full AI Visibility Report</div>
             <h1>Your Complete AI Visibility Audit</h1>
-            <p>15+ scoring factors across 5 dimensions. Competitor comparison. Custom 30-day optimization plan.</p>
-            <div class="domain-badge" id="domain-badge">Enter your domain on the Free Checker first</div>
+            <p>6 core signals scored in depth, with an evidence-backed breakdown and prioritized fixes. Emailed in minutes.</p>
+            <div class="domain-badge" id="domain-badge">Enter your domain on the Free Tools first</div>
         </header>
 
         <!-- WHAT YOU GET -->
         <div class="card">
             <h2>📋 What's in the $99 Report</h2>
             <ul class="feature-list">
-                <li><span class="icon">📊</span> <span><strong>15+ scoring factors</strong> — fully broken down across 5 dimensions (Schema Completeness, Entity Density, Citation Signals, Technical SEO, Content Structure)</span></li>
-                <li><span class="icon">🆚</span> <span><strong>Competitor comparison</strong> — top 5 competitors in your category, ranked by AI visibility</span></li>
-                <li><span class="icon">🔍</span> <span><strong>Specific citation analysis</strong> — exactly where and how ChatGPT, Perplexity, and Gemini mention you (or your competitors)</span></li>
-                <li><span class="icon">🗺️</span> <span><strong>Custom 30-day optimization plan</strong> — prioritized fixes based on your actual gaps, not generic advice</span></li>
-                <li><span class="icon">✅</span> <span><strong>"Quick wins" checklist</strong> — 5-7 fixes you can ship today for immediate improvement</span></li>
-                <li><span class="icon">📄</span> <span><strong>PDF export + presentation deck</strong> — shareable format for your team or clients</span></li>
-                <li><span class="icon">📧</span> <span><strong>Priority email support</strong> — 30 days of follow-up questions included</span></li>
-                <li><span class="icon">📞</span> <span><strong>30-minute strategy call</strong> — we walk through the report together and plan next steps</span></li>
+                <li><span class="icon">&#10003;</span> <span><strong>6-signal AI readiness score</strong> - schema, entity, content, structure, crawlability, and llms.txt, each scored 0-100</span></li>
+                <li><span class="icon">&#10003;</span> <span><strong>Signal-by-signal breakdown</strong> - see exactly which of the 6 signals is dragging your score down</span></li>
+                <li><span class="icon">&#10003;</span> <span><strong>Prioritized fix list</strong> - the highest-impact changes first, based on your actual gaps</span></li>
+                <li><span class="icon">&#10003;</span> <span><strong>llms.txt review</strong> - whether you publish one and what's missing</span></li>
+                <li><span class="icon">&#10003;</span> <span><strong>Clear tier rating</strong> - Excellent, Good, Fair, Poor, or Critical at a glance</span></li>
+                <li><span class="icon">&#10003;</span> <span><strong>Self-contained HTML report</strong> - opens in any browser, easy to share</span></li>
             </ul>
         </div>
 
@@ -156,11 +335,11 @@
                 </div>
                 <div class="step">
                     <div class="step-num">2</div>
-                    <div class="step-text"><strong>Order the report</strong> — click below or from the checker results. We'll email you to confirm your domain and any specific questions.</div>
+                    <div class="step-text"><strong>Order the report</strong> — click below or from the checker results. $99 one-time, charged securely via Stripe. Run the free scan first to attach your domain.</div>
                 </div>
                 <div class="step">
                     <div class="step-num">3</div>
-                    <div class="step-text"><strong>Receive your full report within 48 hours</strong> — PDF + strategy call included. Pay after you review the findings.</div>
+                    <div class="step-text"><strong>Receive your report within minutes</strong> — we analyze your domain, generate the report, and email it to you automatically.</div>
                 </div>
             </div>
         </div>
@@ -168,7 +347,7 @@
         <!-- SOCIAL PROOF -->
         <div class="social-proof">
             <blockquote>
-                "We analyzed 100 SaaS companies. Only 3% scored above 80/100 for AI visibility."
+                "We scored 90 top SaaS domains. Average AI readiness: 62.7/100. Only 6% reached the Excellent tier."
             </blockquote>
             <p style="margin-top: 1rem;"><a href="/blog/ai-readiness-100-saas">Read the open-source analysis →</a></p>
         </div>
@@ -177,24 +356,24 @@
         <div class="cta-card">
             <h2>Get Your Full Report</h2>
             <div class="price">$99 <small style="font-size:1rem;color:var(--text-muted);">one-time</small></div>
-            <div class="price-sub">Delivered within 48 hours. Pay after review.</div>
+            <div class="price-sub">Generated automatically and emailed within minutes.</div>
             <ul class="checklist">
-                <li>✓ 15+ scoring factors across 5 dimensions</li>
-                <li>✓ Top-5 competitor comparison</li>
-                <li>✓ Custom 30-day optimization plan</li>
-                <li>✓ PDF + presentation deck</li>
-                <li>✓ 30-minute strategy call included</li>
+                <li>&#10003; 6-signal score, 0-100</li>
+                <li>&#10003; Signal-by-signal breakdown</li>
+                <li>&#10003; Prioritized fix list</li>
+                <li>&#10003; llms.txt review</li>
+                <li>&#10003; Emailed as an HTML report</li>
             </ul>
-            <a class="btn-primary" id="cta-button" href="mailto:acibronjan@gmail.com?subject=RankFixer%20Paid%20Report%20Inquiry&body=Domain%3A%20%0AEmail%3A%20%0AInterested%20in%3A%20Full%20AI%20Visibility%20Report%20(%2499%20one-time)%0A%0AQuestions%2Fnotes%3A%20">
+            <a class="btn-primary" id="cta-button" href="/report/" onclick="startCheckout(); return false;">
                 Get Full Report → $99
             </a>
-            <p style="font-size:0.8rem;color:var(--text-muted);margin-top:0.75rem;">We'll email you to confirm your domain and any specific questions before starting.</p>
+            <p style="font-size:0.8rem;color:var(--text-muted);margin-top:0.75rem;">Your report is generated automatically and emailed to you within minutes of payment.</p>
         </div>
 
         <!-- FOOTER -->
         <footer class="site-footer">
             <p>RankFixer — Know Your AI Visibility Score</p>
-            <p><a href="/">Home</a> · <a href="/ai-visibility-checker">Free Checker</a> · <a href="/blog">Blog</a> · <a href="/research">Research</a> · <a href="https://github.com/rankfixer-ai/rankfixer-core">GitHub</a></p>
+            <p><a href="/">Home</a> · <a href="/tools" title="AI Visibility Checker, Schema Generator, Report & more">Tools</a> · <a href="/blog">Blog</a> · <a href="/research">Research</a> · <a href="/about">About</a> <a href="https://github.com/rankfixer-ai/rankfixer-core">GitHub</a></p>
         </footer>
 
     </div>
@@ -225,7 +404,7 @@
                 'Interested in: Full AI Visibility Report ($99 one-time)\n' +
                 '\nQuestions/notes: '
             );
-            cta.href = 'mailto:acibronjan@gmail.com?subject=' + subj + '&body=' + body;
+            // CTA uses startCheckout(); domain/email are passed via the /report/ URL.
         }
 
         // Event tracking
@@ -263,5 +442,58 @@
     })();
     </script>
 
+<script src="/checkout.js"></script>
+<script>
+(function(){
+  'use strict';
+  var nav=document.querySelector('.nav');
+  var toggle=document.querySelector('.nav-toggle');
+  var links=document.querySelector('.nav-links');
+  if(!nav||!toggle||!links){ return; }
+
+  var reduceMotion=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+  var backdrop=document.createElement('div');
+  backdrop.className='nav-backdrop';
+  backdrop.setAttribute('aria-hidden','true');
+  document.body.appendChild(backdrop);
+
+  var open=false;
+
+  function setOpen(state){
+    open=state;
+    toggle.classList.toggle('open',state);
+    links.classList.toggle('open',state);
+    backdrop.classList.toggle('open',state);
+    toggle.setAttribute('aria-expanded',state?'true':'false');
+    backdrop.setAttribute('aria-hidden',state?'false':'true');
+  }
+
+  toggle.addEventListener('click',function(){ setOpen(!open); });
+
+  backdrop.addEventListener('click',function(){ setOpen(false); });
+
+  links.addEventListener('click',function(e){
+    if(e.target&&e.target.closest&&e.target.closest('a')){ setOpen(false); }
+  });
+
+  document.addEventListener('keydown',function(e){
+    if((e.key==='Escape'||e.key==='Esc')&&open){ setOpen(false); toggle.focus(); }
+  });
+
+  var ticking=false;
+  function updateScrolled(){
+    nav.classList.toggle('nav-scrolled',window.scrollY>8);
+  }
+  function onScroll(){
+    if(reduceMotion){ updateScrolled(); return; }
+    if(ticking){ return; }
+    ticking=true;
+    window.requestAnimationFrame(function(){ updateScrolled(); ticking=false; });
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  updateScrolled();
+})();
+</script>
 </body>
 </html>

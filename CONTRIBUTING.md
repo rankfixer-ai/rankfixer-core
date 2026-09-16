@@ -17,7 +17,7 @@ First off, thank you for considering contributing to RankFixer Core! We're build
 - If proposing a new signal to evaluate, explain what it measures and why it predicts LLM citation probability
 
 ### 🔬 Adding New Signals
-RankFixer currently evaluates 7 key signals. We're always looking to add more:
+RankFixer currently evaluates 6 key signals. We're always looking to add more:
 
 - **New Schema Types:** Support additional schema.org types (Product, Event, JobPosting, Review, Course)
 - **Content Analysis:** Improved entity extraction, sentiment analysis, citation-worthiness scoring
@@ -98,4 +98,4 @@ By contributing, you agree that your contributions will be licensed under the MI
 
 ---
 
-*Questions? Open a [Discussion](https://github.com/rankfixer-ai/rankfixer-core/discussions) or reach out to hello@rankfixer.co.*
+*Questions? Open a [Discussion](https://github.com/rankfixer-ai/rankfixer-core/discussions) or reach out to acibronjan@gmail.com.*

@@ -16,8 +16,30 @@
     <meta name="twitter:image" content="https://rankfixer.co/images/og-home.png">
     <link rel="canonical" href="https://rankfixer.co/blog/">
     <style>body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;max-width:720px;margin:40px auto;padding:0 20px;line-height:1.65;color:#1a1a2e}h1{font-size:2rem;color:#6C5CE7}a{color:#6C5CE7}.back{font-size:.9rem;margin-bottom:24px;display:inline-block}.post{padding:18px;border:1px solid #e2e2f0;border-radius:10px;margin:14px 0;text-decoration:none;display:block;color:inherit}.post:hover{border-color:#6C5CE7}.post h2{margin:.2rem 0;color:#6C5CE7}.post p{margin:.2rem 0;color:#555}</style>
+<style>
+@media (max-width: 480px) {
+    .nav { flex-wrap: wrap; justify-content: center; gap: 0.5rem; padding: 0.75rem 1rem; }
+    .nav-links { flex-wrap: wrap; justify-content: center; gap: 0.75rem; font-size: 0.8rem; }
+    footer { padding: 1rem; font-size: 0.75rem; }
+}
+</style>
 </head>
 <body>
+<nav class="nav">
+    <a href="/" class="nav-logo">Rankfixer</a>
+    <button type="button" class="nav-toggle" aria-label="Menu" aria-expanded="false">
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+    </button>
+    <div class="nav-links">
+        <a href="/tools">Tools</a>
+        <a href="/blog">Blog</a>
+        <a href="/research">Research</a>
+        <a href="/about">About</a>
+        <a href="https://github.com/rankfixer-ai/rankfixer-core" target="_blank" rel="noopener">GitHub</a>
+    </div>
+</nav>
 <a class="back" href="/">&larr; Back to Rankfixer</a>
 <h1>The Rankfixer Blog</h1>
 <p>Practical guides to getting cited by AI answer engines.</p>
@@ -26,8 +48,8 @@
   <h2>What Is GEO? Generative Engine Optimization Explained</h2>
   <p>A plain-English explainer of GEO and why it matters in 2026.</p>
 </a>
-<a class="post" href="/blog/7-signals-llms-cite.html">
-  <h2>The 7 Signals LLMs Use to Decide What to Cite</h2>
+<a class="post" href="/blog/6-signals-llms-cite.html">
+  <h2>The 6 Signals LLMs Use to Decide What to Cite</h2>
   <p>The structural signals that predict whether you'll be quoted.</p>
 </a>
 <a class="post" href="/blog/schema-markup-for-ai-citations.html">
@@ -36,5 +58,10 @@
 </a>
 
 <p><a href="/">Run a free AI visibility check &rarr;</a></p>
+<footer class="site-footer">
+    <p>RankFixer — Know Your AI Visibility Score</p>
+    <p><a href="/">Home</a> <a href="/tools">Tools</a> <a href="/blog">Blog</a> <a href="/research">Research</a> <a href="/about">About</a> <a href="https://github.com/rankfixer-ai/rankfixer-core" target="_blank" rel="noopener">GitHub</a></p>
+    <p>No signup required. No credit card. No BS.</p>
+</footer>
 </body>
 </html>

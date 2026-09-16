@@ -117,10 +117,10 @@
         <div id="state-not-paid" style="display:none" class="paywall-card">
             <h2>Get Your Full AI Visibility Report</h2>
             <p>Includes competitive landscape analysis, pricing comparison, and actionable recommendations.</p>
-            <div class="price">$5</div>
+            <div class="price">$99</div>
             <div class="price-sub">One-time payment. Instant access after secure checkout.</div>
             <button id="pay-button" class="btn-primary" style="display:inline-block;margin-top:1rem;cursor:pointer;" onclick="startCheckout();">
-                Pay $5 — Secure Checkout →
+                Pay $99 — Secure Checkout →
             </button>
             <p id="pay-error" style="font-size:0.8rem;color:var(--danger);margin-top:0.5rem;display:none;"></p>
             <p style="font-size:0.7rem;color:var(--text-muted);margin-top:0.5rem;">Secure payment via Stripe. Your report unlocks automatically once payment is confirmed.</p>
@@ -130,8 +130,8 @@
         <!-- STATE 3b: Payment pending (user clicked PayPal link) -->
         <div id="state-pending" style="display:none" class="paywall-card">
             <h2>Payment Pending</h2>
-            <p>We'll unlock your report within a few hours of confirming your payment. If you don't hear back by the next business day, email <a href="mailto:hello@rankfixer.co">hello@rankfixer.co</a>.</p>
-            <p style="font-size:0.85rem; color:var(--text-muted); margin-top:1rem;">Questions? <a href="mailto:hello@rankfixer.co">hello@rankfixer.co</a></p>
+            <p>We'll unlock your report within a few hours of confirming your payment. If you don't hear back by the next business day, email <a href="mailto:acibronjan@gmail.com">acibronjan@gmail.com</a>.</p>
+            <p style="font-size:0.85rem; color:var(--text-muted); margin-top:1rem;">Questions? <a href="mailto:acibronjan@gmail.com">acibronjan@gmail.com</a></p>
             <div id="paypal-button-container"></div>
         </div>
 
@@ -178,23 +178,23 @@
                 <h3>📊 Industry Benchmark</h3>
                 <div class="stat-grid">
                     <div class="stat-card">
-                        <div class="stat-value">48.7</div>
+                        <div class="stat-value">62.7</div>
                         <div class="stat-label">Average AI Visibility Score (Top 100 SaaS)</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-value">67%</div>
+                        <div class="stat-value">2.2%</div>
                         <div class="stat-label">Companies score below 40/100</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-value">3%</div>
+                        <div class="stat-value">6.7%</div>
                         <div class="stat-label">Score above 80/100</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-value">96%</div>
+                        <div class="stat-value">28%</div>
                         <div class="stat-label">Lack llms.txt file</div>
                     </div>
                 </div>
-                <div class="insight-box">Source: RankFixer benchmark of 100 SaaS companies (July 2026). Top performers: HubSpot (91.2), Salesforce (88.7), Stripe (86.4).</div>
+                <div class="insight-box">Source: RankFixer benchmark of 100 SaaS companies (August 2026). Top performers: Teamwork.com (91), HubSpot (83), WooCommerce (83).</div>
             </div>
 
             <!-- Recommendations -->
@@ -224,7 +224,7 @@
 
     let _competitorData = null;
     var _reportDomain = 'unknown';  // set in init(), used in renderReport()
-    const REPORT_PRICE = '5.00';
+    const REPORT_PRICE = '99.00';
 
     async function init() {
         // Step 1: Check auth
@@ -284,7 +284,7 @@
         } catch (e) {
             const err = document.getElementById('pay-error');
             if (err) { err.textContent = 'Could not start checkout. Please try again.'; err.style.display = 'block'; }
-            if (btn) { btn.disabled = false; btn.textContent = 'Pay $5 — Secure Checkout →'; }
+            if (btn) { btn.disabled = false; btn.textContent = 'Pay $99 — Secure Checkout →'; }
         }
     }
 

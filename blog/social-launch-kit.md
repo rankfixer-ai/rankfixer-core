@@ -9,19 +9,19 @@
 
 The results shocked us:
 
-• 67% score below 40/100 — Poor or Critical
+• Average score 62.7/100
 • Only 3 companies score above 80/100 (Excellent)
 • 96% of domains don't have an llms.txt file
 • 82% are missing FAQPage schema
 • 39% block GPTBot in robots.txt
 
-HubSpot leads at 91.2. The average? 48.7.
+Teamwork.com leads at 91. The average? 62.7.
 
-Here's the thing: most SaaS companies are optimizing for 2015 Google algorithms while 400M+ people are asking ChatGPT, Perplexity, and Claude for recommendations.
+Here's the thing: most SaaS companies are optimizing for 2015 Google algorithms while millions of people are asking ChatGPT, Perplexity, and Claude for recommendations.
 
-Your Google ranking doesn't mean AI models know you exist. We found that 78% of domains ranking top-3 on Google are completely invisible to AI.
+Your Google ranking doesn't mean AI models can cleanly parse and cite you.
 
-We're open-sourcing the entire dataset — all 100 domains, all 7 signals, all scores. Plus the analysis code.
+We're open-sourcing the entire dataset — all 90 scorable domains, all 6 signals, all scores. Plus the analysis code.
 
 📂 GitHub: https://github.com/rankfixer-ai/rankfixer-core
 📝 Full analysis: https://rankfixer.co/blog/ai-readiness-100-saas
@@ -37,9 +37,9 @@ We're open-sourcing the entire dataset — all 100 domains, all 7 signals, all s
 ```
 🚨 1/10 We analyzed the AI Readiness of 100 top SaaS websites.
 
-67% scored below 40/100. Only 3 scored above 80.
+Average 62.7/100. 6 scored above 80.
 
-The average? 48.7 out of 100.
+The average? 62.7 out of 100.
 
 Here's what we found. 🧵
 
@@ -47,17 +47,17 @@ Here's what we found. 🧵
 
 It's not SEO. It's how easily ChatGPT, Perplexity, and Claude can extract and cite your website as a factual source.
 
-We scored each site on 7 signals: Schema, Entity Density, Content Structure, Technical, Backlinks, Brand Entity, Freshness.
+We scored each site on 6 signals: Schema, Entity, Content, Structure, Crawlability, llms.txt.
 
 3/10 The top 5:
 
-1. HubSpot — 91.2
-2. Salesforce — 88.7
-3. Stripe — 86.4
-4. Shopify — 82.1
-5. Zapier — 79.8
+1. Teamwork.com — 91
+2. HubSpot — 83
+3. WooCommerce — 83
+4. Heroku — 83
+5. Zapier — 81
 
-What do they have in common? 5+ schema types, AI crawlers allowed, weekly content updates, knowledge base presence.
+What do they have in common? Strong content depth and structure, plus a published llms.txt.
 
 4/10 The bottom 5 averaged 4.5/100.
 
@@ -128,13 +128,13 @@ That's the playbook. 🚀
 
 My team built an open-source AI Website Recommendation Engine (think: PageSpeed Insights but for "will ChatGPT cite you?").
 
-We ran it against the top 100 SaaS websites across 7 signals: schema completeness, entity density, content structure, technical SEO, backlinks, brand entity recognition, and freshness.
+We ran it against the top 100 SaaS websites across 6 signals: schema completeness, entity consistency, content structure, technical structure, crawlability, and llms.txt.
 
 **Key findings:**
 
-- Average score: 48.7/100
-- 67% score below 40 ("Poor" or "Critical")
-- Only 3 companies score above 80 ("Excellent"): HubSpot (91.2), Salesforce (88.7), Stripe (86.4)
+- Average score: 62.7/100
+- 2.2% score below 40 ("Poor"); 0 score "Critical"
+- 6 companies score above 80 ("Excellent"): Teamwork.com (91), HubSpot (83), WooCommerce (83), Heroku (83), Zapier (81), Twilio (81)
 - 96% have no llms.txt file
 - 82% are missing FAQPage schema
 - 39% block GPTBot in robots.txt
@@ -146,7 +146,7 @@ We found essentially zero correlation between Google rankings and AI visibility.
 **The #1 fix for most sites:** Unblock AI crawlers in robots.txt + add FAQPage schema. 5-minute fix. 10-15 point gain on average.
 
 Everything is open source under MIT:
-- Full dataset (100 domains, all 7 signals): [GitHub link]
+- Full dataset (90 scorable domains, all 6 signals): [GitHub link]
 - Analysis notebook (Jupyter): [GitHub link]
 - Free scanner (no signup): [Link]
 
@@ -160,9 +160,9 @@ Happy to answer questions about the methodology or specific findings.
 
 **Body:**
 
-We built an open-source engine that scores websites on how likely they are to be cited by ChatGPT, Perplexity, and Claude. We ran it against the top 100 SaaS companies.
+We built an open-source engine that scores websites on how likely they are to be cited by ChatGPT, Perplexity, and Claude. We ran it against 90 scorable domains (100 attempted).
 
-67% scored below 40/100. The #1 issue was missing FAQPage schema (82% of domains). The #1 quick fix was unblocking AI crawlers in robots.txt — 39% of top SaaS companies block GPTBot.
+Average 62.7/100. The #1 gap was schema markup (average 26.6/100). The #1 quick win is adding Organization + WebSite schema.
 
 Everything is open source (MIT): the dataset, the scoring engine, the analysis notebook. You can run it against your own site right now — no signup, no email, free.
 
@@ -183,7 +183,7 @@ We just published something I think you'll find interesting.
 
 We ran the top 100 SaaS websites through RankFixer's AI Visibility engine. The results:
 
-- 67% score below 40/100
+- Average score 62.7/100
 - Only 3 companies score above 80 (HubSpot, Salesforce, Stripe)
 - The #1 issue: 82% are missing FAQPage schema
 - The #1 quick fix: 39% block AI crawlers in robots.txt

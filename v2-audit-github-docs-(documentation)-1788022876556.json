@@ -1,0 +1,104 @@
+{
+  "meta": {
+    "scanDate": "2026-08-29T17:01:16.555Z",
+    "entryUrl": "https://docs.github.com",
+    "duration": "17.2s",
+    "version": "2.0.0"
+  },
+  "site": {
+    "archetype": "content",
+    "requiresJSRendering": false,
+    "totalPages": 20,
+    "templatesDiscovered": 3,
+    "pagesSampled": 9,
+    "pagesCrawledSuccessfully": 9
+  },
+  "templates": [
+    {
+      "pattern": "/en/{slug}",
+      "pageType": "page",
+      "instanceCount": 13,
+      "samplesCrawled": 3,
+      "confidence": "high",
+      "templateIssues": [
+        {
+          "type": "sitemap",
+          "severity": "info",
+          "message": "9 crawled pages are not in the sitemap",
+          "confidence": "high",
+          "estimatedAffectedPages": 13,
+          "recommendation": "Consider adding important pages to the sitemap."
+        }
+      ],
+      "pageIssues": []
+    },
+    {
+      "pattern": "/en/{slug}/{slug}/{slug}",
+      "pageType": "page",
+      "instanceCount": 4,
+      "samplesCrawled": 3,
+      "confidence": "high",
+      "templateIssues": [
+        {
+          "type": "sitemap",
+          "severity": "info",
+          "message": "9 crawled pages are not in the sitemap",
+          "confidence": "high",
+          "estimatedAffectedPages": 4,
+          "recommendation": "Consider adding important pages to the sitemap."
+        }
+      ],
+      "pageIssues": []
+    },
+    {
+      "pattern": "(individual pages)",
+      "pageType": "static-page",
+      "instanceCount": 3,
+      "samplesCrawled": 3,
+      "confidence": "high",
+      "templateIssues": [
+        {
+          "type": "sitemap",
+          "severity": "info",
+          "message": "9 crawled pages are not in the sitemap",
+          "confidence": "high",
+          "estimatedAffectedPages": 3,
+          "recommendation": "Consider adding important pages to the sitemap."
+        }
+      ],
+      "pageIssues": [
+        {
+          "type": "content",
+          "severity": "warning",
+          "message": "https://docs.github.com/en H1 is identical to title tag",
+          "affectedUrls": [
+            "https://docs.github.com/en"
+          ]
+        }
+      ]
+    }
+  ],
+  "globalContradictions": [
+    {
+      "type": "h1-equals-title",
+      "severity": "warning",
+      "message": "https://docs.github.com/en H1 is identical to title tag",
+      "affectedUrls": [
+        "https://docs.github.com/en"
+      ],
+      "recommendation": "Differentiate H1 from title."
+    }
+  ],
+  "graphSummary": {
+    "nodeCount": 9,
+    "edgeCount": 3042,
+    "orphanCount": 0
+  },
+  "discovery": {
+    "sitemapUrls": 0,
+    "crawlUrls": 20,
+    "sitemapOnly": 0,
+    "crawlOnly": 20,
+    "overlap": 0
+  }
+}
