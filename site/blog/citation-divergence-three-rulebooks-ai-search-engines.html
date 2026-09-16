@@ -93,8 +93,9 @@ html{scroll-behavior:smooth;scroll-padding-top:5rem;}
 <hr>
 <h2>The myth of "AI SEO"</h2>
 <p>For the past two years, a single assumption has dominated search strategy: if you rank well in Google, AI engines will cite you too. The logic seemed sound. AI answers pull from the web. The web is indexed by Google. Rank well, get cited.</p>
-<p>That logic is now empirically dead.</p>
+<p>That logic is increasingly hard to defend against the data.</p>
 <p>In July 2026, researchers at CiteLens published a benchmark that tested 320 real buyer queries across four AI engines — Google AI Mode, Perplexity, Claude, and ChatGPT — then compared every cited source against the same query's organic results in Google and Bing. The finding: the four engines sorted into three distinct citation regimes, and two of them barely resemble traditional search at all. [1][2]</p>
+<p><strong>Scope and provenance:</strong> The CiteLens benchmark covered 320 queries. Two of the five cited sources describe its scope differently: MarTech Series reports three consumer sectors in the Turkish market; Obsurfable states "no cherry-picked verticals, no single-industry sample." This post treats the 93%/89%/53%/30% figures as directional signals pending replication on a broader sample.</p>
 <p>This changes how every team working on AI visibility should allocate effort, track success, and define what "cited" actually means.</p>
 <hr>
 <h2>The three regimes, by the numbers</h2>
@@ -114,14 +115,14 @@ html{scroll-behavior:smooth;scroll-padding-top:5rem;}
 <hr>
 <h2>The overlap problem</h2>
 <p>The divergence between engines is not theoretical. It shows up in cross-engine domain overlap data from multiple studies published throughout 2026.</p>
-<p>CiteMetrix, analyzing 680 million citations, found that only <strong>11%</strong> of domains cited by ChatGPT are also cited by Perplexity. [2] The same query, nearly opposite source sets.</p>
+<p>CiteMetrix, analyzing 680 million citations, found that only <strong>11%</strong> of domains cited by ChatGPT are also cited by Perplexity. [2] The same query, nearly opposite source sets. <strong>Provenance note:</strong> The 680M-citation dataset is attributed to CiteMetrix by Obsurfable, but Averi.ai claims the same figure as its own proprietary analysis. The original source is unresolved — treat this stat as directional.</p>
 <p>BrightEdge AI Catalyst found that pairwise top-100 source overlap across five AI engines ranges from 16% to <strong>59%</strong> — a 43-point spread. [4] The engines disagree substantially and inconsistently about where to pull information from. By contrast, brand overlap across the same engines clusters in a tighter 36% to 55% range — a 19-point spread. [4] The engines agree more consistently about which brands to recommend than about which sources to consult.</p>
 <p>Foglift measured ChatGPT-Claude citation Jaccard overlap at <strong>0.027</strong> — effectively near-zero. [2]</p>
 <p>The pattern is unambiguous: AI search is not converging on a single citation standard. It is diverging. [3]</p>
 <hr>
 <h2>What actually drives citations (across all engines)</h2>
 <p>While the engines disagree on which sources to pull from, they agree on one thing: paid content does not work. Muck Rack's May 2026 analysis of more than 25 million links found that paid and advertorial content accounts for just <strong>0.3%</strong> of AI citations across ChatGPT, Claude, and Gemini. [5] You cannot buy your way into the citation set.</p>
-<p>What does work? Earned media. Muck Rack found that earned media — journalism, academic research, government sources, encyclopedic sites, and third-party corporate content — accounts for <strong>84%</strong> of all AI citations. Journalism alone makes up <strong>27%</strong>. [5]</p>
+<p>What does work? Earned media. Muck Rack found that earned media — journalism, academic research, government sources, encyclopedic sites, and third-party corporate content — accounts for <strong>82–89%</strong> of all AI citations across three study editions. Journalism alone makes up <strong>25–27%</strong>. [5]</p>
 <p>Those numbers have held steady across three editions of the study going back to July 2025, suggesting these are structural patterns, not model-update quirks. [5]</p>
 <p>ChatGPT, Claude, and Gemini also differ sharply in how often they cite. ChatGPT cites sources in <strong>96%</strong> of responses but averages only five citations per response. Gemini cites in <strong>82%</strong> of responses, averaging eight. Claude is the most selective, citing in <strong>55%</strong> of responses but averaging 13 sources when it does. [5]</p>
 <hr>
@@ -133,7 +134,7 @@ html{scroll-behavior:smooth;scroll-padding-top:5rem;}
 <hr>
 <h2>What to do instead</h2>
 <p><strong>For Google AI Mode and Perplexity:</strong> Keep investing in traditional SEO. Top-10 rankings are the most reliable path. FAQ schema, clear heading structure, and topical coverage still convert almost directly to citations. [3] For Perplexity specifically, add Reddit placements and a 60-to-90 day content refresh cycle to the mix. [2]</p>
-<p><strong>For Claude:</strong> Ensure Brave Search index presence, allow Claude-SearchBot in robots.txt, and publish documentation-style content with verifiable statistics, named sources, and precise data. Pursue Wikipedia-adjacent coverage. [2][3]</p>
+<p><strong>For Claude:</strong> Claude retrieves through Brave Search and uses its own supplemental crawler, Claude-SearchBot. Confirming Brave index presence and allowing Claude-SearchBot in robots.txt is a reasonable first check. Wikipedia-backed sources correlate with 58% of Claude citations — worth testing whether pursuing this moves the metric; the underlying data is correlational, not causal. [2][3]</p>
 <p><strong>For ChatGPT:</strong> Build entity authority deliberately. Independent brand mentions across publishers, inclusion in comparison and "best of" pieces you do not control, and a Wikipedia entry where the business qualifies. [3] Earned media is what this engine trusts — 84% of citations come from sources outside the cited brand's own domain. [5]</p>
 <p><strong>For every engine:</strong> Track citation share separately per engine on the same prompt set. Build four dashboards, not one aggregate. [2] Report engine-by-engine. Aggregate scores hide the gaps that matter. [2]</p>
 <hr>
@@ -143,12 +144,24 @@ html{scroll-behavior:smooth;scroll-padding-top:5rem;}
 <p>RankFixer's thesis has always been that there is no single AI SEO. The CiteLens benchmark now gives that thesis hard numbers: 93%, 89%, 53%, 30%. Four engines, three rulebooks, and a 11% overlap between the two most popular ones.</p>
 <p>The question for your brand is not "are you cited by AI." It is "are you cited by the engine whose behavior you can actually optimize for?"</p>
 <hr>
+<h2>Methodology note</h2>
+<p>All five sources are published by commercial entities with content-marketing incentives. Their relationship to the data differs:</p>
+<ul>
+<li><strong>CiteLens</strong> — describes itself as an independent research group. Obsurfable explicitly states: "CiteLens is not a platform vendor study. It is an independent analysis." However, MarTech Series reports the benchmark covered three consumer sectors in the Turkish market, while Obsurfable denies any cherry-picked verticals. This contradiction about the same study's scope is unresolved in the published record. Treat the 93%/89%/53%/30% figures as directional, not generalizable.</li>
+<li><strong>Obsurfable, Muck Rack, BrightEdge</strong> — all three sell AI-visibility measurement tools; their studies are vendor-produced benchmark content marketing.</li>
+<li><strong>Mintec</strong> — a general web-development and marketing agency (Honduras/Colombia/US), not an AI-visibility vendor. Its content incentive is marketing-agency lead generation, weaker than the other four.</li>
+</ul>
+<p>Some headline figures recur across independently-attributed secondary sources: "93%" appears in both Paralax and Mintec, each transparently citing the CiteLens primary; "84%" appears in both Obsurfable and Muck Rack, with Obsurfable directly attributing it to Muck Rack. This corroboration is expected when multiple outlets cite the same primary — it is not sourcing circularity.</p>
+<p>The genuinely unresolved figure is the 11% ChatGPT-Perplexity domain overlap: CiteMetrix and Averi.ai both claim the 680M-citation dataset, with no traceable original. It is flagged inline above.</p>
+<p>Sample sizes (320 queries, 25M links, 680M citations), time windows, and query-construction methods are not directly comparable. This post synthesizes directional signals, not controlled experiments.</p>
+<p>Some recommendations in this post derive closely from Obsurfable's engine-specific playbooks; prescriptive language has been softened accordingly.</p>
+<hr>
 <p><strong>Sources:</strong><br>
-[1] Paralax, "AI Search Just Split Into Three Rulebooks — And SEO Only Wins Two of Them" (July 9, 2026)<br>
-[2] Obsurfable, "Three Citation Rulebooks: Why One GEO Strategy Cannot Cover All Four Engines" (July 2026)<br>
-[3] Mintec, "AI Search Now Runs on Three Separate Citation Rulebooks — Here's the Data" (July 17, 2026)<br>
-[4] BrightEdge AI Catalyst, "Why AI Engines Cite Different Sources but Recommend..." (April 24, 2026)<br>
-[5] Muck Rack / Generative Pulse, "Earned media still drives 84% of AI citations" (May 7, 2026)</p>
+[1] Paralax, "AI Search Just Split Into Three Rulebooks — And SEO Only Wins Two of Them" (July 9, 2026) — <a href="https://paralax.ai/blog/ai-search-three-rulebooks-seo-entity-authority-2026">paralax.ai</a><br>
+[2] Obsurfable, "Three Citation Rulebooks: Why One GEO Strategy Cannot Cover All Four Engines" (July 2026) — <a href="https://obsurfable.com/resources/articles/three-citation-rulebooks-citelens-study-2026">obsurfable.com</a><br>
+[3] Mintec, "AI Search Now Runs on Three Separate Citation Rulebooks — Here's the Data" (July 17, 2026) — <a href="https://mintec.co/blog/busqueda-ia-tres-reglamentos-citacion-2026">mintec.co</a><br>
+[4] BrightEdge AI Catalyst, "Why AI Engines Cite Different Sources but Recommend..." (April 24, 2026) — <a href="https://www.brightedge.com/resources/weekly-ai-search-insights/ai-search-same-brands-different-sources">brightedge.com</a><br>
+[5] Muck Rack / Generative Pulse, "Earned media still drives 84% of AI citations" (May 7, 2026) — <a href="https://muckrack.com/blog/what-is-ai-reading-may-2026">muckrack.com</a></p>
 </main>
 <footer>
     <p>RankFixer — Know Your AI Visibility Score</p>
