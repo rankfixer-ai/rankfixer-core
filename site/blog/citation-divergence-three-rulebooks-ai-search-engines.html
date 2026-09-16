@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Citation Divergence: The Three Rulebooks — RankFixer</title>
+<meta name="description" content="A 320-query benchmark shows the four major AI engines don't share a citation standard. They operate under three fundamentally different rulebooks.">
+<style>
+    :root {
+        --brand: #6C5CE7; --brand-hover: #5A4BD1; --bg: #0D0D1A; --bg-card: #151528;
+        --text: #F0F0F5; --text-muted: #8888A0; --border: #2A2A45;
+        --radius: 12px; --radius-sm: 8px; --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.7; overflow-x: hidden; width: 100%; }
+    a { color: var(--brand); }
+    .nav { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; padding: 1rem 2rem; border-bottom: 1px solid var(--border); }
+    .nav-logo { font-weight: 700; font-size: 1.2rem; text-decoration: none; color: var(--text); }
+    .nav-links { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; }
+    .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; }
+    .nav-links a:hover { color: var(--text); }
+    .container { max-width: 720px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+    .article h1 { font-size: 2rem; font-weight: 800; letter-spacing: -0.02em; margin: 0 0 1rem; }
+    .article h2 { font-size: 1.4rem; font-weight: 700; margin: 2rem 0 0.75rem; }
+    .article h3 { font-size: 1.15rem; font-weight: 700; margin: 1.5rem 0 0.5rem; }
+    .article p { margin-bottom: 1rem; }
+    .article ul, .article ol { margin: 0 0 1rem 1.4rem; }
+    .article li { margin-bottom: 0.35rem; }
+    .article blockquote { border-left: 3px solid var(--brand); padding: 0.5rem 1rem; color: var(--text-muted); margin-bottom: 1rem; }
+    .article code { background: var(--bg-card); border: 1px solid var(--border); padding: 0.1rem 0.35rem; border-radius: 4px; font-size: 0.9em; }
+    .article pre { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 1rem; overflow-x: auto; margin-bottom: 1rem; }
+    .article pre code { background: none; border: none; padding: 0; }
+    .article hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
+    footer { text-align: center; padding: 2rem; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.8rem; }
+    footer a { color: var(--text-muted); margin: 0 0.5rem; }
+    @media (max-width: 480px) {
+        nav, .nav { flex-wrap: wrap; justify-content: center; gap: 5px; font-size: 0.8rem; padding: 0 10px; }
+        .container { padding: 1rem; max-width: 100%; }
+        .article h1 { font-size: 1.5rem; }
+        .article pre { max-width: 100%; }
+    }
+/* Rankfixer - modern smooth nav */
+html{scroll-behavior:smooth;scroll-padding-top:5rem;}
+.nav{position:sticky;top:0;z-index:40;background:rgba(13,13,26,0.82);-webkit-backdrop-filter:blur(12px) saturate(160%);backdrop-filter:blur(12px) saturate(160%);border-bottom:1px solid transparent;transition:box-shadow .35s ease,border-color .35s ease;}
+.nav.nav-scrolled{box-shadow:0 6px 24px rgba(0,0,0,.35);border-bottom-color:var(--border);}
+.nav-logo{transition:opacity .25s ease,transform .25s ease;}
+.nav-logo:hover{opacity:.85;transform:translateY(-1px);}
+.nav-links a{position:relative;transition:color .25s ease;}
+.nav-links a::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:2px;border-radius:2px;background:var(--brand);transform:scaleX(0);transform-origin:center;transition:transform .3s ease;}
+.nav-links a:hover{color:var(--text);}
+.nav-links a:hover::after,.nav-links a:focus-visible::after,.nav-links a[aria-current="page"]::after{transform:scaleX(1);}
+.nav-toggle:focus-visible,.nav-links a:focus-visible{outline:2px solid var(--brand);outline-offset:3px;border-radius:4px;}
+.nav-backdrop{position:fixed;inset:0;z-index:30;background:rgba(0,0,0,.5);opacity:0;visibility:hidden;transition:opacity .3s ease,visibility 0s linear .3s;}
+.nav-backdrop.open{opacity:1;visibility:visible;transition:opacity .3s ease,visibility 0s;}
+.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.55rem .5rem;color:var(--text);flex-direction:column;align-items:center;justify-content:center;gap:5px;}
+.nav-toggle-bar{display:block;width:1.4rem;height:2px;border-radius:2px;background:currentColor;transition:transform .3s ease,opacity .25s ease;}
+.nav-toggle.open .nav-toggle-bar:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.nav-toggle.open .nav-toggle-bar:nth-child(2){opacity:0;transform:translateX(-6px);}
+.nav-toggle.open .nav-toggle-bar:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+@media (max-width:768px){
+  .nav{flex-direction:row;flex-wrap:wrap;justify-content:space-between;align-items:center;}
+  .nav-toggle{display:flex;margin-left:auto;}
+  .nav-links{display:flex;flex-direction:column;align-items:flex-start;gap:.6rem;width:100%;max-height:0;overflow:hidden;padding:0;opacity:0;transform:translateY(-8px);visibility:hidden;transition:max-height .4s ease,opacity .3s ease,transform .3s ease,padding .3s ease,visibility 0s linear .4s;}
+  .nav-links.open{max-height:560px;padding:.75rem 0 .25rem;opacity:1;transform:translateY(0);visibility:visible;transition:max-height .4s ease,opacity .3s ease,transform .3s ease,padding .3s ease,visibility 0s;}
+  .nav-links a{opacity:0;transform:translateY(6px);transition:color .25s ease,opacity .3s ease,transform .3s ease;}
+  .nav-links.open a{opacity:1;transform:translateY(0);}
+  .nav-links.open a:nth-child(1){transition-delay:.04s;}
+  .nav-links.open a:nth-child(2){transition-delay:.08s;}
+  .nav-links.open a:nth-child(3){transition-delay:.12s;}
+  .nav-links.open a:nth-child(4){transition-delay:.16s;}
+  .nav-links.open a:nth-child(5){transition-delay:.20s;}
+  .nav-links.open a:nth-child(6){transition-delay:.24s;}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto;}
+  .nav,.nav-logo,.nav-links,.nav-links a,.nav-links a::after,.nav-toggle-bar,.nav-backdrop{transition:none !important;transition-delay:0s !important;}
+}
+</style>
+</head>
+<body>
+<nav class="nav">
+    <a href="/" class="nav-logo">Rankfixer</a><button type="button" class="nav-toggle" aria-label="Menu" aria-expanded="false"><span class="nav-toggle-bar" aria-hidden="true"></span><span class="nav-toggle-bar" aria-hidden="true"></span><span class="nav-toggle-bar" aria-hidden="true"></span></button>
+    <div class="nav-links">
+  <a href="/tools">Tools</a>
+  <a href="/blog" aria-current="page">Blog</a>
+  <a href="/research">Research</a>
+  <a href="/about">About</a>
+  <a href="https://github.com/rankfixer-ai/rankfixer-core" target="_blank" rel="noopener">GitHub</a>
+</div></nav>
+<main class="container article">
+<h1>Citation Divergence: The Three Rulebooks</h1>
+<blockquote><em>A 320-query benchmark reveals that the four major AI engines do not share a single citation standard. They operate under three fundamentally different rulebooks, and optimizing for one will not optimize you for the others.</em></blockquote>
+<hr>
+<h2>The myth of "AI SEO"</h2>
+<p>For the past two years, a single assumption has dominated search strategy: if you rank well in Google, AI engines will cite you too. The logic seemed sound. AI answers pull from the web. The web is indexed by Google. Rank well, get cited.</p>
+<p>That logic is now empirically dead.</p>
+<p>In July 2026, researchers at CiteLens published a benchmark that tested 320 real buyer queries across four AI engines — Google AI Mode, Perplexity, Claude, and ChatGPT — then compared every cited source against the same query's organic results in Google and Bing. The finding: the four engines sorted into three distinct citation regimes, and two of them barely resemble traditional search at all. [1][2]</p>
+<p>This changes how every team working on AI visibility should allocate effort, track success, and define what "cited" actually means.</p>
+<hr>
+<h2>The three regimes, by the numbers</h2>
+<h3>Regime 1: Google-aligned engines (Google AI Mode and Perplexity)</h3>
+<p>Google AI Mode pulls <strong>93%</strong> of its citations from Google's top-10 organic results. Perplexity pulls <strong>89%</strong>. The correlation between Google ranking and citation frequency is 0.92 for AI Mode and 0.87 for Perplexity — near-lockstep alignment. [1]</p>
+<p>For these two engines, classic SEO fundamentals remain the primary path to citation. If a page ranks in the top 10, it will very likely be cited when these engines answer relevant queries. Structured content, topical depth, backlinks, and clear formatting still move the needle directly. [3]</p>
+<p>But the two engines are not identical within the regime. Perplexity shows a heavy preference for Reddit, which accounts for <strong>46.7%</strong> of its top citation share. Freshness also matters: <strong>82%</strong> of Perplexity's citations come from pages under 30 days old. Google AI Mode, meanwhile, increasingly cites Google-hosted surfaces like Business Profiles and Product Knowledge Panels. [2]</p>
+<p>The practical takeaway: ranking works, but source-type strategy must still be engine-specific.</p>
+<h3>Regime 2: The hybrid engine (Claude)</h3>
+<p>Claude splits the difference. It pulls <strong>53%</strong> of its citations from Google's top-10, meaning the remaining citations come from somewhere else entirely. [1] Claude retrieves through Brave Search rather than Google directly, and it also uses its own supplemental crawler, Claude-SearchBot. [2]</p>
+<p>What fills the non-top-10 half? Wikipedia-backed sources predicted <strong>58%</strong> of Claude's citations — the strongest single predictor. Claude favors reference-grade documentation, precise data points with named sources, and content that reads as a primary source. [1][3]</p>
+<p>This means Claude is partially responsive to traditional SEO work but also rewards content that exists in authoritative training data, academic papers, technical documentation, and structured knowledge sources. [3]</p>
+<h3>Regime 3: The independent engine (ChatGPT)</h3>
+<p>ChatGPT is the outlier. Only <strong>30%</strong> of its citations come from Google's top-10 organic results. The other <strong>70%</strong> rank in neither Google's nor Bing's top-10. [1][3] Its correlation with Google ranking is near zero. Its correlation with brand popularity is near zero. [1]</p>
+<p>The convenient assumption that ChatGPT simply mirrors Bing? It does not hold. Fewer than <strong>4%</strong> of ChatGPT's citations appear in Bing's top-10. [1] Only <strong>21%</strong> of its citations go to Wikipedia-backed sites — versus Claude's <strong>58%</strong>. [1] ChatGPT surfaces niche domains that rank nowhere and command little search demand. [1]</p>
+<p>What actually drives ChatGPT citations is entity authority: a brand's consistent, recognized presence across independent publishers, forums, and reference sources, regardless of where any single page sits in Google or Bing. [3]</p>
+<hr>
+<h2>The overlap problem</h2>
+<p>The divergence between engines is not theoretical. It shows up in cross-engine domain overlap data from multiple studies published throughout 2026.</p>
+<p>CiteMetrix, analyzing 680 million citations, found that only <strong>11%</strong> of domains cited by ChatGPT are also cited by Perplexity. [2] The same query, nearly opposite source sets.</p>
+<p>BrightEdge AI Catalyst found that pairwise top-100 source overlap across five AI engines ranges from 16% to <strong>59%</strong> — a 43-point spread. [4] The engines disagree substantially and inconsistently about where to pull information from. By contrast, brand overlap across the same engines clusters in a tighter 36% to 55% range — a 19-point spread. [4] The engines agree more consistently about which brands to recommend than about which sources to consult.</p>
+<p>Foglift measured ChatGPT-Claude citation Jaccard overlap at <strong>0.027</strong> — effectively near-zero. [2]</p>
+<p>The pattern is unambiguous: AI search is not converging on a single citation standard. It is diverging. [3]</p>
+<hr>
+<h2>What actually drives citations (across all engines)</h2>
+<p>While the engines disagree on which sources to pull from, they agree on one thing: paid content does not work. Muck Rack's May 2026 analysis of more than 25 million links found that paid and advertorial content accounts for just <strong>0.3%</strong> of AI citations across ChatGPT, Claude, and Gemini. [5] You cannot buy your way into the citation set.</p>
+<p>What does work? Earned media. Muck Rack found that earned media — journalism, academic research, government sources, encyclopedic sites, and third-party corporate content — accounts for <strong>84%</strong> of all AI citations. Journalism alone makes up <strong>27%</strong>. [5]</p>
+<p>Those numbers have held steady across three editions of the study going back to July 2025, suggesting these are structural patterns, not model-update quirks. [5]</p>
+<p>ChatGPT, Claude, and Gemini also differ sharply in how often they cite. ChatGPT cites sources in <strong>96%</strong> of responses but averages only five citations per response. Gemini cites in <strong>82%</strong> of responses, averaging eight. Claude is the most selective, citing in <strong>55%</strong> of responses but averaging 13 sources when it does. [5]</p>
+<hr>
+<h2>What to stop doing</h2>
+<p><strong>Stop running one content playbook across all engines.</strong> The data is clear that this underperforms on at least two of the three regimes. [3]</p>
+<p>A YouTube page that drives <strong>11.2%</strong> of Google AI Mode citations drives <strong>0.02%</strong> of Claude's. [2] A Reddit thread that dominates Perplexity will not appear in ChatGPT. A page that ranks #20 in Google but has strong entity signals, clear schema, and brand authority can still get cited by ChatGPT while a #2-ranked page with weaker entity signals gets skipped. [3]</p>
+<p><strong>Stop tracking citation share as a single blended number.</strong> A brand can rank well and be cited constantly on Perplexity while remaining nearly invisible on ChatGPT. The difference only shows up when each engine is measured on its own. [3]</p>
+<p><strong>Stop assuming AI Mode and AI Overviews are interchangeable.</strong> Obsurfable measures just <strong>13.7%</strong> overlap in the exact URLs they cite; BrightEdge measures <strong>59%</strong> overlap in source domains. Same conclusion, different measurement bases — treat them as distinct systems. [2][4]</p>
+<hr>
+<h2>What to do instead</h2>
+<p><strong>For Google AI Mode and Perplexity:</strong> Keep investing in traditional SEO. Top-10 rankings are the most reliable path. FAQ schema, clear heading structure, and topical coverage still convert almost directly to citations. [3] For Perplexity specifically, add Reddit placements and a 60-to-90 day content refresh cycle to the mix. [2]</p>
+<p><strong>For Claude:</strong> Ensure Brave Search index presence, allow Claude-SearchBot in robots.txt, and publish documentation-style content with verifiable statistics, named sources, and precise data. Pursue Wikipedia-adjacent coverage. [2][3]</p>
+<p><strong>For ChatGPT:</strong> Build entity authority deliberately. Independent brand mentions across publishers, inclusion in comparison and "best of" pieces you do not control, and a Wikipedia entry where the business qualifies. [3] Earned media is what this engine trusts — 84% of citations come from sources outside the cited brand's own domain. [5]</p>
+<p><strong>For every engine:</strong> Track citation share separately per engine on the same prompt set. Build four dashboards, not one aggregate. [2] Report engine-by-engine. Aggregate scores hide the gaps that matter. [2]</p>
+<hr>
+<h2>The earned authority shift</h2>
+<p>The CiteLens data points to a structural shift in how authority is earned online. For two of the four engines, page-level ranking is still the currency. For the other two, entity-level authority — whether the model already recognizes your brand as a named, credible entity — is what wins the citation. [1]</p>
+<p>This is not a temporary gap. As of July 2026 — the date of the Mintec study — the engines' citation logic is diverging, not converging. [3] Treating them as separate systems is the safer near-term approach. [3]</p>
+<p>RankFixer's thesis has always been that there is no single AI SEO. The CiteLens benchmark now gives that thesis hard numbers: 93%, 89%, 53%, 30%. Four engines, three rulebooks, and a 11% overlap between the two most popular ones.</p>
+<p>The question for your brand is not "are you cited by AI." It is "are you cited by the engine whose behavior you can actually optimize for?"</p>
+<hr>
+<p><strong>Sources:</strong><br>
+[1] Paralax, "AI Search Just Split Into Three Rulebooks — And SEO Only Wins Two of Them" (July 9, 2026)<br>
+[2] Obsurfable, "Three Citation Rulebooks: Why One GEO Strategy Cannot Cover All Four Engines" (July 2026)<br>
+[3] Mintec, "AI Search Now Runs on Three Separate Citation Rulebooks — Here's the Data" (July 17, 2026)<br>
+[4] BrightEdge AI Catalyst, "Why AI Engines Cite Different Sources but Recommend..." (April 24, 2026)<br>
+[5] Muck Rack / Generative Pulse, "Earned media still drives 84% of AI citations" (May 7, 2026)</p>
+</main>
+<footer>
+    <p>RankFixer — Know Your AI Visibility Score</p>
+    <p><a href="/">Home</a> <a href="/ai-visibility-checker">Tools</a> <a href="/schema-generator">Schema Gen</a> <a href="/blog">Blog</a> <a href="/tools">Tools</a> <a href="/research">Research</a> <a href="#contact">Contact</a> <a href="/about">About</a> <a href="https://github.com/rankfixer-ai/rankfixer-core">GitHub</a> <a href="https://www.linkedin.com/in/janacibron/">LinkedIn</a></p>
+</footer>
+<script>
+(function(){
+  const nav=document.querySelector('.nav');
+  const toggle=document.querySelector('.nav-toggle');
+  const links=document.querySelector('.nav-links');
+  const backdrop=document.createElement('div');
+  backdrop.className='nav-backdrop';
+  document.body.appendChild(backdrop);
+  toggle.addEventListener('click',()=>{
+    const open=links.classList.toggle('open');
+    toggle.classList.toggle('open',open);
+    toggle.setAttribute('aria-expanded',open);
+    backdrop.classList.toggle('open',open);
+  });
+  backdrop.addEventListener('click',()=>{
+    links.classList.remove('open');
+    toggle.classList.remove('open');
+    toggle.setAttribute('aria-expanded','false');
+    backdrop.classList.remove('open');
+  });
+  window.addEventListener('scroll',()=>{
+    nav.classList.toggle('nav-scrolled',window.scrollY>10);
+  },{passive:true});
+})();
+</script>
+</body>
+</html>
