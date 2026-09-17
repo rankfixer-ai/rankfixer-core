@@ -47,6 +47,9 @@
         .post-card h2 a { color: var(--text); }
         .post-card h2 a:hover { color: var(--brand); text-decoration: none; }
         .post-card .post-excerpt { font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 0.75rem; }
+        .post-card .post-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem; }
+        .post-card .post-meta .post-date { font-weight: 500; }
+        .post-card .post-meta .post-tags a { color: var(--brand); font-size: 0.78rem; }
         .post-card .read-more { font-size: 0.85rem; font-weight: 600; }
         .post-count { font-size: 0.85rem; color: var(--text-muted); text-align: center; margin-bottom: 1.5rem; }
 
@@ -275,7 +278,27 @@ html{
             <p>Open-source research on AI visibility, Generative Engine Optimization, and how LLMs cite websites.</p>
         </header>
 
-        <p class="post-count">19 article(s) — updated August 23, 2026</p>
+        <p class="post-count">21 article(s) — updated September 16, 2026</p>
+
+        <article class="post-card">
+            <h2><a href="/blog/citation-divergence-three-rulebooks-ai-search-engines">Citation Divergence: The Three Rulebooks</a></h2>
+            <div class="post-meta">
+                <span class="post-date">September 16, 2026</span>
+                <span class="post-tags"><a href="/blog?tag=ai-search">ai-search</a>, <a href="/blog?tag=citations">citations</a>, <a href="/blog?tag=measurement">measurement</a>, <a href="/blog?tag=analytics">analytics</a></span>
+            </div>
+            <p class="post-excerpt">A 320-query benchmark reveals that the four major AI engines do not share a single citation standard. They operate under three fundamentally different rulebooks, and optimizing for one will not optimize you for the others.</p>
+            <p style="margin-top: 0.6rem;"><a href="/blog/citation-divergence-three-rulebooks-ai-search-engines" class="read-more">Read the article →</a></p>
+        </article>
+
+        <article class="post-card">
+            <h2><a href="/blog/perplexity-search-api-ai-visibility-infrastructure-shift">Perplexity Search API: The Infrastructure Shift That Changes AI Visibility</a></h2>
+            <div class="post-meta">
+                <span class="post-date">September 16, 2026</span>
+                <span class="post-tags"><a href="/blog?tag=ai-search">ai-search</a>, <a href="/blog?tag=api">api</a>, <a href="/blog?tag=infrastructure">infrastructure</a>, <a href="/blog?tag=citations">citations</a></span>
+            </div>
+            <p class="post-excerpt">On September 25, 2025, Perplexity opened the same search infrastructure that powers its answer engine to every developer with an API key. The result is more than a developer tool — it's a programmatic window into how one of the most citation-dense AI surfaces actually sees the web.</p>
+            <p style="margin-top: 0.6rem;"><a href="/blog/perplexity-search-api-ai-visibility-infrastructure-shift" class="read-more">Read the article →</a></p>
+        </article>
 
         <article class="post-card">
             <h2><a href="/blog/entity-first-content-generative-citation-sources">Entity-First Content: How Generative Engines Select Citation Sources</a></h2>

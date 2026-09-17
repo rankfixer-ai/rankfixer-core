@@ -26,6 +26,9 @@
     .article p { margin-bottom: 1rem; }
     .article ul, .article ol { margin: 0 0 1rem 1.4rem; }
     .article li { margin-bottom: 0.35rem; }
+    .post-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem; }
+    .post-meta .post-date { font-weight: 500; }
+    .post-meta .post-tags a { color: var(--brand); }
     .article blockquote { border-left: 3px solid var(--brand); padding: 0.5rem 1rem; color: var(--text-muted); margin-bottom: 1rem; }
     .article code { background: var(--bg-card); border: 1px solid var(--border); padding: 0.1rem 0.35rem; border-radius: 4px; font-size: 0.9em; }
     .article pre { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 1rem; overflow-x: auto; margin-bottom: 1rem; }
@@ -89,6 +92,10 @@ html{scroll-behavior:smooth;scroll-padding-top:5rem;}
 </div></nav>
 <main class="container article">
 <h1>Citation Divergence: The Three Rulebooks</h1>
+<div class="post-meta">
+    <span class="post-date">September 16, 2026</span>
+    <span class="post-tags"><a href="/blog?tag=ai-search">ai-search</a>, <a href="/blog?tag=citations">citations</a>, <a href="/blog?tag=measurement">measurement</a>, <a href="/blog?tag=analytics">analytics</a></span>
+</div>
 <blockquote><em>A 320-query benchmark reveals that the four major AI engines do not share a single citation standard. They operate under three fundamentally different rulebooks, and optimizing for one will not optimize you for the others.</em></blockquote>
 <hr>
 <h2>The myth of "AI SEO"</h2>
