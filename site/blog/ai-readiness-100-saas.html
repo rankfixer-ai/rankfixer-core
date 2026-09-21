@@ -276,6 +276,11 @@ html{
     transition-delay:0s !important;
   }
 }
+
+.post-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem; }
+.post-meta time { font-weight: 500; color: var(--text-muted); }
+.post-meta .post-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.post-meta .post-tags span { background: var(--bg-card); padding: 0.15rem 0.5rem; border-radius: var(--radius-sm); font-size: 0.75rem; color: var(--brand); }
 </style>
 </head>
 <body>
@@ -304,6 +309,14 @@ html{
         </div>
 
         <h1>We Analyzed the AI Readiness of 100 Top SaaS Websites (Data + Open Source Code)</h1>
+<div class="post-meta">
+        <time datetime="2026-07-04">July 04, 2026</time>
+        <div class="post-tags">
+        <span>ai-readiness</span>
+        <span>saas</span>
+        <span>benchmark</span>
+        </div>
+    </div>
 
         <p><strong>Executive Summary:</strong> We scored 90 top SaaS domains (10 of the original 100 were bot-blocked or unreachable) with RankFixer's open-source engine. The result? <strong>an average score of 62.7/100.</strong> Most are doing the fundamentals well&mdash;the remaining gap is structured schema markup.</p>
 
