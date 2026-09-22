@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Competitor Benchmark — Compare AI Visibility Scores | RankFixer</title>
+    <meta name="description" content="Compare your AI Visibility Score against 3 competitors. See who's getting cited, who's invisible, and why.">
+
+    <meta property="og:title" content="Competitor Benchmark — Compare AI Visibility Scores">
+    <meta property="og:description" content="Free tool to compare AI Visibility Scores across 4 domains. Side-by-side comparison with signal breakdown.">
+    <meta property="og:url" content="https://rankfixer.co/competitor-benchmark">
+    <meta property="og:type" content="website">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YXZVCPBCZN"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YXZVCPBCZN');
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "RankFixer Competitor Benchmark",
+      "description": "Free tool to compare AI Visibility Scores across up to 4 domains.",
+      "applicationCategory": "AIApplication",
+      "operatingSystem": "Any",
+      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+      "url": "https://rankfixer.co/competitor-benchmark"
+    }
+    </script>
+
+    <style>
+        :root {
+            --brand: #6C5CE7; --brand-hover: #5A4BD1; --bg: #0D0D1A; --bg-card: #151528;
+            --bg-input: #1E1E36; --text: #F0F0F5; --text-muted: #8888A0; --border: #2A2A45;
+            --ok: #00B894; --warn: #FDCB6E; --bad: #E17055;
+            --radius: 12px; --radius-sm: 8px; --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { font-size: 16px; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+        body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.6; min-height: 100vh; -webkit-font-smoothing: antialiased; }
+        a { color: var(--brand); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        .nav { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; padding: 1rem 2rem; border-bottom: 1px solid var(--border); }
+        .nav-logo { font-weight: 700; font-size: 1.2rem; text-decoration: none; color: var(--text); }
+        .nav-links { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; }
+        .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; }
+        .nav-links a:hover { color: var(--text); }
+
+        .container { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+        .hero { text-align: center; padding: 3rem 0 2rem; }
+        .hero h1 { font-size: clamp(1.8rem, 5vw, 2.8rem); font-weight: 800; line-height: 1.2; letter-spacing: -0.02em; margin-bottom: 1rem; }
+        .hero h1 .highlight { background: linear-gradient(135deg, var(--brand), #A29BFE); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .hero p { font-size: 1.05rem; color: var(--text-muted); max-width: 600px; margin: 0 auto 1.5rem; }
+
+        .input-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.75rem; margin-bottom: 1rem; }
+        .input-grid input { background: var(--bg-input); border: 2px solid var(--border); border-radius: var(--radius); color: var(--text); font-size: 0.95rem; padding: 0.75rem 1rem; font-family: var(--font); outline: none; transition: border-color 0.2s; }
+        .input-grid input:focus { border-color: var(--brand); box-shadow: 0 0 0 3px rgba(108,92,231,0.2); }
+        .input-grid input::placeholder { color: #555; }
+        .input-grid input.you { border-color: var(--brand); }
+
+        .btn-row { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem; }
+        .btn { display: inline-block; background: var(--brand); color: #fff; border: none; padding: 0.7rem 1.5rem; font-size: 0.9rem; font-weight: 700; cursor: pointer; border-radius: var(--radius-sm); font-family: var(--font); text-decoration: none; }
+        .btn:hover { background: var(--brand-hover); text-decoration: none; }
+        .btn.secondary { background: transparent; color: var(--brand); border: 1px solid var(--brand); }
+        .btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+        /* LOADING */
+        #loading { display: none; text-align: center; padding: 2rem 0; }
+        #loading.active { display: block; }
+        .spinner { width: 40px; height: 40px; border-radius: 50%; border: 3px solid var(--border); border-top-color: var(--brand); margin: 0 auto 1rem; animation: spin 0.9s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* RESULTS */
+        #results { display: none; }
+        #results.active { display: block; }
+
+        /* RANKING BAR */
+        .ranking-section { margin-bottom: 2rem; }
+        .ranking-row { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem; }
+        .ranking-row .domain { font-weight: 700; font-size: 0.9rem; min-width: 100px; max-width: 140px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .ranking-row .bar-bg { flex: 1; background: var(--bg-input); border-radius: 100px; height: 28px; overflow: hidden; position: relative; }
+        .ranking-row .bar-fill { height: 100%; border-radius: 100px; display: flex; align-items: center; justify-content: flex-end; padding-right: 0.6rem; font-size: 0.75rem; font-weight: 700; color: #fff; transition: width 0.8s ease; min-width: fit-content; }
+        .ranking-row .bar-fill.ok { background: var(--ok); }
+        .ranking-row .bar-fill.warn { background: var(--warn); }
+        .ranking-row .bar-fill.bad { background: var(--bad); }
+        .ranking-row .rank-badge { font-size: 0.75rem; font-weight: 700; min-width: 24px; text-align: center; }
+
+        /* COMPARISON TABLE */
+        .comparison-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1.5rem; overflow-x: auto; }
+        .comparison-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 1rem; }
+        .comparison-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; min-width: 500px; }
+        .comparison-table th { text-align: left; padding: 0.5rem 0.6rem; border-bottom: 1px solid var(--border); color: var(--text-muted); font-weight: 600; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.04em; }
+        .comparison-table td { padding: 0.5rem 0.6rem; border-bottom: 1px solid rgba(42,42,69,0.4); }
+        .comparison-table tr:last-child td { border-bottom: none; }
+        .comparison-table .score-pill { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 100px; font-weight: 700; font-size: 0.75rem; }
+        .score-pill.ok { background: rgba(0,184,148,0.15); color: var(--ok); }
+        .score-pill.warn { background: rgba(253,203,110,0.15); color: var(--warn); }
+        .score-pill.bad { background: rgba(225,112,85,0.15); color: var(--bad); }
+
+        /* INSIGHTS */
+        .insights-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1.5rem; }
+        .insights-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 1rem; }
+        .insights-list { list-style: none; }
+        .insights-list li { padding: 0.5rem 0; font-size: 0.9rem; color: var(--text-muted); border-bottom: 1px solid rgba(42,42,69,0.3); display: flex; align-items: flex-start; gap: 0.6rem; }
+        .insights-list li:last-child { border-bottom: none; }
+        .insights-list .icon { font-size: 1rem; min-width: 20px; }
+
+        /* EMPTY */
+        .empty-state { text-align: center; color: var(--text-muted); font-size: 0.9rem; padding: 2rem 0; }
+
+        .site-footer { text-align: center; padding: 2rem 0; border-top: 1px solid var(--border); margin-top: 2rem; }
+        .site-footer p { font-size: 0.8rem; color: var(--text-muted); }
+        .site-footer a { color: var(--text-muted); margin: 0 0.5rem; }
+
+        /* Rankfixer smooth nav */
+        html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+        .nav { position: sticky; top: 0; z-index: 40; background: rgba(13,13,26,0.82); -webkit-backdrop-filter: blur(12px) saturate(160%); backdrop-filter: blur(12px) saturate(160%); border-bottom: 1px solid transparent; transition: box-shadow .35s ease, border-color .35s ease; }
+        .nav.nav-scrolled { box-shadow: 0 6px 24px rgba(0,0,0,.35); border-bottom-color: var(--border); }
+        .nav-logo { transition: opacity .25s ease, transform .25s ease; }
+        .nav-links a { position: relative; transition: color .25s ease; }
+        .nav-links a::after { content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 2px; border-radius: 2px; background: var(--brand); transform: scaleX(0); transform-origin: center; transition: transform .3s ease; }
+        .nav-links a:hover { color: var(--text); }
+        .nav-links a:hover::after, .nav-links a:focus-visible::after, .nav-links a[aria-current="page"]::after { transform: scaleX(1); }
+
+        @media (max-width: 600px) {
+            .nav { flex-direction: column; gap: 0.5rem; padding: 0.75rem 1rem; }
+            .container { padding: 1rem; }
+            .hero h1 { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="nav">
+        <a href="/" class="nav-logo">Rankfixer</a>
+        <div class="nav-links">
+            <a href="/tools">Tools</a>
+            <a href="/blog">Blog</a>
+  <a href="/skills">Skills</a>
+  <a href="/portfolio">Portfolio</a>
+            <a href="/research">Research</a>
+            <a href="/about">About</a>
+            <a href="https://github.com/rankfixer-ai/rankfixer-core" target="_blank" rel="noopener">GitHub</a>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <header class="hero">
+            <div style="display: inline-block; background: rgba(108, 92, 231, 0.15); color: var(--brand); font-size: 0.8rem; font-weight: 600; padding: 0.35rem 0.85rem; border-radius: 100px; margin-bottom: 1.5rem;">
+                Free Competitor Benchmark
+            </div>
+            <h1>Who's <span class="highlight">Winning</span> the AI Visibility Game?</h1>
+            <p>Enter your domain and up to 3 competitors. See who gets cited by AI engines — and who's invisible.</p>
+        </header>
+
+        <section class="scan-section">
+            <div class="input-grid" id="input-grid">
+                <input type="text" class="you" id="domain-you" placeholder="yourdomain.com (you)" autocomplete="off">
+                <input type="text" id="domain-1" placeholder="competitor1.com" autocomplete="off">
+                <input type="text" id="domain-2" placeholder="competitor2.com" autocomplete="off">
+                <input type="text" id="domain-3" placeholder="competitor3.com" autocomplete="off">
+            </div>
+            <div class="btn-row">
+                <button class="btn" id="benchmark-btn">RUN BENCHMARK →</button>
+                <button class="btn secondary" id="clear-btn">Clear</button>
+            </div>
+            <p class="empty-state" style="font-size: 0.75rem; padding: 0;">Enter at least 2 domains to compare. No signup. No limits.</p>
+        </section>
+
+        <!-- LOADING -->
+        <section id="loading">
+            <div class="spinner"></div>
+            <p id="loading-text">Scanning domains…</p>
+        </section>
+
+        <!-- RESULTS -->
+        <section id="results">
+
+            <!-- RANKING BARS -->
+            <div class="ranking-section" id="ranking-section"></div>
+
+            <!-- COMPARISON TABLE -->
+            <div class="comparison-card">
+                <h3>Signal-by-Signal Comparison</h3>
+                <table class="comparison-table" id="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Signal</th>
+                            <th id="th-you">You</th>
+                            <th id="th-c1">Competitor 1</th>
+                            <th id="th-c2">Competitor 2</th>
+                            <th id="th-c3">Competitor 3</th>
+                        </tr>
+                    </thead>
+                    <tbody id="comparison-body"></tbody>
+                </table>
+            </div>
+
+            <!-- INSIGHTS -->
+            <div class="insights-card">
+                <h3>Key Insights</h3>
+                <ul class="insights-list" id="insights-list"></ul>
+            </div>
+
+            <div style="text-align: center; margin: 1.5rem 0;">
+                <button class="btn" id="new-benchmark-btn">↻ New Benchmark</button>
+            </div>
+
+        </section>
+
+        <footer class="site-footer">
+            <p>RankFixer — Know Your AI Visibility Score</p>
+            <p><a href="/">Home</a> <a href="/tools">Tools</a> <a href="/blog">Blog</a>
+  <a href="/skills">Skills</a>
+  <a href="/portfolio">Portfolio</a> <a href="/research">Research</a> <a href="/about">About</a> <a href="https://github.com/rankfixer-ai/rankfixer-core">GitHub</a></p>
+        </footer>
+
+    </div>
+
+    <script>
+    (function() {
+        // ---- DOM ----
+        const domainInputs = [
+            document.getElementById('domain-you'),
+            document.getElementById('domain-1'),
+            document.getElementById('domain-2'),
+            document.getElementById('domain-3'),
+        ];
+        const benchmarkBtn = document.getElementById('benchmark-btn');
+        const clearBtn = document.getElementById('clear-btn');
+        const loadingScreen = document.getElementById('loading');
+        const resultsArea = document.getElementById('results');
+        const rankingSection = document.getElementById('ranking-section');
+        const comparisonBody = document.getElementById('comparison-body');
+        const insightsList = document.getElementById('insights-list');
+        const newBenchmarkBtn = document.getElementById('new-benchmark-btn');
+
+        // ---- HELPERS ----
+        function isValidDomain(str) {
+            const c = str.trim().replace(/^https?:\/\//i,'').replace(/\/.*$/,'').replace(/^www\./i,'');
+            return /^[a-zA-Z0-9][a-zA-Z0-9-]{0,61}[a-zA-Z0-9]\.[a-zA-Z]{2,}$/.test(c);
+        }
+        function cleanDomain(str) {
+            return str.trim().replace(/^https?:\/\//i,'').replace(/\/.*$/,'').replace(/^www\./i,'');
+        }
+        function scoreColor(score) {
+            if (score >= 80) return 'var(--ok)';
+            if (score >= 60) return 'var(--warn)';
+            return 'var(--bad)';
+        }
+        function scorePillClass(score) {
+            if (score >= 80) return 'ok';
+            if (score >= 60) return 'warn';
+            return 'bad';
+        }
+        function scoreBarClass(score) {
+            if (score >= 80) return 'ok';
+            if (score >= 60) return 'warn';
+            return 'bad';
+        }
+
+        // ---- SCORING ----
+        function computeScore(domain) {
+            return fetch('/.netlify/functions/score', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ domain: domain })
+            }).then(r => r.json()).then(data => ({
+                domain,
+                score: data.score || 0,
+                label: data.label || 'Unknown',
+                dimensions: data.dimensions || {},
+                signals: data.signals || []
+            }));
+        }
+
+        // ---- RENDERING ----
+        function renderResults(results) {
+            resultsArea.style.display = 'block';
+
+            // Sort by score descending
+            const sorted = [...results].sort((a, b) => b.score - a.score);
+
+            // Ranking bars
+            rankingSection.innerHTML = '';
+            sorted.forEach((r, i) => {
+                const div = document.createElement('div');
+                div.className = 'ranking-row';
+                div.innerHTML = `
+                    <span class="rank-badge">#${i + 1}</span>
+                    <span class="domain" title="${r.domain}">${r.domain}</span>
+                    <div class="bar-bg">
+                        <div class="bar-fill ${scoreBarClass(r.score)}" style="width: ${Math.max(r.score, 5)}%">${r.score}</div>
+                    </div>
+                `;
+                rankingSection.appendChild(div);
+            });
+
+            // Comparison table
+            const dimNames = { schema: 'Schema', entity: 'Entity', content: 'Content', structure: 'Structure', crawlable: 'Crawlable', llmsTxt: 'llms.txt' };
+            comparisonBody.innerHTML = '';
+            Object.keys(dimNames).forEach(k => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `<td>${dimNames[k]}</td>`;
+                results.forEach(r => {
+                    const val = r.dimensions[k] || 0;
+                    tr.innerHTML += `<td><span class="score-pill ${scorePillClass(val)}">${val}</span></td>`;
+                });
+                comparisonBody.appendChild(tr);
+            });
+
+            // Total row
+            const totalRow = document.createElement('tr');
+            totalRow.style.fontWeight = '700';
+            totalRow.innerHTML = `<td>Total</td>`;
+            results.forEach(r => {
+                totalRow.innerHTML += `<td><span class="score-pill ${scorePillClass(r.score)}">${r.score}</span></td>`;
+            });
+            comparisonBody.appendChild(totalRow);
+
+            // Insights
+            insightsList.innerHTML = '';
+            const you = results[0];
+            const competitors = results.slice(1).filter(r => r.score > 0);
+
+            // Winner
+            if (sorted[0].domain === you.domain) {
+                insightsList.innerHTML += `<li><span class="icon">🏆</span><span><strong>You're #1</strong> — your AI Visibility Score leads the group. Maintain your advantage by tracking weekly.</span></li>`;
+            } else {
+                const winner = sorted[0];
+                const gap = winner.score - you.score;
+                insightsList.innerHTML += `<li><span class="icon">⚠️</span><span><strong>${winner.domain} leads</strong> by ${gap} points. Your biggest gaps: ${findBiggestGaps(you, winner)}.</span></li>`;
+            }
+
+            // Signal-specific insights
+            const weakSignals = [];
+            Object.keys(dimNames).forEach(k => {
+                const youVal = you.dimensions[k] || 0;
+                const bestVal = Math.max(...competitors.map(r => r.dimensions[k] || 0));
+                if (bestVal - youVal >= 20) {
+                    weakSignals.push(`${dimNames[k]} (${youVal} vs best ${bestVal})`);
+                }
+            });
+            if (weakSignals.length > 0) {
+                insightsList.innerHTML += `<li><span class="icon">📉</span><span><strong>Biggest gaps vs competitors:</strong> ${weakSignals.slice(0, 2).join(', ')}.</span></li>`;
+            }
+
+            // llms.txt insight
+            const hasLlmsTxt = (you.dimensions.llmsTxt || 0) > 0;
+            const competitorsWithLlmsTxt = competitors.filter(r => (r.dimensions.llmsTxt || 0) > 0).length;
+            if (!hasLlmsTxt && competitorsWithLlmsTxt > 0) {
+                insightsList.innerHTML += `<li><span class="icon">📄</span><span><strong>No llms.txt detected</strong> — ${competitorsWithLlmsTxt} of your competitors have one. <a href="/llms-txt-validator">Add one →</a></span></li>`;
+            }
+
+            // Schema insight
+            const schemaScore = you.dimensions.schema || 0;
+            if (schemaScore < 50) {
+                insightsList.innerHTML += `<li><span class="icon">🧩</span><span><strong>Schema markup is thin</strong> (${schemaScore}/100). <a href="/schema-generator">Generate JSON-LD →</a></span></li>`;
+            }
+
+            resultsArea.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function findBiggestGaps(you, winner) {
+            const gaps = [];
+            Object.keys(you.dimensions).forEach(k => {
+                const diff = (winner.dimensions[k] || 0) - (you.dimensions[k] || 0);
+                if (diff >= 15) gaps.push(`${k} (-${diff})`);
+            });
+            return gaps.length > 0 ? gaps.slice(0, 2).join(', ') : 'minor gaps across signals';
+        }
+
+        // ---- EVENTS ----
+        function runBenchmark() {
+            const domains = [];
+            domainInputs.forEach((input, i) => {
+                const val = input.value.trim();
+                if (val && isValidDomain(val)) {
+                    domains.push(cleanDomain(val));
+                }
+            });
+
+            if (domains.length < 2) {
+                domainInputs[0].focus();
+                return;
+            }
+
+            // Reset UI
+            resultsArea.style.display = 'none';
+            loadingScreen.classList.add('active');
+            benchmarkBtn.disabled = true;
+
+            // Score all domains in parallel
+            Promise.all(domains.map(computeScore)).then(results => {
+                loadingScreen.classList.remove('active');
+                benchmarkBtn.disabled = false;
+                renderResults(results);
+            }).catch(() => {
+                loadingScreen.classList.remove('active');
+                benchmarkBtn.disabled = false;
+                alert('Something went wrong. Please try again.');
+            });
+        }
+
+        benchmarkBtn.addEventListener('click', runBenchmark);
+        clearBtn.addEventListener('click', () => {
+            domainInputs.forEach(i => i.value = '');
+            resultsArea.style.display = 'none';
+        });
+        newBenchmarkBtn.addEventListener('click', () => {
+            resultsArea.style.display = 'none';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Enter key support
+        domainInputs.forEach(input => {
+            input.addEventListener('keydown', e => {
+                if (e.key === 'Enter') runBenchmark();
+            });
+        });
+
+        // ---- NAV SCROLL ----
+        const nav = document.querySelector('.nav');
+        let ticking = false;
+        function updateScrolled() {
+            nav.classList.toggle('nav-scrolled', window.scrollY > 8);
+        }
+        window.addEventListener('scroll', () => {
+            if (ticking) return;
+            ticking = true;
+            window.requestAnimationFrame(() => { updateScrolled(); ticking = false; });
+        }, { passive: true });
+        updateScrolled();
+
+    })();
+    </script>
+
+    <script src="/js/analytics.js"></script>
+</body>
+</html>

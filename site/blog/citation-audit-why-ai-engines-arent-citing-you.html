@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Citation Audit: How to Find Out Why AI Engines Aren't Citing You — RankFixer</title>
+<meta name="description" content="A diagnostic framework for AI citation visibility. Real data on how ChatGPT, Perplexity, Gemini, and Claude choose what to cite, and the exact steps to get cited.">
+<style>
+    :root {
+        --brand: #6C5CE7; --brand-hover: #5A4BD1; --bg: #0D0D1A; --bg-card: #151528;
+        --text: #F0F0F5; --text-muted: #8888A0; --border: #2A2A45;
+        --radius: 12px; --radius-sm: 8px; --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    *, *:before, *:after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.7; overflow-x: hidden; width: 100%; }
+    a { color: var(--brand); }
+    .nav { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; padding: 1rem 2rem; border-bottom: 1px solid var(--border); }
+    .nav-logo { font-weight: 700; font-size: 1.2rem; text-decoration: none; color: var(--text); }
+    .nav-links { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; }
+    .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; }
+    .nav-links a:hover { color: var(--text); }
+    .container { max-width: 720px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+    .article h1 { font-size: 2rem; font-weight: 800; letter-spacing: -0.02em; margin: 0 0 1rem; }
+    .article h2 { font-size: 1.4rem; font-weight: 700; margin: 2rem 0 0.75rem; }
+    .article h3 { font-size: 1.15rem; font-weight: 700; margin: 1.5rem 0 0.5rem; }
+    .article p { margin-bottom: 1rem; }
+    .article ul, .article ol { margin: 0 0 1rem 1.4rem; }
+    .article li { margin-bottom: 0.35rem; }
+    .post-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem; }
+    .post-meta .post-date { font-weight: 500; }
+    .post-meta .post-tags { display: flex; gap: 0.5rem; }
+    .post-meta .post-tags span { background: var(--bg-card); padding: 0.15rem 0.5rem; border-radius: var(--radius-sm); font-size: 0.75rem; }
+    blockquote { border-left: 3px solid var(--brand); padding: 0.75rem 1rem; margin: 1rem 0; background: var(--bg-card); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; font-style: italic; color: var(--text-muted); }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem; }
+    th, td { padding: 0.6rem 0.8rem; text-align: left; border-bottom: 1px solid var(--border); }
+    th { color: var(--text-muted); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; }
+    strong { color: var(--text); }
+    .highlight { background: rgba(108, 92, 231, 0.15); padding: 0.1rem 0.3rem; border-radius: 3px; font-weight: 600; }
+    .footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center; color: var(--text-muted); font-size: 0.85rem; }
+    .footer a { color: var(--text-muted); }
+</style>
+</head>
+<body>
+
+<div class="nav">
+    <a href="/" class="nav-logo">RankFixer</a>
+    <div class="nav-links">
+        <a href="/#features">Features</a>
+        <a href="/blog/">Blog</a>
+        <a href="/#contact">Contact</a>
+    </div>
+</div>
+
+<div class="container">
+<article class="article">
+<h1>The Citation Audit: How to Find Out Why AI Engines Aren't Citing You</h1>
+<div class="post-meta">
+    <span class="post-date">September 22, 2026</span>
+    <div class="post-tags">
+        <span>GEO</span>
+        <span>AI Visibility</span>
+        <span>Citations</span>
+    </div>
+</div>
+
+<p>Your brand ranks on page one of Google. Your content is comprehensive, well-written, and regularly updated. But when someone asks ChatGPT, Perplexity, or Gemini a question in your category, you don't show up. Not even as a footnote.</p>
+
+<p>This is the problem keeping SEO leaders up at night in 2026: <strong>ranking is no longer the same as being visible</strong>. AI engines don't rank pages — they cite specific passages from sources they trust. And the rules for earning those citations are fundamentally different from traditional SEO.</p>
+
+<p>This guide gives you a diagnostic framework backed by real citation data. Not theory — actual numbers from studies analyzing tens of thousands of AI citations across ChatGPT, Perplexity, Gemini, and Claude.</p>
+
+<h2>What 60,350 AI Citations Tell Us</h2>
+
+<p>A <a href="https://citations.press/guides/how-to-get-cited-by-ai/" target="_blank" rel="noopener">study of 60,350 citations</a> across the major AI platforms revealed a pattern that contradicts most AI visibility advice: <strong>your homepage is the worst-performing page type for citations</strong>.</p>
+
+<table>
+    <tr><th>Page Type</th><th>ChatGPT Citation Rate</th><th>Claude Citation Rate</th></tr>
+    <tr><td>Best-of / comparison lists</td><td>81%</td><td>75%</td></tr>
+    <tr><td>Homepages</td><td>7%</td><td>4%</td></tr>
+</table>
+
+<p><em>Source: citations.press study of 60,350 AI citations [1]</em></p>
+
+<p>More than four out of five ChatGPT citations go to ranked list pages, comparison articles, and directory-style content. Homepages — the pages most brands optimize hardest — account for barely 7% of citations.</p>
+
+<p>The implication is counterintuitive: <strong>the citation you want often isn't on your own domain</strong>. It's a slot on a third-party publisher's ranked list. That reframes AI visibility as an earned-placement problem, closer to digital PR than on-site SEO.</p>
+
+<h2>The Four Engines Have Different Diets</h2>
+
+<p>Each AI platform was built on different training data and retrieval architecture. They don't reward the same content.</p>
+
+<h3>ChatGPT: Encyclopedic and Community Sources</h3>
+<p>ChatGPT leans heavily on Wikipedia (13.2% of US citations), Reddit (12.0%), and established review platforms like G2 and Capterra. A real-author byline next to a specific claim is a strong citation signal. It cites roughly <strong>7.9 sources per answer</strong> [2]. The first third of your content accounts for 44% of citations — front-load your strongest claims [3].</p>
+
+<h3>Perplexity: Fresh, Attributed, Editorial</h3>
+<p>Perplexity runs a live web search on every query and cites <strong>~21.9 sources per answer</strong> — nearly three times more than ChatGPT [2]. It rewards named-author content, original research (cited 3.1x more frequently than secondary summaries), and recency. Content updated within 30 days gets <strong>3.2x more citations</strong> than older material [4]. Reddit alone accounts for 46.7% of Perplexity's top citations [5].</p>
+
+<h3>Google AI Overviews: Search Index Plus Synthesis</h3>
+<p>AI Overviews draw from the same index as classic search but favor pages that answer the question directly with clear headings and strong structured data. Only 38% of AI Overview citations come from the organic top 10 — meaning ranking helps, but it's not sufficient [6]. Long-tail queries (6-8 words) have a 32-57% chance of triggering an AI Overview [7].</p>
+
+<h3>Claude: Clean, Source-Backed, Methodical</h3>
+<p>Claude favors well-attributed, machine-readable content with clear methodology. Like ChatGPT, it cites list-style pages heavily (75% of citations). It responds fastest to new content — citations can appear within 1-2 weeks of publishing [8].</p>
+
+<h2>Why Your Content Isn't Getting Cited: 6 Diagnostic Checks</h2>
+
+<p>Run these checks in order. Fix the first one before moving to the next.</p>
+
+<h3>Check 1: Are AI Crawlers Allowed?</h3>
+<p>If your robots.txt blocks GPTBot, PerplexityBot, ClaudeBot, or Google-Extended, AI engines literally cannot discover your content. Check yours:</p>
+<blockquote>User-agent: GPTBot<br>Allow: /</blockquote>
+<p>Same for PerplexityBot, Claude-Web, and Google-Extended. This is table stakes — without it, nothing else matters.</p>
+
+<h3>Check 2: Does Your Content Answer in the First 40-60 Words?</h3>
+<p>Analysis of cited blog posts found that <strong>72.4% contained a short, direct answer immediately after a question-based heading</strong> [9]. If your answer is buried under three paragraphs of introduction, AI engines will skip to the next source.</p>
+<p><strong>Fix:</strong> Open every section with a 120-150 character answer capsule — a self-contained statement an engine can lift verbatim [10].</p>
+
+<h3>Check 3: Do You Have Original Data?</h3>
+<p>An Ahrefs analysis found that <strong>67% of ChatGPT's top 1,000 cited pages come from original research, first-hand data, or academic sources</strong> [11]. If your content is a rehash of what's already out there, AI engines will cite the original source instead.</p>
+<p><strong>Fix:</strong> Publish one "source-worthy" asset per quarter — a benchmark, survey, or dataset that becomes the primary reference for a claim in your industry.</p>
+
+<h3>Check 4: Are You on Third-Party Lists?</h3>
+<p>Since 81% of ChatGPT citations go to list-style pages, the question isn't "is my page optimized?" — it's "are the pages that cite my category listing me?" Search for "best [your category] tool" and check which pages AI engines cite. If you're not on them, that's your gap.</p>
+
+<h3>Check 5: Is Your Entity Consistent?</h3>
+<p>AI engines use entity triangulation — they see the same information about your brand across multiple authoritative platforms and confirm your entity status. Inconsistent naming (different company names, founder names, product names across sites) creates ambiguity that reduces citation probability.</p>
+
+<h3>Check 6: Is Your Content Fresh?</h3>
+<p>For Perplexity, recency accounts for roughly 40% of ranking factors. Content labeled "updated two hours ago" was cited 38% more often than month-old content on identical topics [5]. Pages start losing ground once they age past a couple of months.</p>
+
+<h2>The Citation Audit: Your 30-Minute Weekly Check</h2>
+
+<p>Instead of guessing, run a systematic audit:</p>
+
+<ol>
+    <li><strong>Pick 10 commercial prompts</strong> your customers would ask AI engines. Use the language from your actual search queries, support tickets, and sales calls.</li>
+    <li><strong>Run them across ChatGPT, Perplexity, and Google AI Mode.</strong> Log: mentioned (Y/N), cited (Y/N), cited URL (yours, competitor, or aggregator).</li>
+    <li><strong>Calculate your citation rate.</strong> Citation rate = answers with a relevant URL from your domain / total answers scanned.</li>
+    <li><strong>If citation rate is zero but mention rate is positive,</strong> your entity is known but your content isn't citable. Fix answer capsules, add original data, check robots.txt.</li>
+    <li><strong>If you're not mentioned at all,</strong> the problem is entity authority — you need third-party mentions, list placements, and community engagement.</li>
+</ol>
+
+<p>This is the same diagnostic framework RankFixer uses for AI visibility audits. The difference between brands that get cited and brands that don't isn't luck — it's systematic execution on the signals AI engines actually weight.</p>
+
+<h2>What to Do This Week</h2>
+
+<ul>
+    <li><strong>Unblock AI crawlers</strong> in robots.txt (5 minutes)</li>
+    <li><strong>Add answer capsules</strong> to your top 5 pages (30 minutes)</li>
+    <li><strong>Run 10 prompt tests</strong> across ChatGPT and Perplexity (20 minutes)</li>
+    <li><strong>Identify the 3 lists</strong> AI engines cite for your category that don't include you</li>
+    <li><strong>Publish one original data point</strong> — even a small customer survey or usage benchmark</li>
+</ul>
+
+<p>Six weeks from now, run the same 10 prompts. If your citation rate moved, you're on the right track. If not, the problem is entity authority — and that's a 90-day earned media play, not a quick fix.</p>
+
+<h2>Sources</h2>
+
+<ol>
+    <li><a href="https://citations.press/guides/how-to-get-cited-by-ai/" target="_blank" rel="noopener">citations.press — How to Get Cited by AI Search</a> (60,350 citation study)</li>
+    <li><a href="https://favors.dev/blog/how-to-get-cited-by-chatgpt-perplexity" target="_blank" rel="noopener">Favors.dev — How to Get Cited by ChatGPT & Perplexity</a> (Similarweb citation density data)</li>
+    <li><a href="https://www.frictionai.co/blog/how-to-get-your-content-cited-by-ai" target="_blank" rel="noopener">FrictionAI — How to Get Your Content Cited by AI</a> (44% first-third citation data)</li>
+    <li><a href="https://www.geoxylia.com/blog/how-to-get-cited-in-every-major-ai-platform-perplexity-chatgpt-gemini-claude" target="_blank" rel="noopener">GeoXylia — How to Get AI Citations in 2026</a> (First Page Sage recency data)</li>
+    <li><a href="https://surferseo.com/blog/llm-citations/" target="_blank" rel="noopener">SurferSEO — 7 Tips to Get Cited by LLMs</a> (ConvertMate analysis)</li>
+    <li><a href="https://searchengineland.com/geo-experiments-challenge-conventional-ai-visibility-advice-488342" target="_blank" rel="noopener">Search Engine Land — Two GEO Experiments Challenge Conventional AI Visibility Advice</a></li>
+    <li><a href="https://www.seo.com/ai/why-you-arent-appearing-in-ai-overviews" target="_blank" rel="noopener">SEO.com — Why Your Business Isn't Appearing in AI Overviews</a></li>
+    <li><a href="https://loudpixel.ai/blog/how-to-get-mentioned-by-ai-2026" target="_blank" rel="noopener">LoudPixel — How to Get Mentioned by ChatGPT and Perplexity</a></li>
+    <li><a href="https://aiseotracker.com/blog/how-to-get-cited-in-ai-answers" target="_blank" rel="noopener">AI SEO Tracker — How to Get Cited in AI Answers</a></li>
+    <li><a href="https://favors.dev/blog/how-to-get-cited-by-chatgpt-perplexity" target="_blank" rel="noopener">Favors.dev — Answer capsule research</a></li>
+    <li><a href="https://www.frictionai.co/blog/how-to-get-your-content-cited-by-ai" target="_blank" rel="noopener">FrictionAI — Ahrefs original research citation data</a></li>
+</ol>
+
+</article>
+</div>
+
+<div class="footer">
+    <p>&copy; 2026 RankFixer. AI visibility auditing for the generative search era.</p>
+    <p><a href="/">Home</a> &middot; <a href="/blog/">Blog</a> &middot; <a href="/#contact">Contact</a></p>
+</div>
+
+<script>
+// Hamburger toggle
+document.querySelector('.nav-hamburger')?.addEventListener('click', function() {
+    document.querySelector('.nav-links').classList.toggle('active');
+});
+// Scroll shadow
+window.addEventListener('scroll', function() {
+    const nav = document.querySelector('.nav');
+    if (window.scrollY > 10) nav.style.boxShadow = '0 1px 3px rgba(0,0,0,0.3)';
+    else nav.style.boxShadow = 'none';
+});
+</script>
+</body>
+</html>

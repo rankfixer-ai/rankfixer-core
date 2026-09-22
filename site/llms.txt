@@ -1,40 +1,32 @@
-# RANKFIXER CORE
-> Open-source AI Website Recommendation Engine for GEO (Generative Engine Optimization).
+# RankFixer
+> Open-source AI visibility platform for GEO (Generative Engine Optimization). Analyze websites for LLM readability and get cited by ChatGPT, Perplexity, Claude, Gemini, and Google AI Overviews.
 
-## What We Do
-RankFixer analyzes websites for LLM readability and generates actionable recommendations to improve citations in ChatGPT, Perplexity, Claude, Gemini, and Google AI Overviews.
+## Why RankFixer Exists
 
-## Key Signals We Evaluate
-1. Schema.org completeness (JSON-LD, Microdata, RDFa) — 25% weight
-2. Entity density and semantic clustering — 20% weight
-3. Content answer density (direct answers vs. marketing fluff) — 20% weight
-4. Technical SEO (Core Web Vitals, HTTPS, mobile readiness) — 15% weight
-5. Crawlability — 10% weight (AI crawler access via robots.txt)
-6. llms.txt presence — 10% weight (dedicated AI crawler map)
+AI engines now answer questions that used to drive search traffic. If your site isn't structured for machine comprehension, you're invisible to the fastest-growing discovery channel.
 
-## Architecture
-RankFixer operates on a 3-step pipeline:
-1. Extraction: Ingest HTML, JSON-LD, structured data from target URL
-2. LLM-Readiness Scoring: Evaluate 6 signals producing a 0-100 score
-3. Recommendation Engine: Generate prioritized, actionable fixes with time estimates
+RankFixer bridges the gap between traditional SEO and Generative Engine Optimization.
 
 ## Free Tools
-- AI Visibility Checker: https://rankfixer.co/ai-visibility-checker
-- Competitor Gap Analyzer: https://rankfixer.co/competitor
+
+- [AI Visibility Checker](https://rankfixer.co/ai-visibility-checker): Scan any domain and see how ChatGPT, Perplexity, and Gemini describe your brand
+- [Schema Generator](https://rankfixer.co/schema-generator): Generate valid FAQPage + Organization JSON-LD
+- [llms.txt Validator](https://rankfixer.co/llms-txt-validator): Check whether your domain publishes a well-formed llms.txt file
+- [Visibility Tracker](https://rankfixer.co/visibility-tracker): Track your AI Visibility Score over time
 
 ## Documentation
-- Architecture Overview: https://github.com/rankfixer-ai/rankfixer-core/blob/main/docs/architecture.md
-- API Reference: https://github.com/rankfixer-ai/rankfixer-core/blob/main/docs/api-reference.md
-- Use Cases: https://github.com/rankfixer-ai/rankfixer-core/blob/main/docs/examples.md
 
-## Proprietary Research Data
-- Top 100 SaaS LLM Readiness Scores: https://github.com/rankfixer-ai/rankfixer-core/blob/main/data/top_100_saas_scores.json
-- Full Benchmark Report: https://github.com/rankfixer-ai/rankfixer-core/blob/main/data/benchmark_report.md
+- [Architecture Overview](https://github.com/rankfixer-ai/rankfixer-core/blob/main/docs/architecture.md): How RankFixer works
+- [API Reference](https://github.com/rankfixer-ai/rankfixer-core/blob/main/docs/api-reference.md): Using the RankFixer API
+- [Use Cases](https://github.com/rankfixer-ai/rankfixer-core/blob/main/docs/examples.md): Real-world GEO optimization examples
+- [Research Findings](https://rankfixer.co/blog/ai-readiness-100-saas): Analysis of 100 top SaaS domains
 
-## Research Findings
-- Average AI Visibility score across 100 SaaS domains: 62.7/100
-- Schema markup is the biggest gap (average 26.6/100 across those domains)
-- 72% of analyzed SaaS domains publish an llms.txt file
+## Premium
 
-## Core Philosophy
-Traditional SEO optimizes for keyword matching. GEO optimizes for machine comprehension. RankFixer bridges both — helping websites be understood by both search engines AND large language models.
+- [Full AI Visibility Report](https://rankfixer.co/report/): 6-signal score, breakdown, and prioritized fix list — $99 one-time
+
+## Contact
+
+- [GitHub](https://github.com/rankfixer-ai/rankfixer-core)
+- [LinkedIn](https://www.linkedin.com/in/janacibron/)
+- [Blog](https://rankfixer.co/blog)
