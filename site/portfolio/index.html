@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>AI Skills Portfolio | RankFixer</title>
+    <meta name="description" content="Applied AI engineering portfolio: RAG, agents, MLOps, evaluation frameworks, and governed AI systems. Built for the $146K-$250K market.">
+
+    <meta property="og:title" content="AI Skills Portfolio | RankFixer">
+    <meta property="og:description" content="Applied AI engineering portfolio: RAG, agents, MLOps, evaluation frameworks, and governed AI systems.">
+    <meta property="og:url" content="https://rankfixer.co/portfolio">
+    <meta property="og:type" content="website">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YXZVCPBCZN"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YXZVCPBCZN');
+    </script>
+
+    <style>
+        :root {
+            --brand: #6C5CE7; --brand-hover: #5A4BD1; --bg: #0D0D1A; --bg-card: #151528;
+            --bg-input: #1E1E36; --text: #F0F0F5; --text-muted: #8888A0; --border: #2A2A45;
+            --ok: #00B894; --warn: #FDCB6E; --bad: #E17055;
+            --radius: 12px; --radius-sm: 8px; --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { font-size: 16px; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+        body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.6; min-height: 100vh; -webkit-font-smoothing: antialiased; }
+        a { color: var(--brand); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        .nav { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; padding: 1rem 2rem; border-bottom: 1px solid var(--border); }
+        .nav-logo { font-weight: 700; font-size: 1.2rem; text-decoration: none; color: var(--text); }
+        .nav-links { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; }
+        .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; }
+        .nav-links a:hover { color: var(--text); }
+        .nav-links a.active { color: var(--text); font-weight: 700; }
+
+        .container { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+        /* HERO */
+        .hero { text-align: center; padding: 3rem 0 2rem; }
+        .hero h1 { font-size: clamp(1.8rem, 5vw, 2.8rem); font-weight: 800; line-height: 1.2; letter-spacing: -0.02em; margin-bottom: 1rem; }
+        .hero h1 .highlight { background: linear-gradient(135deg, var(--brand), #A29BFE); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .hero p { font-size: 1.05rem; color: var(--text-muted); max-width: 650px; margin: 0 auto 1.5rem; }
+
+        /* SECTION */
+        .section { padding: 2rem 0; border-top: 1px solid var(--border); }
+        .section-title { font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1.5rem; }
+
+        /* SKILLS GRID */
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
+        .skill-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; transition: border-color 0.2s; }
+        .skill-card:hover { border-color: var(--brand); }
+        .skill-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .skill-card .level { font-size: 0.75rem; font-weight: 600; color: var(--ok); margin-bottom: 0.5rem; }
+        .skill-card .level.intermediate { color: var(--warn); }
+        .skill-card .level.beginner { color: var(--bad); }
+        .skill-card p { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem; }
+        .skill-card .projects { font-size: 0.75rem; color: var(--text-muted); }
+        .skill-card .projects strong { color: var(--text); }
+
+        /* PROJECTS */
+        .project-item { padding: 1rem 0; border-bottom: 1px solid rgba(42,42,69,0.3); }
+        .project-item:last-child { border-bottom: none; }
+        .project-item h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.3rem; }
+        .project-item .meta { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.3rem; }
+        .project-item p { font-size: 0.9rem; color: var(--text-muted); margin: 0; }
+
+        /* TAGS */
+        .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem; }
+        .tag { font-size: 0.7rem; color: var(--text-muted); border: 1px solid var(--border); border-radius: 100px; padding: 0.2rem 0.6rem; }
+
+        /* CTA */
+        .cta { text-align: center; padding: 2rem 0; }
+        .btn { display: inline-block; background: var(--brand); color: #fff; border: none; padding: 0.7rem 1.5rem; font-size: 0.9rem; font-weight: 700; cursor: pointer; border-radius: var(--radius-sm); font-family: var(--font); text-decoration: none; }
+        .btn:hover { background: var(--brand-hover); text-decoration: none; }
+
+        /* FOOTER */
+        .site-footer { text-align: center; padding: 2rem 0; border-top: 1px solid var(--border); margin-top: 2rem; }
+        .site-footer p { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.3rem; }
+        .site-footer a { color: var(--text-muted); margin: 0 0.5rem; }
+
+        /* SMOOTH NAV */
+        html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+        .nav { position: sticky; top: 0; z-index: 40; background: rgba(13,13,26,0.82); -webkit-backdrop-filter: blur(12px) saturate(160%); backdrop-filter: blur(12px) saturate(160%); border-bottom: 1px solid transparent; transition: box-shadow .35s ease, border-color .35s ease; }
+        .nav.nav-scrolled { box-shadow: 0 6px 24px rgba(0,0,0,.35); border-bottom-color: var(--border); }
+        .nav-logo { transition: opacity .25s ease, transform .25s ease; }
+        .nav-links a { position: relative; transition: color .25s ease; }
+        .nav-links a::after { content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 2px; border-radius: 2px; background: var(--brand); transform: scaleX(0); transform-origin: center; transition: transform .3s ease; }
+        .nav-links a:hover { color: var(--text); }
+        .nav-links a:hover::after, .nav-links a:focus-visible::after, .nav-links a[aria-current="page"]::after { transform: scaleX(1); }
+
+        @media (max-width: 600px) {
+            .nav { flex-direction: column; gap: 0.5rem; padding: 0.75rem 1rem; }
+            .container { padding: 1rem; }
+            .hero h1 { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="nav">
+        <a href="/" class="nav-logo">Rankfixer</a>
+        <div class="nav-links">
+            <a href="/tools">Tools</a>
+            <a href="/blog">Blog</a>
+            <a href="/skills">Skills</a>
+  <a href="/portfolio">Portfolio</a>
+            <a href="/research">Research</a>
+            <a href="/about">About</a>
+            <a href="https://github.com/rankfixer-ai/rankfixer-core" target="_blank" rel="noopener">GitHub</a>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <header class="hero">
+            <h1>Applied AI <span class="highlight">Portfolio</span></h1>
+            <p>Projects that demonstrate production AI skills: RAG, agents, MLOps, evaluation, and governed execution. Each one maps to market demand.</p>
+        </header>
+
+        <!-- SKILLS OVERVIEW -->
+        <section class="section">
+            <div class="section-title">Skills by Market Demand</div>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h3>RAG Architecture</h3>
+                    <div class="level">Advanced</div>
+                    <p>Retrieval-Augmented Generation pipelines, chunking strategies, embedding models, hybrid search, re-ranking.</p>
+                    <div class="projects">Projects: <strong>AI Learning Engine</strong>, <strong>RPES-v2</strong></div>
+                    <div class="tags"><span class="tag">61% of postings</span><span class="tag">+$22K premium</span></div>
+                </div>
+
+                <div class="skill-card">
+                    <h3>Agentic AI / Multi-Agent</h3>
+                    <div class="level">Advanced</div>
+                    <p>Multi-agent orchestration, agent loops, state management, human-in-the-loop checkpoints, mutation evolution.</p>
+                    <div class="projects">Projects: <strong>PMOS</strong>, <strong>Tiny</strong>, <strong>Hermes</strong></div>
+                    <div class="tags"><span class="tag">+280% YoY</span><span class="tag">+$28K premium</span></div>
+                </div>
+
+                <div class="skill-card">
+                    <h3>Prompt / Context Engineering</h3>
+                    <div class="level">Advanced</div>
+                    <p>System instruction design, few-shot curation, chain-of-thought, structured outputs, context window architecture.</p>
+                    <div class="projects">Projects: <strong>Local Coder</strong>, <strong>LLM Bridge</strong></div>
+                    <div class="tags"><span class="tag">58% of postings</span><span class="tag">+$18K premium</span></div>
+                </div>
+
+                <div class="skill-card">
+                    <h3>MLOps / Experiment Tracking</h3>
+                    <div class="level intermediate">Intermediate</div>
+                    <p>MLflow, experiment tracking, pipeline orchestration, model versioning, evaluation frameworks.</p>
+                    <div class="projects">Projects: <strong>experiment_tracker.py</strong>, <strong>rag_evaluator.py</strong></div>
+                    <div class="tags"><span class="tag">35% of postings</span><span class="tag">+$25K premium</span></div>
+                </div>
+
+                <div class="skill-card">
+                    <h3>LLM Fine-tuning</h3>
+                    <div class="level intermediate">Intermediate (Cloud)</div>
+                    <p>LoRA, QLoRA, PEFT, RLHF, dataset curation, evaluation against domain benchmarks.</p>
+                    <div class="projects">Projects: <strong>hf_peft_config.py</strong> (Colab template)</div>
+                    <div class="tags"><span class="tag">44% of postings</span><span class="tag">+$31K premium</span></div>
+                </div>
+
+                <div class="skill-card">
+                    <h3>Governed AI Execution</h3>
+                    <div class="level">Advanced</div>
+                    <p>Evidence-first governance, fail-closed execution, provenance tracking, audit trails, authority gates.</p>
+                    <div class="projects">Projects: <strong>PMOS</strong>, <strong>CosmosOS</strong></div>
+                    <div class="tags"><span class="tag">Unique</span><span class="tag">AI governance gap</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJECT DETAILS -->
+        <section class="section">
+            <div class="section-title">Project Details</div>
+
+            <div class="project-item">
+                <h3>PMOS — Provenance-Managed Operating System</h3>
+                <div class="meta">2024 · Governance Layer</div>
+                <p>Governed execution system with evidence-first authority gates. No evidence → no authority → no execution. Fail-closed by design. Tracks full provenance from objective through execution, evidence, validation, decision, authorization, to release.</p>
+                <div class="tags"><span class="tag">Agentic AI</span><span class="tag">Governance</span><span class="tag">Fail-closed</span></div>
+            </div>
+
+            <div class="project-item">
+                <h3>AI Learning Engine</h3>
+                <div class="meta">2024 · RAG Pipeline</div>
+                <p>Adaptive learning platform with corpus ingestion, curriculum generation, and progress tracking. Full RAG pipeline: document chunking, embedding storage, retrieval, generation, evaluation.</p>
+                <div class="tags"><span class="tag">RAG</span><span class="tag">Embeddings</span><span class="tag">Chunking</span></div>
+            </div>
+
+            <div class="project-item">
+                <h3>Tiny — PMOS-Governed Agent</h3>
+                <div class="meta">2024 · Agentic AI</div>
+                <p>Small agent system with mutation evolution. PMOS-governed execution with multi-step workflows, state management, and human-in-the-loop checkpoints.</p>
+                <div class="tags"><span class="tag">Agentic AI</span><span class="tag">Mutation</span><span class="tag">Multi-step</span></div>
+            </div>
+
+            <div class="project-item">
+                <h3>Local Coder — Ollama Native Tool Calling</h3>
+                <div class="meta">2025 · Context Engineering</div>
+                <p>Local coding agent with Ollama native tool calling. Context engineering: system prompts, tool schemas, conversation history, structured outputs. Sandbox isolation for safe execution.</p>
+                <div class="tags"><span class="tag">Context Engineering</span><span class="tag">Tool Calling</span><span class="tag">Local LLM</span></div>
+            </div>
+
+            <div class="project-item">
+                <h3>RPES-v2 — Rankfixer Platform Engine Suite</h3>
+                <div class="meta">2025 · Full-Stack AI</div>
+                <p>Node.js API server, bridge server, competitive intelligence. End-to-end AI system: extraction → scoring → evidence → decision → action.</p>
+                <div class="tags"><span class="tag">Full-Stack</span><span class="tag">API Design</span><span class="tag">Scoring</span></div>
+            </div>
+
+            <div class="project-item">
+                <h3>Hermes Agent Orchestration</h3>
+                <div class="meta">2025 · Multi-Agent</div>
+                <p>Multi-agent orchestration with tool calling, delegation, parallel execution. Context engineering across multiple LLM calls with state management.</p>
+                <div class="tags"><span class="tag">Multi-Agent</span><span class="tag">Orchestration</span><span class="tag">Tool Calling</span></div>
+            </div>
+        </section>
+
+        <!-- WHAT I'M LEARNING -->
+        <section class="section">
+            <div class="section-title">Actively Closing Gaps</div>
+            <div class="card" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem;">
+                <p style="margin-bottom: 1rem;">Building production-grade MLOps and fine-tuning skills:</p>
+                <ul style="margin-left: 1.2rem; font-size: 0.9rem; color: var(--text-muted);">
+                    <li style="margin-bottom: 0.4rem;"><strong>MLflow experiment tracking</strong> — Local tracking with CPU-only evaluation (mlops/experiment_tracker.py)</li>
+                    <li style="margin-bottom: 0.4rem;"><strong>RAG evaluation framework</strong> — Faithfulness, answer relevance, context recall/precision (evals/rag_evaluator.py)</li>
+                    <li style="margin-bottom: 0.4rem;"><strong>LoRA/QLoRA fine-tuning</strong> — Google Colab template with Hugging Face PEFT (fine-tuning/hf_peft_config.py)</li>
+                    <li style="margin-bottom: 0.4rem;"><strong>LLM-as-judge evaluation</strong> — Systematic evaluation patterns with local models (evals/llm_judge.py)</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <div class="cta">
+            <a class="btn" href="/skills/">View AI Skills Demand Report</a>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.75rem;">See where your skills fit in the $146K-$250K market.</p>
+        </div>
+
+        <footer class="site-footer">
+            <p>RankFixer — Know Your AI Visibility Score</p>
+            <p><a href="/">Home</a> <a href="/tools">Tools</a> <a href="/blog">Blog</a> <a href="/skills">Skills</a>
+  <a href="/portfolio">Portfolio</a> <a href="/research">Research</a> <a href="/about">About</a> <a href="https://github.com/rankfixer-ai/rankfixer-core">GitHub</a></p>
+        </footer>
+
+    </div>
+
+    <script>
+    // Nav scroll
+    const nav = document.querySelector('.nav');
+    let ticking = false;
+    function updateScrolled() {
+        nav.classList.toggle('nav-scrolled', window.scrollY > 8);
+    }
+    window.addEventListener('scroll', () => {
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(() => { updateScrolled(); ticking = false; });
+    }, { passive: true });
+    updateScrolled();
+    </script>
+
+    <script src="/js/analytics.js"></script>
+</body>
+</html>
