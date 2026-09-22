@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Case Study: Building an Adaptive Learning Engine — RankFixer Research</title>
+    <meta name="description" content="An adaptive learning engine that tracks evidence, verifies competencies, and gates progression. It's not a RAG system — but it surfaces the same architectural decisions.">
+
+    <meta property="og:title" content="Case Study: Building an Adaptive Learning Engine">
+    <meta property="og:description" content="An adaptive learning engine that tracks evidence, verifies competencies, and gates progression. It's not a RAG system — but it surfaces the same architectural decisions.">
+    <meta property="og:url" content="https://rankfixer.co/research/rag/case-study-ai-learning-engine/">
+    <meta property="og:type" content="article">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YXZVCPBCZN"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YXZVCPBCZN');
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Case Study: Building an Adaptive Learning Engine",
+      "description": "An adaptive learning engine that tracks evidence, verifies competencies, and gates progression. It's not a RAG system \u2014 but it surfaces the same architectural decisions.",
+      "author": { "@type": "Person", "name": "Jan Michael Acibron" },
+      "publisher": { "@type": "Organization", "name": "RankFixer" },
+      "url": "https://rankfixer.co/research/rag/case-study-ai-learning-engine/"
+    }
+    </script>
+
+    <style>
+        :root {
+            --brand: #6C5CE7; --brand-hover: #5A4BD1; --bg: #0D0D1A; --bg-card: #151528;
+            --bg-input: #1E1E36; --text: #F0F0F5; --text-muted: #8888A0; --border: #2A2A45;
+            --ok: #00B894; --warn: #FDCB6E; --bad: #E17055;
+            --radius: 12px; --radius-sm: 8px; --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { font-size: 16px; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; scroll-padding-top: 5rem; }
+        body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.7; min-height: 100vh; -webkit-font-smoothing: antialiased; }
+        a { color: var(--brand); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        .nav { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; padding: 1rem 2rem; position: sticky; top: 0; z-index: 40; background: rgba(13,13,26,0.82); -webkit-backdrop-filter: blur(12px) saturate(160%); backdrop-filter: blur(12px) saturate(160%); border-bottom: 1px solid transparent; transition: box-shadow .35s ease, border-color .35s ease; }
+        .nav.nav-scrolled { box-shadow: 0 6px 24px rgba(0,0,0,.35); border-bottom-color: var(--border); }
+        .nav-logo { font-weight: 700; font-size: 1.2rem; text-decoration: none; color: var(--text); }
+        .nav-links { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; }
+        .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; transition: color .25s ease; }
+        .nav-links a:hover, .nav-links a.active { color: var(--text); }
+
+        .container { max-width: 820px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+        .article-meta { text-align: center; padding: 2rem 0 1rem; border-bottom: 1px solid var(--border); margin-bottom: 2rem; }
+        .article-meta .eyebrow { font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem; }
+        .article-meta h1 { font-size: clamp(1.6rem, 4.5vw, 2.4rem); font-weight: 800; line-height: 1.25; letter-spacing: -0.02em; }
+
+        article { font-size: 1rem; }
+        article h1 { display: none; }
+        article h2 { font-size: 1.4rem; font-weight: 700; margin: 2.5rem 0 1rem; letter-spacing: -0.01em; }
+        article h3 { font-size: 1.15rem; font-weight: 700; margin: 2rem 0 0.75rem; }
+        article p { margin-bottom: 1.25rem; color: var(--text-muted); }
+        article strong { color: var(--text); font-weight: 700; }
+        article em { font-style: italic; }
+        article ul, article ol { margin: 1rem 0 1.5rem 1.5rem; }
+        article li { margin-bottom: 0.5rem; color: var(--text-muted); }
+        article blockquote { border-left: 3px solid var(--brand); padding: 1rem 1.25rem; margin: 1.5rem 0; background: var(--bg-card); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+        article blockquote p { margin: 0; color: var(--text); font-style: italic; }
+        article code { background: var(--bg-input); padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 0.9em; font-family: 'SF Mono', Monaco, Consolas, monospace; color: var(--text); }
+        article pre { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; overflow-x: auto; margin: 1.5rem 0; }
+        article pre code { background: none; padding: 0; font-size: 0.85rem; line-height: 1.6; }
+        article table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.9rem; }
+        article th, article td { padding: 0.75rem; text-align: left; border-bottom: 1px solid var(--border); }
+        article th { font-weight: 700; color: var(--text); background: var(--bg-card); }
+        article td { color: var(--text-muted); }
+        article hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+
+        .cta-bar { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+        .cta-bar > p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem; }
+        .cta-block { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem 1.5rem; margin-bottom: 1rem; }
+        .cta-block p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.75rem; }
+        .cta-block p:last-child { margin-bottom: 0; }
+        .cta-block strong { color: var(--text); }
+        .cta-block .btn { display: inline-block; background: var(--brand); color: #fff; padding: 0.6rem 1.25rem; border-radius: var(--radius-sm); font-weight: 700; font-size: 0.9rem; text-decoration: none; margin-top: 0.25rem; }
+        .cta-block .btn:hover { background: var(--brand-hover); text-decoration: none; }
+
+        .site-footer { text-align: center; padding: 2rem 0; border-top: 1px solid var(--border); margin-top: 3rem; }
+        .site-footer p { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.3rem; }
+        .site-footer a { color: var(--text-muted); margin: 0 0.5rem; }
+
+        @media (max-width: 600px) {
+            .nav { flex-direction: column; gap: 0.5rem; padding: 0.75rem 1rem; }
+            .container { padding: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="nav">
+        <a href="/" class="nav-logo">Rankfixer</a>
+        <div class="nav-links">
+            <a href="/tools">Tools</a>
+            <a href="/blog">Blog</a>
+            <a href="/skills">Skills</a>
+            <a href="/portfolio">Portfolio</a>
+            <a href="/research" class="active">Research</a>
+            <a href="/about">About</a>
+            <a href="https://github.com/rankfixer-ai/rankfixer-core" target="_blank" rel="noopener">GitHub</a>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <header class="article-meta">
+            <div class="eyebrow">Research · RAG Architecture</div>
+            <h1>Case Study: Building an Adaptive Learning Engine</h1>
+        </header>
+
+        <article>
+            <h1 id="case-study-building-an-adaptive-learning-engine-where-rag-fits">Case Study: Building an Adaptive Learning Engine (Where RAG Fits)</h1>
+            <hr />
+            <h2 id="the-hook">The Hook</h2>
+            <p>The AI Learning Engine is a competency-based learning platform. Learners progress by demonstrating skills — not by completing lessons. The system tracks evidence, verifies competencies, and gates progression.</p>
+            <p>It's not a RAG system. But it taught me the architectural decisions that a RAG system would need to make — the ones covered in <a href="/research/rag/rag-architecture/">RAG Architecture Explained</a>.</p>
+            <p>This case study covers what the learning engine is, where RAG fits into it, and what building the application layer taught me about the retrieval layer beneath it.</p>
+            <hr />
+            <h2 id="the-brief">The Brief</h2>
+            <p>The project started with a constraint: a learning system where <strong>competency demonstration is the only authority for progression</strong>. Not quiz scores. Not time spent. Verified evidence.</p>
+            <h3 id="the-domain">The domain</h3>
+            <table>
+            <thead>
+            <tr>
+            <th>Aspect</th>
+            <th>Description</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+            <td><strong>Users</strong></td>
+            <td>Learners moving through a 4-level competency hierarchy (AI Literacy → Application → Engineering → Research)</td>
+            </tr>
+            <tr>
+            <td><strong>Structure</strong></td>
+            <td>4 competency dimensions (Cognition, Skills, Thinking, Values), each with declarative competencies</td>
+            </tr>
+            <tr>
+            <td><strong>Evidence</strong></td>
+            <td>Append-only record of learner actions — not scores, but what the learner actually did</td>
+            </tr>
+            <tr>
+            <td><strong>Verification</strong></td>
+            <td>Rules that map evidence to competency verification</td>
+            </tr>
+            <tr>
+            <td><strong>Progression</strong></td>
+            <td>Competency gates — you can't advance until verified</td>
+            </tr>
+            </tbody>
+            </table>
+            <h3 id="the-constraint">The constraint</h3>
+            <p>PRL (Procedural Representation Language) is the canonical representation layer. Every competency, lesson, assessment, evidence record, and verification rule is a PRL program. The compiler validates structure. The engine executes logic. The evidence store is append-only.</p>
+            <p>This means: <strong>the learning logic is decoupled from the content</strong>. New lessons can be added as PRL files without modifying engine code.</p>
+            <hr />
+            <h2 id="the-architecture">The Architecture</h2>
+            <pre><code>Curriculum Intent (curriculum/*.prl)
+                    ↓
+            PRL Compiler (prl/learning/ — extends prlc/pipeline.py)
+                    ↓
+            Learning Runtime (engine/)
+                    ↓
+            Learner Interaction (app/interactive_lesson/)
+                    ↓
+            Evidence → Verification → Competency → Progression
+            </code></pre>
+            <p>The system is a pipeline of PRL programs. The compiler validates. The runtime executes. The evidence store records. The competency tracker gates.</p>
+            <p>This is the <strong>application layer</strong> — the logic that decides what a learner does next based on evidence.</p>
+            <p>But here's the gap: <strong>what if a learner asks a question that isn't covered by the lesson flow?</strong> "Why does face recognition fail in low light?" The lesson demonstrates it, but the explanation lives in the curriculum content. To answer dynamically, you need retrieval.</p>
+            <p>That's where RAG fits.</p>
+            <hr />
+            <h2 id="where-rag-fits">Where RAG Fits</h2>
+            <p>The learning engine doesn't have a RAG pipeline today. But here's where one would plug in:</p>
+            <h3 id="the-retrieval-need">The retrieval need</h3>
+            <p>Learners ask questions during lessons. Some are answered by the lesson flow. Others require pulling from:</p>
+            <ul>
+            <li>Lesson content (PRL source files)</li>
+            <li>Assessment rubrics</li>
+            <li>Evidence records (past learner actions)</li>
+            <li>External documentation (when the curriculum references external standards)</li>
+            </ul>
+            <p>A RAG pipeline would:</p>
+            <ol>
+            <li><strong>Ingest</strong> — lesson PRL files, assessment rubrics, evidence records</li>
+            <li><strong>Chunk</strong> — by PRL primitive type (competency, lesson, assessment, evidence)</li>
+            <li><strong>Embed</strong> — with a model that understands structured PRL syntax</li>
+            <li><strong>Store</strong> — in a vector DB indexed by competency and dimension</li>
+            <li><strong>Retrieve</strong> — hybrid search (semantic + exact-match for PRL keywords like <code>competency_id</code>)</li>
+            <li><strong>Generate</strong> — grounded answers that cite the specific PRL section</li>
+            </ol>
+            <p>This is the architecture from <a href="/research/rag/rag-architecture/">Piece #6</a> applied to a specific domain.</p>
+            <hr />
+            <h2 id="what-broke-and-what-it-taught-me">What Broke (And What It Taught Me)</h2>
+            <p>Building the learning engine surface three failures that map directly to RAG architectural decisions.</p>
+            <hr />
+            <h3 id="failure-1-chunking-by-token-count-broke-prl-structure">Failure 1: Chunking by Token Count Broke PRL Structure</h3>
+            <p><strong>What I did first:</strong> Treat PRL files like any other document. Split by token count — 500 tokens, 50 overlap.</p>
+            <p><strong>What broke:</strong> PRL primitives span multiple lines. A <code>competency</code> definition is 5-15 lines. Chunking by token count split primitives mid-definition. The compiler couldn't parse fragments. The system silently dropped malformed chunks.</p>
+            <p><strong>The fix:</strong> Chunk by <strong>PRL primitive boundary</strong>, not token count. Each chunk is one complete primitive (one competency, one assessment, one evidence record). Token count varies — 50 to 300 tokens per chunk.</p>
+            <p><strong>The RAG lesson:</strong> This is <a href="/research/rag/rag-architecture/">Piece #6's chunking decision</a> in practice. The default (fixed-size chunking) is wrong for structured content. You chunk by the structure of your documents, not by a number.</p>
+            <hr />
+            <h3 id="failure-2-the-evidence-store-was-append-only-but-not-queryable">Failure 2: The Evidence Store Was Append-Only But Not Queryable</h3>
+            <p><strong>What I built:</strong> An append-only evidence store. Every learner action is recorded. The store is immutable — evidence is never deleted or modified.</p>
+            <p><strong>What broke:</strong> The system couldn't answer "what evidence has this learner submitted for competency X?" The store had no query layer. It was a write-optimized log, not a read-optimized index.</p>
+            <p><strong>The fix:</strong> Add a separate query layer — an index that maps <code>(learner_id, competency_id)</code> to evidence record IDs. The store stays append-only. The index is derived.</p>
+            <p><strong>The RAG lesson:</strong> This is <a href="/research/rag/rag-architecture/">Piece #6's retrieval pattern</a>. Your vector DB is the query layer. Your source documents are the append-only store. You need both — and they serve different purposes.</p>
+            <hr />
+            <h3 id="failure-3-verification-rules-couldnt-explain-themselves">Failure 3: Verification Rules Couldn't Explain Themselves</h3>
+            <p><strong>What I built:</strong> Verification rules map evidence to competency verification. A rule says "if evidence type is <code>experiment_result</code> AND score &gt; 0.8, verify competency."</p>
+            <p><strong>What broke:</strong> When the system says "competency verified," there's no explanation of <em>why</em>. The learner sees a green checkmark. They don't see which evidence triggered the rule. They can't contest it.</p>
+            <p><strong>The fix:</strong> Add a verification explanation layer. When a rule fires, the system generates a human-readable explanation: "Competency verified based on evidence [record-42] — experiment_result with score 0.85, meeting threshold of 0.8."</p>
+            <p><strong>The RAG lesson:</strong> This is <a href="/research/rag/5-signs-you-need-rag/">Piece #4's Sign 4</a> — the AI answers but can't cite sources. Grounding requires not just the answer but the <strong>provenance of the answer</strong>. Every claim needs a citation.</p>
+            <hr />
+            <h2 id="the-architecture-decisions-that-held-up">The Architecture Decisions That Held Up</h2>
+            <p>Three decisions that aged well:</p>
+            <h3 id="1-prl-as-canonical-representation">1. PRL as canonical representation</h3>
+            <p>Every domain concept (competency, lesson, assessment, evidence) is a PRL primitive. The compiler validates structure before execution. This means: <strong>you can't inject malformed learning logic</strong>. The compiler catches it.</p>
+            <p><strong>RAG equivalent:</strong> Schema validation on chunks before embedding. If a chunk doesn't match the expected structure, reject it before it enters the vector store.</p>
+            <h3 id="2-append-only-evidence">2. Append-only evidence</h3>
+            <p>Evidence is never deleted. Even failed assessments remain in the store. This gives you a complete audit trail — and it means the competency decision is reproducible.</p>
+            <p><strong>RAG equivalent:</strong> Versioned document ingestion. When a document changes, the old version stays in the store (or is explicitly replaced). You can trace which version of a document generated an answer.</p>
+            <h3 id="3-competency-gates">3. Competency gates</h3>
+            <p>You can't bypass progression. The engine enforces it. This is fail-closed: if verification doesn't fire, progression doesn't happen.</p>
+            <p><strong>RAG equivalent:</strong> Confidence thresholds. If retrieval confidence falls below your calibrated threshold, don't generate — say "I don't know" instead of guessing. Fail-closed, not fail-open.</p>
+            <hr />
+            <h2 id="the-numbers">The Numbers</h2>
+            <p>The learning engine is not a deployed production system. It's a working reference implementation. The numbers below are from the test suite and development runs, not production traffic.</p>
+            <table>
+            <thead>
+            <tr>
+            <th>Metric</th>
+            <th>Value</th>
+            <th>Notes</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+            <td>Test suite</td>
+            <td>107 tests</td>
+            <td>All passing</td>
+            </tr>
+            <tr>
+            <td>PRL primitives</td>
+            <td>6 types</td>
+            <td>competency, lesson, assessment, evidence, verification, remediation</td>
+            </tr>
+            <tr>
+            <td>Competency dimensions</td>
+            <td>4</td>
+            <td>Cognition, Skills, Thinking, Values</td>
+            </tr>
+            <tr>
+            <td>Lesson stages</td>
+            <td>10 per lesson</td>
+            <td>Fixed in PRL, not hardcoded</td>
+            </tr>
+            <tr>
+            <td>Evidence records</td>
+            <td>Append-only</td>
+            <td>Immutable once written</td>
+            </tr>
+            <tr>
+            <td>Chunking strategy</td>
+            <td>Primitive-boundary</td>
+            <td>Not token-boundary</td>
+            </tr>
+            </tbody>
+            </table>
+            <p><strong>What I didn't measure:</strong> Latency, cost per query, retrieval accuracy. These are future work when the RAG layer is added.</p>
+            <hr />
+            <h2 id="what-id-do-differently">What I'd Do Differently</h2>
+            <p>Three things, each mapping to a lesson from the cluster:</p>
+            <h3 id="1-build-the-evaluation-framework-before-the-learning-logic">1. Build the evaluation framework before the learning logic</h3>
+            <p>The test suite validates PRL compilation and engine execution. But there's no evaluation of <strong>learning outcomes</strong>. Does the competency model actually produce competent learners? I don't know.</p>
+            <p><strong>RAG equivalent:</strong> <a href="/research/rag/rag-cost-breakdown/">Piece #7's evaluation cost center</a>. Build the eval framework first, before tuning anything. You can't improve what you don't measure.</p>
+            <h3 id="2-start-with-hybrid-retrieval-for-prl-keywords">2. Start with hybrid retrieval for PRL keywords</h3>
+            <p>When the RAG layer is added, exact-match retrieval on PRL keywords (<code>competency_id</code>, <code>evidence_type</code>) will be as important as semantic search. I'd start with hybrid, not add it later.</p>
+            <p><strong>RAG equivalent:</strong> <a href="/research/rag/rag-architecture/">Piece #6's retrieval decision</a>. Hybrid is the production default, not an enhancement.</p>
+            <h3 id="3-set-chunking-strategy-based-on-document-structure">3. Set chunking strategy based on document structure</h3>
+            <p>The first version chunked by token count and broke PRL structure. The second version chunked by primitive boundary. The third version (not yet built) will embed each chunk with metadata that includes the primitive type, competency ID, and dimension.</p>
+            <p><strong>RAG equivalent:</strong> <a href="/research/rag/rag-architecture/">Piece #6's chunking decision</a>. There is no default chunking strategy. There is only the strategy that fits your document structure.</p>
+            <hr />
+            <h2 id="what-this-means-for-your-project">What This Means for Your Project</h2>
+            <p>If you're building a RAG system, the learning engine is the <strong>application layer</strong> that sits on top. It's what decides what to do with the retrieved information — how to verify it, how to present it, how to gate progression based on it.</p>
+            <p>The RAG pipeline is the <strong>retrieval layer</strong> beneath it. It's what finds the relevant information in the first place.</p>
+            <p>You need both. The learning engine without RAG can only answer questions covered by the lesson flow. The RAG pipeline without an application layer can only retrieve — it can't decide what to do with what it found.</p>
+            <hr />
+            <h2 id="how-i-can-help">How I Can Help</h2>
+            <p>I build AI systems where knowledge, evidence, decisions, and actions are traceable. RAG is one pattern I use when the problem requires external or proprietary knowledge at inference time.</p>
+            <p><strong>Recent work:</strong> I built the learning engine. It's not a RAG system — but building it forced the same decisions a RAG pipeline demands: how to chunk by structure, how to retrieve relevant context, how to verify provenance, and how to evaluate whether the system is working. <a href="/research/rag/case-study-ai-learning-engine/">See the case study →</a></p>
+            <p><strong>My approach:</strong></p>
+            <ol>
+            <li><strong>Audit</strong> — What's the application layer? What does it need to retrieve?</li>
+            <li><strong>Design</strong> — Architecture that fits the problem: retrieval, evidence, verification, governance</li>
+            <li><strong>Build</strong> — Working system in typically 2-6 weeks, not months</li>
+            <li><strong>Evaluate</strong> — Metrics for both retrieval and application outcomes</li>
+            <li><strong>Deploy</strong> — You own the code, the data, and the pipeline</li>
+            </ol>
+            <p><strong>Book a scoping call:</strong> <a href="/contact">Let's talk →</a></p>
+            <hr />
+            <h2 id="the-rag-content-cluster">The RAG Content Cluster</h2>
+            <p>This article is part of a cluster on RAG. Explore deeper:</p>
+            <ul>
+            <li><a href="/research/rag/what-is-rag/">What is RAG? — The Definitional Guide</a></li>
+            <li><a href="/research/rag/rag-vs-fine-tuning/">RAG vs Fine-Tuning: Which Does Your Business Need?</a></li>
+            <li><a href="/research/rag/why-llms-hallucinate/">Why Your LLM Hallucinates (And How RAG Fixes It)</a></li>
+            <li><a href="/research/rag/5-signs-you-need-rag/">5 Signs Your Business Needs RAG, Not a Bigger Model</a></li>
+            <li><a href="/research/rag/how-to-build-rag-pipeline/">How to Build a RAG Pipeline: A Practical Guide</a></li>
+            <li><a href="/research/rag/rag-architecture/">RAG Architecture Explained: Chunking, Embeddings, Retrieval, and the Decisions That Matter</a></li>
+            <li><a href="/research/rag/rag-cost-breakdown/">How Much Does a RAG Pipeline Actually Cost?</a></li>
+            <li><a href="/research/rag/rag-consultant/">What to Look for in a RAG Consultant (And What to Avoid)</a></li>
+            </ul>
+            <hr />
+            <h2 id="sources">Sources</h2>
+            <p>[^1]: The AI Learning Engine reference implementation is at <code>D:/workspace/projects/ai-learning-engine</code>. 107 tests, 6 PRL primitive types, 4 competency dimensions.</p>
+            <p>[^2]: For the architecture decisions this project surfaced — see <a href="/research/rag/rag-architecture/">RAG Architecture Explained</a></p>
+            <p>[^3]: For the cost of building the RAG layer — see <a href="/research/rag/rag-cost-breakdown/">How Much Does a RAG Pipeline Actually Cost?</a></p>
+            <hr />
+        </article>
+
+        <div class="cta-bar">
+            <p><em>This piece is part of an applied research program on how AI systems retrieve, cite, and govern knowledge.</em></p>
+
+            <div class="cta-block">
+                <p><strong>See the full research →</strong> <a href="/research/">The RankFixer research program</a></p>
+                <p><strong>See how this works in practice →</strong> <a href="/portfolio/">The portfolio</a></p>
+            </div>
+
+            <div class="cta-block">
+                <p><strong>Need help building this?</strong></p>
+                <p>I build the systems this research describes. Tell me what you're building — no pitch, just questions about your problem.</p>
+                <a href="/contact/" class="btn">Start a conversation →</a>
+            </div>
+        </div>
+
+    </div>
+
+    <footer class="site-footer">
+        <p>RankFixer — evidence-first governance for AI systems.</p>
+        <p>
+            <a href="/about">About</a>
+            <a href="/research">Research</a>
+            <a href="/portfolio">Portfolio</a>
+            <a href="https://github.com/rankfixer-ai/rankfixer-core" target="_blank" rel="noopener">GitHub</a>
+        </p>
+        <p>© 2026 RankFixer. All data published under MIT license.</p>
+    </footer>
+
+    <script>
+        const nav = document.querySelector('.nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 10) nav.classList.add('nav-scrolled');
+            else nav.classList.remove('nav-scrolled');
+        }, { passive: true });
+    </script>
+</body>
+</html>

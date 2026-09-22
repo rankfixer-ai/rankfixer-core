@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>RAG Architecture Explained: Chunking, Embeddings, Retrieval, and the Decisions That Matter — RankFixer Research</title>
+    <meta name="description" content="Five architectural decisions that separate a working RAG system from a broken one. Chunking, embeddings, retrieval, generation, evaluation.">
+
+    <meta property="og:title" content="RAG Architecture Explained: Chunking, Embeddings, Retrieval, and the Decisions That Matter">
+    <meta property="og:description" content="Five architectural decisions that separate a working RAG system from a broken one. Chunking, embeddings, retrieval, generation, evaluation.">
+    <meta property="og:url" content="https://rankfixer.co/research/rag/rag-architecture/">
+    <meta property="og:type" content="article">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YXZVCPBCZN"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YXZVCPBCZN');
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "RAG Architecture Explained: Chunking, Embeddings, Retrieval, and the Decisions That Matter",
+      "description": "Five architectural decisions that separate a working RAG system from a broken one. Chunking, embeddings, retrieval, generation, evaluation.",
+      "author": { "@type": "Person", "name": "Jan Michael Acibron" },
+      "publisher": { "@type": "Organization", "name": "RankFixer" },
+      "url": "https://rankfixer.co/research/rag/rag-architecture/"
+    }
+    </script>
+
+    <style>
+        :root {
+            --brand: #6C5CE7; --brand-hover: #5A4BD1; --bg: #0D0D1A; --bg-card: #151528;
+            --bg-input: #1E1E36; --text: #F0F0F5; --text-muted: #8888A0; --border: #2A2A45;
+            --ok: #00B894; --warn: #FDCB6E; --bad: #E17055;
+            --radius: 12px; --radius-sm: 8px; --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { font-size: 16px; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; scroll-padding-top: 5rem; }
+        body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.7; min-height: 100vh; -webkit-font-smoothing: antialiased; }
+        a { color: var(--brand); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        .nav { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; padding: 1rem 2rem; position: sticky; top: 0; z-index: 40; background: rgba(13,13,26,0.82); -webkit-backdrop-filter: blur(12px) saturate(160%); backdrop-filter: blur(12px) saturate(160%); border-bottom: 1px solid transparent; transition: box-shadow .35s ease, border-color .35s ease; }
+        .nav.nav-scrolled { box-shadow: 0 6px 24px rgba(0,0,0,.35); border-bottom-color: var(--border); }
+        .nav-logo { font-weight: 700; font-size: 1.2rem; text-decoration: none; color: var(--text); }
+        .nav-links { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; }
+        .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; transition: color .25s ease; }
+        .nav-links a:hover, .nav-links a.active { color: var(--text); }
+
+        .container { max-width: 820px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+        .article-meta { text-align: center; padding: 2rem 0 1rem; border-bottom: 1px solid var(--border); margin-bottom: 2rem; }
+        .article-meta .eyebrow { font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem; }
+        .article-meta h1 { font-size: clamp(1.6rem, 4.5vw, 2.4rem); font-weight: 800; line-height: 1.25; letter-spacing: -0.02em; }
+
+        article { font-size: 1rem; }
+        article h1 { display: none; }
+        article h2 { font-size: 1.4rem; font-weight: 700; margin: 2.5rem 0 1rem; letter-spacing: -0.01em; }
+        article h3 { font-size: 1.15rem; font-weight: 700; margin: 2rem 0 0.75rem; }
+        article p { margin-bottom: 1.25rem; color: var(--text-muted); }
+        article strong { color: var(--text); font-weight: 700; }
+        article em { font-style: italic; }
+        article ul, article ol { margin: 1rem 0 1.5rem 1.5rem; }
+        article li { margin-bottom: 0.5rem; color: var(--text-muted); }
+        article blockquote { border-left: 3px solid var(--brand); padding: 1rem 1.25rem; margin: 1.5rem 0; background: var(--bg-card); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+        article blockquote p { margin: 0; color: var(--text); font-style: italic; }
+        article code { background: var(--bg-input); padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 0.9em; font-family: 'SF Mono', Monaco, Consolas, monospace; color: var(--text); }
+        article pre { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; overflow-x: auto; margin: 1.5rem 0; }
+        article pre code { background: none; padding: 0; font-size: 0.85rem; line-height: 1.6; }
+        article table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.9rem; }
+        article th, article td { padding: 0.75rem; text-align: left; border-bottom: 1px solid var(--border); }
+        article th { font-weight: 700; color: var(--text); background: var(--bg-card); }
+        article td { color: var(--text-muted); }
+        article hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+
+        .cta-bar { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+        .cta-bar > p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem; }
+        .cta-block { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem 1.5rem; margin-bottom: 1rem; }
+        .cta-block p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.75rem; }
+        .cta-block p:last-child { margin-bottom: 0; }
+        .cta-block strong { color: var(--text); }
+        .cta-block .btn { display: inline-block; background: var(--brand); color: #fff; padding: 0.6rem 1.25rem; border-radius: var(--radius-sm); font-weight: 700; font-size: 0.9rem; text-decoration: none; margin-top: 0.25rem; }
+        .cta-block .btn:hover { background: var(--brand-hover); text-decoration: none; }
+
+        .site-footer { text-align: center; padding: 2rem 0; border-top: 1px solid var(--border); margin-top: 3rem; }
+        .site-footer p { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.3rem; }
+        .site-footer a { color: var(--text-muted); margin: 0 0.5rem; }
+
+        @media (max-width: 600px) {
+            .nav { flex-direction: column; gap: 0.5rem; padding: 0.75rem 1rem; }
+            .container { padding: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="nav">
+        <a href="/" class="nav-logo">Rankfixer</a>
+        <div class="nav-links">
+            <a href="/tools">Tools</a>
+            <a href="/blog">Blog</a>
+            <a href="/skills">Skills</a>
+            <a href="/portfolio">Portfolio</a>
+            <a href="/research" class="active">Research</a>
+            <a href="/about">About</a>
+            <a href="https://github.com/rankfixer-ai/rankfixer-core" target="_blank" rel="noopener">GitHub</a>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <header class="article-meta">
+            <div class="eyebrow">Research · RAG Architecture</div>
+            <h1>RAG Architecture Explained: Chunking, Embeddings, Retrieval, and the Decisions That Matter</h1>
+        </header>
+
+        <article>
+            <h1 id="rag-architecture-explained-chunking-embeddings-retrieval-and-the-decisions-that-matter">RAG Architecture Explained: Chunking, Embeddings, Retrieval, and the Decisions That Matter</h1>
+            <hr />
+            <h2 id="the-hook">The Hook</h2>
+            <p>Two RAG systems can use the same model, the same vector database, and the same documents — and perform completely differently. The difference is architecture: how you chunk, which embedding model you choose, whether you use hybrid search, whether you re-rank, and how you evaluate.</p>
+            <p>This is a technical reference for each decision — what to choose, why, and what breaks when you get it wrong. It assumes you've read <a href="/research/rag/what-is-rag/">What is RAG?</a> and <a href="/research/rag/how-to-build-rag-pipeline/">How to Build a RAG Pipeline</a>. It goes deeper than both.</p>
+            <hr />
+            <h2 id="decision-1-chunking-strategy">Decision 1: Chunking Strategy</h2>
+            <p>This is the highest-leverage decision and the most misunderstood.</p>
+            <h3 id="the-strategies">The strategies</h3>
+            <table>
+            <thead>
+            <tr>
+            <th>Strategy</th>
+            <th>How It Works</th>
+            <th>Best For</th>
+            <th>Breaks When</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+            <td><strong>Fixed-size</strong></td>
+            <td>Split every N tokens with overlap</td>
+            <td>Homogeneous text</td>
+            <td>Documents have structure (headers, tables, code)</td>
+            </tr>
+            <tr>
+            <td><strong>Recursive</strong></td>
+            <td>Split by hierarchy (headers → paragraphs → sentences)</td>
+            <td>Structured docs (manuals, policies, wikis)</td>
+            <td>Text is unstructured prose</td>
+            </tr>
+            <tr>
+            <td><strong>Semantic</strong></td>
+            <td>Split at meaning boundaries (embedding similarity drops)</td>
+            <td>Mixed content, high variance</td>
+            <td>Latency and cost matter (requires embedding during chunking)</td>
+            </tr>
+            <tr>
+            <td><strong>Document-aware</strong></td>
+            <td>Preserve tables, code blocks, lists as single chunks</td>
+            <td>Technical docs, code, financial reports</td>
+            <td>Documents are prose-heavy</td>
+            </tr>
+            </tbody>
+            </table>
+            <h3 id="the-parameters">The parameters</h3>
+            <ul>
+            <li><strong>Chunk size:</strong> 200–500 tokens is the default. Smaller chunks = more precise retrieval but less context. Larger chunks = more context but retrieval noise.</li>
+            <li><strong>Overlap:</strong> typically 10–20% of chunk size. Preserves boundary context. Too much = duplication and cost.</li>
+            <li><strong>Metadata:</strong> Every chunk should carry source document, section heading, version, and position. Without metadata, you can't trace answers back to sources.</li>
+            </ul>
+            <h3 id="what-breaks">What breaks</h3>
+            <p>Wrong chunk size means retrieval returns fragments that don't contain the answer. A 100-token chunk might split a policy in half: "Returns are accepted within..." and "...14 days of purchase." The retrieval system finds the first half, misses the second, and the model answers "Returns are accepted within..." — incomplete and misleading.</p>
+            <p><strong>This is one of the most common sources of production failures.</strong></p>
+            <h3 id="the-pattern">The pattern</h3>
+            <pre><code class="language-python"># Recursive chunking with metadata preservation
+            def chunk_document(doc, chunk_size=300, overlap=50):
+                chunks = []
+                sections = split_by_headers(doc)  # Respect document structure
+            
+                for section in sections:
+                    paragraphs = split_into_paragraphs(section)
+                    for i in range(0, len(paragraphs), chunk_size - overlap):
+                        chunk_text = &quot; &quot;.join(paragraphs[i:i + chunk_size])
+                        chunks.append({
+                            &quot;text&quot;: chunk_text,
+                            &quot;source&quot;: doc.filename,
+                            &quot;section&quot;: section.heading,
+                            &quot;version&quot;: doc.version,
+                            &quot;position&quot;: i
+                        })
+                return chunks
+            </code></pre>
+            <hr />
+            <h2 id="decision-2-embedding-model">Decision 2: Embedding Model</h2>
+            <p>The embedding model determines what "similar" means. Change it, and every vector in your store is invalid.</p>
+            <h3 id="the-landscape">The landscape</h3>
+            <table>
+            <thead>
+            <tr>
+            <th>Model</th>
+            <th>Dimensions</th>
+            <th>Cost</th>
+            <th>Best For</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+            <td>OpenAI text-embedding-3-large</td>
+            <td>3072</td>
+            <td>$0.13/1M tokens</td>
+            <td>General-purpose, highest quality</td>
+            </tr>
+            <tr>
+            <td>OpenAI text-embedding-3-small</td>
+            <td>1536</td>
+            <td>$0.02/1M tokens</td>
+            <td>Cost-sensitive, high volume</td>
+            </tr>
+            <tr>
+            <td>Cohere Embed v3</td>
+            <td>1024</td>
+            <td>$0.10/1M tokens</td>
+            <td>Retrieval-optimized</td>
+            </tr>
+            <tr>
+            <td>BGE-large (BAAI)</td>
+            <td>1024</td>
+            <td>Self-hosted</td>
+            <td>Privacy, no API costs</td>
+            </tr>
+            <tr>
+            <td>E5-large (Microsoft)</td>
+            <td>1024</td>
+            <td>Self-hosted</td>
+            <td>Multilingual</td>
+            </tr>
+            <tr>
+            <td>Nomic Embed v2</td>
+            <td>768</td>
+            <td>Self-hosted</td>
+            <td>Long context, efficient</td>
+            </tr>
+            </tbody>
+            </table>
+            <h3 id="the-commitment">The commitment</h3>
+            <p><strong>Pick one and commit.</strong> If you ingest 100K chunks with OpenAI text-embedding-3-small and later switch to BGE-large, you must re-embed everything. There's no translation between embedding spaces.</p>
+            <h3 id="what-breaks_1">What breaks</h3>
+            <p>Mixing embedding models across ingestion and query. If you embed documents with model A and queries with model B, the similarity scores are meaningless. This is a subtle bug — the system runs, but retrieval is silently degraded.</p>
+            <h3 id="the-pattern_1">The pattern</h3>
+            <pre><code class="language-python"># Consistent embedding across ingestion and query
+            from openai import OpenAI
+            
+            client = OpenAI()
+            
+            def embed_text(text, model=&quot;text-embedding-3-small&quot;):
+                response = client.embeddings.create(
+                    input=text,
+                    model=model
+                )
+                return response.data[0].embedding
+            
+            # Ingest: embed chunks
+            chunk_vectors = [embed_text(chunk[&quot;text&quot;]) for chunk in chunks]
+            
+            # Query: embed question with the SAME model
+            query_vector = embed_text(user_question)
+            </code></pre>
+            <hr />
+            <h2 id="decision-3-retrieval-pattern">Decision 3: Retrieval Pattern</h2>
+            <p>This is where the real engineering is. Dense retrieval alone is the starting point, not the production default.</p>
+            <h3 id="the-patterns">The patterns</h3>
+            <table>
+            <thead>
+            <tr>
+            <th>Pattern</th>
+            <th>How It Works</th>
+            <th>When to Use</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+            <td><strong>Dense (semantic)</strong></td>
+            <td>Vector similarity search</td>
+            <td>Default starting point</td>
+            </tr>
+            <tr>
+            <td><strong>Sparse (keyword)</strong></td>
+            <td>BM25, TF-IDF on exact terms</td>
+            <td>Codes, names, error messages, exact-match queries</td>
+            </tr>
+            <tr>
+            <td><strong>Hybrid</strong></td>
+            <td>Combine dense + sparse scores</td>
+            <td><strong>Production default</strong> — catches both semantic and exact matches</td>
+            </tr>
+            <tr>
+            <td><strong>Re-ranked</strong></td>
+            <td>Retrieve N candidates, rerank to top K</td>
+            <td>When precision matters (regulated, high-stakes)</td>
+            </tr>
+            <tr>
+            <td><strong>Multi-query</strong></td>
+            <td>Generate query variants, retrieve all, deduplicate</td>
+            <td>When user queries are vague or ambiguous</td>
+            </tr>
+            <tr>
+            <td><strong>Parent-child</strong></td>
+            <td>Index small chunks, return larger context window</td>
+            <td>When the answer spans multiple chunks</td>
+            </tr>
+            </tbody>
+            </table>
+            <h3 id="why-hybrid-is-the-default">Why hybrid is the default</h3>
+            <p>Dense retrieval fails on exact-match queries. A user searching for "error code 0x80070005" needs keyword matching — the embedding model doesn't know that specific hex code. Sparse retrieval fails on semantic queries. A user asking "why won't my app install?" needs semantic matching — no keyword overlap with "error code 0x80070005 access denied."</p>
+            <p><strong>Hybrid catches both.</strong></p>
+            <h3 id="what-breaks_2">What breaks</h3>
+            <p>Retrieval returns top-k chunks by similarity — but similarity isn't relevance. A chunk about "return policy for electronics" might be semantically similar to a query about "return policy for clothing" but factually wrong. Re-ranking fixes this by scoring candidates against the query with a cross-encoder.</p>
+            <h3 id="the-pattern_2">The pattern</h3>
+            <pre><code class="language-python"># Hybrid retrieval with re-ranking
+            def hybrid_retrieve(query, vector_store, bm25_index, k=5, n=20):
+                # Step 1: Dense retrieval (semantic)
+                dense_results = vector_store.similarity_search(query, k=n)
+            
+                # Step 2: Sparse retrieval (keyword)
+                sparse_results = bm25_index.search(query, k=n)
+            
+                # Step 3: Combine and deduplicate
+                combined = merge_results(dense_results, sparse_results, 
+                                         dense_weight=0.7, sparse_weight=0.3)
+            
+                # Step 4: Re-rank top candidates
+                reranked = reranker.rerank(query, combined, top_k=k)
+            
+                return reranked
+            </code></pre>
+            <hr />
+            <h2 id="decision-4-generation-and-grounding">Decision 4: Generation and Grounding</h2>
+            <p>The model's job is to summarize retrieved chunks, not to reason about the world. The prompt has to make that explicit.</p>
+            <h3 id="the-grounding-patterns">The grounding patterns</h3>
+            <ol>
+            <li><strong>Explicit instruction:</strong> "You MUST answer ONLY from the context below. Do not use outside knowledge."</li>
+            <li><strong>Citation requirement:</strong> "Cite the specific section your answer comes from."</li>
+            <li><strong>Structured output:</strong> Force JSON with <code>answer</code>, <code>sources</code>, and <code>confidence</code> fields.</li>
+            <li><strong>Fallback instruction:</strong> "If the answer isn't in the context, say 'I don't know.'"</li>
+            </ol>
+            <h3 id="what-breaks_3">What breaks</h3>
+            <p>The model ignores the context and answers from training data. This happens when:
+            - The context is too long (model gets lazy)
+            - The instructions are weak ("use the context if relevant")
+            - There are conflicting instructions elsewhere in the prompt
+            - The model is under pressure to always produce an answer</p>
+            <p>Even with strong grounding, models can ignore instructions — especially when the context is long, conflicting, or noisy. That's why you need evaluation.</p>
+            <h3 id="the-pattern_3">The pattern</h3>
+            <pre><code class="language-python"># Grounded generation prompt
+            GROUNDED_PROMPT = &quot;&quot;&quot;
+            You are a factual assistant. Answer the question using ONLY the context provided.
+            
+            RULES:
+            1. Answer ONLY from the context. Do not use outside knowledge.
+            2. Cite the specific section your answer comes from.
+            3. If the answer is not in the context, say &quot;I don't know.&quot;
+            4. Do not guess, infer, or fill in gaps.
+            
+            Context:
+            {context}
+            
+            Question:
+            {question}
+            
+            Respond in JSON:
+            {{
+              &quot;answer&quot;: &quot;your answer here&quot;,
+              &quot;sources&quot;: [&quot;section 1&quot;, &quot;section 2&quot;],
+              &quot;confidence&quot;: &quot;high&quot; | &quot;medium&quot; | &quot;low&quot;
+            }}
+            &quot;&quot;&quot;
+            </code></pre>
+            <hr />
+            <h2 id="decision-5-evaluation">Decision 5: Evaluation</h2>
+            <p>This is the section that differentiates the piece. Most architecture articles skip evaluation. Production systems can't.</p>
+            <h3 id="the-metrics">The metrics</h3>
+            <table>
+            <thead>
+            <tr>
+            <th>Metric</th>
+            <th>What It Measures</th>
+            <th>How to Compute</th>
+            <th>Target</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+            <td><strong>Recall@k</strong></td>
+            <td>Did retrieval find the right chunks?</td>
+            <td>Labeled test set</td>
+            <td>&gt;85%</td>
+            </tr>
+            <tr>
+            <td><strong>MRR</strong></td>
+            <td>How high did the right chunk rank?</td>
+            <td>Labeled test set</td>
+            <td>&gt;0.8</td>
+            </tr>
+            <tr>
+            <td><strong>Groundedness</strong></td>
+            <td>Is the answer from the context?</td>
+            <td>LLM-as-judge</td>
+            <td>&gt;90%</td>
+            </tr>
+            <tr>
+            <td><strong>Faithfulness</strong></td>
+            <td>Does the answer contradict the context?</td>
+            <td>LLM-as-judge</td>
+            <td>&gt;95%</td>
+            </tr>
+            <tr>
+            <td><strong>Answer relevance</strong></td>
+            <td>Does it answer the question?</td>
+            <td>LLM-as-judge</td>
+            <td>&gt;85%</td>
+            </tr>
+            <tr>
+            <td><strong>Latency</strong></td>
+            <td>How long does it take?</td>
+            <td>Instrumentation</td>
+            <td>&lt;3s</td>
+            </tr>
+            <tr>
+            <td><strong>Cost per query</strong></td>
+            <td>What does it cost?</td>
+            <td>Token counting</td>
+            <td>Varies</td>
+            </tr>
+            </tbody>
+            </table>
+            <h3 id="the-evaluation-pipeline">The evaluation pipeline</h3>
+            <ol>
+            <li><strong>Build a test set:</strong> 100–500 question-answer pairs with labeled relevant chunks</li>
+            <li><strong>Run evaluation:</strong> Every query in development, sampled in production</li>
+            <li><strong>Alert:</strong> When metrics drop below threshold, trigger investigation</li>
+            <li><strong>Iterate:</strong> Fix the architecture decision that's causing the degradation</li>
+            </ol>
+            <h3 id="what-breaks_4">What breaks</h3>
+            <p>No evaluation means you don't know if a change made it better or worse. You deploy a new embedding model, retrieval gets worse, and you don't find out until customers complain. Evaluation is continuous infrastructure, not a phase.</p>
+            <h3 id="the-pattern_4">The pattern</h3>
+            <pre><code class="language-python"># Evaluation pipeline
+            def evaluate_rag_system(test_set, rag_pipeline):
+                results = []
+            
+                for question, expected_answer, relevant_chunks in test_set:
+                    # Run the pipeline
+                    answer = rag_pipeline.query(question)
+            
+                    # Measure retrieval
+                    recall_at_5 = compute_recall(answer.retrieved_chunks, relevant_chunks, k=5)
+                    mrr = compute_mrr(answer.retrieved_chunks, relevant_chunks)
+            
+                    # Measure generation
+                    groundedness = judge_groundedness(answer.text, answer.retrieved_chunks)
+                    faithfulness = judge_faithfulness(answer.text, answer.retrieved_chunks)
+                    relevance = judge_relevance(answer.text, question)
+            
+                    results.append({
+                        &quot;question&quot;: question,
+                        &quot;recall@5&quot;: recall_at_5,
+                        &quot;mrr&quot;: mrr,
+                        &quot;groundedness&quot;: groundedness,
+                        &quot;faithfulness&quot;: faithfulness,
+                        &quot;relevance&quot;: relevance
+                    })
+            
+                return aggregate_metrics(results)
+            </code></pre>
+            <hr />
+            <h2 id="the-architecture-decision-matrix">The Architecture Decision Matrix</h2>
+            <table>
+            <thead>
+            <tr>
+            <th>Decision</th>
+            <th>Default</th>
+            <th>When to Change</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+            <td><strong>Chunking</strong></td>
+            <td>Recursive, 300–500 tokens, 15% overlap</td>
+            <td>Structured docs → document-aware; mixed content → semantic</td>
+            </tr>
+            <tr>
+            <td><strong>Embedding</strong></td>
+            <td>OpenAI text-embedding-3-small</td>
+            <td>Privacy requirements → self-hosted; multilingual → E5</td>
+            </tr>
+            <tr>
+            <td><strong>Retrieval</strong></td>
+            <td>Hybrid (dense + sparse) + re-ranking</td>
+            <td>Low latency requirement → dense only; high precision → add multi-query</td>
+            </tr>
+            <tr>
+            <td><strong>Generation</strong></td>
+            <td>Grounded prompt + structured output + citations</td>
+            <td>Regulated industry → add calibrated confidence thresholds and human handoff for low-confidence responses</td>
+            </tr>
+            <tr>
+            <td><strong>Evaluation</strong></td>
+            <td>Recall@k + groundedness + faithfulness</td>
+            <td>Production → add latency and cost monitoring; regulated → add full audit trail</td>
+            </tr>
+            </tbody>
+            </table>
+            <hr />
+            <h2 id="how-i-can-help">How I Can Help</h2>
+            <p>I build AI systems where knowledge, evidence, decisions, and actions are traceable. RAG is one pattern I use when the problem requires external or proprietary knowledge at inference time.</p>
+            <p><strong>Recent work:</strong> I built an adaptive learning engine. It's not a RAG system — but building it forced the same decisions a RAG pipeline demands: how to chunk by structure, how to retrieve relevant context, how to verify provenance, and how to evaluate whether the system is working. <a href="/research/rag/case-study-ai-learning-engine/">See the case study →</a></p>
+            <p><strong>My approach:</strong></p>
+            <ol>
+            <li><strong>Audit</strong> — What documents do you have? What queries do you need to answer?</li>
+            <li><strong>Design</strong> — Architecture that fits the problem: retrieval, evidence, verification, governance</li>
+            <li><strong>Build</strong> — Working system in typically 2-6 weeks, not months</li>
+            <li><strong>Evaluate</strong> — Metrics, test set, production monitoring before handoff</li>
+            <li><strong>Deploy</strong> — You own the code, the data, and the pipeline</li>
+            </ol>
+            <p><strong>Want an architecture review?</strong> <a href="/contact">Let's talk →</a></p>
+            <hr />
+            <h2 id="the-rag-content-cluster">The RAG Content Cluster</h2>
+            <p>This article is part of a cluster on RAG. Explore deeper:</p>
+            <ul>
+            <li><a href="/research/rag/what-is-rag/">What is RAG? — The Definitional Guide</a></li>
+            <li><a href="/research/rag/rag-vs-fine-tuning/">RAG vs Fine-Tuning: Which Does Your Business Need?</a></li>
+            <li><a href="/research/rag/why-llms-hallucinate/">Why Your LLM Hallucinates (And How RAG Fixes It)</a></li>
+            <li><a href="/research/rag/5-signs-you-need-rag/">5 Signs Your Business Needs RAG, Not a Bigger Model</a></li>
+            <li><a href="/research/rag/how-to-build-rag-pipeline/">How to Build a RAG Pipeline: A Practical Guide</a></li>
+            <li><a href="/research/rag/rag-cost-breakdown/">How Much Does a RAG Pipeline Actually Cost?</a></li>
+            <li><a href="/research/rag/case-study-ai-learning-engine/">Case Study: Building an Adaptive Learning Engine (Where RAG Fits)</a></li>
+            <li><a href="/research/rag/rag-consultant/">What to Look for in a RAG Consultant (And What to Avoid)</a></li>
+            </ul>
+            <hr />
+            <h2 id="sources">Sources</h2>
+            <p>[^1]: For the conceptual pipeline overview — see <a href="/research/rag/what-is-rag/">What is RAG?</a></p>
+            <p>[^2]: For the build timeline and production failures — see <a href="/research/rag/how-to-build-rag-pipeline/">How to Build a RAG Pipeline</a></p>
+            <p>[^3]: For the hallucination mechanics and fixes — see <a href="/research/rag/why-llms-hallucinate/">Why Your LLM Hallucinates</a></p>
+            <hr />
+        </article>
+
+        <div class="cta-bar">
+            <p><em>This piece is part of an applied research program on how AI systems retrieve, cite, and govern knowledge.</em></p>
+
+            <div class="cta-block">
+                <p><strong>See the full research →</strong> <a href="/research/">The RankFixer research program</a></p>
+                <p><strong>See how this works in practice →</strong> <a href="/portfolio/">The portfolio</a></p>
+            </div>
+
+            <div class="cta-block">
+                <p><strong>Need help building this?</strong></p>
+                <p>I build the systems this research describes. Tell me what you're building — no pitch, just questions about your problem.</p>
+                <a href="/contact/" class="btn">Start a conversation →</a>
+            </div>
+        </div>
+
+    </div>
+
+    <footer class="site-footer">
+        <p>RankFixer — evidence-first governance for AI systems.</p>
+        <p>
+            <a href="/about">About</a>
+            <a href="/research">Research</a>
+            <a href="/portfolio">Portfolio</a>
+            <a href="https://github.com/rankfixer-ai/rankfixer-core" target="_blank" rel="noopener">GitHub</a>
+        </p>
+        <p>© 2026 RankFixer. All data published under MIT license.</p>
+    </footer>
+
+    <script>
+        const nav = document.querySelector('.nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 10) nav.classList.add('nav-scrolled');
+            else nav.classList.remove('nav-scrolled');
+        }, { passive: true });
+    </script>
+</body>
+</html>

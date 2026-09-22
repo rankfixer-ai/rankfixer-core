@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Why Your LLM Hallucinates (And How RAG Fixes It) — RankFixer Research</title>
+    <meta name="description" content="LLMs are confidently wrong. Here's why — and what actually fixes it. Three failure modes, four causes, and the production architecture that addresses them.">
+
+    <meta property="og:title" content="Why Your LLM Hallucinates (And How RAG Fixes It)">
+    <meta property="og:description" content="LLMs are confidently wrong. Here's why — and what actually fixes it. Three failure modes, four causes, and the production architecture that addresses them.">
+    <meta property="og:url" content="https://rankfixer.co/research/rag/why-llms-hallucinate/">
+    <meta property="og:type" content="article">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YXZVCPBCZN"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YXZVCPBCZN');
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Why Your LLM Hallucinates (And How RAG Fixes It)",
+      "description": "LLMs are confidently wrong. Here's why \u2014 and what actually fixes it. Three failure modes, four causes, and the production architecture that addresses them.",
+      "author": { "@type": "Person", "name": "Jan Michael Acibron" },
+      "publisher": { "@type": "Organization", "name": "RankFixer" },
+      "url": "https://rankfixer.co/research/rag/why-llms-hallucinate/"
+    }
+    </script>
+
+    <style>
+        :root {
+            --brand: #6C5CE7; --brand-hover: #5A4BD1; --bg: #0D0D1A; --bg-card: #151528;
+            --bg-input: #1E1E36; --text: #F0F0F5; --text-muted: #8888A0; --border: #2A2A45;
+            --ok: #00B894; --warn: #FDCB6E; --bad: #E17055;
+            --radius: 12px; --radius-sm: 8px; --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { font-size: 16px; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; scroll-padding-top: 5rem; }
+        body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.7; min-height: 100vh; -webkit-font-smoothing: antialiased; }
+        a { color: var(--brand); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        .nav { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; padding: 1rem 2rem; position: sticky; top: 0; z-index: 40; background: rgba(13,13,26,0.82); -webkit-backdrop-filter: blur(12px) saturate(160%); backdrop-filter: blur(12px) saturate(160%); border-bottom: 1px solid transparent; transition: box-shadow .35s ease, border-color .35s ease; }
+        .nav.nav-scrolled { box-shadow: 0 6px 24px rgba(0,0,0,.35); border-bottom-color: var(--border); }
+        .nav-logo { font-weight: 700; font-size: 1.2rem; text-decoration: none; color: var(--text); }
+        .nav-links { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; }
+        .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; transition: color .25s ease; }
+        .nav-links a:hover, .nav-links a.active { color: var(--text); }
+
+        .container { max-width: 820px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+        .article-meta { text-align: center; padding: 2rem 0 1rem; border-bottom: 1px solid var(--border); margin-bottom: 2rem; }
+        .article-meta .eyebrow { font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem; }
+        .article-meta h1 { font-size: clamp(1.6rem, 4.5vw, 2.4rem); font-weight: 800; line-height: 1.25; letter-spacing: -0.02em; }
+
+        article { font-size: 1rem; }
+        article h1 { display: none; }
+        article h2 { font-size: 1.4rem; font-weight: 700; margin: 2.5rem 0 1rem; letter-spacing: -0.01em; }
+        article h3 { font-size: 1.15rem; font-weight: 700; margin: 2rem 0 0.75rem; }
+        article p { margin-bottom: 1.25rem; color: var(--text-muted); }
+        article strong { color: var(--text); font-weight: 700; }
+        article em { font-style: italic; }
+        article ul, article ol { margin: 1rem 0 1.5rem 1.5rem; }
+        article li { margin-bottom: 0.5rem; color: var(--text-muted); }
+        article blockquote { border-left: 3px solid var(--brand); padding: 1rem 1.25rem; margin: 1.5rem 0; background: var(--bg-card); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+        article blockquote p { margin: 0; color: var(--text); font-style: italic; }
+        article code { background: var(--bg-input); padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 0.9em; font-family: 'SF Mono', Monaco, Consolas, monospace; color: var(--text); }
+        article pre { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; overflow-x: auto; margin: 1.5rem 0; }
+        article pre code { background: none; padding: 0; font-size: 0.85rem; line-height: 1.6; }
+        article table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.9rem; }
+        article th, article td { padding: 0.75rem; text-align: left; border-bottom: 1px solid var(--border); }
+        article th { font-weight: 700; color: var(--text); background: var(--bg-card); }
+        article td { color: var(--text-muted); }
+        article hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+
+        .cta-bar { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+        .cta-bar > p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem; }
+        .cta-block { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem 1.5rem; margin-bottom: 1rem; }
+        .cta-block p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.75rem; }
+        .cta-block p:last-child { margin-bottom: 0; }
+        .cta-block strong { color: var(--text); }
+        .cta-block .btn { display: inline-block; background: var(--brand); color: #fff; padding: 0.6rem 1.25rem; border-radius: var(--radius-sm); font-weight: 700; font-size: 0.9rem; text-decoration: none; margin-top: 0.25rem; }
+        .cta-block .btn:hover { background: var(--brand-hover); text-decoration: none; }
+
+        .site-footer { text-align: center; padding: 2rem 0; border-top: 1px solid var(--border); margin-top: 3rem; }
+        .site-footer p { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.3rem; }
+        .site-footer a { color: var(--text-muted); margin: 0 0.5rem; }
+
+        @media (max-width: 600px) {
+            .nav { flex-direction: column; gap: 0.5rem; padding: 0.75rem 1rem; }
+            .container { padding: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="nav">
+        <a href="/" class="nav-logo">Rankfixer</a>
+        <div class="nav-links">
+            <a href="/tools">Tools</a>
+            <a href="/blog">Blog</a>
+            <a href="/skills">Skills</a>
+            <a href="/portfolio">Portfolio</a>
+            <a href="/research" class="active">Research</a>
+            <a href="/about">About</a>
+            <a href="https://github.com/rankfixer-ai/rankfixer-core" target="_blank" rel="noopener">GitHub</a>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <header class="article-meta">
+            <div class="eyebrow">Research · RAG Architecture</div>
+            <h1>Why Your LLM Hallucinates (And How RAG Fixes It)</h1>
+        </header>
+
+        <article>
+            <h1 id="why-your-llm-hallucinates-and-how-rag-fixes-it">Why Your LLM Hallucinates (And How RAG Fixes It)</h1>
+            <hr />
+            <h2 id="the-hook">The Hook</h2>
+            <p>Your AI told a customer your return window was 60 days. It's 14. The customer is now quoting your own bot back at you in a dispute.</p>
+            <p>This is the most expensive thing about LLMs — not that they're wrong, but that they're <strong>confidently</strong> wrong. The AI doesn't say "I'm not sure." It doesn't say "Let me check." It generates a plausible, well-structured, confidently delivered answer that is completely fabricated.</p>
+            <p>And the fix isn't a bigger model. It's architecture.</p>
+            <p>This piece covers why LLMs hallucinate, why fine-tuning doesn't fix it, and what actually does.</p>
+            <hr />
+            <h2 id="what-hallucination-actually-is">What Hallucination Actually Is</h2>
+            <p>Hallucination isn't a bug. It's a feature of how LLMs work.</p>
+            <p>A Large Language Model is a prediction engine. Given a sequence of tokens (words, roughly), it generates the most statistically likely next token. It doesn't verify facts. It doesn't check sources. It doesn't know what "true" means. It knows what "plausible" looks like.</p>
+            <p>There are three distinct failure modes, and most articles conflate them:</p>
+            <h3 id="1-confabulation">1. Confabulation</h3>
+            <p>The model fills in gaps with invented content that's consistent with the prompt but unsupported by evidence.</p>
+            <blockquote>
+            <p><strong>Prompt:</strong> "What's our refund policy?"
+            <strong>Response:</strong> "Customers can return items within 60 days with a receipt."
+            <strong>Reality:</strong> Your policy says 14 days. The model invented 60 because it sounds reasonable for retail.</p>
+            </blockquote>
+            <h3 id="2-fabrication">2. Fabrication</h3>
+            <p>The model generates content that's entirely fictional — nonexistent APIs, fake case law, made-up product features.</p>
+            <blockquote>
+            <p><strong>Prompt:</strong> "Does Python have a built-in <code>sort_dict()</code> function?"
+            <strong>Response:</strong> "Yes, <code>sort_dict()</code> was added in Python 3.9 and sorts dictionaries by value."
+            <strong>Reality:</strong> No such function exists. The model hallucinated a plausible-sounding API.</p>
+            </blockquote>
+            <h3 id="3-grounded-error">3. Grounded error</h3>
+            <p>The model has the right context but draws the wrong conclusion from it.</p>
+            <blockquote>
+            <p><strong>Prompt:</strong> "Based on this document, can returns be made after 30 days?"
+            <strong>Response:</strong> "Yes, returns are accepted within 30 days."
+            <strong>Reality:</strong> The document says "no returns after 14 days." The model misread it.</p>
+            </blockquote>
+            <p><strong>Why this matters:</strong> Each failure mode has a different fix. Confabulation and fabrication are inherent to LLMs and require architectural solutions. Grounded error can be fixed with better evaluation and retrieval accuracy.</p>
+            <hr />
+            <h2 id="the-four-causes-of-hallucination">The Four Causes of Hallucination</h2>
+            <p>Most articles list one cause. There are four, and understanding them is the fix.</p>
+            <h3 id="cause-1-training-data-gaps">Cause 1: Training data gaps</h3>
+            <p>The model was trained on public internet data. It doesn't have your internal documents, your product catalog, your support tickets, or your proprietary research. When you ask it about information that isn't public, it doesn't say "I don't know." It guesses.</p>
+            <p>A 2024 Stanford RegLab study tested legal AI tools on legal research queries. Even purpose-built tools — trained on legal corpora — hallucinated 17–33% of the time. General-purpose GPT-4 hallucinated 43% of the same tasks. [^1]</p>
+            <p>This cause is about missing data. But not every hallucination has this cause — model capability, prompt ambiguity, and retrieval failure can all produce hallucinations even when the data exists.</p>
+            <h3 id="cause-2-distributional-drift">Cause 2: Distributional drift</h3>
+            <p>Facts change. Your refund policy updated last month. Your pricing changed yesterday. The model's training cutoff is months or years old. Anything that changed after that cutoff is unknown to the model.</p>
+            <p>This is why you can't fix hallucination by switching to a newer model. By the time the new model ships, your documents have changed again.</p>
+            <h3 id="cause-3-prompt-ambiguity">Cause 3: Prompt ambiguity</h3>
+            <p>Vague questions get fabricated answers.</p>
+            <blockquote>
+            <p>"What's the return window?" → The model has to guess: Which product? Which region? Which policy version?</p>
+            </blockquote>
+            <p>The more specific the prompt, the less room for fabrication. But you can't control how users phrase their questions. Customers don't write precise technical queries.</p>
+            <h3 id="cause-4-retrieval-failure">Cause 4: Retrieval failure</h3>
+            <p>This is the RAG implementation problem. You set up a RAG pipeline, but it retrieves the wrong chunks. The AI answers from the wrong document — confidently, with a citation, but wrong.</p>
+            <p>Retrieval failure is the cause you can address without retraining the model. Better chunking, better embeddings, better query expansion — these improve retrieval accuracy and reduce grounded errors.</p>
+            <p><strong>The key insight:</strong> Causes 1–3 are inherent to generation from training data alone. Fine-tuning doesn't fix them. Only architectural solutions — RAG, evaluation, guardrails — address them.</p>
+            <hr />
+            <h2 id="why-fine-tuning-doesnt-fix-hallucination">Why Fine-Tuning Doesn't Fix Hallucination</h2>
+            <p>This is the most common mistake: "Can you just fine-tune the model on our data so it stops hallucinating?"</p>
+            <p>Fine-tuning teaches a model <strong>style and format</strong>, not factual grounding.</p>
+            <p>What fine-tuning does:
+            - Adapts tone (more formal, more conversational)
+            - Enforces structure (always output JSON with these fields)
+            - Learns patterns (write like a clinician, write like a lawyer)</p>
+            <p>What fine-tuning doesn't do:
+            - Give the model access to your live documents
+            - Update facts when your content changes
+            - Reduce fabrication on queries outside the training data</p>
+            <p>A fine-tuned model will hallucinate <strong>in your brand voice</strong>. It will confidently deliver wrong answers in the exact tone and format you taught it.</p>
+            <p>Fine-tuning is valuable — but for a different problem. It's for when you need the AI to <em>sound</em> like your business. It's not for when you need the AI to <em>know</em> your business. [^2]</p>
+            <hr />
+            <h2 id="what-actually-fixes-it">What Actually Fixes It</h2>
+            <p>There's no single fix. Production systems use four tiers:</p>
+            <h3 id="tier-1-prompt-level-fixes">Tier 1: Prompt-level fixes</h3>
+            <p>The cheapest starting point. Add instructions like:</p>
+            <ul>
+            <li>"Answer only from the provided context"</li>
+            <li>"If the answer isn't in the context, say 'I don't know'"</li>
+            <li>"Do not guess or infer beyond what's explicitly stated"</li>
+            </ul>
+            <p><strong>Limitations:</strong> Prompt-level fixes can help, but they're not reliable. Models can still fabricate when under pressure to produce an answer, especially when instructions conflict or context is long. Measurement is the only way to know whether they're working in your system.</p>
+            <h3 id="tier-2-rag-the-main-fix">Tier 2: RAG (the main fix)</h3>
+            <p>RAG grounds answers in retrieved documents. The AI doesn't rely on its training data — it reads from your actual content.</p>
+            <p>How RAG fixes each failure mode:</p>
+            <table>
+            <thead>
+            <tr>
+            <th>Failure mode</th>
+            <th>How RAG addresses it</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+            <td>Confabulation</td>
+            <td>Answer is grounded in retrieved text, not model memory</td>
+            </tr>
+            <tr>
+            <td>Fabrication</td>
+            <td>A well-designed system can use absence of supporting evidence as a reason to abstain — but this behavior must be explicitly implemented and evaluated. It's not automatic.</td>
+            </tr>
+            <tr>
+            <td>Grounded error</td>
+            <td>Better retrieval = better context = correct reading</td>
+            </tr>
+            </tbody>
+            </table>
+            <p>RAG also gives you two things prompt fixes can't:</p>
+            <ol>
+            <li><strong>Source attribution</strong> — Every answer cites the document it came from. If the answer is wrong, you can trace it to the source.</li>
+            <li><strong>Graceful failure</strong> — If retrieval returns nothing relevant, the AI says "I don't know" instead of fabricating.</li>
+            </ol>
+            <p>RAG grounds answers in retrieved documents — which can reduce unsupported answers. Whether it does, and by how much, depends on retrieval accuracy, abstention logic, and evaluation.</p>
+            <h3 id="tier-3-evaluation-and-monitoring">Tier 3: Evaluation and monitoring</h3>
+            <p>RAG without evaluation is blind. You need to measure:</p>
+            <ul>
+            <li><strong>Retrieval accuracy</strong> — Is the system finding the right chunks? (Measure: recall@k, precision@k)</li>
+            <li><strong>Answer groundedness</strong> — Is the answer actually derived from the retrieved text?</li>
+            <li><strong>Hallucination rate</strong> — What percentage of answers contain fabricated content?</li>
+            </ul>
+            <p>Tools like Ragas (open-source), TruLens, and Phoenix (Arize) automate these checks. They run evaluation on every query in development and sample queries in production.</p>
+            <p>This is the "budget roughly 20–30% of build cost for evaluation" point. It's not optional. It's what separates a demo from a production system.</p>
+            <h3 id="tier-4-guardrails">Tier 4: Guardrails</h3>
+            <p>The final layer. Guardrails catch what RAG and evaluation miss:</p>
+            <ul>
+            <li><strong>Confidence thresholds</strong> — If the model's retrieval confidence falls below your calibrated threshold, route to a human</li>
+            <li><strong>Human-in-the-loop</strong> — High-stakes queries (legal, medical, financial) get human review</li>
+            <li><strong>Fallback responses</strong> — When retrieval fails, serve a defined "I don't know" response instead of letting the model guess</li>
+            </ul>
+            <p>Guardrails are the safety net. They assume hallucination will happen and minimize the damage when it does.</p>
+            <p><strong>The production answer:</strong> RAG + evaluation + guardrails. Not one alone.</p>
+            <hr />
+            <h2 id="the-cost-of-getting-it-wrong">The Cost of Getting It Wrong</h2>
+            <p>Hallucination isn't a technical problem. It's a business cost.</p>
+            <h3 id="customer-trust">Customer trust</h3>
+            <p>The refund policy example isn't hypothetical. Companies have had customers quote AI-generated policies back at them. Once a customer learns the AI is wrong, they stop trusting it — and they tell others.</p>
+            <h3 id="legal-exposure">Legal exposure</h3>
+            <p>In regulated industries (legal, healthcare, financial), a hallucinated answer isn't just embarrassing. It's a liability. Air Canada was held liable in 2024 for a chatbot hallucinating a discount policy. [^4]</p>
+            <h3 id="support-ticket-volume">Support ticket volume</h3>
+            <p>When the AI gives wrong answers, customers open tickets to correct them. The AI was supposed to reduce support load. Instead, it increases it.</p>
+            <h3 id="engineering-time">Engineering time</h3>
+            <p>Debugging hallucination is expensive. You're tracing wrong answers through retrieval, generation, and evaluation layers. Without proper tooling, it's weeks of work to identify the root cause.</p>
+            <p>The cost of building a proper RAG system is typically $15K–$60K. The cost of not building one is measured in customer churn, legal exposure, and engineering time. The ROI calculation isn't close.</p>
+            <hr />
+            <h2 id="when-rag-isnt-the-answer">When RAG Isn't the Answer</h2>
+            <p>Not every hallucination problem is a RAG problem. Sometimes the fix is simpler:</p>
+            <h3 id="prompt-ambiguity-fix-the-prompt">Prompt ambiguity → Fix the prompt</h3>
+            <p>If users are asking vague questions, add clarification prompts. "Which product are you asking about?" is often more effective than rebuilding your retrieval stack.</p>
+            <h3 id="wrong-model-for-the-task-use-a-different-model">Wrong model for the task → Use a different model</h3>
+            <p>A 7B parameter model will hallucinate more than a 70B model on complex reasoning tasks. If you're using a small model for a task that requires a bigger one, the fix isn't RAG — it's upgrading the model.</p>
+            <h3 id="no-documents-to-retrieve-from-rag-has-nothing-to-work-with">No documents to retrieve from → RAG has nothing to work with</h3>
+            <p>If the hallucination is about general knowledge (not your proprietary data), RAG can't help. The model needs to know world facts, and your documents don't contain them. In this case, the fix is either prompt engineering or accepting the limitation.</p>
+            <p><strong>The honest take:</strong> RAG is powerful, but it's not magic. It fixes hallucination caused by missing information. It doesn't fix hallucination caused by ambiguous prompts, inadequate models, or tasks the AI wasn't designed for.</p>
+            <hr />
+            <h2 id="the-hallucination-fix-matrix">The Hallucination Fix Matrix</h2>
+            <table>
+            <thead>
+            <tr>
+            <th>Cause of hallucination</th>
+            <th>Best fix</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+            <td>AI doesn't have your data</td>
+            <td>RAG</td>
+            </tr>
+            <tr>
+            <td>Facts changed after training cutoff</td>
+            <td>RAG</td>
+            </tr>
+            <tr>
+            <td>Vague user queries</td>
+            <td>Prompt engineering</td>
+            </tr>
+            <tr>
+            <td>Wrong chunks retrieved</td>
+            <td>Better retrieval (chunking, embeddings, reranking)</td>
+            </tr>
+            <tr>
+            <td>Model ignoring instructions</td>
+            <td>Evaluation + guardrails</td>
+            </tr>
+            <tr>
+            <td>Model is too small for the task</td>
+            <td>Use a larger model</td>
+            </tr>
+            <tr>
+            <td>No documents exist for the topic</td>
+            <td>Accept the limitation</td>
+            </tr>
+            </tbody>
+            </table>
+            <hr />
+            <h2 id="how-i-can-help">How I Can Help</h2>
+            <p>I build AI systems where knowledge, evidence, decisions, and actions are traceable. RAG is one pattern I use when the problem requires external or proprietary knowledge at inference time.</p>
+            <p><strong>Recent work:</strong> I built an adaptive learning engine. It's not a RAG system — but building it forced the same decisions a RAG pipeline demands: how to chunk by structure, how to retrieve relevant context, how to verify provenance, and how to evaluate whether the system is working. <a href="/research/rag/case-study-ai-learning-engine/">See the case study →</a></p>
+            <p><strong>My approach:</strong></p>
+            <ol>
+            <li><strong>Audit</strong> — What does the system need to know? What actions does it need to take?</li>
+            <li><strong>Design</strong> — Architecture that fits the problem: retrieval, evidence, verification, governance</li>
+            <li><strong>Build</strong> — Working system in typically 2-6 weeks, not months</li>
+            <li><strong>Evaluate</strong> — Measure retrieval accuracy, groundedness, and answer quality before deploying</li>
+            <li><strong>Deploy</strong> — You own the code, the data, and the pipeline</li>
+            </ol>
+            <p><strong>Have a hallucination problem?</strong> <a href="/contact">Let's talk →</a></p>
+            <hr />
+            <h2 id="the-rag-content-cluster">The RAG Content Cluster</h2>
+            <p>This article is part of a cluster on RAG. Explore deeper:</p>
+            <ul>
+            <li><a href="/research/rag/what-is-rag/">What is RAG? — The Definitional Guide</a></li>
+            <li><a href="/research/rag/rag-vs-fine-tuning/">RAG vs Fine-Tuning: Which Does Your Business Need?</a></li>
+            <li><a href="/research/rag/5-signs-you-need-rag/">5 Signs Your Business Needs RAG, Not a Bigger Model</a></li>
+            <li><a href="/research/rag/how-to-build-rag-pipeline/">How to Build a RAG Pipeline: A Practical Guide</a></li>
+            <li><a href="/research/rag/rag-architecture/">RAG Architecture Explained: Chunking, Embeddings, Retrieval, and the Decisions That Matter</a></li>
+            <li><a href="/research/rag/rag-cost-breakdown/">How Much Does a RAG Pipeline Actually Cost?</a></li>
+            <li><a href="/research/rag/case-study-ai-learning-engine/">Case Study: Building an Adaptive Learning Engine (Where RAG Fits)</a></li>
+            <li><a href="/research/rag/rag-consultant/">What to Look for in a RAG Consultant (And What to Avoid)</a></li>
+            </ul>
+            <hr />
+            <h2 id="sources">Sources</h2>
+            <p>[^1]: Stanford RegLab and Stanford Human-Centered AI Institute, 2024. Tested Lexis+ AI, Westlaw AI-Assisted Research, Practical Law AI, and GPT-4 on legal research queries. Purpose-built tools hallucinated on 17–33% of queries; GPT-4 hallucinated on 43%. Primary source: reglab.stanford.edu</p>
+            <p>[^2]: For the full RAG vs. fine-tuning comparison — when to use which, and why — see <a href="/research/rag/rag-vs-fine-tuning/">RAG vs Fine-Tuning: Which Does Your Business Need?</a></p>
+            <p>[^3]: For the full RAG pipeline breakdown — chunking, embeddings, retrieval, generation, evaluation — see <a href="/research/rag/what-is-rag/">What is RAG? — The Definitional Guide</a></p>
+            <p>[^4]: Moffatt v. Air Canada, 2024. The airline's chatbot hallucinated a discount policy for bereavement fares. The court held the airline responsible for the bot's statements. A landmark case for AI liability.</p>
+            <hr />
+        </article>
+
+        <div class="cta-bar">
+            <p><em>This piece is part of an applied research program on how AI systems retrieve, cite, and govern knowledge.</em></p>
+
+            <div class="cta-block">
+                <p><strong>See the full research →</strong> <a href="/research/">The RankFixer research program</a></p>
+                <p><strong>See how this works in practice →</strong> <a href="/portfolio/">The portfolio</a></p>
+            </div>
+
+            <div class="cta-block">
+                <p><strong>Need help building this?</strong></p>
+                <p>I build the systems this research describes. Tell me what you're building — no pitch, just questions about your problem.</p>
+                <a href="/contact/" class="btn">Start a conversation →</a>
+            </div>
+        </div>
+
+    </div>
+
+    <footer class="site-footer">
+        <p>RankFixer — evidence-first governance for AI systems.</p>
+        <p>
+            <a href="/about">About</a>
+            <a href="/research">Research</a>
+            <a href="/portfolio">Portfolio</a>
+            <a href="https://github.com/rankfixer-ai/rankfixer-core" target="_blank" rel="noopener">GitHub</a>
+        </p>
+        <p>© 2026 RankFixer. All data published under MIT license.</p>
+    </footer>
+
+    <script>
+        const nav = document.querySelector('.nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 10) nav.classList.add('nav-scrolled');
+            else nav.classList.remove('nav-scrolled');
+        }, { passive: true });
+    </script>
+</body>
+</html>

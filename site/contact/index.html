@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Contact | RankFixer</title>
+    <meta name="description" content="Have a use case? Tell me what you're building. I respond within 24 hours.">
+
+    <style>
+        :root {
+            --brand: #6C5CE7; --brand-hover: #5A4BD1; --bg: #0D0D1A; --bg-card: #151528;
+            --bg-input: #1E1E36; --text: #F0F0F5; --text-muted: #8888A0; --border: #2A2A45;
+            --ok: #00B894; --warn: #FDCB6E; --bad: #E17055;
+            --radius: 12px; --radius-sm: 8px; --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { font-size: 16px; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+        body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.6; min-height: 100vh; -webkit-font-smoothing: antialiased; }
+        a { color: var(--brand); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        .nav { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; padding: 1rem 2rem; border-bottom: 1px solid var(--border); }
+        .nav-logo { font-weight: 700; font-size: 1.2rem; text-decoration: none; color: var(--text); }
+        .nav-links { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; }
+        .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; }
+        .nav-links a:hover { color: var(--text); }
+        .nav-links a.active { color: var(--text); font-weight: 700; }
+
+        .container { max-width: 700px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+        /* HERO */
+        .hero { text-align: center; padding: 3rem 0 2rem; }
+        .hero h1 { font-size: clamp(1.8rem, 5vw, 2.8rem); font-weight: 800; line-height: 1.2; letter-spacing: -0.02em; margin-bottom: 1rem; }
+        .hero h1 .highlight { background: linear-gradient(135deg, var(--brand), #A29BFE); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .hero p { font-size: 1.05rem; color: var(--text-muted); max-width: 550px; margin: 0 auto 1.5rem; }
+
+        /* SECTION */
+        .section { padding: 2rem 0; border-top: 1px solid var(--border); }
+        .section-title { font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1.5rem; }
+
+        /* CARDS */
+        .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1rem; }
+        .card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .card p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.75rem; }
+        .card p:last-child { margin-bottom: 0; }
+
+        /* FORM */
+        .form-group { margin-bottom: 1.25rem; }
+        .form-group label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--text-muted); margin-bottom: 0.4rem; }
+        .form-group input, .form-group textarea { width: 100%; background: var(--bg-input); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.7rem 0.9rem; color: var(--text); font-family: var(--font); font-size: 0.9rem; transition: border-color 0.2s; }
+        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--brand); }
+        .form-group textarea { min-height: 120px; resize: vertical; }
+
+        /* BUTTONS */
+        .btn { display: inline-block; background: var(--brand); color: #fff; border: none; padding: 0.7rem 1.5rem; font-size: 0.9rem; font-weight: 700; cursor: pointer; border-radius: var(--radius-sm); font-family: var(--font); text-decoration: none; }
+        .btn:hover { background: var(--brand-hover); text-decoration: none; }
+        .btn.secondary { background: transparent; color: var(--brand); border: 1px solid var(--brand); }
+
+        /* NOTE */
+        .note { font-size: 0.8rem; color: var(--text-muted); text-align: center; margin-top: 1rem; }
+
+        /* FOOTER */
+        .site-footer { text-align: center; padding: 2rem 0; border-top: 1px solid var(--border); margin-top: 2rem; }
+        .site-footer p { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.3rem; }
+        .site-footer a { color: var(--text-muted); margin: 0 0.5rem; }
+
+        /* SMOOTH NAV */
+        html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+        .nav { position: sticky; top: 0; z-index: 40; background: rgba(13,13,26,0.82); -webkit-backdrop-filter: blur(12px) saturate(160%); backdrop-filter: blur(12px) saturate(160%); border-bottom: 1px solid transparent; transition: box-shadow .35s ease, border-color .35s ease; }
+        .nav.nav-scrolled { box-shadow: 0 6px 24px rgba(0,0,0,.35); border-bottom-color: var(--border); }
+        .nav-logo { transition: opacity .25s ease, transform .25s ease; }
+        .nav-links a { position: relative; transition: color .25s ease; }
+        .nav-links a::after { content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 2px; border-radius: 2px; background: var(--brand); transform: scaleX(0); transform-origin: center; transition: transform .3s ease; }
+        .nav-links a:hover { color: var(--text); }
+        .nav-links a:hover::after, .nav-links a:focus-visible::after, .nav-links a[aria-current="page"]::after { transform: scaleX(1); }
+
+        @media (max-width: 600px) {
+            .nav { flex-direction: column; gap: 0.5rem; padding: 0.75rem 1rem; }
+            .container { padding: 1rem; }
+            .hero h1 { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="nav">
+        <a href="/" class="nav-logo">Rankfixer</a>
+        <div class="nav-links">
+            <a href="/tools">Tools</a>
+            <a href="/blog">Blog</a>
+            <a href="/skills">Skills</a>
+            <a href="/portfolio">Portfolio</a>
+            <a href="/research">Research</a>
+            <a href="/contact" aria-current="page" class="active">Contact</a>
+            <a href="https://github.com/rankfixer-ai/rankfixer-core" target="_blank" rel="noopener">GitHub</a>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <header class="hero">
+            <h1>Let's <span class="highlight">Talk</span></h1>
+            <p>Have a use case? Tell me what you're building, what's failing, and what "done" looks like. I respond within 24 hours.</p>
+        </header>
+
+        <!-- CONTACT FORM -->
+        <section class="section">
+            <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                <input type="hidden" name="form-name" value="contact" />
+                <p style="display: none;">
+                    <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+                </p>
+
+                <div class="card">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="company">Company (optional)</label>
+                        <input type="text" id="company" name="company" />
+                    </div>
+                    <div class="form-group">
+                        <label for="message">What are you building?</label>
+                        <textarea id="message" name="message" placeholder="Describe the problem, the current setup, and what success looks like." required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Send Message</button>
+                    <p class="note">I respond within 24 hours. If it's urgent, include "URGENT" in the message.</p>
+                </div>
+            </form>
+        </section>
+
+        <!-- OTHER WAYS -->
+        <section class="section">
+            <div class="section-title">Not Ready to Reach Out?</div>
+            <div class="card">
+                <h3>Read the work first</h3>
+                <p>If you want to see how I think before making contact:</p>
+                <ul style="margin-left: 1.2rem; font-size: 0.9rem; color: var(--text-muted); margin-top: 0.5rem;">
+                    <li><a href="/portfolio">Portfolio</a> — projects I've built and what they demonstrate</li>
+                    <li><a href="/research">Research</a> — original data on AI skills demand</li>
+                    <li><a href="/blog">Blog</a> — practical explainers on RAG and agentic AI (coming soon)</li>
+                </ul>
+            </div>
+        </section>
+
+        <footer class="site-footer">
+            <p>RankFixer — Evidence-Driven AI Systems</p>
+            <p><a href="/">Home</a> <a href="/tools">Tools</a> <a href="/blog">Blog</a> <a href="/skills">Skills</a> <a href="/portfolio">Portfolio</a> <a href="/research">Research</a> <a href="/contact">Contact</a></p>
+        </footer>
+
+    </div>
+
+    <script src="/js/analytics.js"></script>
+</body>
+</html>

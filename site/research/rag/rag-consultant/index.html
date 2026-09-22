@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>What to Look for in a RAG Consultant (And What to Avoid) — RankFixer Research</title>
+    <meta name="description" content="Eight questions that separate someone who's built a RAG system from someone who's read about one.">
+
+    <meta property="og:title" content="What to Look for in a RAG Consultant (And What to Avoid)">
+    <meta property="og:description" content="Eight questions that separate someone who's built a RAG system from someone who's read about one.">
+    <meta property="og:url" content="https://rankfixer.co/research/rag/rag-consultant/">
+    <meta property="og:type" content="article">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YXZVCPBCZN"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YXZVCPBCZN');
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "What to Look for in a RAG Consultant (And What to Avoid)",
+      "description": "Eight questions that separate someone who's built a RAG system from someone who's read about one.",
+      "author": { "@type": "Person", "name": "Jan Michael Acibron" },
+      "publisher": { "@type": "Organization", "name": "RankFixer" },
+      "url": "https://rankfixer.co/research/rag/rag-consultant/"
+    }
+    </script>
+
+    <style>
+        :root {
+            --brand: #6C5CE7; --brand-hover: #5A4BD1; --bg: #0D0D1A; --bg-card: #151528;
+            --bg-input: #1E1E36; --text: #F0F0F5; --text-muted: #8888A0; --border: #2A2A45;
+            --ok: #00B894; --warn: #FDCB6E; --bad: #E17055;
+            --radius: 12px; --radius-sm: 8px; --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { font-size: 16px; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; scroll-padding-top: 5rem; }
+        body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.7; min-height: 100vh; -webkit-font-smoothing: antialiased; }
+        a { color: var(--brand); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        .nav { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; padding: 1rem 2rem; position: sticky; top: 0; z-index: 40; background: rgba(13,13,26,0.82); -webkit-backdrop-filter: blur(12px) saturate(160%); backdrop-filter: blur(12px) saturate(160%); border-bottom: 1px solid transparent; transition: box-shadow .35s ease, border-color .35s ease; }
+        .nav.nav-scrolled { box-shadow: 0 6px 24px rgba(0,0,0,.35); border-bottom-color: var(--border); }
+        .nav-logo { font-weight: 700; font-size: 1.2rem; text-decoration: none; color: var(--text); }
+        .nav-links { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; }
+        .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; transition: color .25s ease; }
+        .nav-links a:hover, .nav-links a.active { color: var(--text); }
+
+        .container { max-width: 820px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+        .article-meta { text-align: center; padding: 2rem 0 1rem; border-bottom: 1px solid var(--border); margin-bottom: 2rem; }
+        .article-meta .eyebrow { font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem; }
+        .article-meta h1 { font-size: clamp(1.6rem, 4.5vw, 2.4rem); font-weight: 800; line-height: 1.25; letter-spacing: -0.02em; }
+
+        article { font-size: 1rem; }
+        article h1 { display: none; }
+        article h2 { font-size: 1.4rem; font-weight: 700; margin: 2.5rem 0 1rem; letter-spacing: -0.01em; }
+        article h3 { font-size: 1.15rem; font-weight: 700; margin: 2rem 0 0.75rem; }
+        article p { margin-bottom: 1.25rem; color: var(--text-muted); }
+        article strong { color: var(--text); font-weight: 700; }
+        article em { font-style: italic; }
+        article ul, article ol { margin: 1rem 0 1.5rem 1.5rem; }
+        article li { margin-bottom: 0.5rem; color: var(--text-muted); }
+        article blockquote { border-left: 3px solid var(--brand); padding: 1rem 1.25rem; margin: 1.5rem 0; background: var(--bg-card); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+        article blockquote p { margin: 0; color: var(--text); font-style: italic; }
+        article code { background: var(--bg-input); padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 0.9em; font-family: 'SF Mono', Monaco, Consolas, monospace; color: var(--text); }
+        article pre { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; overflow-x: auto; margin: 1.5rem 0; }
+        article pre code { background: none; padding: 0; font-size: 0.85rem; line-height: 1.6; }
+        article table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.9rem; }
+        article th, article td { padding: 0.75rem; text-align: left; border-bottom: 1px solid var(--border); }
+        article th { font-weight: 700; color: var(--text); background: var(--bg-card); }
+        article td { color: var(--text-muted); }
+        article hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+
+        .cta-bar { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+        .cta-bar > p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem; }
+        .cta-block { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem 1.5rem; margin-bottom: 1rem; }
+        .cta-block p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.75rem; }
+        .cta-block p:last-child { margin-bottom: 0; }
+        .cta-block strong { color: var(--text); }
+        .cta-block .btn { display: inline-block; background: var(--brand); color: #fff; padding: 0.6rem 1.25rem; border-radius: var(--radius-sm); font-weight: 700; font-size: 0.9rem; text-decoration: none; margin-top: 0.25rem; }
+        .cta-block .btn:hover { background: var(--brand-hover); text-decoration: none; }
+
+        .site-footer { text-align: center; padding: 2rem 0; border-top: 1px solid var(--border); margin-top: 3rem; }
+        .site-footer p { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.3rem; }
+        .site-footer a { color: var(--text-muted); margin: 0 0.5rem; }
+
+        @media (max-width: 600px) {
+            .nav { flex-direction: column; gap: 0.5rem; padding: 0.75rem 1rem; }
+            .container { padding: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="nav">
+        <a href="/" class="nav-logo">Rankfixer</a>
+        <div class="nav-links">
+            <a href="/tools">Tools</a>
+            <a href="/blog">Blog</a>
+            <a href="/skills">Skills</a>
+            <a href="/portfolio">Portfolio</a>
+            <a href="/research" class="active">Research</a>
+            <a href="/about">About</a>
+            <a href="https://github.com/rankfixer-ai/rankfixer-core" target="_blank" rel="noopener">GitHub</a>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <header class="article-meta">
+            <div class="eyebrow">Research · RAG Architecture</div>
+            <h1>What to Look for in a RAG Consultant (And What to Avoid)</h1>
+        </header>
+
+        <article>
+            <h1 id="what-to-look-for-in-a-rag-consultant-and-what-to-avoid">What to Look for in a RAG Consultant (And What to Avoid)</h1>
+            <hr />
+            <h2 id="the-hook">The Hook</h2>
+            <p>RAG is in 61% of AI job postings. It's also in the pitch deck of every agency that added "AI" to its services page last quarter.</p>
+            <p>The result: a market full of people who can <em>talk</em> about RAG — and very few who can show you a system that survives contact with real users. The difference isn't credentials. It's whether they've actually hit the failures.</p>
+            <p>This is the buyer's guide: eight questions that separate someone who's built a RAG system from someone who's read about one.</p>
+            <hr />
+            <h2 id="the-core-problem">The Core Problem</h2>
+            <p>Hiring for RAG is harder than hiring for other technical work:</p>
+            <ul>
+            <li><strong>The demos all look the same.</strong> Every consultant can show a demo. Demos work on clean data and happy-path queries.</li>
+            <li><strong>The failure modes are invisible until production.</strong> Retrieval degradation, document drift, ungrounded answers — none show up in a demo.</li>
+            <li><strong>The vocabulary is new.</strong> "RAG," "hybrid search," "re-ranking," "groundedness" — many people use these words without having shipped systems that implement them.</li>
+            <li><strong>The work is not one skill.</strong> It's retrieval engineering, prompt design, evaluation, and infrastructure. Most people are strong in one area and weak in others.</li>
+            </ul>
+            <p>The question isn't whether they can build a RAG demo. It's whether they've built one that broke — and fixed it.</p>
+            <hr />
+            <h2 id="the-eight-questions">The Eight Questions</h2>
+            <p>Each question has what to ask, what a good answer sounds like, and what a bad answer sounds like.</p>
+            <hr />
+            <h3 id="q1-can-you-walk-me-through-a-rag-system-youve-built-end-to-end">Q1: "Can you walk me through a RAG system you've built end-to-end?"</h3>
+            <p><strong>Good answer:</strong> Specific — the corpus size, the chunking strategy, the retrieval pattern, the eval metrics, what broke and how they fixed it. They talk about failures unprompted.</p>
+            <p><strong>Bad answer:</strong> "I've worked on RAG projects." No specifics. Or they describe a tutorial they followed. Or the system is theoretical.</p>
+            <hr />
+            <h3 id="q2-how-do-you-handle-document-updates">Q2: "How do you handle document updates?"</h3>
+            <p><strong>Good answer:</strong> "Incremental ingestion, change detection, re-embedding strategy, versioning." They describe infrastructure.</p>
+            <p><strong>Bad answer:</strong> "We retrain the model." This is wrong. Fine-tuning doesn't handle document updates — it's the whole reason RAG exists.</p>
+            <hr />
+            <h3 id="q3-how-do-you-measure-retrieval-quality">Q3: "How do you measure retrieval quality?"</h3>
+            <p><strong>Good answer:</strong> Names metrics — recall@k, MRR, precision. Describes a labeled test set. Mentions that retrieval is separate from generation quality.</p>
+            <p><strong>Bad answer:</strong> "The answers look good." Or they can't name a metric. Or they conflate retrieval quality with answer quality.</p>
+            <hr />
+            <h3 id="q4-what-happens-when-the-retrieved-chunks-dont-contain-the-answer">Q4: "What happens when the retrieved chunks don't contain the answer?"</h3>
+            <p><strong>Good answer:</strong> "Graceful fallback — 'I don't know,' confidence thresholds, human handoff." They've thought about the boundary case.</p>
+            <p><strong>Bad answer:</strong> "The model figures it out." This is how hallucinations happen. The model will always produce <em>something</em>.</p>
+            <hr />
+            <h3 id="q5-how-do-you-evaluate-groundedness-whether-the-answer-comes-from-the-retrieved-context">Q5: "How do you evaluate groundedness — whether the answer comes from the retrieved context?"</h3>
+            <p><strong>Good answer:</strong> Describes LLM-as-judge, faithfulness checks, or citation verification. Understands the distinction between "correct" and "grounded."</p>
+            <p><strong>Bad answer:</strong> "We check the answers manually." Manual review doesn't scale. Or they don't understand the question.</p>
+            <hr />
+            <h3 id="q6-what-does-your-evaluation-framework-look-like-after-launch">Q6: "What does your evaluation framework look like after launch?"</h3>
+            <p><strong>Good answer:</strong> Continuous monitoring, regression tests, alerts on retrieval degradation. Evaluation as infrastructure, not a phase.</p>
+            <p><strong>Bad answer:</strong> "We test it before launch." That's not an answer — it's the absence of one.</p>
+            <hr />
+            <h3 id="q7-what-would-you-need-from-us-to-scope-this">Q7: "What would you need from us to scope this?"</h3>
+            <p><strong>Good answer:</strong> Document audit, query analysis, success criteria, access to real data. They want to understand the problem before quoting.</p>
+            <p><strong>Bad answer:</strong> A flat number without seeing anything. Or "we use our standard RAG solution" — there is no standard. Every corpus is different.</p>
+            <hr />
+            <h3 id="q8-whats-the-most-common-reason-rag-projects-fail">Q8: "What's the most common reason RAG projects fail?"</h3>
+            <p><strong>Good answer:</strong> No evaluation. Or retrieval that was never tuned. Or scope creep from "internal tool" to "customer-facing" without the corresponding investment. They've seen failure.</p>
+            <p><strong>Bad answer:</strong> "Data quality." That's true but generic — it's the answer someone who hasn't shipped gives. The real answer is about architecture and iteration.</p>
+            <hr />
+            <h2 id="red-flags">Red Flags</h2>
+            <p>Beyond the questions — the patterns that signal trouble:</p>
+            <table>
+            <thead>
+            <tr>
+            <th>Red Flag</th>
+            <th>Why It Matters</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+            <td><strong>No public work</strong></td>
+            <td>No case studies, no GitHub, no writing. For a young field, writing is often the only proof.</td>
+            </tr>
+            <tr>
+            <td><strong>Guaranteed results</strong></td>
+            <td>"We can guarantee 95% accuracy." Nobody can — it depends on your corpus.</td>
+            </tr>
+            <tr>
+            <td><strong>A single tool for every problem</strong></td>
+            <td>"We use [framework X] for everything." Different problems need different architectures.</td>
+            </tr>
+            <tr>
+            <td><strong>No questions about your data</strong></td>
+            <td>If they quote without seeing your documents, they're not scoping.</td>
+            </tr>
+            <tr>
+            <td><strong>Fine-tuning as the answer to everything</strong></td>
+            <td>It's one tool, not the only tool.</td>
+            </tr>
+            <tr>
+            <td><strong>No mention of evaluation</strong></td>
+            <td>If evaluation isn't in the proposal, it's not in the system.</td>
+            </tr>
+            </tbody>
+            </table>
+            <hr />
+            <h2 id="green-flags">Green Flags</h2>
+            <p>What to look for:</p>
+            <table>
+            <thead>
+            <tr>
+            <th>Green Flag</th>
+            <th>Why It Matters</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+            <td><strong>Specificity</strong></td>
+            <td>Numbers, architectures, failures. The details only come from experience.</td>
+            </tr>
+            <tr>
+            <td><strong>Honest limitations</strong></td>
+            <td>"This won't work for X." Consultants who know the boundaries.</td>
+            </tr>
+            <tr>
+            <td><strong>Written work</strong></td>
+            <td>Blog posts, case studies, technical writing — evidence of thinking.</td>
+            </tr>
+            <tr>
+            <td><strong>Questions about the problem</strong></td>
+            <td>They want to understand before they propose.</td>
+            </tr>
+            <tr>
+            <td><strong>A phased plan</strong></td>
+            <td>Prototype first, then production. Not a big-bang commitment.</td>
+            </tr>
+            <tr>
+            <td><strong>Evaluation in the proposal</strong></td>
+            <td>It's a line item, not an afterthought.</td>
+            </tr>
+            </tbody>
+            </table>
+            <hr />
+            <h2 id="a-scoping-checklist">A Scoping Checklist</h2>
+            <p>What to prepare before hiring — whether it's me or someone else:</p>
+            <table>
+            <thead>
+            <tr>
+            <th>Category</th>
+            <th>What to Gather</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+            <td><strong>Documents</strong></td>
+            <td>Sample of real documents, formats, size</td>
+            </tr>
+            <tr>
+            <td><strong>Queries</strong></td>
+            <td>20–50 real questions users ask</td>
+            </tr>
+            <tr>
+            <td><strong>Success criteria</strong></td>
+            <td>What does "working" mean? Accuracy? Latency? Citations?</td>
+            </tr>
+            <tr>
+            <td><strong>Constraints</strong></td>
+            <td>Privacy, budget, timeline, integration surface</td>
+            </tr>
+            <tr>
+            <td><strong>Existing system</strong></td>
+            <td>What's in place now? What's failing?</td>
+            </tr>
+            <tr>
+            <td><strong>Stakeholders</strong></td>
+            <td>Who decides? Who uses it?</td>
+            </tr>
+            </tbody>
+            </table>
+            <p>A consultant who asks for these has done this before. A consultant who doesn't is learning on your budget.</p>
+            <hr />
+            <h2 id="the-honest-frame">The Honest Frame</h2>
+            <p>I wrote this guide from the architecture side — the eight pieces in this cluster describe what a RAG system actually requires: chunking decisions, retrieval patterns, evaluation infrastructure, cost centers, and failure modes.</p>
+            <p>I build AI systems with the same architectural rigor RAG requires. The <a href="/research/rag/case-study-ai-learning-engine/">case study</a> documents what I've built — an adaptive learning engine that surfaces the same decisions a RAG system makes. Whether you build it yourself, hire someone else, or work with me, the questions above are the same ones I'd ask of any system I was evaluating.</p>
+            <p>The field is young. The honest position is: nobody has a decade of RAG experience. What matters is whether someone has shipped something, broken it, and fixed it — and whether they can talk about that honestly.</p>
+            <hr />
+            <h2 id="how-i-can-help">How I Can Help</h2>
+            <p>I build AI systems where knowledge, evidence, decisions, and actions are traceable. RAG is one pattern I use when the problem requires external or proprietary knowledge at inference time.</p>
+            <p><strong>Recent work:</strong> I built an adaptive learning engine. It's not a RAG system — but building it forced the same decisions a RAG pipeline demands: how to chunk by structure, how to retrieve relevant context, how to verify provenance, and how to evaluate whether the system is working. <a href="/research/rag/case-study-ai-learning-engine/">See the case study →</a></p>
+            <p><strong>My approach:</strong></p>
+            <ol>
+            <li><strong>Audit</strong> — What documents do you have? What queries do you need to answer?</li>
+            <li><strong>Design</strong> — Architecture that fits the problem: retrieval, evidence, verification, governance</li>
+            <li><strong>Build</strong> — Working system in typically 2-6 weeks, not months</li>
+            <li><strong>Evaluate</strong> — Metrics, test set, production monitoring before handoff</li>
+            <li><strong>Deploy</strong> — You own the code, the data, and the pipeline</li>
+            </ol>
+            <p><strong>Ready to scope?</strong> <a href="/contact">Book a scoping call →</a></p>
+            <hr />
+            <h2 id="the-rag-content-cluster">The RAG Content Cluster</h2>
+            <p>This article is part of a complete cluster on RAG. Explore all nine pieces:</p>
+            <ul>
+            <li><a href="/research/rag/what-is-rag/">What is RAG? — The Definitional Guide</a></li>
+            <li><a href="/research/rag/rag-vs-fine-tuning/">RAG vs Fine-Tuning: Which Does Your Business Need?</a></li>
+            <li><a href="/research/rag/why-llms-hallucinate/">Why Your LLM Hallucinates (And How RAG Fixes It)</a></li>
+            <li><a href="/research/rag/5-signs-you-need-rag/">5 Signs Your Business Needs RAG, Not a Bigger Model</a></li>
+            <li><a href="/research/rag/how-to-build-rag-pipeline/">How to Build a RAG Pipeline: A Practical Guide</a></li>
+            <li><a href="/research/rag/rag-architecture/">RAG Architecture Explained: Chunking, Embeddings, Retrieval, and the Decisions That Matter</a></li>
+            <li><a href="/research/rag/rag-cost-breakdown/">How Much Does a RAG Pipeline Actually Cost?</a></li>
+            <li><a href="/research/rag/case-study-ai-learning-engine/">Case Study: Building an Adaptive Learning Engine (Where RAG Fits)</a></li>
+            <li>What to Look for in a RAG Consultant (And What to Avoid)</li>
+            </ul>
+            <hr />
+            <h2 id="sources">Sources</h2>
+            <p>[^1]: Job posting analysis, Q1 2026 — 12,000+ AI/ML job postings within our 360K+ posting dataset. RAG appears in 61% of postings.</p>
+            <p>[^2]: For the architecture decisions a RAG system requires — see <a href="/research/rag/rag-architecture/">RAG Architecture Explained</a></p>
+            <p>[^3]: For the failures that separate demos from production — see <a href="/research/rag/how-to-build-rag-pipeline/">How to Build a RAG Pipeline</a></p>
+            <hr />
+        </article>
+
+        <div class="cta-bar">
+            <p><em>This piece is part of an applied research program on how AI systems retrieve, cite, and govern knowledge.</em></p>
+
+            <div class="cta-block">
+                <p><strong>See the full research →</strong> <a href="/research/">The RankFixer research program</a></p>
+                <p><strong>See how this works in practice →</strong> <a href="/portfolio/">The portfolio</a></p>
+            </div>
+
+            <div class="cta-block">
+                <p><strong>Need help building this?</strong></p>
+                <p>I build the systems this research describes. Tell me what you're building — no pitch, just questions about your problem.</p>
+                <a href="/contact/" class="btn">Start a conversation →</a>
+            </div>
+        </div>
+
+    </div>
+
+    <footer class="site-footer">
+        <p>RankFixer — evidence-first governance for AI systems.</p>
+        <p>
+            <a href="/about">About</a>
+            <a href="/research">Research</a>
+            <a href="/portfolio">Portfolio</a>
+            <a href="https://github.com/rankfixer-ai/rankfixer-core" target="_blank" rel="noopener">GitHub</a>
+        </p>
+        <p>© 2026 RankFixer. All data published under MIT license.</p>
+    </footer>
+
+    <script>
+        const nav = document.querySelector('.nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 10) nav.classList.add('nav-scrolled');
+            else nav.classList.remove('nav-scrolled');
+        }, { passive: true });
+    </script>
+</body>
+</html>

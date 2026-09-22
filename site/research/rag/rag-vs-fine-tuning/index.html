@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>RAG vs Fine-Tuning: Which Does Your Business Need? — RankFixer Research</title>
+    <meta name="description" content="Use RAG for knowledge. Use fine-tuning for style. Most production systems use both. A decision framework for matching the technique to the problem.">
+
+    <meta property="og:title" content="RAG vs Fine-Tuning: Which Does Your Business Need?">
+    <meta property="og:description" content="Use RAG for knowledge. Use fine-tuning for style. Most production systems use both. A decision framework for matching the technique to the problem.">
+    <meta property="og:url" content="https://rankfixer.co/research/rag/rag-vs-fine-tuning/">
+    <meta property="og:type" content="article">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YXZVCPBCZN"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YXZVCPBCZN');
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "RAG vs Fine-Tuning: Which Does Your Business Need?",
+      "description": "Use RAG for knowledge. Use fine-tuning for style. Most production systems use both. A decision framework for matching the technique to the problem.",
+      "author": { "@type": "Person", "name": "Jan Michael Acibron" },
+      "publisher": { "@type": "Organization", "name": "RankFixer" },
+      "url": "https://rankfixer.co/research/rag/rag-vs-fine-tuning/"
+    }
+    </script>
+
+    <style>
+        :root {
+            --brand: #6C5CE7; --brand-hover: #5A4BD1; --bg: #0D0D1A; --bg-card: #151528;
+            --bg-input: #1E1E36; --text: #F0F0F5; --text-muted: #8888A0; --border: #2A2A45;
+            --ok: #00B894; --warn: #FDCB6E; --bad: #E17055;
+            --radius: 12px; --radius-sm: 8px; --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { font-size: 16px; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; scroll-padding-top: 5rem; }
+        body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.7; min-height: 100vh; -webkit-font-smoothing: antialiased; }
+        a { color: var(--brand); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        .nav { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; padding: 1rem 2rem; position: sticky; top: 0; z-index: 40; background: rgba(13,13,26,0.82); -webkit-backdrop-filter: blur(12px) saturate(160%); backdrop-filter: blur(12px) saturate(160%); border-bottom: 1px solid transparent; transition: box-shadow .35s ease, border-color .35s ease; }
+        .nav.nav-scrolled { box-shadow: 0 6px 24px rgba(0,0,0,.35); border-bottom-color: var(--border); }
+        .nav-logo { font-weight: 700; font-size: 1.2rem; text-decoration: none; color: var(--text); }
+        .nav-links { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; }
+        .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; transition: color .25s ease; }
+        .nav-links a:hover, .nav-links a.active { color: var(--text); }
+
+        .container { max-width: 820px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+        .article-meta { text-align: center; padding: 2rem 0 1rem; border-bottom: 1px solid var(--border); margin-bottom: 2rem; }
+        .article-meta .eyebrow { font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem; }
+        .article-meta h1 { font-size: clamp(1.6rem, 4.5vw, 2.4rem); font-weight: 800; line-height: 1.25; letter-spacing: -0.02em; }
+
+        article { font-size: 1rem; }
+        article h1 { display: none; }
+        article h2 { font-size: 1.4rem; font-weight: 700; margin: 2.5rem 0 1rem; letter-spacing: -0.01em; }
+        article h3 { font-size: 1.15rem; font-weight: 700; margin: 2rem 0 0.75rem; }
+        article p { margin-bottom: 1.25rem; color: var(--text-muted); }
+        article strong { color: var(--text); font-weight: 700; }
+        article em { font-style: italic; }
+        article ul, article ol { margin: 1rem 0 1.5rem 1.5rem; }
+        article li { margin-bottom: 0.5rem; color: var(--text-muted); }
+        article blockquote { border-left: 3px solid var(--brand); padding: 1rem 1.25rem; margin: 1.5rem 0; background: var(--bg-card); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+        article blockquote p { margin: 0; color: var(--text); font-style: italic; }
+        article code { background: var(--bg-input); padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 0.9em; font-family: 'SF Mono', Monaco, Consolas, monospace; color: var(--text); }
+        article pre { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; overflow-x: auto; margin: 1.5rem 0; }
+        article pre code { background: none; padding: 0; font-size: 0.85rem; line-height: 1.6; }
+        article table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.9rem; }
+        article th, article td { padding: 0.75rem; text-align: left; border-bottom: 1px solid var(--border); }
+        article th { font-weight: 700; color: var(--text); background: var(--bg-card); }
+        article td { color: var(--text-muted); }
+        article hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+
+        .cta-bar { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+        .cta-bar > p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem; }
+        .cta-block { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem 1.5rem; margin-bottom: 1rem; }
+        .cta-block p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.75rem; }
+        .cta-block p:last-child { margin-bottom: 0; }
+        .cta-block strong { color: var(--text); }
+        .cta-block .btn { display: inline-block; background: var(--brand); color: #fff; padding: 0.6rem 1.25rem; border-radius: var(--radius-sm); font-weight: 700; font-size: 0.9rem; text-decoration: none; margin-top: 0.25rem; }
+        .cta-block .btn:hover { background: var(--brand-hover); text-decoration: none; }
+
+        .site-footer { text-align: center; padding: 2rem 0; border-top: 1px solid var(--border); margin-top: 3rem; }
+        .site-footer p { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.3rem; }
+        .site-footer a { color: var(--text-muted); margin: 0 0.5rem; }
+
+        @media (max-width: 600px) {
+            .nav { flex-direction: column; gap: 0.5rem; padding: 0.75rem 1rem; }
+            .container { padding: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="nav">
+        <a href="/" class="nav-logo">Rankfixer</a>
+        <div class="nav-links">
+            <a href="/tools">Tools</a>
+            <a href="/blog">Blog</a>
+            <a href="/skills">Skills</a>
+            <a href="/portfolio">Portfolio</a>
+            <a href="/research" class="active">Research</a>
+            <a href="/about">About</a>
+            <a href="https://github.com/rankfixer-ai/rankfixer-core" target="_blank" rel="noopener">GitHub</a>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <header class="article-meta">
+            <div class="eyebrow">Research · RAG Architecture</div>
+            <h1>RAG vs Fine-Tuning: Which Does Your Business Need?</h1>
+        </header>
+
+        <article>
+            <h1 id="rag-vs-fine-tuning-which-does-your-business-need">RAG vs Fine-Tuning: Which Does Your Business Need?</h1>
+            <hr />
+            <h2 id="the-one-sentence-answer">The One-Sentence Answer</h2>
+            <p>Use <strong>RAG</strong> when you need the AI to answer from your documents. Use <strong>fine-tuning</strong> when you need the AI to adopt a specific style, tone, or behavior. Most production systems use both.</p>
+            <hr />
+            <h2 id="the-question-behind-the-question">The Question Behind the Question</h2>
+            <p>When a client asks "should I use RAG or fine-tuning?", they're really asking: <strong>"How do I make the AI understand my business without spending a fortune?"</strong></p>
+            <p>The answer isn't either/or. It's about matching the technique to the problem.</p>
+            <hr />
+            <h2 id="what-rag-does-best">What RAG Does Best</h2>
+            <p>RAG gives the AI access to information it doesn't already have.</p>
+            <h3 id="ideal-use-cases">Ideal use cases</h3>
+            <ul>
+            <li><strong>Knowledge Q&amp;A</strong> — "What's our refund policy?" → AI retrieves the policy document and answers from it</li>
+            <li><strong>Technical support</strong> — "How do I configure X?" → AI retrieves the manual, not generic training data</li>
+            <li><strong>Legal/compliance</strong> — "Does our policy meet regulation Y?" → AI retrieves the specific regulation and compares</li>
+            <li><strong>Product recommendations</strong> — "What's the difference between Plan A and Plan B?" → AI retrieves current pricing, not last year's</li>
+            </ul>
+            <h3 id="what-rag-gives-you">What RAG gives you</h3>
+            <table>
+            <thead>
+            <tr>
+            <th>Benefit</th>
+            <th>Why It Matters</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+            <td><strong>Up-to-date answers</strong></td>
+            <td>Update a document, the AI's answers change immediately</td>
+            </tr>
+            <tr>
+            <td><strong>Source attribution</strong></td>
+            <td>Every answer cites the document it came from</td>
+            </tr>
+            <tr>
+            <td><strong>Lower cost</strong></td>
+            <td>No training runs; you pay for storage + inference only</td>
+            </tr>
+            <tr>
+            <td><strong>Faster iteration</strong></td>
+            <td>Add a new document, it's searchable in minutes</td>
+            </tr>
+            <tr>
+            <td><strong>Reduced hallucination</strong></td>
+            <td>Answers are grounded in retrieved text, not model memory</td>
+            </tr>
+            </tbody>
+            </table>
+            <h3 id="what-rag-doesnt-do">What RAG doesn't do</h3>
+            <ul>
+            <li>Change the AI's writing style or tone</li>
+            <li>Teach the AI a new format or structure</li>
+            <li>Make the AI "sound like your brand"</li>
+            </ul>
+            <p>That's fine-tuning's job.</p>
+            <hr />
+            <h2 id="what-fine-tuning-does-best">What Fine-Tuning Does Best</h2>
+            <p>Fine-tuning teaches the AI a new way of behaving.</p>
+            <h3 id="ideal-use-cases_1">Ideal use cases</h3>
+            <ul>
+            <li><strong>Brand voice</strong> — "Write in the tone of our marketing copy" → Model learns your style from examples</li>
+            <li><strong>Format adherence</strong> — "Always output JSON with these exact fields" → Model learns the structure</li>
+            <li><strong>Tone adjustment</strong> — "Be more formal" or "be more conversational" → Model adapts its language patterns</li>
+            <li><strong>Domain-specific generation</strong> — "Write medical summaries like a clinician" → Model learns the patterns of the domain</li>
+            </ul>
+            <h3 id="what-fine-tuning-gives-you">What fine-tuning gives you</h3>
+            <table>
+            <thead>
+            <tr>
+            <th>Benefit</th>
+            <th>Why It Matters</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+            <td><strong>Consistent style</strong></td>
+            <td>Every output matches your brand guidelines</td>
+            </tr>
+            <tr>
+            <td><strong>Format compliance</strong></td>
+            <td>Output always follows the required structure</td>
+            </tr>
+            <tr>
+            <td><strong>Behavioral change</strong></td>
+            <td>Model learns to act differently, not just know more</td>
+            </tr>
+            <tr>
+            <td><strong>No retrieval latency</strong></td>
+            <td>No vector lookup needed; faster inference</td>
+            </tr>
+            </tbody>
+            </table>
+            <h3 id="what-fine-tuning-doesnt-do">What fine-tuning doesn't do</h3>
+            <ul>
+            <li>Add new knowledge (the model still doesn't have your documents)</li>
+            <li>Update instantly (retraining takes days to weeks)</li>
+            <li>Solve hallucinations (the model still fabricates when uncertain)</li>
+            </ul>
+            <hr />
+            <h2 id="the-decision-framework">The Decision Framework</h2>
+            <p>Ask these four questions:</p>
+            <h3 id="1-whats-the-primary-problem">1. What's the primary problem?</h3>
+            <table>
+            <thead>
+            <tr>
+            <th>Problem</th>
+            <th>Solution</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+            <td>AI doesn't have my data</td>
+            <td>RAG</td>
+            </tr>
+            <tr>
+            <td>AI doesn't write like me</td>
+            <td>Fine-tuning</td>
+            </tr>
+            <tr>
+            <td>Both</td>
+            <td>RAG + Fine-tuning</td>
+            </tr>
+            </tbody>
+            </table>
+            <h3 id="2-how-often-does-the-content-change">2. How often does the content change?</h3>
+            <table>
+            <thead>
+            <tr>
+            <th>Change frequency</th>
+            <th>Best approach</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+            <td>Daily or weekly</td>
+            <td>RAG (instant updates)</td>
+            </tr>
+            <tr>
+            <td>Monthly or quarterly</td>
+            <td>Fine-tuning (batch retrain)</td>
+            </tr>
+            <tr>
+            <td>Rarely</td>
+            <td>Either works</td>
+            </tr>
+            </tbody>
+            </table>
+            <h3 id="3-do-you-have-labeled-examples">3. Do you have labeled examples?</h3>
+            <table>
+            <thead>
+            <tr>
+            <th>Data available</th>
+            <th>Best approach</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+            <td>Raw documents (PDFs, wikis, etc.)</td>
+            <td>RAG</td>
+            </tr>
+            <tr>
+            <td>Input-output examples (prompt → desired response)</td>
+            <td>Fine-tuning</td>
+            </tr>
+            <tr>
+            <td>Both</td>
+            <td>RAG + Fine-tuning</td>
+            </tr>
+            </tbody>
+            </table>
+            <h3 id="4-whats-your-timeline">4. What's your timeline?</h3>
+            <table>
+            <thead>
+            <tr>
+            <th>Timeline</th>
+            <th>Best approach</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+            <td>Days to weeks</td>
+            <td>RAG (deploy fast)</td>
+            </tr>
+            <tr>
+            <td>Weeks to months</td>
+            <td>Fine-tuning (requires training)</td>
+            </tr>
+            <tr>
+            <td>Immediate need, long-term polish</td>
+            <td>RAG first, add fine-tuning later</td>
+            </tr>
+            </tbody>
+            </table>
+            <hr />
+            <h2 id="the-comparison-table">The Comparison Table</h2>
+            <table>
+            <thead>
+            <tr>
+            <th>Factor</th>
+            <th>RAG</th>
+            <th>Fine-Tuning</th>
+            <th>RAG + Fine-Tuning</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+            <td><strong>Primary purpose</strong></td>
+            <td>Knowledge retrieval</td>
+            <td>Style/behavior</td>
+            <td>Knowledge + style</td>
+            </tr>
+            <tr>
+            <td><strong>Cost</strong></td>
+            <td>$ — storage + inference</td>
+            <td>$$ — $15K–$50K+ per run</td>
+            <td>$$$ — combined</td>
+            </tr>
+            <tr>
+            <td><strong>Update speed</strong></td>
+            <td>Real-time</td>
+            <td>Days to weeks</td>
+            <td>Combined</td>
+            </tr>
+            <tr>
+            <td><strong>Hallucination</strong></td>
+            <td>Reduced (grounded)</td>
+            <td>Not solved</td>
+            <td>Reduced</td>
+            </tr>
+            <tr>
+            <td><strong>Best for</strong></td>
+            <td>Document Q&amp;A</td>
+            <td>Brand voice, format</td>
+            <td>Full production systems</td>
+            </tr>
+            <tr>
+            <td><strong>Data needed</strong></td>
+            <td>Your documents</td>
+            <td>Labeled examples</td>
+            <td>Both</td>
+            </tr>
+            <tr>
+            <td><strong>Time to deploy</strong></td>
+            <td>Days–weeks</td>
+            <td>Weeks–months</td>
+            <td>Weeks–months</td>
+            </tr>
+            <tr>
+            <td><strong>Maintenance</strong></td>
+            <td>Low (update docs)</td>
+            <td>Medium (retrain on change)</td>
+            <td>Medium</td>
+            </tr>
+            </tbody>
+            </table>
+            <hr />
+            <h2 id="the-recommended-approach-rag-first-fine-tune-second">The Recommended Approach: RAG First, Fine-Tune Second</h2>
+            <p>For most businesses, the sequence is:</p>
+            <h3 id="phase-1-rag-weeks-1-4">Phase 1: RAG (Weeks 1-4)</h3>
+            <ol>
+            <li>Ingest your documents into a vector database</li>
+            <li>Build the retrieval pipeline</li>
+            <li>Connect to your chat interface or support system</li>
+            <li>Measure retrieval accuracy and answer quality</li>
+            </ol>
+            <p><strong>You now have a working system.</strong> It answers from your documents, cites sources, and updates in real-time.</p>
+            <h3 id="phase-2-evaluate-weeks-4-6">Phase 2: Evaluate (Weeks 4-6)</h3>
+            <ol>
+            <li>Test with real user queries</li>
+            <li>Identify gaps: Are answers accurate? Are they in the right tone?</li>
+            <li>Determine if the writing style needs adjustment</li>
+            </ol>
+            <h3 id="phase-3-fine-tune-weeks-6-12-if-needed">Phase 3: Fine-tune (Weeks 6-12, if needed)</h3>
+            <ol>
+            <li>Collect examples of desired output style</li>
+            <li>Fine-tune a model on your brand voice, format requirements, or tone</li>
+            <li>Deploy the fine-tuned model as the generator in your RAG pipeline</li>
+            </ol>
+            <p><strong>You now have a system that answers from your documents AND sounds like your business.</strong></p>
+            <hr />
+            <h2 id="cost-comparison-real-numbers">Cost Comparison: Real Numbers</h2>
+            <p>Based on 2026 market data:</p>
+            <h3 id="rag-pipeline-build">RAG pipeline (build)</h3>
+            <table>
+            <thead>
+            <tr>
+            <th>Component</th>
+            <th>Monthly Cost</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+            <td>Vector database (managed)</td>
+            <td>$70–$700</td>
+            </tr>
+            <tr>
+            <td>Embedding API</td>
+            <td>$0.02–$0.10 per 1K tokens</td>
+            </tr>
+            <tr>
+            <td>LLM inference (GPT-4o-mini)</td>
+            <td>$0.15 per 1M input tokens</td>
+            </tr>
+            <tr>
+            <td><strong>Total (10K docs, 100 queries/day)</strong></td>
+            <td><strong>$50–$200/month</strong></td>
+            </tr>
+            </tbody>
+            </table>
+            <h3 id="fine-tuning-one-time">Fine-tuning (one-time)</h3>
+            <table>
+            <thead>
+            <tr>
+            <th>Task</th>
+            <th>Cost Range</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+            <td>Dataset preparation</td>
+            <td>$2K–$10K (if outsourced)</td>
+            </tr>
+            <tr>
+            <td>Training (cloud GPU)</td>
+            <td>$5K–$30K per run</td>
+            </tr>
+            <tr>
+            <td>Evaluation</td>
+            <td>$2K–$5K</td>
+            </tr>
+            <tr>
+            <td><strong>Total per iteration</strong></td>
+            <td><strong>$10K–$45K</strong></td>
+            </tr>
+            </tbody>
+            </table>
+            <h3 id="rag-fine-tuning-combined">RAG + Fine-tuning (combined)</h3>
+            <table>
+            <thead>
+            <tr>
+            <th>Phase</th>
+            <th>Cost</th>
+            <th>Timeline</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+            <td>RAG build</td>
+            <td>$5K–$15K</td>
+            <td>2–4 weeks</td>
+            </tr>
+            <tr>
+            <td>Fine-tune (one round)</td>
+            <td>$10K–$45K</td>
+            <td>4–8 weeks</td>
+            </tr>
+            <tr>
+            <td><strong>Total</strong></td>
+            <td><strong>typically $15K–$60K</strong></td>
+            <td><strong>6–12 weeks</strong></td>
+            </tr>
+            </tbody>
+            </table>
+            <hr />
+            <h2 id="when-to-use-only-rag">When to Use Only RAG</h2>
+            <p>Fine-tuning isn't always necessary. Skip it if:</p>
+            <ul>
+            <li><strong>Your documents are well-written</strong> — The AI can answer in the existing tone</li>
+            <li><strong>You're building an internal tool</strong> — Employees care about accuracy, not brand voice</li>
+            <li><strong>You need to move fast</strong> — RAG deploys in days; fine-tuning takes weeks</li>
+            <li><strong>Your content changes frequently</strong> — Fine-tuning requires retraining on every significant change</li>
+            </ul>
+            <p><strong>Most internal AI systems (knowledge bases, support bots, research assistants) use RAG alone.</strong></p>
+            <hr />
+            <h2 id="when-to-use-only-fine-tuning">When to Use Only Fine-Tuning</h2>
+            <p>RAG isn't always necessary. Skip it if:</p>
+            <ul>
+            <li><strong>The knowledge is already in the training data</strong> — General facts, common procedures, public information</li>
+            <li><strong>You only need style/format changes</strong> — The model already knows the content; you need it to present differently</li>
+            <li><strong>You have no documents to retrieve from</strong> — The task is pure generation, not Q&amp;A</li>
+            <li><strong>You need zero retrieval latency</strong> — Real-time applications where every millisecond counts</li>
+            </ul>
+            <p><strong>Creative tasks (copywriting, content generation, tone adaptation) often use fine-tuning alone.</strong></p>
+            <hr />
+            <h2 id="the-verdict">The Verdict</h2>
+            <table>
+            <thead>
+            <tr>
+            <th>If you need...</th>
+            <th>Use...</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+            <td>Answers from your documents</td>
+            <td>RAG</td>
+            </tr>
+            <tr>
+            <td>AI that writes in your brand voice</td>
+            <td>Fine-tuning</td>
+            </tr>
+            <tr>
+            <td>Both</td>
+            <td>RAG + Fine-tuning</td>
+            </tr>
+            <tr>
+            <td>Fastest time to value</td>
+            <td>RAG</td>
+            </tr>
+            <tr>
+            <td>Production system that scales</td>
+            <td>RAG + Fine-tuning</td>
+            </tr>
+            <tr>
+            <td>Lowest cost</td>
+            <td>RAG</td>
+            </tr>
+            </tbody>
+            </table>
+            <p><strong>Start with RAG. Add fine-tuning only when you've proven the retrieval works and the writing style needs improvement.</strong></p>
+            <hr />
+            <h2 id="common-mistakes">Common Mistakes</h2>
+            <h3 id="mistake-1-fine-tuning-when-you-should-use-rag">Mistake 1: Fine-tuning when you should use RAG</h3>
+            <p>A client asks: "Can you train the AI on our product catalog?" If the catalog changes weekly, fine-tuning is the wrong answer. RAG gives instant updates; fine-tuning requires retraining every time a price changes.</p>
+            <h3 id="mistake-2-rag-without-evaluating-retrieval">Mistake 2: RAG without evaluating retrieval</h3>
+            <p>Building a RAG pipeline is easy. Building one that retrieves the <em>right</em> chunks is hard. If retrieval accuracy is below 80%, the AI will answer from the wrong documents — and hallucinate in new, exciting ways.</p>
+            <h3 id="mistake-3-expecting-fine-tuning-to-solve-hallucination">Mistake 3: Expecting fine-tuning to solve hallucination</h3>
+            <p>Fine-tuning changes how the AI writes, not whether it knows the truth. A fine-tuned model will hallucinate in your brand voice. RAG reduces hallucination by grounding answers in documents.</p>
+            <h3 id="mistake-4-using-rag-for-style-tasks">Mistake 4: Using RAG for style tasks</h3>
+            <p>If you need the AI to "sound more professional" or "write like a lawyer," RAG won't help. The AI retrieves your documents and answers in its default tone. Only fine-tuning changes the tone.</p>
+            <hr />
+            <h2 id="what-this-means-for-your-project">What This Means for Your Project</h2>
+            <p>If you're building an AI system, start with these questions:</p>
+            <ol>
+            <li><strong>What information does the AI need that it doesn't have?</strong> → RAG</li>
+            <li><strong>How should the AI sound when it answers?</strong> → Fine-tuning</li>
+            <li><strong>How often does the information change?</strong> → RAG if frequent, fine-tuning if stable</li>
+            <li><strong>What's your budget and timeline?</strong> → RAG if limited, RAG + fine-tuning if resources allow</li>
+            </ol>
+            <p>The answers tell you which technique to use — and in what order.</p>
+            <hr />
+            <h2 id="the-rag-content-cluster">The RAG Content Cluster</h2>
+            <p>This article is part of a cluster on RAG. Explore deeper:</p>
+            <ul>
+            <li><a href="/research/rag/what-is-rag/">What is RAG? — The Definitional Guide</a></li>
+            <li><a href="/research/rag/why-llms-hallucinate/">Why Your LLM Hallucinates (And How RAG Fixes It)</a></li>
+            <li><a href="/research/rag/5-signs-you-need-rag/">5 Signs Your Business Needs RAG, Not a Bigger Model</a></li>
+            <li><a href="/research/rag/how-to-build-rag-pipeline/">How to Build a RAG Pipeline: A Practical Guide</a></li>
+            <li><a href="/research/rag/rag-architecture/">RAG Architecture Explained: Chunking, Embeddings, Retrieval, and the Decisions That Matter</a></li>
+            <li><a href="/research/rag/rag-cost-breakdown/">How Much Does a RAG Pipeline Actually Cost?</a></li>
+            <li><a href="/research/rag/case-study-ai-learning-engine/">Case Study: Building an Adaptive Learning Engine (Where RAG Fits)</a></li>
+            <li><a href="/research/rag/rag-consultant/">What to Look for in a RAG Consultant (And What to Avoid)</a></li>
+            </ul>
+            <hr />
+            <h2 id="how-i-can-help">How I Can Help</h2>
+            <p>I build AI systems where knowledge, evidence, decisions, and actions are traceable. RAG is one pattern I use when the problem requires external or proprietary knowledge at inference time.</p>
+            <p><strong>Recent work:</strong> I built an adaptive learning engine. It's not a RAG system — but building it forced the same decisions a RAG pipeline demands: how to chunk by structure, how to retrieve relevant context, how to verify provenance, and how to evaluate whether the system is working. <a href="/research/rag/case-study-ai-learning-engine/">See the case study →</a></p>
+            <p><strong>My approach:</strong></p>
+            <ol>
+            <li><strong>Audit</strong> — What does the system need to know? What actions does it need to take?</li>
+            <li><strong>Design</strong> — Architecture that fits the problem: retrieval, evidence, verification, governance</li>
+            <li><strong>Build</strong> — Working system in typically 2-6 weeks, not months</li>
+            <li><strong>Evaluate</strong> — Measure retrieval accuracy and answer quality</li>
+            <li><strong>Deploy</strong> — You own the code, the data, and the pipeline</li>
+            </ol>
+            <p><strong>Have a use case?</strong> <a href="/contact">Let's talk →</a></p>
+            <hr />
+            <h2 id="sources">Sources</h2>
+            <p>[^1]: Job posting analysis, Q1 2026 — 12,000+ AI/ML job postings within our 360K+ posting dataset. RAG appears in 61% of postings; vector databases in 38%.
+            [^2]: Fine-tuning cost estimates based on 2026 cloud GPU pricing (AWS, GCP, Azure) and dataset preparation market rates.</p>
+            <hr />
+        </article>
+
+        <div class="cta-bar">
+            <p><em>This piece is part of an applied research program on how AI systems retrieve, cite, and govern knowledge.</em></p>
+
+            <div class="cta-block">
+                <p><strong>See the full research →</strong> <a href="/research/">The RankFixer research program</a></p>
+                <p><strong>See how this works in practice →</strong> <a href="/portfolio/">The portfolio</a></p>
+            </div>
+
+            <div class="cta-block">
+                <p><strong>Need help building this?</strong></p>
+                <p>I build the systems this research describes. Tell me what you're building — no pitch, just questions about your problem.</p>
+                <a href="/contact/" class="btn">Start a conversation →</a>
+            </div>
+        </div>
+
+    </div>
+
+    <footer class="site-footer">
+        <p>RankFixer — evidence-first governance for AI systems.</p>
+        <p>
+            <a href="/about">About</a>
+            <a href="/research">Research</a>
+            <a href="/portfolio">Portfolio</a>
+            <a href="https://github.com/rankfixer-ai/rankfixer-core" target="_blank" rel="noopener">GitHub</a>
+        </p>
+        <p>© 2026 RankFixer. All data published under MIT license.</p>
+    </footer>
+
+    <script>
+        const nav = document.querySelector('.nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 10) nav.classList.add('nav-scrolled');
+            else nav.classList.remove('nav-scrolled');
+        }, { passive: true });
+    </script>
+</body>
+</html>
