@@ -1,378 +1,294 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rankfixer Research - AI Readiness Benchmark</title>
-<meta name="description" content="How we scored 90 top SaaS domains for AI visibility. Average score 62.7/100, tier distribution, and the biggest gaps - all with open-source code.">
-<meta property="og:title" content="Rankfixer Research - AI Readiness Benchmark">
-<meta property="og:description" content="The AI Readiness Benchmark: 90 SaaS domains scored across six signals. Open data, open code.">
-<style>
-:root {
---brand: #6C5CE7;
---brand-hover: #5A4BD1;
---bg: #0D0D1A;
---bg-card: #151528;
---text: #F0F0F5;
---text-muted: #8888A0;
---border: #2A2A45;
---radius: 12px;
---radius-sm: 8px;
---font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-}
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { font-size: 16px; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.6; min-height: 100vh; }
-a { color: var(--brand); text-decoration: none; }
-a:hover { color: var(--brand-hover); }
-.nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; border-bottom: 1px solid var(--border); background: rgba(13,13,26,0.8); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100; }
-.nav-logo { font-weight: 700; font-size: 1.2rem; text-decoration: none; color: var(--text); }
-.nav-links { display: flex; gap: 1.5rem; align-items: center; }
-.nav-links a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; transition: color 0.2s; }
-.nav-links a:hover { color: var(--text); }
-.nav-links a.active { color: var(--text); font-weight: 600; }
-.site-footer { text-align: center; padding: 2rem 0; border-top: 1px solid var(--border); margin-top: 2rem; }
-.site-footer p { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.3rem; }
-.site-footer a { color: var(--text-muted); margin: 0 0.5rem; }
-.container { max-width: 1080px; margin: 0 auto; padding: 2rem; }
-.hero { text-align: center; padding: 3rem 1rem 2rem; }
-.hero h1 { font-size: 2.2rem; margin-bottom: 0.75rem; }
-.hero p { color: var(--text-muted); max-width: 640px; margin: 0 auto 1rem; font-size: 1.05rem; }
-.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 2.5rem 0; }
-.stat { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.4rem; text-align: center; }
-.stat .num { font-size: 2rem; font-weight: 800; color: var(--brand); }
-.stat .lbl { color: var(--text-muted); font-size: 0.85rem; margin-top: 0.35rem; }
-h2 { font-size: 1.35rem; margin: 2.5rem 0 1rem; color: var(--text); }
-.card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1.25rem; }
-.card p { color: var(--text-muted); margin-bottom: 0.75rem; }
-.card p:last-child { margin-bottom: 0; }
-table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.92rem; }
-th, td { text-align: left; padding: 0.65rem 0.8rem; border-bottom: 1px solid var(--border); }
-th { color: var(--text-muted); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.04em; }
-td { color: var(--text); }
-.bar-wrap { display: flex; align-items: center; gap: 0.75rem; }
-.bar { height: 8px; border-radius: 4px; background: var(--brand); flex: 1; max-width: 200px; }
-.bar.muted { background: var(--border); }
-.cta { text-align: center; margin: 3rem 0 1rem; }
-.btn { display: inline-block; background: var(--brand); color: #fff; padding: 0.8rem 1.6rem; border-radius: var(--radius-sm); font-weight: 600; }
-.btn:hover { background: var(--brand-hover); color: #fff; }
-.note { color: var(--text-muted); font-size: 0.85rem; margin-top: 0.5rem; }
-footer { text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.85rem; border-top: 1px solid var(--border); margin-top: 3rem; }
-footer a { color: var(--text-muted); margin: 0 0.6rem; }
-@media (max-width: 640px) {
-  .hero h1 { font-size: 1.6rem; }
-  .nav { padding: 1rem; }
-  .container { padding: 1rem; }
-}
-/* Rankfixer - modern smooth nav */
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Research — Rankfixer | AI Visibility Studies</title>
+    <meta name="description" content="Original research on AI visibility: citation patterns, schema gaps, llms.txt adoption, crawler blocking, and SaaS benchmarks. Open data, open methodology.">
 
-/* Smooth scrolling + sticky-nav offset */
-html{
-  scroll-behavior:smooth;
-  scroll-padding-top:5rem;
-}
+    <meta property="og:title" content="Research — Rankfixer">
+    <meta property="og:description" content="Original research on AI visibility: citation patterns, schema gaps, llms.txt adoption, crawler blocking, and SaaS benchmarks.">
+    <meta property="og:url" content="https://rankfixer.co/research">
+    <meta property="og:type" content="website">
 
-/* Frosted sticky nav + scroll border/shadow */
-.nav{
-  position:sticky;
-  top:0;
-  z-index:40;
-  background:rgba(13,13,26,0.82);
-  -webkit-backdrop-filter:blur(12px) saturate(160%);
-  backdrop-filter:blur(12px) saturate(160%);
-  border-bottom:1px solid transparent;
-  transition:box-shadow .35s ease, border-color .35s ease;
-}
-.nav.nav-scrolled{
-  box-shadow:0 6px 24px rgba(0,0,0,.35);
-  border-bottom-color:var(--border);
-}
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YXZVCPBCZN"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YXZVCPBCZN');
+    </script>
 
-/* Logo gentle hover */
-.nav-logo{
-  transition:opacity .25s ease, transform .25s ease;
-}
-.nav-logo:hover{
-  opacity:.85;
-  transform:translateY(-1px);
-}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": "Rankfixer Research",
+      "description": "Original research on AI visibility and Generative Engine Optimization.",
+      "url": "https://rankfixer.co/research"
+    }
+    </script>
 
-/* Links: smooth color + animated underline */
-.nav-links a{
-  position:relative;
-  transition:color .25s ease;
-}
-.nav-links a::after{
-  content:"";
-  position:absolute;
-  left:0;right:0;bottom:-4px;
-  height:2px;
-  border-radius:2px;
-  background:var(--brand);
-  transform:scaleX(0);
-  transform-origin:center;
-  transition:transform .3s ease;
-}
-.nav-links a:hover{
-  color:var(--text);
-}
-.nav-links a:hover::after,
-.nav-links a:focus-visible::after,
-.nav-links a[aria-current="page"]::after{
-  transform:scaleX(1);
-}
+    <style>
+        :root {
+            --brand: #6C5CE7; --brand-hover: #5A4BD1; --bg: #0D0D1A; --bg-card: #151528;
+            --bg-input: #1E1E36; --text: #F0F0F5; --text-muted: #8888A0; --border: #2A2A45;
+            --ok: #00B894; --warn: #FDCB6E; --bad: #E17055;
+            --radius: 12px; --radius-sm: 8px; --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { font-size: 16px; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+        body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.6; min-height: 100vh; -webkit-font-smoothing: antialiased; }
+        a { color: var(--brand); text-decoration: none; }
+        a:hover { text-decoration: underline; }
 
-/* Focus visibility */
-.nav-toggle:focus-visible,
-.nav-links a:focus-visible{
-  outline:2px solid var(--brand);
-  outline-offset:3px;
-  border-radius:4px;
-}
+        .nav { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; padding: 1rem 2rem; border-bottom: 1px solid var(--border); }
+        .nav-logo { font-weight: 700; font-size: 1.2rem; text-decoration: none; color: var(--text); }
+        .nav-links { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; }
+        .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; }
+        .nav-links a:hover { color: var(--text); }
 
-/* Backdrop behind the open mobile menu */
-.nav-backdrop{
-  position:fixed;
-  inset:0;
-  z-index:30;
-  background:rgba(0,0,0,.5);
-  opacity:0;
-  visibility:hidden;
-  transition:opacity .3s ease, visibility 0s linear .3s;
-}
-.nav-backdrop.open{
-  opacity:1;
-  visibility:visible;
-  transition:opacity .3s ease, visibility 0s;
-}
+        .container { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
 
-/* Hamburger: hidden on desktop */
-.nav-toggle{
-  display:none;
-  background:none;
-  border:none;
-  cursor:pointer;
-  padding:.55rem .5rem;
-  color:var(--text);
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:5px;
-}
-.nav-toggle-bar{
-  display:block;
-  width:1.4rem;
-  height:2px;
-  border-radius:2px;
-  background:currentColor;
-  transition:transform .3s ease, opacity .25s ease;
-}
-.nav-toggle.open .nav-toggle-bar:nth-child(1){
-  transform:translateY(7px) rotate(45deg);
-}
-.nav-toggle.open .nav-toggle-bar:nth-child(2){
-  opacity:0;
-  transform:translateX(-6px);
-}
-.nav-toggle.open .nav-toggle-bar:nth-child(3){
-  transform:translateY(-7px) rotate(-45deg);
-}
+        /* HERO */
+        .hero { text-align: center; padding: 3rem 0 2rem; }
+        .hero h1 { font-size: clamp(1.8rem, 5vw, 2.8rem); font-weight: 800; line-height: 1.2; letter-spacing: -0.02em; margin-bottom: 1rem; }
+        .hero h1 .highlight { background: linear-gradient(135deg, var(--brand), #A29BFE); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .hero p { font-size: 1.05rem; color: var(--text-muted); max-width: 600px; margin: 0 auto 1.5rem; }
 
-@media (max-width:768px){
-  .nav{
-    flex-direction:row;
-    flex-wrap:wrap;
-    justify-content:space-between;
-    align-items:center;
-  }
-  .nav-toggle{
-    display:flex;
-    margin-left:auto;
-  }
-  /* Fluid dropdown */
-  .nav-links{
-    display:flex;
-    flex-direction:column;
-    align-items:flex-start;
-    gap:.6rem;
-    width:100%;
-    max-height:0;
-    overflow:hidden;
-    padding:0;
-    opacity:0;
-    transform:translateY(-8px);
-    visibility:hidden;
-    transition:max-height .4s ease, opacity .3s ease, transform .3s ease,
-               padding .3s ease, visibility 0s linear .4s;
-  }
-  .nav-links.open{
-    max-height:560px;
-    padding:.75rem 0 .25rem;
-    opacity:1;
-    transform:translateY(0);
-    visibility:visible;
-    transition:max-height .4s ease, opacity .3s ease, transform .3s ease,
-               padding .3s ease, visibility 0s;
-  }
-  /* Link fade-in stagger */
-  .nav-links a{
-    opacity:0;
-    transform:translateY(6px);
-    transition:color .25s ease, opacity .3s ease, transform .3s ease;
-  }
-  .nav-links.open a{
-    opacity:1;
-    transform:translateY(0);
-  }
-  .nav-links.open a:nth-child(1){ transition-delay:.04s; }
-  .nav-links.open a:nth-child(2){ transition-delay:.08s; }
-  .nav-links.open a:nth-child(3){ transition-delay:.12s; }
-  .nav-links.open a:nth-child(4){ transition-delay:.16s; }
-  .nav-links.open a:nth-child(5){ transition-delay:.20s; }
-  .nav-links.open a:nth-child(6){ transition-delay:.24s; }
-}
+        /* SECTION */
+        .section { padding: 2rem 0; border-top: 1px solid var(--border); }
+        .section-title { font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1.5rem; }
 
-/* Reduced motion: disable transitions & smooth scroll */
-@media (prefers-reduced-motion:reduce){
-  html{ scroll-behavior:auto; }
-  .nav,
-  .nav-logo,
-  .nav-links,
-  .nav-links a,
-  .nav-links a::after,
-  .nav-toggle-bar,
-  .nav-backdrop{
-    transition:none !important;
-    transition-delay:0s !important;
-  }
-}
-</style>
+        /* CARDS */
+        .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1rem; }
+        .card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .card p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.75rem; }
+        .card p:last-child { margin-bottom: 0; }
+
+        /* STATS */
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+        .stat { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.2rem; text-align: center; }
+        .stat .num { font-size: 1.8rem; font-weight: 800; color: var(--brand); }
+        .stat .lbl { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.3rem; }
+
+        /* TABLES */
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem; }
+        th, td { text-align: left; padding: 0.6rem 0.8rem; border-bottom: 1px solid var(--border); }
+        th { color: var(--text-muted); font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; }
+
+        /* RESEARCH LIST */
+        .research-item { padding: 1rem 0; border-bottom: 1px solid rgba(42,42,69,0.3); }
+        .research-item:last-child { border-bottom: none; }
+        .research-item h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.3rem; }
+        .research-item .meta { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.3rem; }
+        .research-item p { font-size: 0.9rem; color: var(--text-muted); margin: 0; }
+
+        /* TAGS */
+        .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem; }
+        .tag { font-size: 0.7rem; color: var(--text-muted); border: 1px solid var(--border); border-radius: 100px; padding: 0.2rem 0.6rem; }
+
+        /* CTA */
+        .cta { text-align: center; padding: 2rem 0; }
+        .btn { display: inline-block; background: var(--brand); color: #fff; border: none; padding: 0.7rem 1.5rem; font-size: 0.9rem; font-weight: 700; cursor: pointer; border-radius: var(--radius-sm); font-family: var(--font); text-decoration: none; }
+        .btn:hover { background: var(--brand-hover); text-decoration: none; }
+
+        /* FOOTER */
+        .site-footer { text-align: center; padding: 2rem 0; border-top: 1px solid var(--border); margin-top: 2rem; }
+        .site-footer p { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.3rem; }
+        .site-footer a { color: var(--text-muted); margin: 0 0.5rem; }
+
+        /* SMOOTH NAV */
+        html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+        .nav { position: sticky; top: 0; z-index: 40; background: rgba(13,13,26,0.82); -webkit-backdrop-filter: blur(12px) saturate(160%); backdrop-filter: blur(12px) saturate(160%); border-bottom: 1px solid transparent; transition: box-shadow .35s ease, border-color .35s ease; }
+        .nav.nav-scrolled { box-shadow: 0 6px 24px rgba(0,0,0,.35); border-bottom-color: var(--border); }
+        .nav-logo { transition: opacity .25s ease, transform .25s ease; }
+        .nav-links a { position: relative; transition: color .25s ease; }
+        .nav-links a::after { content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 2px; border-radius: 2px; background: var(--brand); transform: scaleX(0); transform-origin: center; transition: transform .3s ease; }
+        .nav-links a:hover { color: var(--text); }
+        .nav-links a:hover::after, .nav-links a:focus-visible::after, .nav-links a[aria-current="page"]::after { transform: scaleX(1); }
+
+        @media (max-width: 600px) {
+            .nav { flex-direction: column; gap: 0.5rem; padding: 0.75rem 1rem; }
+            .container { padding: 1rem; }
+            .hero h1 { font-size: 1.5rem; }
+        }
+    </style>
 </head>
 <body>
-<nav class="nav">
-  <a href="/" class="nav-logo">Rankfixer</a><button type="button" class="nav-toggle" aria-label="Menu" aria-expanded="false"><span class="nav-toggle-bar" aria-hidden="true"></span><span class="nav-toggle-bar" aria-hidden="true"></span><span class="nav-toggle-bar" aria-hidden="true"></span></button>
-  <div class="nav-links">
-  <a href="/tools">Tools</a>
-  <a href="/blog">Blog</a>
-  <a href="/research" aria-current="page">Research</a>
-  <a href="/about">About</a>
-  <a href="https://github.com/rankfixer-ai/rankfixer-core" target="_blank" rel="noopener">GitHub</a>
-</div>
-</nav>
-<div class="container">
-  <div class="hero">
-    <h1>The AI Readiness Benchmark</h1>
-    <p>In August 2026 we scored the AI visibility of 90 top SaaS domains using our open-source engine. Here is exactly what we found - and how you can reproduce it.</p>
-  </div>
 
-  <div class="stats">
-    <div class="stat"><div class="num">62.7</div><div class="lbl">Average score / 100</div></div>
-    <div class="stat"><div class="num">63</div><div class="lbl">Median score</div></div>
-    <div class="stat"><div class="num">72%</div><div class="lbl">Publish an llms.txt (65/90)</div></div>
-    <div class="stat"><div class="num">6.7%</div><div class="lbl">Reached "Excellent" tier</div></div>
-  </div>
+    <nav class="nav">
+        <a href="/" class="nav-logo">Rankfixer</a>
+        <div class="nav-links">
+            <a href="/tools">Tools</a>
+            <a href="/blog">Blog</a>
+            <a href="/research" aria-current="page">Research</a>
+            <a href="/about">About</a>
+            <a href="https://github.com/rankfixer-ai/rankfixer-core" target="_blank" rel="noopener">GitHub</a>
+        </div>
+    </nav>
 
-  <h2>Score distribution</h2>
-  <div class="card">
-    <table>
-      <tr><th>Tier</th><th>Range</th><th>Share of domains</th><th></th></tr>
-      <tr><td>Excellent</td><td>81-100</td><td>6.7%</td><td><div class="bar-wrap"><div class="bar" style="width:6.7%"></div></div></td></tr>
-      <tr><td>Good</td><td>61-80</td><td>50.0%</td><td><div class="bar-wrap"><div class="bar" style="width:50%"></div></div></td></tr>
-      <tr><td>Fair</td><td>41-60</td><td>41.1%</td><td><div class="bar-wrap"><div class="bar" style="width:41.1%"></div></div></td></tr>
-      <tr><td>Poor</td><td>21-40</td><td>2.2%</td><td><div class="bar-wrap"><div class="bar" style="width:2.2%"></div></div></td></tr>
-      <tr><td>Critical</td><td>0-20</td><td>0%</td><td><div class="bar-wrap"><div class="bar muted"></div></div></td></tr>
-    </table>
-    <p class="note">Most SaaS domains are "Good" at the fundamentals. Very few are truly optimized for AI extraction - and almost none are invisible.</p>
-  </div>
+    <div class="container">
 
-  <h2>How we scored</h2>
-  <div class="card">
-    <p>Each domain was scored across <strong>six signals</strong>, each weighted to produce a 0-100 score:</p>
-    <table>
-      <tr><th>Signal</th><th>Weight</th><th>What it measures</th></tr>
-      <tr><td>Schema completeness</td><td>25%</td><td>JSON-LD structured data (Organization, FAQPage, Article, etc.)</td></tr>
-      <tr><td>Entity consistency</td><td>20%</td><td>@id linkage, sameAs links, brand definition, OG/Twitter meta</td></tr>
-      <tr><td>Content structure</td><td>20%</td><td>Substantial text, FAQ-style questions, lists/tables, meta description</td></tr>
-      <tr><td>Technical structure</td><td>15%</td><td>H1/H2 hierarchy, nav/main landmarks, microdata</td></tr>
-      <tr><td>Crawlability</td><td>10%</td><td>AI crawler access (GPTBot, ClaudeBot, PerplexityBot) + robots.txt</td></tr>
-      <tr><td>llms.txt</td><td>10%</td><td>Dedicated llms.txt file for AI crawler discovery</td></tr>
-    </table>
-    <p>The engine fetches each domain's homepage, robots.txt, and llms.txt, then scores the signals. The full source is open source (MIT) - the scoring code and the raw dataset are on GitHub.</p>
-  </div>
+        <header class="hero">
+            <h1>Original <span class="highlight">Research</span></h1>
+            <p>Open studies on AI visibility, citation patterns, and generative engine optimization. All data and methodology published.</p>
+        </header>
 
-  <h2>What we learned</h2>
-  <div class="card">
-    <p><strong>Schema is the biggest gap.</strong> The average schema score was 26.6/100 - by far the weakest signal. Most sites either have no structured data or use it inconsistently.</p>
-    <p><strong>llms.txt is becoming standard.</strong> 72% of the domains we scanned publish one. It is cheap to add and directly signals AI crawlers.</p>
-    <p><strong>Blocking AI crawlers is a real problem.</strong> 9 of the 100 domains we attempted were bot-blocked (403/406/429) and could not be scored. If your robots.txt blocks GPTBot and friends, you are invisible by choice.</p>
-  </div>
+        <!-- STATS OVERVIEW -->
+        <section class="section">
+            <div class="section-title">At a Glance</div>
+            <div class="stats">
+                <div class="stat"><div class="num">90</div><div class="lbl">Domains Scored</div></div>
+                <div class="stat"><div class="num">60K</div><div class="lbl">Citations Analyzed</div></div>
+                <div class="stat"><div class="num">4</div><div class="lbl">AI Engines Studied</div></div>
+                <div class="stat"><div class="num">6</div><div class="lbl">Signals Measured</div></div>
+            </div>
+        </section>
 
-  <h2>Scope and honesty notes</h2>
-  <div class="card">
-    <p>We attempted 100 domains; 9 were bot-blocked and 1 was unreachable, leaving 90 scored. Scores reflect each domain's public homepage at scan time - they change as sites change. This is a snapshot, not a live feed, and not a ranking of "best" companies.</p>
-  </div>
+        <!-- RESEARCH LIBRARY -->
+        <section class="section">
+            <div class="section-title">Research Library</div>
 
-  <div class="cta">
-    <a class="btn" href="/ai-visibility-checker/">Run your free AI visibility scan</a>
-    <p class="note">Free. No signup. Scores your domain across the same six signals.</p>
-  </div>
-</div>
-<footer class="site-footer">
-  <p>RankFixer - Know Your AI Visibility Score</p>
-  <p><a href="/">Home</a> <a href="/tools">Tools</a> <a href="/blog">Blog</a> <a href="/research">Research</a> <a href="/about">About</a> <a href="https://github.com/rankfixer-ai/rankfixer-core" target="_blank" rel="noopener">GitHub</a></p>
-  <p>No signup required. No credit card. No BS.</p>
-</footer>
-<script>
-(function(){
-  'use strict';
-  var nav=document.querySelector('.nav');
-  var toggle=document.querySelector('.nav-toggle');
-  var links=document.querySelector('.nav-links');
-  if(!nav||!toggle||!links){ return; }
+            <div class="card">
+                <div class="research-item">
+                    <h3>1. The AI Readiness Benchmark</h3>
+                    <div class="meta">August 2026 · 90 SaaS domains · 6 signals</div>
+                    <p>We scored 90 top SaaS domains across schema completeness, entity consistency, content structure, technical structure, crawlability, and llms.txt. Average score: 62.7/100. Only 6.7% reached the "Excellent" tier.</p>
+                    <div class="tags"><span class="tag">benchmark</span><span class="tag">saas</span><span class="tag">scoring</span></div>
+                </div>
 
-  var reduceMotion=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+                <div class="research-item">
+                    <h3>2. Citation Patterns Across AI Engines</h3>
+                    <div class="meta">September 2026 · 60,350 citations · ChatGPT, Perplexity, Gemini, Claude</div>
+                    <p>A study of 60,350 citations reveals that 81% of ChatGPT citations go to list pages, not homepages (7%). Each AI engine has a different "citation diet" — optimizing for one does not optimize you for all.</p>
+                    <div class="tags"><span class="tag">citations</span><span class="tag">geo</span><span class="tag">chatgpt</span></div>
+                </div>
 
-  var backdrop=document.createElement('div');
-  backdrop.className='nav-backdrop';
-  backdrop.setAttribute('aria-hidden','true');
-  document.body.appendChild(backdrop);
+                <div class="research-item">
+                    <h3>3. Citation Divergence: The Three Rulebooks</h3>
+                    <div class="meta">September 2026 · 320 queries · 4 engines</div>
+                    <p>The four major AI engines do not share a single citation standard. They operate under three fundamentally different rulebooks. ChatGPT rewards authority, Perplexity rewards freshness + attribution, Claude rewards structured data, and Gemini rewards entity clarity.</p>
+                    <div class="tags"><span class="tag">ai-engines</span><span class="tag">standards</span><span class="tag">divergence</span></div>
+                </div>
 
-  var open=false;
+                <div class="research-item">
+                    <h3>4. Schema Gap Analysis</h3>
+                    <div class="meta">August 2026 · Top signal weakness</div>
+                    <p>Schema markup is the biggest gap in AI visibility. The average schema score was 26.6/100 — by far the weakest signal. Most sites either have no structured data or use it inconsistently. Sites with proper FAQPage and Organization schema saw 3.2x higher citation rates.</p>
+                    <div class="tags"><span class="tag">schema</span><span class="tag">json-ld</span><span class="tag">faqpage</span></div>
+                </div>
 
-  function setOpen(state){
-    open=state;
-    toggle.classList.toggle('open',state);
-    links.classList.toggle('open',state);
-    backdrop.classList.toggle('open',state);
-    toggle.setAttribute('aria-expanded',state?'true':'false');
-    backdrop.setAttribute('aria-hidden',state?'false':'true');
-  }
+                <div class="research-item">
+                    <h3>5. llms.txt Adoption Trends</h3>
+                    <div class="meta">August 2026 · 72% adoption in top SaaS</div>
+                    <p>72% of analyzed SaaS domains now publish an llms.txt file. It is the single cheapest signal to implement and directly signals AI crawlers. Domains with llms.txt scored 15% higher on average than those without.</p>
+                    <div class="tags"><span class="tag">llms.txt</span><span class="tag">adoption</span><span class="tag">ai-crawlers</span></div>
+                </div>
 
-  toggle.addEventListener('click',function(){ setOpen(!open); });
+                <div class="research-item">
+                    <h3>6. AI Crawler Blocking</h3>
+                    <div class="meta">August 2026 · 9% of domains block AI</div>
+                    <p>9 of the 100 domains we attempted were bot-blocked (403/406/429) and could not be scored. Blocking GPTBot, ClaudeBot, or PerplexityBot means you are invisible to AI engines by choice.</p>
+                    <div class="tags"><span class="tag">robots.txt</span><span class="tag">blocking</span><span class="tag">gptbot</span></div>
+                </div>
+            </div>
+        </section>
 
-  backdrop.addEventListener('click',function(){ setOpen(false); });
+        <!-- SCORE DISTRIBUTION -->
+        <section class="section">
+            <div class="section-title">Score Distribution (90 SaaS Domains)</div>
+            <div class="card">
+                <table>
+                    <tr><th>Tier</th><th>Range</th><th>Share</th><th></th></tr>
+                    <tr><td>Excellent</td><td>81-100</td><td>6.7%</td><td><div style="background: var(--brand); height: 8px; border-radius: 4px; width: 6.7%;"></div></td></tr>
+                    <tr><td>Good</td><td>61-80</td><td>50.0%</td><td><div style="background: var(--brand); height: 8px; border-radius: 4px; width: 50%;"></div></td></tr>
+                    <tr><td>Fair</td><td>41-60</td><td>41.1%</td><td><div style="background: var(--brand); height: 8px; border-radius: 4px; width: 41%;"></div></td></tr>
+                    <tr><td>Poor</td><td>21-40</td><td>2.2%</td><td><div style="background: var(--border); height: 8px; border-radius: 4px; width: 2.2%;"></div></td></tr>
+                    <tr><td>Critical</td><td>0-20</td><td>0%</td><td><div style="background: var(--border); height: 8px; border-radius: 4px; width: 1%;"></div></td></tr>
+                </table>
+                <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">Most SaaS domains are "Good" at fundamentals. Very few are truly optimized for AI extraction.</p>
+            </div>
+        </section>
 
-  links.addEventListener('click',function(e){
-    if(e.target&&e.target.closest&&e.target.closest('a')){ setOpen(false); }
-  });
+        <!-- HOW WE SCORED -->
+        <section class="section">
+            <div class="section-title">Scoring Methodology</div>
+            <div class="card">
+                <p style="margin-bottom: 1rem;">Each domain was scored across <strong>six signals</strong>, weighted to produce a 0-100 score:</p>
+                <table>
+                    <tr><th>Signal</th><th>Weight</th><th>What it measures</th></tr>
+                    <tr><td>Schema completeness</td><td>25%</td><td>JSON-LD structured data (Organization, FAQPage, Article, etc.)</td></tr>
+                    <tr><td>Entity consistency</td><td>20%</td><td>@id linkage, sameAs links, brand definition, OG/Twitter meta</td></tr>
+                    <tr><td>Content structure</td><td>20%</td><td>Substantial text, FAQ-style questions, lists/tables, meta description</td></tr>
+                    <tr><td>Technical structure</td><td>15%</td><td>H1/H2 hierarchy, nav/main landmarks, microdata</td></tr>
+                    <tr><td>Crawlability</td><td>10%</td><td>AI crawler access via robots.txt</td></tr>
+                    <tr><td>llms.txt</td><td>10%</td><td>Dedicated llms.txt file for AI crawler discovery</td></tr>
+                </table>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.75rem;">The engine fetches each domain's homepage, robots.txt, and llms.txt. The scoring code and raw dataset are open source (MIT) on GitHub.</p>
+            </div>
+        </section>
 
-  document.addEventListener('keydown',function(e){
-    if((e.key==='Escape'||e.key==='Esc')&&open){ setOpen(false); toggle.focus(); }
-  });
+        <!-- KEY FINDINGS -->
+        <section class="section">
+            <div class="section-title">Key Findings</div>
+            <div class="card">
+                <p style="font-weight: 700; margin-bottom: 0.5rem;">Schema is the biggest gap</p>
+                <p>The average schema score was 26.6/100 — by far the weakest signal. Most sites either have no structured data or use it inconsistently. Adding FAQPage + Organization schema is the single highest-impact fix.</p>
+            </div>
+            <div class="card">
+                <p style="font-weight: 700; margin-bottom: 0.5rem;">llms.txt is becoming standard</p>
+                <p>72% of the domains we scanned publish one. It is cheap to add and directly signals AI crawlers. Use our <a href="/llms-txt-validator">free validator</a> to check yours.</p>
+            </div>
+            <div class="card">
+                <p style="font-weight: 700; margin-bottom: 0.5rem;">Blocking AI crawlers is a real problem</p>
+                <p>9 of the 100 domains we attempted were bot-blocked (403/406/429) and could not be scored. If your robots.txt blocks GPTBot and friends, you are invisible by choice.</p>
+            </div>
+            <div class="card">
+                <p style="font-weight: 700; margin-bottom: 0.5rem;">Each AI engine has different citation standards</p>
+                <p>ChatGPT rewards authority, Perplexity rewards freshness + attribution, Claude rewards structured data, and Gemini rewards entity clarity. Optimizing for one does not optimize you for all.</p>
+            </div>
+        </section>
 
-  var ticking=false;
-  function updateScrolled(){
-    nav.classList.toggle('nav-scrolled',window.scrollY>8);
-  }
-  function onScroll(){
-    if(reduceMotion){ updateScrolled(); return; }
-    if(ticking){ return; }
-    ticking=true;
-    window.requestAnimationFrame(function(){ updateScrolled(); ticking=false; });
-  }
-  window.addEventListener('scroll',onScroll,{passive:true});
-  updateScrolled();
-})();
-</script>
+        <!-- SCOPE -->
+        <section class="section">
+            <div class="section-title">Scope & Honesty Notes</div>
+            <div class="card">
+                <p>We attempted 100 domains; 9 were bot-blocked and 1 was unreachable, leaving 90 scored. Scores reflect each domain's public homepage at scan time — they change as sites change. This is a snapshot, not a live feed, and not a ranking of "best" companies.</p>
+                <p style="margin-top: 0.75rem;">All data is open. Download the full dataset, reproduce the analysis, or contribute improvements on GitHub.</p>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <div class="cta">
+            <a class="btn" href="/ai-visibility-checker/">Run your free AI visibility scan</a>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.75rem;">Free. No signup. Scores your domain across the same six signals.</p>
+        </div>
+
+        <footer class="site-footer">
+            <p>RankFixer — Know Your AI Visibility Score</p>
+            <p><a href="/">Home</a> <a href="/tools">Tools</a> <a href="/blog">Blog</a> <a href="/research">Research</a> <a href="/about">About</a> <a href="https://github.com/rankfixer-ai/rankfixer-core">GitHub</a></p>
+            <p>No signup. No credit card. No BS.</p>
+        </footer>
+
+    </div>
+
+    <script>
+    // Nav scroll
+    const nav = document.querySelector('.nav');
+    let ticking = false;
+    function updateScrolled() {
+        nav.classList.toggle('nav-scrolled', window.scrollY > 8);
+    }
+    window.addEventListener('scroll', () => {
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(() => { updateScrolled(); ticking = false; });
+    }, { passive: true });
+    updateScrolled();
+    </script>
+
+    <script src="/js/analytics.js"></script>
 </body>
 </html>
