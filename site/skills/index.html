@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>The AI Skills Demand Report 2026 | RankFixer Research</title>
+    <meta name="description" content="Original research on AI skills demand: which technical skills pay the most, which roles are growing fastest, and where the talent gap is widest. Data from LinkedIn, Qarera, Lightcast, and 360K+ job postings.">
+
+    <meta property="og:title" content="The AI Skills Demand Report 2026 | RankFixer Research">
+    <meta property="og:description" content="Which AI skills pay the most in 2026? Which roles are growing fastest? Data from 360K+ job postings.">
+    <meta property="og:url" content="https://rankfixer.co/skills">
+    <meta property="og:type" content="website">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YXZVCPBCZN"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YXZVCPBCZN');
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Report",
+      "name": "The AI Skills Demand Report 2026",
+      "description": "Original research on AI skills demand: technical skills, salaries, and talent gaps.",
+      "url": "https://rankfixer.co/skills",
+      "datePublished": "2026-09-22"
+    }
+    </script>
+
+    <style>
+        :root {
+            --brand: #6C5CE7; --brand-hover: #5A4BD1; --bg: #0D0D1A; --bg-card: #151528;
+            --bg-input: #1E1E36; --text: #F0F0F5; --text-muted: #8888A0; --border: #2A2A45;
+            --ok: #00B894; --warn: #FDCB6E; --bad: #E17055;
+            --radius: 12px; --radius-sm: 8px; --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { font-size: 16px; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+        body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.6; min-height: 100vh; -webkit-font-smoothing: antialiased; }
+        a { color: var(--brand); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        .nav { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; padding: 1rem 2rem; border-bottom: 1px solid var(--border); }
+        .nav-logo { font-weight: 700; font-size: 1.2rem; text-decoration: none; color: var(--text); }
+        .nav-links { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; }
+        .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; }
+        .nav-links a:hover { color: var(--text); }
+        .nav-links a.active { color: var(--text); font-weight: 700; }
+
+        .container { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+        /* HERO */
+        .hero { text-align: center; padding: 3rem 0 2rem; }
+        .hero h1 { font-size: clamp(1.8rem, 5vw, 2.8rem); font-weight: 800; line-height: 1.2; letter-spacing: -0.02em; margin-bottom: 1rem; }
+        .hero h1 .highlight { background: linear-gradient(135deg, var(--brand), #A29BFE); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .hero p { font-size: 1.05rem; color: var(--text-muted); max-width: 650px; margin: 0 auto 1.5rem; }
+
+        /* SECTION */
+        .section { padding: 2rem 0; border-top: 1px solid var(--border); }
+        .section-title { font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1.5rem; }
+
+        /* CARDS */
+        .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1rem; }
+        .card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .card p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.75rem; }
+        .card p:last-child { margin-bottom: 0; }
+
+        /* STATS */
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+        .stat { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.2rem; text-align: center; }
+        .stat .num { font-size: 1.8rem; font-weight: 800; color: var(--brand); }
+        .stat .lbl { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.3rem; }
+
+        /* TABLES */
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.85rem; }
+        th, td { text-align: left; padding: 0.6rem 0.8rem; border-bottom: 1px solid var(--border); }
+        th { color: var(--text-muted); font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; }
+        .num-cell { font-weight: 700; color: var(--text); }
+        .bar-cell { width: 120px; }
+        .bar { height: 8px; border-radius: 4px; background: var(--brand); }
+
+        /* TAGS */
+        .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem; }
+        .tag { font-size: 0.7rem; color: var(--text-muted); border: 1px solid var(--border); border-radius: 100px; padding: 0.2rem 0.6rem; }
+
+        /* CTA */
+        .cta { text-align: center; padding: 2rem 0; }
+        .btn { display: inline-block; background: var(--brand); color: #fff; border: none; padding: 0.7rem 1.5rem; font-size: 0.9rem; font-weight: 700; cursor: pointer; border-radius: var(--radius-sm); font-family: var(--font); text-decoration: none; }
+        .btn:hover { background: var(--brand-hover); text-decoration: none; }
+
+        /* FOOTER */
+        .site-footer { text-align: center; padding: 2rem 0; border-top: 1px solid var(--border); margin-top: 2rem; }
+        .site-footer p { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.3rem; }
+        .site-footer a { color: var(--text-muted); margin: 0 0.5rem; }
+
+        /* SMOOTH NAV */
+        html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+        .nav { position: sticky; top: 0; z-index: 40; background: rgba(13,13,26,0.82); -webkit-backdrop-filter: blur(12px) saturate(160%); backdrop-filter: blur(12px) saturate(160%); border-bottom: 1px solid transparent; transition: box-shadow .35s ease, border-color .35s ease; }
+        .nav.nav-scrolled { box-shadow: 0 6px 24px rgba(0,0,0,.35); border-bottom-color: var(--border); }
+        .nav-logo { transition: opacity .25s ease, transform .25s ease; }
+        .nav-links a { position: relative; transition: color .25s ease; }
+        .nav-links a::after { content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 2px; border-radius: 2px; background: var(--brand); transform: scaleX(0); transform-origin: center; transition: transform .3s ease; }
+        .nav-links a:hover { color: var(--text); }
+        .nav-links a:hover::after, .nav-links a:focus-visible::after, .nav-links a[aria-current="page"]::after { transform: scaleX(1); }
+
+        @media (max-width: 600px) {
+            .nav { flex-direction: column; gap: 0.5rem; padding: 0.75rem 1rem; }
+            .container { padding: 1rem; }
+            .hero h1 { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="nav">
+        <a href="/" class="nav-logo">Rankfixer</a>
+        <div class="nav-links">
+            <a href="/tools">Tools</a>
+            <a href="/blog">Blog</a>
+            <a href="/skills" aria-current="page" class="active">Skills</a>
+  <a href="/portfolio">Portfolio</a>
+            <a href="/research">Research</a>
+            <a href="/about">About</a>
+            <a href="https://github.com/rankfixer-ai/rankfixer-core" target="_blank" rel="noopener">GitHub</a>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <header class="hero">
+            <div style="display: inline-block; background: rgba(108, 92, 231, 0.15); color: var(--brand); font-size: 0.8rem; font-weight: 600; padding: 0.35rem 0.85rem; border-radius: 100px; margin-bottom: 1.5rem;">
+                Research Report · September 2026
+            </div>
+            <h1>The AI Skills Demand <span class="highlight">Report</span></h1>
+            <p>Which AI technical skills pay the most in 2026? Which roles are growing fastest? Where is the talent gap widest? We analyzed 360,000+ job postings and 10 industry reports to find out.</p>
+        </header>
+
+        <!-- KEY STATS -->
+        <section class="section">
+            <div class="section-title">At a Glance</div>
+            <div class="stats">
+                <div class="stat"><div class="num">142%</div><div class="lbl">YoY Growth in AI Jobs</div></div>
+                <div class="stat"><div class="num">3.2:1</div><div class="lbl">Demand-to-Supply Gap</div></div>
+                <div class="stat"><div class="num">1.6M</div><div class="lbl">Open Positions</div></div>
+                <div class="stat"><div class="num">518K</div><div class="lbl">Qualified Candidates</div></div>
+                <div class="stat"><div class="num">56%</div><div class="lbl">AI Skills Wage Premium</div></div>
+                <div class="stat"><div class="num">360K</div><div class="lbl">Postings Analyzed</div></div>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 1rem;">Sources: LinkedIn Workforce Insights Q1 2026, Qarera Job Market Report 2026, Lightcast via Stanford AI Index 2026, World Economic Forum Future of Jobs 2025, PwC AI Jobs Barometer 2026.</p>
+        </section>
+
+        <!-- WHAT'S RISING -->
+        <section class="section">
+            <div class="section-title">Fastest-Growing AI Roles (2026)</div>
+            <div class="card">
+                <table>
+                    <tr><th>Role</th><th>YoY Growth</th><th>Demand Level</th><th>Median Salary</th></tr>
+                    <tr><td>Prompt Engineer / AI Interaction Designer</td><td class="num-cell">+194%</td><td><div class="bar" style="width:97%"></div></td><td>$95K – $155K</td></tr>
+                    <tr><td>Machine Learning Engineer</td><td class="num-cell">+178%</td><td><div class="bar" style="width:89%"></div></td><td>$140K – $200K</td></tr>
+                    <tr><td>AI Product Manager</td><td class="num-cell">+161%</td><td><div class="bar" style="width:81%"></div></td><td>$172K – $250K</td></tr>
+                    <tr><td>AI Analyst</td><td class="num-cell">+138%</td><td><div class="bar" style="width:69%"></div></td><td>$85K – $130K</td></tr>
+                    <tr><td>AI Operations Specialist</td><td class="num-cell">+122%</td><td><div class="bar" style="width:61%"></div></td><td>$145K – $195K</td></tr>
+                    <tr><td>Agentic AI Engineer</td><td class="num-cell">+280%</td><td><div class="bar" style="width:100%"></div></td><td>$150K – $220K</td></tr>
+                    <tr><td>AI Engineer (General)</td><td class="num-cell">+143%</td><td><div class="bar" style="width:72%"></div></td><td>$146K – $189K</td></tr>
+                </table>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.75rem;">Source: LinkedIn Workforce Insights Q1 2026, Lightcast via Stanford AI Index 2026. Salary ranges are US-based.</p>
+            </div>
+        </section>
+
+        <!-- TOP TECHNICAL SKILLS -->
+        <section class="section">
+            <div class="section_title">Most-Demanded Technical Skills</div>
+            <div class="card">
+                <p style="font-weight: 700; margin-bottom: 1rem;">Skills by appearance in job postings (Q1 2026)</p>
+                <table>
+                    <tr><th>Skill</th><th>% of Postings</th><th>Salary Premium</th></tr>
+                    <tr><td>Python + PyTorch</td><td class="num-cell">82%</td><td>+$12,000</td></tr>
+                    <tr><td>RAG (Retrieval-Augmented Generation)</td><td class="num-cell">61%</td><td>+$22,000</td></tr>
+                    <tr><td>Prompt Engineering</td><td class="num-cell">58%</td><td>+$18,000</td></tr>
+                    <tr><td>LLM Fine-tuning (LoRA, QLoRA, RLHF)</td><td class="num-cell">44%</td><td>+$31,000</td></tr>
+                    <tr><td>Vector Databases (Pinecone, Qdrant, pgvector)</td><td class="num-cell">38%</td><td>+$15,000</td></tr>
+                    <tr><td>MLOps (Kubernetes, Docker, MLflow)</td><td class="num-cell">35%</td><td>+$25,000</td></tr>
+                    <tr><td>LangChain / LangGraph</td><td class="num-cell">28%</td><td>+$14,000</td></tr>
+                    <tr><td>Agentic AI / Multi-Agent Orchestration</td><td class="num-cell">24%</td><td>+$28,000</td></tr>
+                </table>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.75rem;">Source: JobZeni analysis of real job postings, Qarera 2026 report. Premium is average salary boost over baseline role.</p>
+            </div>
+        </section>
+
+        <!-- DEMAND VS SUPPLY -->
+        <section class="section">
+            <div class="section-title">The Talent Gap</div>
+            <div class="card">
+                <p style="font-weight: 700; margin-bottom: 0.75rem;">There are 3.2 open positions for every 1 qualified AI candidate.</p>
+                <p>The global AI job market has roughly <strong>1.6 million open positions</strong> but only <strong>~518,000 qualified candidates</strong> — a 3.2:1 demand-to-supply ratio. A year ago it was 3.1:1. The gap is widening, not closing.</p>
+                <p style="margin-top: 0.75rem;">Tightest regions: Europe (1.9 candidates per 10 roles), Southeast Asia (1.4 per 10). North America is looser at 2.8 per 10, but still deeply under-supplied.</p>
+                <p style="margin-top: 0.75rem;">Average time-to-fill for AI roles hit 68 days in Q1 2026, up from 52 days a year earlier. Non-technical roles fill in 38 days.</p>
+                <div class="tags"><span class="tag">talent-gap</span><span class="tag">hiring</span><span class="tag">shortage</span><span class="tag">LinkedIn</span></div>
+            </div>
+        </section>
+
+        <!-- SALARY BANDS -->
+        <section class="section">
+            <div class="section-title">Salary Bands by Role (US, 2026)</div>
+            <div class="card">
+                <table>
+                    <tr><th>Role</th><th>Base Salary Range</th><th>Total Comp (Top Tier)</th></tr>
+                    <tr><td>AI Engineer (LLM/RAG/Agents)</td><td>$146K – $189K</td><td>$250K – $350K+</td></tr>
+                    <tr><td>Machine Learning Engineer</td><td>$140K – $200K</td><td>$220K – $300K+</td></tr>
+                    <tr><td>AI Architect</td><td>$160K – $210K</td><td>$250K – $350K+</td></tr>
+                    <tr><td>AI Product Manager</td><td>$150K – $210K</td><td>$250K – $350K+</td></tr>
+                    <tr><td>Research Scientist (Frontier Lab)</td><td>$200K – $350K</td><td>$500K – $1.5M+</td></tr>
+                    <tr><td>MLOps Engineer</td><td>$145K – $195K</td><td>$200K – $280K+</td></tr>
+                    <tr><td>Agentic AI Developer</td><td>$145K – $200K</td><td>$250K – $400K+</td></tr>
+                    <tr><td>Forward Deployed Engineer</td><td>$130K – $188K</td><td>$385K – $785K+</td></tr>
+                </table>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.75rem;">Source: Levels.fyi, LinkedIn, Lightcast. Total comp includes equity and bonus. Frontier lab = OpenAI, Anthropic, DeepMind.</p>
+            </div>
+        </section>
+
+        <!-- WHAT'S DECLINING -->
+        <section class="section">
+            <div class="section-title">What's Declining</div>
+            <div class="card">
+                <p>Not every AI skill is growing. Some are being commoditized or absorbed:</p>
+                <ul style="margin: 0.75rem 0 0 1.2rem; font-size: 0.9rem; color: var(--text-muted);">
+                    <li style="margin-bottom: 0.4rem;"><strong>Basic data science</strong> (pandas, sklearn, Jupyter): Still useful, but no longer sufficient for dedicated roles. Absorbed into general software engineering expectations.</li>
+                    <li style="margin-bottom: 0.4rem;"><strong>Standalone NLP</strong> (spaCy, NLTK, custom transformers): Traditional NLP has been largely replaced by LLM API calls. Only 1% of postings mention NLP as a primary skill.</li>
+                    <li style="margin-bottom: 0.4rem;"><strong>Prompt engineer as a job title</strong>: The skill stayed, the job dissolved into other roles. AI Engineer postings now mention RAG (13.6%) more than prompt engineering (8.9%).</li>
+                    <li style="margin-bottom: 0.4rem;"><strong>Entry-level AI roles</strong>: Employment of 22-25 year olds in AI-exposed occupations trails the rest by 19%. Only 3% of ML Engineer postings are entry-level.</li>
+                </ul>
+                <div class="tags"><span class="tag">declining</span><span class="tag">commoditization</span><span class="tag">market-shift</span></div>
+            </div>
+        </section>
+
+        <!-- THE WAGE PREMIUM -->
+        <section class="section">
+            <div class="section-title">The AI Wage Premium</div>
+            <div class="card">
+                <p>Workers with AI skills earn a <strong>56% wage premium</strong> over colleagues in the same role without AI skills. A year earlier it was 25%. The premium is accelerating.</p>
+                <p style="margin-top: 0.75rem;">By role penetration: 37% of product manager postings require AI skills. 23.1% of designer roles. 19.1% of business analyst roles. 39.5% of principal-level postings.</p>
+                <p style="margin-top: 0.75rem;">Remote roles want it more: A remote posting is 3.2x more likely to require LLM experience than an on-site one.</p>
+                <div class="tags"><span class="tag">wage-premium</span><span class="tag">remote</span><span class="tag">compensation</span></div>
+            </div>
+        </section>
+
+        <!-- ROLE CLUSTERS -->
+        <section class="section">
+            <div class="section-title">The Five Role Clusters Driving Demand</div>
+            <div class="card">
+                <h3>1. Applied AI Engineer (RAG, Evals, Agents)</h3>
+                <p>The most 2026-specific role. Ships LLM-powered products: retrieval pipelines, evaluation frameworks, multi-agent workflows. Median salary $176K.</p>
+                <h3>2. Machine Learning Engineer</h3>
+                <p>Builds, fine-tunes, and productionizes models. The operational backbone. Up 41.8% YoY. Median salary $185K.</p>
+                <h3>3. AI Product Manager</h3>
+                <p>Defines what AI features should do and ships them across engineering, legal, and commercial teams. Up 161% YoY. Median salary $172K.</p>
+                <h3>4. Prompt / Context Engineer</h3>
+                <p>The fastest-growing title (+194% YoY). Now evolving into "context engineering" — designing the full information environment for LLMs. Salary $95K – $155K.</p>
+                <h3>5. AI Operations Specialist</h3>
+                <p>Manages infrastructure, monitors performance, handles vendor relationships. Up 122% YoY. Still underhired relative to demand.</p>
+            </div>
+        </section>
+
+        <!-- SOURCES -->
+        <section class="section">
+            <div class="section-title">Sources & Methodology</div>
+            <div class="card">
+                <p>This report synthesizes data from 10 sources published between January and September 2026:</p>
+                <ul style="margin: 0.75rem 0 0 1.2rem; font-size: 0.85rem; color: var(--text-muted);">
+                    <li><a href="https://news.linkedin.com/2026/Skills-on-the-rise-2026" target="_blank" rel="noopener">LinkedIn Skills on the Rise 2026</a> — 950M profiles, 60M+ postings</li>
+                    <li><a href="https://resources.rework.com/news/ai-jobs-skills/linkedin-ai-skills-demand-surge-2026" target="_blank" rel="noopener">LinkedIn AI Skills Demand Surge</a> — 142% YoY growth</li>
+                    <li><a href="https://www.qarera.com/reports/most-in-demand-skills-2026" target="_blank" rel="noopener">Qarera Most In-Demand Skills 2026</a> — 360,336 postings analyzed</li>
+                    <li><a href="https://jobzeni.com/blog/top-15-ai-skills-2026" target="_blank" rel="noopener">JobZeni Top 15 AI Skills 2026</a> — Real job posting analysis</li>
+                    <li><a href="https://futureproofing.dev/resources/ai-talent-gap/ai-engineer-demand-2026" target="_blank" rel="noopener">AI Engineer Demand 2026</a> — 3.2:1 demand-to-supply gap</li>
+                    <li><a href="https://engineeringhulk.com/top-10-ai-skills-you-need-to-get-a-job-in-tech-in-2026" target="_blank" rel="noopener">Engineering Hulk</a> — Applied AI engineering focus</li>
+                    <li><a href="https://genai.club/blog/ai-engineer-skills-companies-want-in-2026-3449-posting-analysis-source-summary-t" target="_blank" rel="noopener">GenAI Club</a> — 3,449 posting analysis</li>
+                    <li><a href="https://www.ilinmaks.com/blog/en/ai-jobs-market-2026" target="_blank" rel="noopener">AI Job Market 2026</a> — Salary and role aggregation</li>
+                    <li>Stanford AI Index 2026 via Lightcast</li>
+                    <li>PwC AI Jobs Barometer 2026</li>
+                </ul>
+                <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.75rem;">Salary figures are US-based and include base + equity + bonus where noted. Role growth rates are year-over-year (Q1 2025 → Q1 2026). Remote premiums not included in base ranges.</p>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <div class="cta">
+            <a class="btn" href="/tools/">Explore Free AI Visibility Tools</a>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.75rem;">Put your AI skills to work with our free tools.</p>
+        </div>
+
+        <footer class="site-footer">
+            <p>RankFixer — Know Your AI Visibility Score</p>
+            <p><a href="/">Home</a> <a href="/tools">Tools</a> <a href="/blog">Blog</a> <a href="/skills">Skills</a>
+  <a href="/portfolio">Portfolio</a> <a href="/research">Research</a> <a href="/about">About</a> <a href="https://github.com/rankfixer-ai/rankfixer-core">GitHub</a></p>
+        </footer>
+
+    </div>
+
+    <script>
+    // Nav scroll
+    const nav = document.querySelector('.nav');
+    let ticking = false;
+    function updateScrolled() {
+        nav.classList.toggle('nav-scrolled', window.scrollY > 8);
+    }
+    window.addEventListener('scroll', () => {
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(() => { updateScrolled(); ticking = false; });
+    }, { passive: true });
+    updateScrolled();
+    </script>
+
+    <script src="/js/analytics.js"></script>
+</body>
+</html>

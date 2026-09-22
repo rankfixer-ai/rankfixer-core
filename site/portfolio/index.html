@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>AI Skills Portfolio | RankFixer</title>
+    <meta name="description" content="Applied AI engineering portfolio: RAG, agents, MLOps, evaluation frameworks, and governed AI systems. Built for the $146K-$250K market.">
+
+    <meta property="og:title" content="AI Skills Portfolio | RankFixer">
+    <meta property="og:description" content="Applied AI engineering portfolio: RAG, agents, MLOps, evaluation frameworks, and governed AI systems.">
+    <meta property="og:url" content="https://rankfixer.co/portfolio">
+    <meta property="og:type" content="website">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YXZVCPBCZN"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YXZVCPBCZN');
+    </script>
+
+    <style>
+        :root {
+            --brand: #6C5CE7; --brand-hover: #5A4BD1; --bg: #0D0D1A; --bg-card: #151528;
+            --bg-input: #1E1E36; --text: #F0F0F5; --text-muted: #8888A0; --border: #2A2A45;
+            --ok: #00B894; --warn: #FDCB6E; --bad: #E17055;
+            --radius: 12px; --radius-sm: 8px; --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { font-size: 16px; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+        body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.6; min-height: 100vh; -webkit-font-smoothing: antialiased; }
+        a { color: var(--brand); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        .nav { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; padding: 1rem 2rem; border-bottom: 1px solid var(--border); }
+        .nav-logo { font-weight: 700; font-size: 1.2rem; text-decoration: none; color: var(--text); }
+        .nav-links { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; }
+        .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; }
+        .nav-links a:hover { color: var(--text); }
+        .nav-links a.active { color: var(--text); font-weight: 700; }
+
+        .container { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+        /* ===== SELF-DIAGNOSIS QUIZ (Hero) ===== */
+        .quiz-hero { text-align: center; padding: 3rem 0 2rem; }
+        .quiz-hero h1 { font-size: clamp(1.8rem, 5vw, 2.8rem); font-weight: 800; line-height: 1.2; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+        .quiz-hero h1 .highlight { background: linear-gradient(135deg, var(--brand), #A29BFE); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .quiz-hero .subtitle { font-size: 1.05rem; color: var(--text-muted); max-width: 650px; margin: 0 auto 2rem; }
+        .quiz-progress { display: flex; justify-content: center; gap: 0.5rem; margin-bottom: 1.5rem; }
+        .quiz-progress .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--border); transition: background 0.3s; }
+        .quiz-progress .dot.active { background: var(--brand); }
+        .quiz-step { display: none; animation: fadeIn 0.4s ease; }
+        .quiz-step.visible { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+        .quiz-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+        .quiz-option {
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+            padding: 1.25rem; cursor: pointer; transition: all 0.2s; text-align: left;
+        }
+        .quiz-option:hover { border-color: var(--brand); transform: translateY(-2px); }
+        .quiz-option .icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .quiz-option .label { font-size: 1rem; font-weight: 600; color: var(--text); margin-bottom: 0.3rem; }
+        .quiz-option .desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.4; }
+
+        /* Quiz Result Card */
+        .quiz-result { display: none; margin-top: 1.5rem; animation: fadeIn 0.4s ease; }
+        .quiz-result.visible { display: block; }
+        .quiz-result-card {
+            background: var(--bg-card); border: 1px solid var(--brand); border-radius: var(--radius);
+            padding: 1.75rem; text-align: left;
+        }
+        .quiz-result-card .result-label { font-size: 0.75rem; font-weight: 700; color: var(--brand); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem; }
+        .quiz-result-card h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .quiz-result-card p { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 1rem; line-height: 1.5; }
+        .quiz-result-card .result-cta { display: inline-block; background: var(--brand); color: #fff; padding: 0.6rem 1.2rem; border-radius: 100px; font-size: 0.9rem; font-weight: 600; text-decoration: none; }
+        .quiz-result-card .result-cta:hover { background: var(--brand-hover); text-decoration: none; }
+        .quiz-result-card .related-projects { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+        .quiz-result-card .related-projects h4 { font-size: 0.85rem; font-weight: 600; color: var(--text-muted); margin-bottom: 0.5rem; }
+        .quiz-result-card .related-projects ul { list-style: none; padding: 0; margin: 0; }
+        .quiz-result-card .related-projects li { font-size: 0.85rem; color: var(--text-muted); padding: 0.25rem 0; }
+        .quiz-result-card .related-projects li strong { color: var(--text); }
+
+        .quiz-reset { display: none; margin-top: 1.5rem; font-size: 0.85rem; color: var(--text-muted); cursor: pointer; background: none; border: none; text-decoration: underline; }
+        .quiz-reset.visible { display: inline-block; }
+
+        /* ===== SKILLS OVERVIEW ===== */
+        .section { padding: 2rem 0; border-top: 1px solid var(--border); }
+        .section-title { font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1.5rem; }
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
+        .skill-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; transition: border-color 0.2s; }
+        .skill-card:hover { border-color: var(--brand); }
+        .skill-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .skill-card .level { font-size: 0.75rem; font-weight: 600; color: var(--ok); margin-bottom: 0.5rem; }
+        .skill-card .level.intermediate { color: var(--warn); }
+        .skill-card .level.beginner { color: var(--bad); }
+        .skill-card p { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem; }
+        .skill-card .projects { font-size: 0.75rem; color: var(--text-muted); }
+        .skill-card .projects strong { color: var(--text); }
+        .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem; }
+        .tag { font-size: 0.7rem; color: var(--text-muted); border: 1px solid var(--border); border-radius: 100px; padding: 0.2rem 0.6rem; }
+
+        /* ===== PROJECT DETAILS ===== */
+        .project-item { padding: 1rem 0; border-bottom: 1px solid rgba(42,42,69,0.3); }
+        .project-item:last-child { border-bottom: none; }
+        .project-item h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.3rem; }
+        .project-item .meta { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.3rem; }
+        .project-item p { font-size: 0.9rem; color: var(--text-muted); margin: 0; }
+
+        /* ===== CTA ===== */
+        .cta-section { text-align: center; padding: 2rem 0; }
+        .cta-section h2 { font-size: 1.3rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .cta-section p { font-size: 0.95rem; color: var(--text-muted); max-width: 550px; margin: 0 auto 1.5rem; }
+        .btn { display: inline-block; background: var(--brand); color: #fff; border: none; padding: 0.7rem 1.5rem; font-size: 0.9rem; font-weight: 700; cursor: pointer; border-radius: var(--radius-sm); font-family: var(--font); text-decoration: none; }
+        .btn:hover { background: var(--brand-hover); text-decoration: none; }
+
+        /* ===== FOOTER ===== */
+        .site-footer { text-align: center; padding: 2rem 0; border-top: 1px solid var(--border); margin-top: 2rem; }
+        .site-footer p { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.3rem; }
+        .site-footer a { color: var(--text-muted); margin: 0 0.5rem; }
+
+        /* SMOOTH NAV */
+        html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+        .nav { position: sticky; top: 0; z-index: 40; background: rgba(13,13,26,0.82); -webkit-backdrop-filter: blur(12px) saturate(160%); backdrop-filter: blur(12px) saturate(160%); border-bottom: 1px solid transparent; transition: box-shadow .35s ease, border-color .35s ease; }
+        .nav.nav-scrolled { box-shadow: 0 6px 24px rgba(0,0,0,.35); border-bottom-color: var(--border); }
+        .nav-logo { transition: opacity .25s ease, transform .25s ease; }
+        .nav-links a { position: relative; transition: color .25s ease; }
+        .nav-links a::after { content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 2px; border-radius: 2px; background: var(--brand); transform: scaleX(0); transform-origin: center; transition: transform .3s ease; }
+        .nav-links a:hover { color: var(--text); }
+        .nav-links a:hover::after, .nav-links a:focus-visible::after, .nav-links a[aria-current="page"]::after { transform: scaleX(1); }
+
+        @media (max-width: 600px) {
+            .nav { flex-direction: column; gap: 0.5rem; padding: 0.75rem 1rem; }
+            .container { padding: 1rem; }
+            .quiz-options { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- NAV -->
+    <nav class="nav">
+        <a href="/" class="nav-logo">Rankfixer</a>
+        <div class="nav-links">
+            <a href="/tools">Tools</a>
+            <a href="/blog">Blog</a>
+            <a href="/skills">Skills</a>
+            <a href="/portfolio" class="active" aria-current="page">Portfolio</a>
+            <a href="/research">Research</a>
+            <a href="/about">About</a>
+            <a href="https://github.com/rankfixer-ai/rankfixer-core" target="_blank" rel="noopener">GitHub</a>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <!-- ===== SELF-DIAGNOSIS QUIZ HERO ===== -->
+        <div class="quiz-hero" id="quizHero">
+            <h1>What brings you here <span class="highlight">today?</span></h1>
+            <p class="subtitle">Pick the path that matches where you are. No email required — just useful next steps.</p>
+
+            <div class="quiz-progress">
+                <span class="dot active" id="dot1"></span>
+                <span class="dot" id="dot2"></span>
+            </div>
+
+            <!-- Step 1: Primary intent -->
+            <div class="quiz-step visible" id="step1">
+                <div class="quiz-options">
+                    <div class="quiz-option" data-next="checker" onclick="handleQuizAnswer('checker')">
+                        <div class="icon">🔍</div>
+                        <div class="label">Check my site's AI visibility</div>
+                        <div class="desc">I want to know if ChatGPT, Perplexity, and Gemini can cite my content.</div>
+                    </div>
+                    <div class="quiz-option" data-next="research" onclick="handleQuizAnswer('research')">
+                        <div class="icon">📚</div>
+                        <div class="label">Research AI visibility / GEO</div>
+                        <div class="desc">I'm learning about generative engine optimization and AI citations.</div>
+                    </div>
+                    <div class="quiz-option" data-next="build" onclick="handleQuizAnswer('build')">
+                        <div class="icon">🤖</div>
+                        <div class="label">I need custom AI tools built</div>
+                        <div class="desc">I want governed agents, RAG pipelines, or MLOps systems for my business.</div>
+                    </div>
+                    <div class="quiz-option" data-next="explore" onclick="handleQuizAnswer('explore')">
+                        <div class="icon">💬</div>
+                        <div class="label">Just exploring — not sure yet</div>
+                        <div class="desc">Show me what's possible. I'll figure out what I need.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 2: Role-based routing (only for "explore") -->
+            <div class="quiz-step" id="step2">
+                <div class="quiz-options">
+                    <div class="quiz-option" data-next="dev" onclick="handleQuizAnswer('dev')">
+                        <div class="icon">👨‍💻</div>
+                        <div class="label">Developer / Engineer</div>
+                        <div class="desc">I want to see agent architectures, tool calling, and scoring engines.</div>
+                    </div>
+                    <div class="quiz-option" data-next="marketer" onclick="handleQuizAnswer('marketer')">
+                        <div class="icon">📈</div>
+                        <div class="label">Marketer / SEO specialist</div>
+                        <div class="desc">I need AI visibility audits, citation strategies, and content optimization.</div>
+                    </div>
+                    <div class="quiz-option" data-next="ceo" onclick="handleQuizAnswer('ceo')">
+                        <div class="icon">👔</div>
+                        <div class="label">CEO / Founder</div>
+                        <div class="desc">I want to know how AI visibility impacts my business and what to build.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results -->
+            <div class="quiz-result" id="resultChecker">
+                <div class="quiz-result-card">
+                    <div class="result-label">Your next step</div>
+                    <h3>Run your free AI Visibility Scan</h3>
+                    <p>Enter your domain. Get your score across 6 signals in under 30 seconds. No signup. No credit card.</p>
+                    <a class="result-cta" href="/ai-visibility-checker">Run Free Scan →</a>
+                    <div class="related-projects">
+                        <h4>Powered by</h4>
+                        <ul>
+                            <li><strong>RPES-v2</strong> — Rankfixer Platform Engine Suite (scoring + evidence pipeline)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-result" id="resultResearch">
+                <div class="quiz-result-card">
+                    <div class="result-label">Your next step</div>
+                    <h3>Read the GEO research library</h3>
+                    <p>Open-source analysis on how LLMs cite websites, schema markup for AI, and the 2025 playbook.</p>
+                    <a class="result-cta" href="/blog">Browse the Blog →</a>
+                    <div class="related-projects">
+                        <h4>Start with</h4>
+                        <ul>
+                            <li><a href="/blog/citation-divergence-three-rulebooks-ai-search-engines"><strong>Citation Divergence</strong> — three rulebooks for AI search engines</a></li>
+                            <li><a href="/blog/perplexity-search-api-ai-visibility-infrastructure-shift"><strong>Perplexity Search API</strong> — AI visibility infrastructure shift</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-result" id="resultBuild">
+                <div class="quiz-result-card">
+                    <div class="result-label">Your next step</div>
+                    <h3>Let's build your custom AI solution</h3>
+                    <p>Governed agents, RAG pipelines, scoring engines, or MLOps — built with proven architectures. PMOS-governed execution, evidence-first design, full audit trails.</p>
+                    <a class="result-cta" href="#contact" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get in Touch →</a>
+                    <div class="related-projects">
+                        <h4>Key projects</h4>
+                        <ul>
+                            <li><strong>PMOS</strong> — Provenance-Managed Operating System (fail-closed governance)</li>
+                            <li><strong>Tiny</strong> — PMOS-Governed Agent (mutation evolution, human-in-the-loop)</li>
+                            <li><strong>Hermes</strong> — Multi-Agent Orchestration (tool calling, delegation, parallel execution)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-result" id="resultExplore">
+                <div class="quiz-result-card">
+                    <div class="result-label">Your next step</div>
+                    <h3>See what's possible for your role</h3>
+                    <p>Scroll down to find projects matched to your situation. Or jump straight to the free AI Visibility Checker to see where you stand.</p>
+                    <a class="result-cta" href="/ai-visibility-checker">Try the Checker →</a>
+                    <a class="result-cta" href="#projects" style="margin-left:0.5rem; background: transparent; border: 1px solid var(--brand); color: var(--brand);">See Projects ↓</a>
+                </div>
+            </div>
+
+            <div class="quiz-result" id="resultDev">
+                <div class="quiz-result-card">
+                    <div class="result-label">For developers</div>
+                    <h3>Architectures that ship</h3>
+                    <p>Ollama native tool calling, multi-agent orchestration, context engineering at scale. Read the code, run the system.</p>
+                    <a class="result-cta" href="https://github.com/rankfixer-ai/rankfixer-core" target="_blank" rel="noopener">View on GitHub →</a>
+                    <div class="related-projects">
+                        <h4>See also</h4>
+                        <ul>
+                            <li><strong>Local Coder</strong> — Ollama native tool calling + sandbox isolation</li>
+                            <li><strong>Hermes</strong> — Multi-agent orchestration with tool calling + delegation</li>
+                            <li><strong>RPES-v2</strong> — Full-stack scoring engine (extraction → evidence → decision)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-result" id="resultMarketer">
+                <div class="quiz-result-card">
+                    <div class="result-label">For marketers</div>
+                    <h3>AI visibility you can measure</h3>
+                    <p>Schema markup, entity density, citation management — the signals that determine if LLMs recommend your brand.</p>
+                    <a class="result-cta" href="/tools/schema-generator">Try Schema Generator →</a>
+                    <div class="related-projects">
+                        <h4>See also</h4>
+                        <ul>
+                            <li><strong>AI Learning Engine</strong> — Corpus ingestion + full RAG pipeline</li>
+                            <li><a href="/blog/ai-visibility-auditing-for-local-businesses"><strong>Local Business Auditing</strong> — AI visibility for local SEO</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-result" id="resultCeo">
+                <div class="quiz-result-card">
+                    <div class="result-label">For founders</div>
+                    <h3>Governed AI, not guesswork</h3>
+                    <p>Evidence-first execution: no evidence → no authority → no action. Fail-closed by design. Full provenance from objective to release.</p>
+                    <a class="result-cta" href="#contact" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Discuss Your Project →</a>
+                    <div class="related-projects">
+                        <h4>See also</h4>
+                        <ul>
+                            <li><strong>PMOS</strong> — Provenance-Managed Operating System</li>
+                            <li><strong>CosmosOS</strong> — AI governance gap solution</li>
+                            <li><strong>Tiny</strong> — PMOS-Governed Agent (mutation evolution)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <button class="quiz-reset" id="quizReset" onclick="resetQuiz()">← Start over</button>
+        </div>
+
+        <!-- ===== SKILLS OVERVIEW ===== -->
+        <section class="section">
+            <div class="section-title">Skills by Market Demand</div>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h3>RAG Architecture</h3>
+                    <div class="level">Advanced</div>
+                    <p>Retrieval-Augmented Generation pipelines, chunking strategies, embedding models, hybrid search, re-ranking.</p>
+                    <div class="projects">Projects: <strong>AI Learning Engine</strong>, <strong>RPES-v2</strong></div>
+                    <div class="tags"><span class="tag">61% of postings</span><span class="tag">+$22K premium</span></div>
+                </div>
+
+                <div class="skill-card">
+                    <h3>Agentic AI / Multi-Agent</h3>
+                    <div class="level">Advanced</div>
+                    <p>Multi-agent orchestration, agent loops, state management, human-in-the-loop checkpoints, mutation evolution.</p>
+                    <div class="projects">Projects: <strong>PMOS</strong>, <strong>Tiny</strong>, <strong>Hermes</strong></div>
+                    <div class="tags"><span class="tag">+280% YoY</span><span class="tag">+$28K premium</span></div>
+                </div>
+
+                <div class="skill-card">
+                    <h3>Prompt / Context Engineering</h3>
+                    <div class="level">Advanced</div>
+                    <p>System instruction design, few-shot curation, chain-of-thought, structured outputs, context window architecture.</p>
+                    <div class="projects">Projects: <strong>Local Coder</strong>, <strong>LLM Bridge</strong></div>
+                    <div class="tags"><span class="tag">58% of postings</span><span class="tag">+$18K premium</span></div>
+                </div>
+
+                <div class="skill-card">
+                    <h3>MLOps / Experiment Tracking</h3>
+                    <div class="level intermediate">Intermediate</div>
+                    <p>MLflow, experiment tracking, pipeline orchestration, model versioning, evaluation frameworks.</p>
+                    <div class="projects">Projects: <strong>experiment_tracker.py</strong>, <strong>rag_evaluator.py</strong></div>
+                    <div class="tags"><span class="tag">35% of postings</span><span class="tag">+$25K premium</span></div>
+                </div>
+
+                <div class="skill-card">
+                    <h3>LLM Fine-tuning</h3>
+                    <div class="level intermediate">Intermediate (Cloud)</div>
+                    <p>LoRA, QLoRA, PEFT, RLHF, dataset curation, evaluation against domain benchmarks.</p>
+                    <div class="projects">Projects: <strong>hf_peft_config.py</strong> (Colab template)</div>
+                    <div class="tags"><span class="tag">44% of postings</span><span class="tag">+$31K premium</span></div>
+                </div>
+
+                <div class="skill-card">
+                    <h3>Governed AI Execution</h3>
+                    <div class="level">Advanced</div>
+                    <p>Evidence-first governance, fail-closed execution, provenance tracking, audit trails, authority gates.</p>
+                    <div class="projects">Projects: <strong>PMOS</strong>, <strong>CosmosOS</strong></div>
+                    <div class="tags"><span class="tag">Unique</span><span class="tag">AI governance gap</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== PROJECT DETAILS ===== -->
+        <section class="section" id="projects">
+            <div class="section-title">Project Details</div>
+
+            <div class="project-item">
+                <h3>PMOS — Provenance-Managed Operating System</h3>
+                <div class="meta">2024 · Governance Layer</div>
+                <p>Governed execution system with evidence-first authority gates. No evidence → no authority → no execution. Fail-closed by design. Tracks full provenance from objective through execution, evidence, validation, decision, authorization, to release.</p>
+                <div class="tags"><span class="tag">Agentic AI</span><span class="tag">Governance</span><span class="tag">Fail-closed</span></div>
+            </div>
+
+            <div class="project-item">
+                <h3>AI Learning Engine</h3>
+                <div class="meta">2024 · RAG Pipeline</div>
+                <p>Adaptive learning platform with corpus ingestion, curriculum generation, and progress tracking. Full RAG pipeline: document chunking, embedding storage, retrieval, generation, evaluation.</p>
+                <div class="tags"><span class="tag">RAG</span><span class="tag">Embeddings</span><span class="tag">Chunking</span></div>
+            </div>
+
+            <div class="project-item">
+                <h3>Tiny — PMOS-Governed Agent</h3>
+                <div class="meta">2024 · Agentic AI</div>
+                <p>Small agent system with mutation evolution. PMOS-governed execution with multi-step workflows, state management, and human-in-the-loop checkpoints.</p>
+                <div class="tags"><span class="tag">Agentic AI</span><span class="tag">Mutation</span><span class="tag">Multi-step</span></div>
+            </div>
+
+            <div class="project-item">
+                <h3>Local Coder — Ollama Native Tool Calling</h3>
+                <div class="meta">2025 · Context Engineering</div>
+                <p>Local coding agent with Ollama native tool calling. Context engineering: system prompts, tool schemas, conversation history, structured outputs. Sandbox isolation for safe execution.</p>
+                <div class="tags"><span class="tag">Context Engineering</span><span class="tag">Tool Calling</span><span class="tag">Local LLM</span></div>
+            </div>
+
+            <div class="project-item">
+                <h3>RPES-v2 — Rankfixer Platform Engine Suite</h3>
+                <div class="meta">2025 · Full-Stack AI</div>
+                <p>Node.js API server, bridge server, competitive intelligence. End-to-end AI system: extraction → scoring → evidence → decision → action.</p>
+                <div class="tags"><span class="tag">Full-Stack</span><span class="tag">API Design</span><span class="tag">Scoring</span></div>
+            </div>
+
+            <div class="project-item">
+                <h3>Hermes Agent Orchestration</h3>
+                <div class="meta">2025 · Multi-Agent</div>
+                <p>Multi-agent orchestration with tool calling, delegation, parallel execution. Context engineering across multiple LLM calls with state management.</p>
+                <div class="tags"><span class="tag">Multi-Agent</span><span class="tag">Orchestration</span><span class="tag">Tool Calling</span></div>
+            </div>
+        </section>
+
+        <!-- ===== ACTIVELY CLOSING GAPS ===== -->
+        <section class="section">
+            <div class="section-title">Actively Closing Gaps</div>
+            <div class="card" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem;">
+                <p style="margin-bottom: 1rem;">Building production-grade MLOps and fine-tuning skills:</p>
+                <ul style="margin-left: 1.2rem; font-size: 0.9rem; color: var(--text-muted);">
+                    <li style="margin-bottom: 0.4rem;"><strong>MLflow experiment tracking</strong> — Local tracking with CPU-only evaluation (mlops/experiment_tracker.py)</li>
+                    <li style="margin-bottom: 0.4rem;"><strong>RAG evaluation framework</strong> — Faithfulness, answer relevance, context recall/precision (evals/rag_evaluator.py)</li>
+                    <li style="margin-bottom: 0.4rem;"><strong>LoRA/QLoRA fine-tuning</strong> — Google Colab template with Hugging Face PEFT (fine-tuning/hf_peft_config.py)</li>
+                    <li style="margin-bottom: 0.4rem;"><strong>LLM-as-judge evaluation</strong> — Systematic evaluation patterns with local models (evals/llm_judge.py)</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ===== CTA ===== -->
+        <section class="cta-section">
+            <h2>Want to go deeper?</h2>
+            <p>See where these skills fit in the market, or get in touch to discuss your project.</p>
+            <a class="btn" href="/skills/" style="margin-right: 0.5rem;">View AI Skills Demand Report</a>
+            <a class="btn" href="#contact" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})" style="background: transparent; border: 1px solid var(--brand); color: var(--brand);">Contact →</a>
+        </section>
+
+        <!-- ===== CONTACT ===== -->
+        <section id="contact" class="contact-section" style="padding: 2rem 0; text-align: center;">
+            <h2 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 0.5rem;">Get in touch</h2>
+            <p style="color: var(--text-muted); max-width: 550px; margin: 0 auto 1.5rem;">Questions about AI visibility, custom tooling, or governed agent systems? We'll respond within 24 hours.</p>
+            <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.75rem; max-width: 620px; margin: 0 auto; text-align: left;">
+                <form name="rankfixer-portfolio-contact" action="/" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-webhook="https://script.google.com/macros/s/AKfycbzyyKA0A2RFixVUPLzcWUHSMNBQT0O28nac_nIDSvyIYgQWyU7NvPt-XgdgEGvj2pp-dg/exec" data-source="RankFixer-Portfolio" onsubmit="return handlePortfolioContact(event)">
+                    <input type="hidden" name="form-name" value="rankfixer-portfolio-contact" />
+                    <p style="position: absolute; left: -9999px; height: 0; overflow: hidden;"><label>Don't fill this: <input name="bot-field" /></label></p>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; margin-bottom: 1rem;">
+                        <div><label for="p-name" style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.4rem;">Name</label><input id="p-name" name="name" type="text" required placeholder="Jane Doe" style="width: 100%; background: var(--bg-input); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.7rem 0.85rem; color: var(--text); font-size: 0.9rem; font-family: var(--font);" /></div>
+                        <div><label for="p-email" style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.4rem;">Email</label><input id="p-email" name="email" type="email" required placeholder="you@company.com" style="width: 100%; background: var(--bg-input); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.7rem 0.85rem; color: var(--text); font-size: 0.9rem; font-family: var(--font);" /></div>
+                    </div>
+                    <div style="margin-bottom: 1rem;"><label for="p-interest" style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.4rem;">Interest</label>
+                        <select id="p-interest" name="interest" style="width: 100%; background: var(--bg-input); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.7rem 0.85rem; color: var(--text); font-size: 0.9rem; font-family: var(--font);">
+                            <option value="Custom AI Tools">Custom AI Tools</option>
+                            <option value="AI Visibility Audit">AI Visibility Audit</option>
+                            <option value="Partnership">Partnership</option>
+                            <option value="General">General</option>
+                        </select>
+                    </div>
+                    <div style="margin-bottom: 1rem;"><label for="p-msg" style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.4rem;">Message</label><textarea id="p-msg" name="message" rows="3" placeholder="Tell me about your project, timeline, or what you're trying to solve." style="width: 100%; background: var(--bg-input); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.7rem 0.85rem; color: var(--text); font-size: 0.9rem; font-family: var(--font); resize: vertical;"></textarea></div>
+                    <button type="submit" class="btn" style="width: 100%; border: none; cursor: pointer; font-family: var(--font);">Send Message →</button>
+                    <div id="portfolioFormNote" style="color: var(--brand); font-size: 0.9rem; margin-top: 0.85rem; min-height: 1.1rem;"></div>
+                </form>
+            </div>
+        </section>
+
+        <!-- ===== FOOTER ===== -->
+        <footer class="site-footer">
+            <p>RankFixer — Know Your AI Visibility Score</p>
+            <p><a href="/">Home</a> <a href="/tools">Tools</a> <a href="/blog">Blog</a> <a href="/skills">Skills</a> <a href="/portfolio">Portfolio</a> <a href="/research">Research</a> <a href="/about">About</a> <a href="https://github.com/rankfixer-ai/rankfixer-core">GitHub</a></p>
+        </footer>
+
+    </div>
+
+    <script>
+    // ===== QUIZ LOGIC =====
+    var currentStep = 1;
+    var answerHistory = [];
+
+    function handleQuizAnswer(answer) {
+        answerHistory.push(answer);
+        var Rfx = window.Rfx;
+
+        // Step 1 answers
+        if (answer === 'checker' || answer === 'research' || answer === 'build') {
+            showResult('result' + answer.charAt(0).toUpperCase() + answer.slice(1));
+            if (Rfx) Rfx.track('portfolio_quiz_answer', { answer: answer, step: 1, funnel: 'direct' });
+        }
+        else if (answer === 'explore') {
+            // Go to step 2
+            showStep(2);
+            if (Rfx) Rfx.track('portfolio_quiz_answer', { answer: answer, step: 1, funnel: 'explore' });
+        }
+        // Step 2 answers (role-based)
+        else if (answer === 'dev' || answer === 'marketer' || answer === 'ceo') {
+            showResult('result' + answer.charAt(0).toUpperCase() + answer.slice(1));
+            if (Rfx) Rfx.track('portfolio_quiz_answer', { answer: answer, step: 2, funnel: 'role' });
+        }
+    }
+
+    function showStep(n) {
+        document.getElementById('step1').classList.remove('visible');
+        document.getElementById('step2').classList.add('visible');
+        document.getElementById('dot2').classList.add('active');
+        currentStep = n;
+    }
+
+    function showResult(resultId) {
+        // Hide steps
+        document.querySelectorAll('.quiz-step').forEach(function(el) { el.classList.remove('visible'); });
+        // Hide all results
+        document.querySelectorAll('.quiz-result').forEach(function(el) { el.classList.remove('visible'); });
+        // Show target result
+        document.getElementById(resultId).classList.add('visible');
+        // Show reset
+        document.getElementById('quizReset').classList.add('visible');
+        // Update progress
+        document.getElementById('dot1').classList.remove('active');
+        document.getElementById('dot2').classList.add('active');
+    }
+
+    function resetQuiz() {
+        answerHistory = [];
+        document.querySelectorAll('.quiz-result').forEach(function(el) { el.classList.remove('visible'); });
+        document.getElementById('step2').classList.remove('visible');
+        document.getElementById('step1').classList.add('visible');
+        document.getElementById('quizReset').classList.remove('visible');
+        document.getElementById('dot1').classList.add('active');
+        document.getElementById('dot2').classList.remove('active');
+        currentStep = 1;
+        var Rfx = window.Rfx;
+        if (Rfx) Rfx.track('portfolio_quiz_reset', {});
+    }
+
+    // ===== CONTACT FORM =====
+    function handlePortfolioContact(e) {
+        e.preventDefault();
+        var form = e.target;
+        var note = document.getElementById('portfolioFormNote');
+        var data = new FormData(form);
+        var webhook = form.dataset.webhook;
+        var source = form.dataset.source || '';
+        data.append('source', source);
+        note.style.color = 'var(--brand)';
+        note.textContent = 'Sending…';
+
+        if (!webhook || webhook.indexOf('YOUR_DEPLOYMENT_ID') !== -1) {
+            portfolioMailtoFallback(data, note, 'RankFixer Portfolio Inquiry');
+            return false;
+        }
+        fetch(webhook, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams(data)
+        }).then(function() {
+            form.reset();
+            note.style.color = 'var(--ok)';
+            note.textContent = '✓ Message sent — we\'ll respond within 24 hours.';
+            var Rfx = window.Rfx;
+            if (Rfx) Rfx.conversion('contact_form_submit', { source: 'portfolio', interest: data.get('interest') || '' });
+        }).catch(function() {
+            portfolioMailtoFallback(data, note, 'RankFixer Portfolio Inquiry');
+        });
+        return false;
+    }
+
+    function portfolioMailtoFallback(data, note, subjectPrefix) {
+        var f = Object.fromEntries(data.entries());
+        var ts = new Date().toISOString();
+        var subj = encodeURIComponent(subjectPrefix + ' — ' + (f.interest || ''));
+        var body = encodeURIComponent(
+            'Name: ' + (f.name||'') + '\n' +
+            'Email: ' + (f.email||'') + '\n' +
+            'Interest: ' + (f.interest||'') + '\n' +
+            'Message: ' + (f.message||'') + '\n' +
+            'Submitted: ' + ts + '\n'
+        );
+        window.location.href = 'mailto:acibronjan@gmail.com?subject=' + subj + '&body=' + body;
+        note.style.color = 'var(--ok)';
+        note.textContent = '✓ Opening your email client…';
+        var Rfx = window.Rfx;
+        if (Rfx) Rfx.conversion('contact_form_submit', { source: 'portfolio', method: 'mailto' });
+    }
+
+    // ===== NAV SCROLL =====
+    (function() {
+        var nav = document.querySelector('.nav');
+        if (!nav) return;
+        var ticking = false;
+        function updateScrolled() {
+            nav.classList.toggle('nav-scrolled', window.scrollY > 8);
+        }
+        window.addEventListener('scroll', function() {
+            if (ticking) return;
+            ticking = true;
+            window.requestAnimationFrame(function() { updateScrolled(); ticking = false; });
+        }, { passive: true });
+        updateScrolled();
+    })();
+    </script>
+
+    <script src="/js/analytics.js"></script>
+</body>
+</html>
