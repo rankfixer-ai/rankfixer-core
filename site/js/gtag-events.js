@@ -45,9 +45,12 @@
   // Form submit
   document.addEventListener('submit', function (e) {
     var form = e.target;
-    if (form.tagName === 'FORM' && form.name) {
+    // NB: form.name returns the <input name="name"> element (named-property
+    // shadowing), so use getAttribute to get the actual form name.
+    var formName = form.getAttribute && form.getAttribute('name');
+    if (form.tagName === 'FORM' && formName) {
       track('form_submit', {
-        form_name: form.name
+        form_name: formName
       });
     }
   });
