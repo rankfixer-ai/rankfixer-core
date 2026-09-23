@@ -1,13 +1,13 @@
-# Contact-form success page. /success/ is shadowed by the legacy root-level
-# success.html (Stripe payment confirmation — do not touch). The force flag (!)
-# is required: without it the static file wins and /success/ 301s to /success.
-/success/  /success/index.html  200!
+# Contact-form success page lives at /thanks/ — /success* is the legacy Stripe
+# payment-confirmation flow (success.html, used by create-checkout.js) and must
+# not be touched. The form processor resolves the action path through the file
+# manifest, so the success page needs an unshadowed directory of its own.
+/thanks    /thanks/    301
 /portfolio  /portfolio/  301
 /skills    /skills/    301
 /tools     /tools/     301
 /about     /about/     301
 /research  /research/  301
-/success   /success/   301
 /report    /report/    301
 /blog      /blog/      301
 /contact   /contact/   301
