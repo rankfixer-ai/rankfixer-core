@@ -11,5 +11,7 @@
 /report    /report/    301
 /blog      /blog/      301
 /contact   /contact/   301
+/research/why-pmos-exists    /research/why-pmos-exists/    301
+/research/governed-ai-execution  /research/governed-ai-execution/  301
 
 https://www.rankfixer.co/*  https://rankfixer.co/:splat  301!

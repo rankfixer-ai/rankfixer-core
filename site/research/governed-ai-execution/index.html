@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Governed AI Execution: A 9-Piece Cluster — RankFixer Research</title>
+    <meta name="description" content="Most AI governance is documentation. What actually protects a system is runtime governance — evidence-first, fail-closed, append-only. Nine pieces covering the architecture, discipline, and cost of governed AI execution.">
+
+    <meta property="og:title" content="Governed AI Execution: A 9-Piece Cluster">
+    <meta property="og:description" content="Most AI governance is documentation. What actually protects a system is runtime governance — evidence-first, fail-closed, append-only.">
+    <meta property="og:url" content="https://rankfixer.co/research/governed-ai-execution/">
+    <meta property="og:type" content="website">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YXZVCPBCZN"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YXZVCPBCZN');
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": "Governed AI Execution: A 9-Piece Cluster",
+      "description": "Nine pieces covering the architecture, discipline, and cost of governed AI execution.",
+      "url": "https://rankfixer.co/research/governed-ai-execution/",
+      "isPartOf": {
+        "@type": "CollectionPage",
+        "name": "RankFixer Research",
+        "url": "https://rankfixer.co/research/"
+      }
+    }
+    </script>
+
+    <style>
+        :root {
+            --brand: #6C5CE7; --brand-hover: #5A4BD1; --bg: #0D0D1A; --bg-card: #151528;
+            --bg-input: #1E1E36; --text: #F0F0F5; --text-muted: #8888A0; --border: #2A2A45;
+            --ok: #00B894; --warn: #FDCB6E; --bad: #E17055;
+            --radius: 12px; --radius-sm: 8px; --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { font-size: 16px; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; scroll-padding-top: 5rem; }
+        body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.7; min-height: 100vh; -webkit-font-smoothing: antialiased; }
+        a { color: var(--brand); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .nav { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; padding: 1rem 2rem; position: sticky; top: 0; z-index: 40; background: rgba(13,13,26,0.82); -webkit-backdrop-filter: blur(12px) saturate(160%); backdrop-filter: blur(12px) saturate(160%); border-bottom: 1px solid transparent; transition: box-shadow .35s ease, border-color .35s ease; }
+        .nav.nav-scrolled { box-shadow: 0 6px 24px rgba(0,0,0,.35); border-bottom-color: var(--border); }
+        .nav-logo { font-weight: 700; font-size: 1.2rem; text-decoration: none; color: var(--text); }
+        .nav-links { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; }
+        .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; transition: color .25s ease; }
+        .nav-links a:hover, .nav-links a.active { color: var(--text); }
+        .container { max-width: 820px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+        .hero { text-align: center; padding: 3rem 0 2rem; }
+        .hero .eyebrow { font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem; }
+        .hero h1 { font-size: clamp(1.8rem, 5vw, 2.6rem); font-weight: 800; line-height: 1.25; letter-spacing: -0.02em; margin-bottom: 1rem; }
+        .hero .subtitle { font-size: 1.05rem; color: var(--text-muted); max-width: 600px; margin: 0 auto; }
+        .section { padding: 2rem 0; border-top: 1px solid var(--border); }
+        .section-title { font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1.5rem; }
+        .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; transition: border-color 0.2s; }
+        .card:hover { border-color: var(--brand); }
+        .card .num { font-size: 0.75rem; font-weight: 700; color: var(--brand); margin-bottom: 0.5rem; }
+        .card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .card h3 a { color: var(--text); }
+        .card h3 a:hover { color: var(--brand); text-decoration: none; }
+        .card p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.5rem; }
+        .card p:last-child { margin-bottom: 0; }
+        .card .tag { font-size: 0.7rem; color: var(--text-muted); border: 1px solid var(--border); border-radius: 100px; padding: 0.2rem 0.6rem; margin-right: 0.3rem; }
+        .article h1 { font-size: clamp(1.8rem, 4.5vw, 2.4rem); font-weight: 800; letter-spacing: -0.02em; margin: 0 0 1rem; }
+        .article h2 { font-size: 1.4rem; font-weight: 700; margin: 2rem 0 0.75rem; }
+        .article h3 { font-size: 1.15rem; font-weight: 700; margin: 1.5rem 0 0.5rem; }
+        .article p { margin-bottom: 1rem; }
+        .article ul, .article ol { margin: 0 0 1rem 1.4rem; }
+        .article li { margin-bottom: 0.35rem; }
+        .article blockquote { border-left: 3px solid var(--brand); padding: 0.5rem 1rem; color: var(--text-muted); margin-bottom: 1rem; font-style: italic; }
+        .article code { background: var(--bg-card); border: 1px solid var(--border); padding: 0.1rem 0.35rem; border-radius: 4px; font-size: 0.9em; }
+        .article pre { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 1rem; overflow-x: auto; margin-bottom: 1rem; }
+        .article pre code { background: none; border: none; padding: 0; }
+        .article hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
+        .article strong { color: var(--text); }
+        .article table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem; }
+        .article th, .article td { text-align: left; padding: 0.6rem 0.8rem; border-bottom: 1px solid var(--border); }
+        .article th { color: var(--text-muted); font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; }
+        .cta-bar { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+        .cta-bar > p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem; }
+        .cta-block { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem 1.5rem; margin-bottom: 1rem; }
+        .cta-block p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.75rem; }
+        .cta-block p:last-child { margin-bottom: 0; }
+        .cta-block strong { color: var(--text); }
+        .cta-block .btn { display: inline-block; background: var(--brand); color: #fff; padding: 0.6rem 1.25rem; border-radius: var(--radius-sm); font-weight: 700; font-size: 0.9rem; text-decoration: none; margin-top: 0.25rem; }
+        .cta-block .btn:hover { background: var(--brand-hover); text-decoration: none; }
+        .site-footer { text-align: center; padding: 2rem 0; border-top: 1px solid var(--border); margin-top: 3rem; }
+        .site-footer p { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.3rem; }
+        .site-footer a { color: var(--text-muted); margin: 0 0.5rem; }
+        @media (max-width: 600px) {
+            .nav { flex-direction: column; gap: 0.5rem; padding: 0.75rem 1rem; }
+            .container { padding: 1rem; }
+            .hero h1 { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/" class="nav-logo">Rankfixer</a>
+        <div class="nav-links">
+            <a href="/tools">Tools</a>
+            <a href="/blog">Blog</a>
+            <a href="/skills">Skills</a>
+            <a href="/portfolio">Portfolio</a>
+            <a href="/research" class="active">Research</a>
+            <a href="/about">About</a>
+            <a href="https://github.com/rankfixer-ai/rankfixer-core" target="_blank" rel="noopener">GitHub</a>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <header class="hero">
+            <div class="eyebrow">Applied Research</div>
+            <h1>Governed AI Execution: A 9-Piece Cluster</h1>
+            <p class="subtitle">Most AI governance is documentation. What actually protects a system is runtime governance — evidence-first, fail-closed, append-only.</p>
+        </header>
+
+        <!-- THE NINE PIECES -->
+        <section class="section">
+            <div class="section-title">The Nine Pieces</div>
+
+            <div class="card">
+                <div class="num">01</div>
+                <h3><a href="#piece-1">Why Your AI Governance Plan Will Fail</a></h3>
+                <p>Diagnostic. Documentation governance vs. runtime governance.</p>
+                <p><span class="tag">diagnostic</span><span class="tag">pillar piece</span></p>
+            </div>
+
+            <div class="card">
+                <div class="num">02</div>
+                <h3><a href="#piece-2">The Incident That Made Us Build Governance as Runtime</a></h3>
+                <p>Origin story. A deletion event forces the shift from documented rules to runtime enforcement.</p>
+                <p><span class="tag">origin</span><span class="tag">incident</span></p>
+            </div>
+
+            <div class="card">
+                <div class="num">03</div>
+                <h3><a href="#piece-3">Building a Governed Agent Runtime (ToolFoundry)</a></h3>
+                <p>Architecture — runtime layer. Agent loop → tool validation → approval gate → ledger.</p>
+                <p><span class="tag">architecture</span><span class="tag">runtime</span></p>
+            </div>
+
+            <div class="card">
+                <div class="num">04</div>
+                <h3><a href="#piece-4">Verification as Infrastructure (FastPlay + verify_claims)</a></h3>
+                <p>Architecture — verification layer. Deterministic scanners + mechanical verifier.</p>
+                <p><span class="tag">architecture</span><span class="tag">verification</span></p>
+            </div>
+
+            <div class="card">
+                <div class="num">05</div>
+                <h3><a href="#piece-5">Article 0: The Discipline Behind the System</a></h3>
+                <p>Discipline — decision rules. The sanity gate that governs all other gates.</p>
+                <p><span class="tag">discipline</span><span class="tag">Article 0</span></p>
+            </div>
+
+            <div class="card">
+                <div class="num">06</div>
+                <h3><a href="#piece-6">The Citation Verification Layer (Blog Pipeline Stage 3)</a></h3>
+                <p>Discipline — evidence chain. Mechanical verification for published claims.</p>
+                <p><span class="tag">discipline</span><span class="tag">citations</span></p>
+            </div>
+
+            <div class="card">
+                <div class="num">07</div>
+                <h3><a href="#piece-7">PMOS — Governance as Operating System</a></h3>
+                <p>Discipline — full lifecycle. Authority → evidence → execution → acceptance → release.</p>
+                <p><span class="tag">discipline</span><span class="tag">PMOS</span></p>
+            </div>
+
+            <div class="card">
+                <div class="num">08</div>
+                <h3><a href="#piece-8">The Final Verification — When the System Passes Its Own Test</a></h3>
+                <p>Case study. The audit that honest about what it can and cannot prove.</p>
+                <p><span class="tag">case study</span><span class="tag">audit</span></p>
+            </div>
+
+            <div class="card">
+                <div class="num">09</div>
+                <h3><a href="#piece-9">How to Work With Us (The Offer)</a></h3>
+                <p>Offer. Governance audit, verification layer design, Article 0 adoption.</p>
+                <p><span class="tag">offer</span><span class="tag">methodology</span></p>
+            </div>
+        </section>
+
+        <!-- BODY OF THE CLUSTER -->
+        <article class="article">
+
+            <h1 id="piece-1">Governed AI Execution: The Complete Cluster</h1>
+
+            <p>This cluster argues one thesis: <strong>Governance is not what the system says about execution. It is what the system is technically prevented from doing.</strong></p>
+
+            <p>The evidence trail shows the architecture moving from documented rules toward enforcement. Every claim in this cluster is either grounded in a real artifact or marked <code>[Qualitative — pattern/convention]</code>. No claim cites a session that does not exist. The original draft's 28 fabricated session citations were identified by a mechanical audit and removed or downgraded. The verification report is at <code>blog/drafts/citation-verification-report.md</code>.</p>
+
+            <hr>
+
+            <h2 id="piece-2">Piece 1: Why Your AI Governance Plan Will Fail</h2>
+
+            <p>Most AI governance plans are documents — PDFs, Confluence pages, acceptable-use policies. Documents do not execute. They sit in a wiki while production code runs ungoverned. The failure mode is always the same: a decision gets made (a tool approved, a change shipped, a claim published) and the governance artifact finds out afterward — if it finds out at all.</p>
+
+            <p>In governed agent systems, approval gates often exist in documentation but not in code — a validation result is computed and written to a record, but the approval function never reads that field before stamping the record "approved." On paper, there is a gate. At runtime, there isn't. <code>[Project: ToolFoundry provenance audit — 32/32 records showed approval.method: "auto" regardless of import_check result]</code></p>
+
+            <p>Silent rejection — where the system refuses an action but logs nothing — is a common failure mode in governance pipelines that only record acceptances. Without a dedicated rejection-event type, the system cannot reconstruct what it refused to do or why. <code>[Project: ToolFoundry event ledger — rejected candidates left zero trace until CANDIDATE_REJECTED event type was added]</code></p>
+
+            <p>Long-running pipelines can produce silent failures: operational systems that report green while producing nothing, because the failure detection path is itself broken. <code>[Qualitative — pattern observed across multiple systems]</code></p>
+
+            <hr>
+
+            <h2 id="piece-3">Piece 2: The Incident That Made Us Build Governance as Runtime</h2>
+
+            <p>A command-line deletion event can destroy critical project state. Recovery without append-only ledgers requires reconstructing intent from scattered artifacts — memory files, skill docs, session history. The realization: if governance had been a runtime concern — append-only ledgers, hash-chained events, content-addressable decisions — recovery would have been a replay operation, not an archaeological dig.</p>
+
+            <p>When a working tree is deleted by the agent itself mid-task, with no governance stopping it, the only recovery path is reconstruction from whatever artifacts survive — drafts, saved session transcripts, memory entries. <code>[Qualitative — pattern observed]</code></p>
+
+            <p>Untracked files are not protected by git. Any file a cron job depends on must be tracked. This is a lesson learned from losing a test file that was recreated from scratch. <code>[Qualitative — memory entry added after incident]</code></p>
+
+            <hr>
+
+            <h2 id="piece-4">Piece 3: Building a Governed Agent Runtime (ToolFoundry)</h2>
+
+            <p>A governed agent runtime is designed so that every action (generate, evaluate, approve, reject, execute) emits an immutable event to an append-only ledger. The architecture: agent loop → tool validation → approval gate → ledger → execution (or rejection).</p>
+
+            <p>Fixing an approval gate often requires a single function change — reading the computed validation result before acting on it — rather than adding a new layer. <code>[Project: ToolFoundry — provenance_for_auto() now reads import_check before setting approval.method]</code></p>
+
+            <p>Silent reject points in an agent loop (where <code>print()</code> + <code>return</code> replaces event emission) leave the system unable to reconstruct its own refusal reasoning. Adding a dedicated rejection-event type closes this gap. <code>[Project: ToolFoundry — _log_candidate_rejected() helper added at 3 reject stages]</code></p>
+
+            <p>Ledger verification: new events appended with valid hash chain links; regression checks confirm zero false positives on the acceptance path. <code>[Project: ToolFoundry — 9 new CANDIDATE_REJECTED events with valid hash chain links]</code></p>
+
+            <hr>
+
+            <h2 id="piece-5">Piece 4: Verification as Infrastructure (FastPlay + verify_claims)</h2>
+
+            <p>Governance without verification is just policy. The verification layer has two components: (1) deterministic scanners that produce evidence JSON — pattern matches, smell counts, coverage metrics — and (2) a mechanical verifier that checks claims against evidence without LLM involvement. The key insight: the LLM drafts, the verifier decides.</p>
+
+            <p><code>verify_claims.py</code> provides verification primitives: behavioral, categorical, procedural checks. The "simulate" pattern (present in weaker versions) must be absent — it produces fabricated results. <code>[Project: verify_claims.py — 7 verification primitives confirmed present; simulate pattern absent]</code></p>
+
+            <p>FastPlay Scanner: a deterministic pattern matcher producing evidence JSON. It is a code-quality scanner, NOT a comprehensive data-flow analyzer. Do not credit it with proving facts it does not inspect. <code>[Qualitative — scanner boundary]</code></p>
+
+            <hr>
+
+            <h2 id="piece-6">Piece 5: Article 0 — The Discipline Behind the System</h2>
+
+            <p>Article 0 is the convention that governs all other conventions. It has two clauses: (1) don't do rewrites whose current cost is zero — if it isn't broken, the system doesn't touch it; (2) don't declare something retired/done before verifying — "plausible" isn't enough.</p>
+
+            <p>Article 0 as the precondition layer: missing evidence is a stop condition, not an invitation to guess. Missing or invalid authority is a stop condition. <code>[Qualitative — convention]</code></p>
+
+            <hr>
+
+            <h2 id="piece-7">Piece 6: The Citation Verification Layer (Blog Pipeline Stage 3)</h2>
+
+            <p>The blog pipeline was the first non-code domain where governed execution was applied. Stage 1 discovers trends. Stage 2 drafts from sources (every numeric claim gets a <code>[N]</code> bracket). Stage 3 runs mechanical verification: does the source file exist? Does it contain the value? Is the attribution consistent? Hard rule: REVISE if any claim fails mechanically, lacks citation, or contradicts another cited source.</p>
+
+            <p>The adapter problem: blog sources are <code>{exact_quote, number, context}</code> — not scanner <code>issues</code> lists. Forcing them into the wrong shape produces meaningless deltas. Solution: a new claim type, not a bad mapping. <code>[Qualitative — pattern]</code></p>
+
+            <hr>
+
+            <h2 id="piece-8">Piece 7: PMOS — Governance as Operating System</h2>
+
+            <p>PMOS (Provenance-Managed Operating System) is the conceptual layer above ToolFoundry. Where ToolFoundry governs agent actions, PMOS governs the full path from objective through execution, evidence, validation, decision, authorization, release, and deployment. The core rule: no authority → no execution.</p>
+
+            <p>G5/G6 authority separation: Hermes does not create authority, accept G5, or release G6. Human approval sits at the authority boundary. The Broker sits between authorization and execution as an independent verifier. <code>[Qualitative — architecture]</code></p>
+
+            <hr>
+
+            <h2 id="piece-9">Piece 8: The Final Verification — When the System Passes Its Own Test</h2>
+
+            <p>The moment the system proved itself wasn't when it caught a failure — it was when it passed its own audit. The verification was honest: "independently verified" vs "reported" — the distinction was kept sharp, not blurred.</p>
+
+            <p><code>verify_claims.py</code> self-test: all verification primitives confirmed present, simulate pattern absent, CLI exits 0. <code>[Project: verify_claims.py — self-test]</code></p>
+
+            <hr>
+
+            <h2>Piece 9: How to Work With Us (The Offer)</h2>
+
+            <p>This isn't a product pitch. It's a methodology: governance as runtime, verification as infrastructure, Article 0 as the stop-guard. The offer is to apply this discipline to your own systems — not to buy a platform, but to build your own governed execution layer using the patterns proven in this stack.</p>
+
+            <p>Three things offered:</p>
+            <ol>
+                <li><strong>Governance audit</strong> — map your current AI execution path and identify where decisions leave no trace.</li>
+                <li><strong>Verification layer design</strong> — build mechanical checks between your LLM and your production boundary.</li>
+                <li><strong>Article 0 adoption</strong> — the discipline of "don't fix what isn't broken" and "verify before declaring done."</li>
+            </ol>
+
+            <p>Not offered: A SaaS platform. A managed service. A black box. This is open-source, deterministic, and runs on your hardware with your models.</p>
+
+            <hr>
+
+            <h2>Audit Trail</h2>
+
+            <p>This cluster was audited against the on-disk artifact inventory. All 28 original session citations (for dates 2026-09-11, 09-15, 09-16, 09-21) resolved to UNRESOLVED — no session dumps exist for those dates. Claims were rewritten as qualitative author-synthesis or removed. The resolver is at <code>blog/tools/resolve_citations.py</code>. The verification report is at <code>blog/drafts/citation-verification-report.md</code>.</p>
+
+            <p>The two pre-audit drafts (<code>governed-ai-execution-9-piece-cluster.md</code> and <code>governed-ai-execution-merged-pillar-package.md</code>) carry do-not-publish markers and must not be republished.</p>
+
+        </article>
+
+        <!-- CTA -->
+        <div class="cta-bar">
+            <p><em>This cluster is part of an applied research program on how AI systems govern execution, evidence, and authority.</em></p>
+
+            <div class="cta-block">
+                <p><strong>Read the audit story →</strong> <a href="/research/governed-ai-execution/audit-our-own-citations/">We Audited Our Own Citations</a></p>
+                <p><strong>Read the foundational document →</strong> <a href="/research/why-pmos-exists/">Why PMOS Exists</a></p>
+            </div>
+
+            <div class="cta-block">
+                <p><strong>See the full research →</strong> <a href="/research/">The RankFixer research program</a></p>
+                <p><strong>Need help building this?</strong></p>
+                <p>Tell me what you're building — no pitch, just questions about your problem.</p>
+                <a href="/contact/" class="btn">Start a conversation →</a>
+            </div>
+        </div>
+
+    </div>
+
+    <footer class="site-footer">
+        <p>RankFixer — evidence-first governance for AI systems.</p>
+        <p><a href="/about">About</a> <a href="/research">Research</a> <a href="/portfolio">Portfolio</a> <a href="https://github.com/rankfixer-ai/rankfixer-core" target="_blank" rel="noopener">GitHub</a></p>
+        <p>© 2026 RankFixer. All data published under MIT license.</p>
+    </footer>
+
+    <script>
+        const nav = document.querySelector('.nav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('nav-scrolled', window.scrollY > 10);
+        }, { passive: true });
+    </script>
+    <script src="/js/gtag-events.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>We Audited Our Own Citations — RankFixer Research</title>
+    <meta name="description" content="Twenty-eight claims cited conversation sessions. Zero resolved. This is the story of that audit, the mechanism, and the mechanical fix.">
+
+    <meta property="og:title" content="We Audited Our Own Citations">
+    <meta property="og:description" content="Twenty-eight claims cited conversation sessions. Zero resolved. This is the story of that audit, the mechanism, and the mechanical fix.">
+    <meta property="og:url" content="https://rankfixer.co/research/governed-ai-execution/audit-our-own-citations/">
+    <meta property="og:type" content="article">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YXZVCPBCZN"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YXZVCPBCZN');
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "We Audited Our Own Citations",
+      "description": "Twenty-eight claims cited conversation sessions. Zero resolved.",
+      "author": { "@type": "Person", "name": "Jan Michael Acibron" },
+      "publisher": { "@type": "Organization", "name": "RankFixer" },
+      "url": "https://rankfixer.co/research/governed-ai-execution/audit-our-own-citations/"
+    }
+    </script>
+
+    <style>
+        :root {
+            --brand: #6C5CE7; --brand-hover: #5A4BD1; --bg: #0D0D1A; --bg-card: #151528;
+            --text: #F0F0F5; --text-muted: #8888A0; --border: #2A2A45;
+            --radius: 12px; --radius-sm: 8px; --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { font-size: 16px; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; scroll-padding-top: 5rem; }
+        body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.7; min-height: 100vh; -webkit-font-smoothing: antialiased; }
+        a { color: var(--brand); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .nav { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; padding: 1rem 2rem; position: sticky; top: 0; z-index: 40; background: rgba(13,13,26,0.82); -webkit-backdrop-filter: blur(12px) saturate(160%); backdrop-filter: blur(12px) saturate(160%); border-bottom: 1px solid transparent; transition: box-shadow .35s ease, border-color .35s ease; }
+        .nav.nav-scrolled { box-shadow: 0 6px 24px rgba(0,0,0,.35); border-bottom-color: var(--border); }
+        .nav-logo { font-weight: 700; font-size: 1.2rem; text-decoration: none; color: var(--text); }
+        .nav-links { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; }
+        .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; transition: color .25s ease; }
+        .nav-links a:hover, .nav-links a.active { color: var(--text); }
+        .container { max-width: 720px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+        .article h1 { font-size: clamp(1.8rem, 4.5vw, 2.4rem); font-weight: 800; letter-spacing: -0.02em; margin: 0 0 1rem; }
+        .article h2 { font-size: 1.4rem; font-weight: 700; margin: 2rem 0 0.75rem; }
+        .article p { margin-bottom: 1rem; }
+        .article ul, .article ol { margin: 0 0 1rem 1.4rem; }
+        .article li { margin-bottom: 0.35rem; }
+        .article blockquote { border-left: 3px solid var(--brand); padding: 0.5rem 1rem; color: var(--text-muted); margin-bottom: 1rem; font-style: italic; }
+        .article code { background: var(--bg-card); border: 1px solid var(--border); padding: 0.1rem 0.35rem; border-radius: 4px; font-size: 0.9em; }
+        .article pre { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 1rem; overflow-x: auto; margin-bottom: 1rem; }
+        .article pre code { background: none; border: none; padding: 0; }
+        .article hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
+        .article strong { color: var(--text); }
+        .article table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem; }
+        .article th, .article td { text-align: left; padding: 0.6rem 0.8rem; border-bottom: 1px solid var(--border); }
+        .article th { color: var(--text-muted); font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; }
+        .post-nav { display: flex; flex-wrap: wrap; gap: 0.75rem; padding: 1.5rem 0; border-top: 1px solid var(--border); margin-top: 2rem; }
+        .post-nav a { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.5rem 0.9rem; border: 1px solid var(--border); border-radius: 999px; font-size: 0.85rem; color: var(--text-muted); background: var(--bg-card); transition: all .2s; }
+        .post-nav a:hover { color: var(--text); border-color: var(--brand); text-decoration: none; }
+        footer { text-align: center; padding: 2rem 0; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.8rem; }
+        footer a { color: var(--text-muted); margin: 0 0.5rem; }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/" class="nav-logo">Rankfixer</a>
+        <div class="nav-links">
+            <a href="/tools">Tools</a>
+            <a href="/blog">Blog</a>
+            <a href="/skills">Skills</a>
+            <a href="/portfolio">Portfolio</a>
+            <a href="/research" class="active">Research</a>
+            <a href="/about">About</a>
+            <a href="https://github.com/rankfixer-ai/rankfixer-core" target="_blank" rel="noopener">GitHub</a>
+        </div>
+    </nav>
+
+    <main class="container article">
+        <h1>We Audited Our Own Citations</h1>
+
+        <p>Twenty-eight claims cited conversation sessions. Zero resolved.</p>
+
+        <p>We built a nine-piece content cluster on governed AI execution. Every claim cited a specific session — <code>@session:jan/20260911_093342_80910f</code>, <code>@session:jan/20260915_222717_d5e597</code>, and others. When we ran the citations against the on-disk artifact inventory, none of them existed. Not one session dump matched the cited IDs. The cluster's evidentiary foundation was entirely fabricated — not by malice, not by carelessness about truth, but by a mechanism that is itself the exact failure mode the pillar describes.</p>
+
+        <p>This piece is about a nine-piece cluster publishing immediately after it. Read that first if you want the full context — or read this first if you want the failure analysis before the artifact.</p>
+
+        <hr>
+
+        <h2>What we were trying to build</h2>
+
+        <p>The cluster argued one thesis: governance is not what the system says about execution. It is what the system is technically prevented from doing.</p>
+
+        <p>The nine pieces moved from problem (documentation governance fails) to origin (a deletion event that forced runtime governance) to architecture (ToolFoundry, PMOS, verify_claims) to discipline (Article 0, citation verification, ceremony gates) to offer (how to apply the methodology). Each piece cited specific sessions where decisions were made, fixes were implemented, designs were named.</p>
+
+        <p>The thesis was sound. The structure was sound. The citations were fiction.</p>
+
+        <hr>
+
+        <h2>How the fabrication happened</h2>
+
+        <p>The mechanism was structural, not intentional.</p>
+
+        <p>Real work existed. The project has 63 session dumps across three profiles: <code>ite-kernel</code> (Aug 5–12) for governance kernel development, <code>governance</code> (Aug 19–25) for PMOS and authority design, <code>jan</code> (Aug 30 – Sep 9) for FastPlay and blog pipeline development. Real artifacts exist for Sept 15 and 21: spawn trees (<code>jan/spawn-trees/e8cd1bf3/</code>, <code>jan/spawn-trees/fe353311/</code>, <code>jan/spawn-trees/97d127ae/</code>), delegation summaries (<code>jan/cache/delegation/subagent-summary-1-20260921_225604_516979.txt</code>), receipts (<code>governance/logs/update_receipts/update_20260915_222301_18004.json</code>), and config backups (<code>jan/backups/config/config.yaml.good.20260915-215846</code>).</p>
+
+        <p>The cluster did not cite these real sessions and artifacts. Instead, it constructed session-shaped anchors from adjacent metadata:</p>
+
+        <ul>
+            <li><strong>Dates</strong> came from artifacts sharing the date prefix. Sept 15 had config backups and spawn trees. Sept 21 had spawn trees and delegation summaries. Sept 11 and 16 had nothing at all — those dates were interpolated between real dates.</li>
+            <li><strong>Times</strong> were fabricated. The cited session IDs (<code>20260911_093342_80910f</code>, <code>20260915_222717_d5e597</code>, <code>20260916_085922_4d023b</code>, <code>20260921_211740_38b6ea</code>) contain timestamps that do not appear in any artifact filename.</li>
+            <li><strong>The format</strong> matched the citation class the pillar itself demands: <code>@session:jan/&lt;YYYYMMDD&gt;_&lt;HHMMSS&gt;_&lt;hash&gt;</code>. The format looked correct. No check verified the artifact existed.</li>
+        </ul>
+
+        <p>The result: 28 citations, all structurally valid, all pointing to nothing.</p>
+
+        <hr>
+
+        <h2>The audit</h2>
+
+        <p>We built a resolver — <code>resolve_citations.py</code> — that parses every citation, checks the artifact path against disk, and emits one of three states: RESOLVED, UNRESOLVED, or CONTRADICTED.</p>
+
+        <table>
+            <tr><th>Status</th><th>Count</th></tr>
+            <tr><td>RESOLVED</td><td>0</td></tr>
+            <tr><td>UNRESOLVED</td><td>28</td></tr>
+            <tr><td>CONTRADICTED</td><td>0</td></tr>
+        </table>
+
+        <p>Every claim resolved to UNRESOLVED. No session dump matched any cited ID.</p>
+
+        <p>We added a second check: CATEGORY-MISMATCH. Claims describe conversations, decisions, findings — evidence types that require SESSION-class artifacts. The artifacts that actually exist for the cited dates are SPAWN trees, DELEGATION summaries, RECEIPTs, and BACKUPs. These are different artifact classes. A spawn tree proves work was dispatched; it does not contain the conversation. A delegation summary proves a subagent produced output; it does not contain the decision-maker's reasoning. A receipt proves system state at a time; it does not describe the work.</p>
+
+        <p>The mismatch is total: 28 claims, 28 category mismatches. Structural, not accidental.</p>
+
+        <hr>
+
+        <h2>The fix — mechanical, not editorial</h2>
+
+        <p>We did not fix the cluster by editing prose. We fixed it by building a pipeline.</p>
+
+        <p><strong>Step 1: Inventory.</strong> The resolver walks every artifact class (session, spawn, delegation, receipt, backup) across every profile. It emits a machine-readable index: <code>{class, profile, id, path, size, mtime}</code>.</p>
+
+        <p><strong>Step 2: Resolve.</strong> For each citation, the resolver parses <code>{class, profile, id, anchor}</code>, checks the artifact exists at the expected path, and emits RESOLVED / UNRESOLVED / CONTRADICTED.</p>
+
+        <p><strong>Step 3: Class-match.</strong> For each claim, the resolver determines the minimum evidence class required. A claim that says "we discussed X" requires SESSION. A claim that says "we dispatched research on X" requires SPAWN. A claim that says "a subagent produced findings on X" requires DELEGATION. If the citation's class is below the requirement, flag as CATEGORY-MISMATCH.</p>
+
+        <p><strong>Step 4: Re-point.</strong> For each UNRESOLVED or CATEGORY-MISMATCH claim, we searched the inventory for an artifact that could support it. Two paths:</p>
+        <ul>
+            <li><strong>Path A:</strong> Rewrite as qualitative author-synthesis for pattern claims ("In governed agent systems, approval gates often exist in documentation but not in code"). Mark as <code>[Qualitative — pattern observed]</code>.</li>
+            <li><strong>Path B:</strong> Remove entirely for specific-event claims with no artifact support ("Finding 1 was fixed in session X").</li>
+        </ul>
+
+        <p>Path A for general patterns. Path B for specific events.</p>
+
+        <p><strong>Step 5: Re-verification.</strong> Re-ran the resolver against the re-pointed draft. Result: every claim now either grounded in a real <code>[Project: artifact/finding]</code> citation or marked <code>[Qualitative — pattern/convention]</code>. Zero residual session citations.</p>
+
+        <p>The pipeline is the fix. The edits are the output of the pipeline, not the fix itself.</p>
+
+        <hr>
+
+        <h2>What this demonstrates</h2>
+
+        <p>The pillar's thesis, applied to the pillar:</p>
+
+        <p><strong>Documentation governance:</strong> The <code>@session</code> format existed. It looked correct. It was never checked. The citations sat in the document looking authoritative while pointing to nothing. This is documentation governance — the form of verification without the substance.</p>
+
+        <p><strong>Runtime governance:</strong> The resolver checks at publish time. A citation that cannot resolve blocks publication. The check is mechanical, not editorial. It does not depend on the author remembering to verify. It is a gate.</p>
+
+        <p><strong>The fabrication was caught by exactly the discipline the pillar argues for — applied to the pillar itself.</strong> The nine-piece cluster argues that governance must be enforced at execution time, not documented at review time. The audit enforced citation governance at publish time. The result: the cluster's own failure mode became the proof of its thesis.</p>
+
+        <p>We did not set out to fabricate evidence. We set out to build a content cluster, and we built a fabrication machine. The machine produced structurally valid citations that pointed to non-existent sessions. The only reason we caught it is that we built a tool to catch it — and we built that tool because the pillar says to build such tools.</p>
+
+        <p>This is not a story about AI safety. It is a story about what happens when you argue for runtime governance and then apply documentation governance to your own work. The gap between what we said and what we did is the gap the pillar describes. Closing that gap required not better intentions but better tools.</p>
+
+        <p>The re-pointed cluster is at <code>blog/drafts/governed-ai-execution-9-piece-cluster.repointed.md</code>. Every claim is grounded or marked qualitative. The resolver is at <code>blog/tools/resolve_citations.py</code>. The verification report is at <code>blog/drafts/citation-verification-report.md</code>.</p>
+
+        <hr>
+
+        <p><strong>Tell me what you're building.</strong><br>
+        <strong>No pitch — just questions about your problem.</strong></p>
+
+        <p><a href="/contact/">Contact →</a></p>
+
+        <p>(<em>See also: the architectural discipline behind this —</em> <a href="/research/rag/">/research/rag/</a>)</p>
+
+        <p>(<em>See also: the foundational document this cluster builds on —</em> <a href="/research/why-pmos-exists/">Why PMOS Exists</a>, <em>publishing first</em>)</p>
+
+        <div class="post-nav">
+            <a href="/research/why-pmos-exists/">← Why PMOS Exists</a>
+            <a href="/research/governed-ai-execution/">Governed AI Execution cluster →</a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>RankFixer — evidence-first governance for AI systems.</p>
+        <p><a href="/">Home</a> <a href="/tools">Tools</a> <a href="/blog">Blog</a> <a href="/skills">Skills</a> <a href="/portfolio">Portfolio</a> <a href="/research">Research</a> <a href="/about">About</a> <a href="https://github.com/rankfixer-ai/rankfixer-core">GitHub</a></p>
+        <p>© 2026 RankFixer. All data published under MIT license.</p>
+    </footer>
+
+    <script>
+        const nav = document.querySelector('.nav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('nav-scrolled', window.scrollY > 10);
+        }, { passive: true });
+    </script>
+    <script src="/js/gtag-events.js" defer></script>
+</body>
+</html>
