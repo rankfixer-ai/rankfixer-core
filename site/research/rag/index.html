@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>RAG Architecture: A Practical Guide — RankFixer Research</title>
+    <meta name="description" content="Nine pieces covering what RAG is, how to build it, and what it costs. Demand data from 12,000+ AI/ML job postings analyzed in Q1 2026.">
+
+    <meta property="og:title" content="RAG Architecture: A Practical Guide">
+    <meta property="og:description" content="Nine pieces covering what RAG is, how to build it, and what it costs. Demand data from 12,000+ AI/ML job postings.">
+    <meta property="og:url" content="https://rankfixer.co/research/rag/">
+    <meta property="og:type" content="website">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YXZVCPBCZN"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YXZVCPBCZN');
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": "RAG Architecture: A Practical Guide",
+      "description": "Nine pieces covering what RAG is, how to build it, and what it costs.",
+      "url": "https://rankfixer.co/research/rag/",
+      "isPartOf": {
+        "@type": "CollectionPage",
+        "name": "RankFixer Research",
+        "url": "https://rankfixer.co/research/"
+      }
+    }
+    </script>
+
+    <style>
+        :root {
+            --brand: #6C5CE7; --brand-hover: #5A4BD1; --bg: #0D0D1A; --bg-card: #151528;
+            --bg-input: #1E1E36; --text: #F0F0F5; --text-muted: #8888A0; --border: #2A2A45;
+            --ok: #00B894; --warn: #FDCB6E; --bad: #E17055;
+            --radius: 12px; --radius-sm: 8px; --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { font-size: 16px; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; scroll-padding-top: 5rem; }
+        body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.7; min-height: 100vh; -webkit-font-smoothing: antialiased; }
+        a { color: var(--brand); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        .nav { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; padding: 1rem 2rem; position: sticky; top: 0; z-index: 40; background: rgba(13,13,26,0.82); -webkit-backdrop-filter: blur(12px) saturate(160%); backdrop-filter: blur(12px) saturate(160%); border-bottom: 1px solid transparent; transition: box-shadow .35s ease, border-color .35s ease; }
+        .nav.nav-scrolled { box-shadow: 0 6px 24px rgba(0,0,0,.35); border-bottom-color: var(--border); }
+        .nav-logo { font-weight: 700; font-size: 1.2rem; text-decoration: none; color: var(--text); }
+        .nav-links { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; }
+        .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; transition: color .25s ease; }
+        .nav-links a:hover, .nav-links a.active { color: var(--text); }
+
+        .container { max-width: 820px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+        .hero { text-align: center; padding: 3rem 0 2rem; }
+        .hero .eyebrow { font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem; }
+        .hero h1 { font-size: clamp(1.6rem, 4.5vw, 2.4rem); font-weight: 800; line-height: 1.25; letter-spacing: -0.02em; margin-bottom: 1rem; }
+        .hero .subtitle { font-size: 1.05rem; color: var(--text-muted); max-width: 600px; margin: 0 auto; }
+
+        .section { padding: 2rem 0; border-top: 1px solid var(--border); }
+        .section-title { font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1.5rem; }
+
+        .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; transition: border-color 0.2s; }
+        .card:hover { border-color: var(--brand); }
+        .card .num { font-size: 0.75rem; font-weight: 700; color: var(--brand); margin-bottom: 0.5rem; }
+        .card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .card h3 a { color: var(--text); }
+        .card h3 a:hover { color: var(--brand); text-decoration: none; }
+        .card p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.5rem; }
+        .card p:last-child { margin-bottom: 0; }
+
+        .cta-bar { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+        .cta-bar > p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem; }
+        .cta-block { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem 1.5rem; margin-bottom: 1rem; }
+        .cta-block p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.75rem; }
+        .cta-block p:last-child { margin-bottom: 0; }
+        .cta-block strong { color: var(--text); }
+        .cta-block .btn { display: inline-block; background: var(--brand); color: #fff; padding: 0.6rem 1.25rem; border-radius: var(--radius-sm); font-weight: 700; font-size: 0.9rem; text-decoration: none; margin-top: 0.25rem; }
+        .cta-block .btn:hover { background: var(--brand-hover); text-decoration: none; }
+
+        .site-footer { text-align: center; padding: 2rem 0; border-top: 1px solid var(--border); margin-top: 3rem; }
+        .site-footer p { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.3rem; }
+        .site-footer a { color: var(--text-muted); margin: 0 0.5rem; }
+
+        @media (max-width: 600px) {
+            .nav { flex-direction: column; gap: 0.5rem; padding: 0.75rem 1rem; }
+            .container { padding: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="nav">
+        <a href="/" class="nav-logo">Rankfixer</a>
+        <div class="nav-links">
+            <a href="/tools">Tools</a>
+            <a href="/blog">Blog</a>
+            <a href="/skills">Skills</a>
+            <a href="/portfolio">Portfolio</a>
+            <a href="/research" class="active">Research</a>
+            <a href="/about">About</a>
+            <a href="https://github.com/rankfixer-ai/rankfixer-core" target="_blank" rel="noopener">GitHub</a>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <header class="hero">
+            <div class="eyebrow">Applied Research</div>
+            <h1>RAG Architecture: A Practical Guide</h1>
+            <p class="subtitle">Nine pieces covering what RAG is, how to build it, and what it costs. Demand data from 12,000+ AI/ML job postings analyzed in Q1 2026.</p>
+        </header>
+
+        <!-- THE NINE PIECES -->
+        <section class="section">
+            <div class="section-title">The Nine Pieces</div>
+
+            <div class="card">
+                <div class="num">01</div>
+                <h3><a href="/research/rag/what-is-rag/">What is Retrieval-Augmented Generation (RAG)?</a></h3>
+                <p>The one-sentence answer, the problem it solves, how it works in plain English, and why it's in 61% of AI job postings.</p>
+            </div>
+
+            <div class="card">
+                <div class="num">02</div>
+                <h3><a href="/research/rag/rag-vs-fine-tuning/">RAG vs Fine-Tuning: Which Does Your Business Need?</a></h3>
+                <p>The decision framework most articles skip. When to use RAG, when to use fine-tuning, when to use both — with a phased approach and cost comparison.</p>
+            </div>
+
+            <div class="card">
+                <div class="num">03</div>
+                <h3><a href="/research/rag/why-llms-hallucinate/">Why Your LLM Hallucinates (And How RAG Fixes It)</a></h3>
+                <p>Three failure modes, four causes, and the four-tier fix that works in production. Based on Stanford RegLab research.</p>
+            </div>
+
+            <div class="card">
+                <div class="num">04</div>
+                <h3><a href="/research/rag/5-signs-you-need-rag/">5 Signs You Need RAG, Not a Bigger Model</a></h3>
+                <p>A self-diagnostic with a scorecard. Check your symptoms, determine whether you have a knowledge problem or a model problem.</p>
+            </div>
+
+            <div class="card">
+                <div class="num">05</div>
+                <h3><a href="/research/rag/how-to-build-rag-pipeline/">How to Build a RAG Pipeline</a></h3>
+                <p>The 7 steps plus the 5 things that break in production. The gap between a weekend demo and a system that survives contact with real users.</p>
+            </div>
+
+            <div class="card">
+                <div class="num">06</div>
+                <h3><a href="/research/rag/rag-architecture/">RAG Architecture Explained</a></h3>
+                <p>The 5 architectural decisions that separate working RAG from broken RAG. Chunking strategy, embedding models, retrieval patterns, generation grounding, and evaluation.</p>
+            </div>
+
+            <div class="card">
+                <div class="num">07</div>
+                <h3><a href="/research/rag/rag-cost-breakdown/">How Much Does a RAG Pipeline Actually Cost?</a></h3>
+                <p>Five cost centers, three realistic budgets, and the hidden costs nobody budgets for. Per-query cost breakdown and honest maintenance estimates.</p>
+            </div>
+
+            <div class="card">
+                <div class="num">08</div>
+                <h3><a href="/research/rag/case-study-ai-learning-engine/">Case Study: Building an Adaptive Learning Engine</a></h3>
+                <p>What building an adaptive learning engine taught me about RAG. Three real failures, three architectural lessons, and an honest accounting of what was and wasn't built.</p>
+            </div>
+
+            <div class="card">
+                <div class="num">09</div>
+                <h3><a href="/research/rag/rag-consultant/">What to Look for in a RAG Consultant</a></h3>
+                <p>Eight questions that separate builders from talkers. Red flags, green flags, and a scoping checklist. Whether you hire me or someone else, use these criteria.</p>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <div class="cta-bar">
+            <p><em>This cluster is part of an applied research program on how AI systems retrieve, cite, and govern knowledge.</em></p>
+
+            <div class="cta-block">
+                <p><strong>See the full research →</strong> <a href="/research/">The RankFixer research program</a></p>
+                <p><strong>See how this works in practice →</strong> <a href="/portfolio/">The portfolio</a></p>
+            </div>
+
+            <div class="cta-block">
+                <p><strong>Need help building this?</strong></p>
+                <p>I build the systems this research describes. Tell me what you're building — no pitch, just questions about your problem.</p>
+                <a href="/contact/" class="btn">Start a conversation →</a>
+            </div>
+        </div>
+
+    </div>
+
+    <footer class="site-footer">
+        <p>RankFixer — evidence-first governance for AI systems.</p>
+        <p>
+            <a href="/about">About</a>
+            <a href="/research">Research</a>
+            <a href="/portfolio">Portfolio</a>
+            <a href="https://github.com/rankfixer-ai/rankfixer-core" target="_blank" rel="noopener">GitHub</a>
+        </p>
+        <p>© 2026 RankFixer. All data published under MIT license.</p>
+    </footer>
+
+    <script>
+        const nav = document.querySelector('.nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 10) nav.classList.add('nav-scrolled');
+            else nav.classList.remove('nav-scrolled');
+        }, { passive: true });
+    </script>
+</body>
+</html>
