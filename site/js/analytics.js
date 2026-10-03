@@ -40,7 +40,10 @@
     // Events that fire at most ONCE per page load (idempotency)
     var ONCE_PER_PAGE = [
         'page_load_time',
-        'scroll_25', 'scroll_50', 'scroll_75', 'scroll_100'
+        'page_view',
+        'scroll_25', 'scroll_50', 'scroll_75', 'scroll_100',
+        // Page-scoped view events: must not re-fire on repeat renders.
+        'tools_page_viewed', 'report_viewed', 'visibility_tracker_viewed'
     ];
 
     // Events considered conversions
@@ -78,8 +81,24 @@
             try {
                 var gaData = {};
                 for (var k in data) { if (data.hasOwnProperty(k)) gaData[k] = data[k]; }
-                // GA4 reserves 'page' as a reserved param in some configs; alias to page_path
-                if (gaData.page) { gaData.page_path = gaData.page; delete gaData.page; }
+                // GA4 reserves several parameter names. Passing them through verbatim
+                // collides with standard dimensions and corrupts session attribution:
+                // 'source' overwrote sessionSourceMedium with values like 'tools_hub'.
+                // Alias every reserved name to a rfx_-prefixed custom param.
+                var RESERVED = {
+                    page:      'rfx_page',
+                    page_path: 'rfx_page_path',
+                    source:    'rfx_source',
+                    medium:    'rfx_medium',
+                    referrer:  'rfx_referrer',
+                    campaign:  'rfx_campaign'
+                };
+                for (var rk in RESERVED) {
+                    if (gaData.hasOwnProperty(rk)) {
+                        gaData[RESERVED[rk]] = gaData[rk];
+                        delete gaData[rk];
+                    }
+                }
                 gtag('event', name, gaData);
             } catch (_) { /* silent */ }
         }
