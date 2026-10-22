@@ -12,12 +12,17 @@
   <meta property="og:site_name" content="RankFixer">
 
   <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-YXZVCPBCZN"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-YXZVCPBCZN');
+    <script>
+      if (window.location.hostname === 'rankfixer.co' || window.location.hostname === 'www.rankfixer.co') {
+        var _gaScript = document.createElement('script');
+        _gaScript.async = true;
+        _gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-YXZVCPBCZN';
+        document.head.appendChild(_gaScript);
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-YXZVCPBCZN');
+      }
   </script>
 
   <style>
@@ -270,6 +275,7 @@ html{
   }
 }
 </style>
+<link rel="canonical" href="https://rankfixer.co/tools/" />
 </head>
 <body>
 

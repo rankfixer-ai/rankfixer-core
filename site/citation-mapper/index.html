@@ -11,12 +11,17 @@
     <meta property="og:url" content="https://rankfixer.co/citation-mapper">
     <meta property="og:type" content="website">
 
-    <script async src="https://www.googlegagmanager.com/gtag/js?id=G-YXZVCPBCZN"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-YXZVCPBCZN');
+      if (window.location.hostname === 'rankfixer.co' || window.location.hostname === 'www.rankfixer.co') {
+        var _gaScript = document.createElement('script');
+        _gaScript.async = true;
+        _gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-YXZVCPBCZN';
+        document.head.appendChild(_gaScript);
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-YXZVCPBCZN');
+      }
     </script>
 
     <script type="application/ld+json">
@@ -132,6 +137,7 @@
             .input-row { flex-direction: column; }
         }
     </style>
+<link rel="canonical" href="https://rankfixer.co/citation-mapper/" />
 </head>
 <body>
 
