@@ -59,8 +59,10 @@
 
         @media (max-width: 600px) {
             .nav { flex-direction: column; gap: 0.5rem; padding: 0.75rem 1rem; }
-            .container { padding: 1rem; max-width: 100%; }
+            .container { padding: 0.5rem; max-width: 100%; }
             .page-header h1 { font-size: 1.6rem; }
+            .category-filters { display: none !important; }
+            .category-select { display: block !important; width: 100%; padding: 0.5rem; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text); font-size: 0.85rem; margin-bottom: 1rem; }
         }
 
         /* Global Mobile Fix */
@@ -72,7 +74,9 @@
             nav, .nav, header ul { flex-wrap: wrap; justify-content: center; gap: 5px; font-size: 0.8rem; padding: 0 10px; }
             .input-wrapper, form, .hero-form { flex-direction: column; width: 100%; padding: 0 15px; }
             input[type="text"], input[type="url"], input[type="email"] { width: 100% !important; margin-bottom: 10px; }
-            button, .btn-primary, input[type="submit"] { width: 100% !important; margin: 0 !important; }
+            button:not(.filter-btn), .btn-primary, input[type="submit"] { width: 100% !important; margin: 0 !important; }
+            .category-filters { display: none !important; }
+            .category-select { display: block !important; width: 100%; padding: 0.5rem; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text); font-size: 0.85rem; margin-bottom: 1rem; }
             .post-card, .tool-card, article { width: 100% !important; margin: 10px 0 !important; padding: 15px !important; }
         }
     /* Rankfixer - modern smooth nav */
@@ -257,6 +261,18 @@ html{
     transition-delay:0s !important;
   }
 }
+    .category-filters { display: flex; flex-wrap: wrap; gap: 0.3rem; justify-content: center; margin-bottom: 1.5rem; max-width: 100%; }
+    .filter-btn { background: var(--bg-card); border: 1px solid var(--border); color: var(--text-muted); padding: 0.2rem 0.4rem; border-radius: 20px; font-size: 0.7rem; cursor: pointer; transition: all 0.2s; font-family: inherit; max-width: 100%; white-space: normal; word-break: break-word; }
+    .filter-btn:hover { border-color: var(--brand); color: var(--text); }
+    .filter-btn.active { background: var(--brand); border-color: var(--brand); color: #fff; }
+    .category-badge { display: inline-block; font-size: 0.7rem; font-weight: 600; padding: 0.15rem 0.5rem; border-radius: 4px; margin-bottom: 0.4rem; color: #fff; }
+    /* Category select (mobile only) */
+    .category-select { display: none; }
+    .category-badge[data-cat="technology"] { background: #4A3FB8; }
+    .category-badge[data-cat="ai-automation"] { background: #006B30; }
+    .category-badge[data-cat="ai-visibility-seo"] { background: #8B6914; color: #fff; }
+    .category-badge[data-cat="research"] { background: #B02020; }
+    .category-badge[data-cat="guides"] { background: #006064; }
 </style>
 <link rel="canonical" href="https://rankfixer.co/blog/" />
 </head>
@@ -270,6 +286,7 @@ html{
   <a href="/skills/">Skills</a>
   <a href="/portfolio/">Portfolio</a>
   <a href="/research/">Research</a>
+  <a href="/technology/">Technology</a>
   <a href="/about/">About</a>
   <a href="https://github.com/rankfixer-ai/rankfixer-core" target="_blank" rel="noopener">GitHub</a>
 </div></nav>
@@ -281,10 +298,28 @@ html{
             <p>Open-source research on AI visibility, Generative Engine Optimization, and how LLMs cite websites.</p>
         </header>
 
-        <p class="post-count">32 article(s) — updated September 23, 2026</p>
+        <div class="category-filters">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="technology">Technology</button>
+            <button class="filter-btn" data-filter="ai-automation">AI &amp; Automation</button>
+            <button class="filter-btn" data-filter="ai-visibility-seo">AI Visibility &amp; SEO</button>
+            <button class="filter-btn" data-filter="research">Research &amp; Experiments</button>
+            <button class="filter-btn" data-filter="guides">Guides &amp; Tutorials</button>
+        </div>
+        <select class="category-select" id="categorySelect">
+            <option value="all">All Categories</option>
+            <option value="technology">Technology</option>
+            <option value="ai-automation">AI &amp; Automation</option>
+            <option value="ai-visibility-seo">AI Visibility &amp; SEO</option>
+            <option value="research">Research &amp; Experiments</option>
+            <option value="guides">Guides &amp; Tutorials</option>
+        </select>
+
+        <p class="post-count">29 articles — updated September 23, 2026</p>
 
         <!-- RAG CLUSTER — New -->
-        <article class="post-card" style="border-color: var(--brand);">
+        <article class="post-card" style="border-color: var(--brand);" data-category="ai-automation">
+            <span class="category-badge" data-cat="ai-automation">AI & Automation</span>
             <h2><a href="/research/rag/what-is-rag/">What is Retrieval-Augmented Generation (RAG)?</a></h2>
             <div class="post-meta">
                 <span class="post-date">September 23, 2026</span>
@@ -294,7 +329,8 @@ html{
             <p style="margin-top: 0.6rem;"><a href="/research/rag/what-is-rag/" class="read-more">Read the article →</a></p>
         </article>
 
-        <article class="post-card">
+        <article class="post-card" data-category="ai-automation">
+            <span class="category-badge" data-cat="ai-automation">AI & Automation</span>
             <h2><a href="/research/rag/rag-vs-fine-tuning/">RAG vs Fine-Tuning: Which Does Your Business Need?</a></h2>
             <div class="post-meta">
                 <span class="post-date">September 23, 2026</span>
@@ -304,7 +340,8 @@ html{
             <p style="margin-top: 0.6rem;"><a href="/research/rag/rag-vs-fine-tuning/" class="read-more">Read the article →</a></p>
         </article>
 
-        <article class="post-card">
+        <article class="post-card" data-category="ai-automation">
+            <span class="category-badge" data-cat="ai-automation">AI & Automation</span>
             <h2><a href="/research/rag/why-llms-hallucinate/">Why Your LLM Hallucinates (And What Actually Fixes It)</a></h2>
             <div class="post-meta">
                 <span class="post-date">September 23, 2026</span>
@@ -314,7 +351,8 @@ html{
             <p style="margin-top: 0.6rem;"><a href="/research/rag/why-llms-hallucinate/" class="read-more">Read the article →</a></p>
         </article>
 
-        <article class="post-card">
+        <article class="post-card" data-category="ai-automation">
+            <span class="category-badge" data-cat="ai-automation">AI & Automation</span>
             <h2><a href="/research/rag/5-signs-you-need-rag/">5 Signs You Need RAG, Not a Bigger Model</a></h2>
             <div class="post-meta">
                 <span class="post-date">September 23, 2026</span>
@@ -324,7 +362,8 @@ html{
             <p style="margin-top: 0.6rem;"><a href="/research/rag/5-signs-you-need-rag/" class="read-more">Read the article →</a></p>
         </article>
 
-        <article class="post-card">
+        <article class="post-card" data-category="guides">
+            <span class="category-badge" data-cat="guides">Guides & Tutorials</span>
             <h2><a href="/research/rag/how-to-build-rag-pipeline/">How to Build a RAG Pipeline</a></h2>
             <div class="post-meta">
                 <span class="post-date">September 23, 2026</span>
@@ -334,7 +373,8 @@ html{
             <p style="margin-top: 0.6rem;"><a href="/research/rag/how-to-build-rag-pipeline/" class="read-more">Read the article →</a></p>
         </article>
 
-        <article class="post-card">
+        <article class="post-card" data-category="technology">
+            <span class="category-badge" data-cat="technology">Technology</span>
             <h2><a href="/research/rag/rag-architecture/">RAG Architecture Explained</a></h2>
             <div class="post-meta">
                 <span class="post-date">September 23, 2026</span>
@@ -344,7 +384,8 @@ html{
             <p style="margin-top: 0.6rem;"><a href="/research/rag/rag-architecture/" class="read-more">Read the article →</a></p>
         </article>
 
-        <article class="post-card">
+        <article class="post-card" data-category="research">
+            <span class="category-badge" data-cat="research">Research & Experiments</span>
             <h2><a href="/research/rag/rag-cost-breakdown/">How Much Does a RAG Pipeline Actually Cost?</a></h2>
             <div class="post-meta">
                 <span class="post-date">September 23, 2026</span>
@@ -354,7 +395,8 @@ html{
             <p style="margin-top: 0.6rem;"><a href="/research/rag/rag-cost-breakdown/" class="read-more">Read the article →</a></p>
         </article>
 
-        <article class="post-card">
+        <article class="post-card" data-category="ai-automation">
+            <span class="category-badge" data-cat="ai-automation">AI & Automation</span>
             <h2><a href="/research/rag/case-study-ai-learning-engine/">Case Study: Building an Adaptive Learning Engine</a></h2>
             <div class="post-meta">
                 <span class="post-date">September 23, 2026</span>
@@ -364,7 +406,8 @@ html{
             <p style="margin-top: 0.6rem;"><a href="/research/rag/case-study-ai-learning-engine/" class="read-more">Read the article →</a></p>
         </article>
 
-        <article class="post-card">
+        <article class="post-card" data-category="ai-automation">
+            <span class="category-badge" data-cat="ai-automation">AI & Automation</span>
             <h2><a href="/research/rag/rag-consultant/">What to Look for in a RAG Consultant</a></h2>
             <div class="post-meta">
                 <span class="post-date">September 23, 2026</span>
@@ -375,7 +418,8 @@ html{
         </article>
 
         <!-- AGENTIC AI -->
-        <article class="post-card" style="border-color: var(--brand);">
+        <article class="post-card" style="border-color: var(--brand);" data-category="ai-automation">
+            <span class="category-badge" data-cat="ai-automation">AI & Automation</span>
             <h2><a href="/research/">What is Agentic AI?</a></h2>
             <div class="post-meta">
                 <span class="post-date">September 23, 2026</span>
@@ -386,7 +430,8 @@ html{
         </article>
 
         <!-- EXISTING ARTICLES -->
-        <article class="post-card">
+        <article class="post-card" data-category="ai-visibility-seo">
+            <span class="category-badge" data-cat="ai-visibility-seo">AI Visibility & SEO</span>
             <h2><a href="/blog/citation-audit-why-ai-engines-arent-citing-you">The Citation Audit: How to Find Out Why AI Engines Aren't Citing You</a></h2>
             <div class="post-meta">
                 <span class="post-date">September 22, 2026</span>
@@ -396,7 +441,8 @@ html{
             <p style="margin-top: 0.6rem;"><a href="/blog/citation-audit-why-ai-engines-arent-citing-you" class="read-more">Read the article →</a></p>
         </article>
 
-        <article class="post-card">
+        <article class="post-card" data-category="ai-visibility-seo">
+            <span class="category-badge" data-cat="ai-visibility-seo">AI Visibility & SEO</span>
             <h2><a href="/blog/citation-divergence-three-rulebooks-ai-search-engines">Citation Divergence: The Three Rulebooks</a></h2>
             <div class="post-meta">
                 <span class="post-date">September 16, 2026</span>
@@ -406,7 +452,8 @@ html{
             <p style="margin-top: 0.6rem;"><a href="/blog/citation-divergence-three-rulebooks-ai-search-engines" class="read-more">Read the article →</a></p>
         </article>
 
-        <article class="post-card">
+        <article class="post-card" data-category="technology">
+            <span class="category-badge" data-cat="technology">Technology</span>
             <h2><a href="/blog/perplexity-search-api-ai-visibility-infrastructure-shift">Perplexity Search API: The Infrastructure Shift That Changes AI Visibility</a></h2>
             <div class="post-meta">
                 <span class="post-date">September 16, 2026</span>
@@ -416,13 +463,15 @@ html{
             <p style="margin-top: 0.6rem;"><a href="/blog/perplexity-search-api-ai-visibility-infrastructure-shift" class="read-more">Read the article →</a></p>
         </article>
 
-        <article class="post-card">
+        <article class="post-card" data-category="ai-visibility-seo">
+            <span class="category-badge" data-cat="ai-visibility-seo">AI Visibility & SEO</span>
             <h2><a href="/blog/entity-first-content-generative-citation-sources">Entity-First Content: How Generative Engines Select Citation Sources</a></h2>
             <p class="post-excerpt">Research on how AI search engines use entity-relationship mapping to select sources, and what content structural changes improve citation frequency in 2026.</p>
             <p style="margin-top: 0.6rem;"><a href="/blog/entity-first-content-generative-citation-sources" class="read-more">Read the article →</a></p>
         </article>
 
-        <article class="post-card">
+        <article class="post-card" data-category="ai-visibility-seo">
+            <span class="category-badge" data-cat="ai-visibility-seo">AI Visibility & SEO</span>
             <h2><a href="/blog/ai-citation-management-for-local-businesses">AI Citation Management for Local Businesses</a></h2>
             <div class="post-meta">
                 <span class="post-tags"><a href="/blog?tag=ai-citations">ai-citations</a>, <a href="/blog?tag=local-business">local-business</a></span>
@@ -433,7 +482,8 @@ html{
             <p class="post-excerpt">Are your local citations invisible to AI search? Discover why traditional citation management fails in the era of ChatGPT and Perplexity, and how to make your business visible to AI answer engines.</p>
             <p style="margin-top: 0.6rem;"><a href="/blog/ai-citation-management-for-local-businesses" class="read-more">Read the article →</a></p>
         </article>
-        <article class="post-card">
+        <article class="post-card" data-category="ai-visibility-seo">
+            <span class="category-badge" data-cat="ai-visibility-seo">AI Visibility & SEO</span>
             <h2><a href="/blog/ai-driven-predictive-seo-for-zero-click-serps">AI Driven Predictive SEO for Zero Click Serps</a></h2>
             <div class="post-meta">
                 <span class="post-tags"><a href="/blog?tag=predictive-seo">predictive-seo</a>, <a href="/blog?tag=zero-click">zero-click</a></span>
@@ -444,7 +494,8 @@ html{
             <p class="post-excerpt">Zero-click searches are killing organic traffic. Discover how AI-driven predictive SEO can help you stay ahead of the curve and capture visibility even when users never click through to your site.</p>
             <p style="margin-top: 0.6rem;"><a href="/blog/ai-driven-predictive-seo-for-zero-click-serps" class="read-more">Read the article →</a></p>
         </article>
-        <article class="post-card">
+        <article class="post-card" data-category="ai-visibility-seo">
+            <span class="category-badge" data-cat="ai-visibility-seo">AI Visibility & SEO</span>
             <h2><a href="/blog/ai-visibility-auditing-for-local-businesses">AI Visibility Auditing for Local Businesses</a></h2>
             <div class="post-meta">
                 <span class="post-tags"><a href="/blog?tag=ai-visibility">ai-visibility</a>, <a href="/blog?tag=local-business">local-business</a>, <a href="/blog?tag=audit">audit</a></span>
@@ -455,7 +506,8 @@ html{
             <p class="post-excerpt">Is ChatGPT recommending your competitors instead of you? Discover how AI visibility auditing reveals gaps in your digital presence and what to fix before you lose more customers to AI answers.</p>
             <p style="margin-top: 0.6rem;"><a href="/blog/ai-visibility-auditing-for-local-businesses" class="read-more">Read the article →</a></p>
         </article>
-        <article class="post-card">
+        <article class="post-card" data-category="ai-visibility-seo">
+            <span class="category-badge" data-cat="ai-visibility-seo">AI Visibility & SEO</span>
             <h2><a href="/blog/ai-visibility-audits-for-enterprise-knowledge-graphs">AI Visibility Audits for Enterprise Knowledge Graphs</a></h2>
             <div class="post-meta">
                 <span class="post-tags"><a href="/blog?tag=enterprise">enterprise</a>, <a href="/blog?tag=knowledge-graphs">knowledge-graphs</a>, <a href="/blog?tag=ai-visibility">ai-visibility</a></span>
@@ -466,7 +518,8 @@ html{
             <p class="post-excerpt">Enterprise knowledge graphs are invisible to AI search. Learn how RankFixer's open-source engine evaluates structured data, entity density, and citation signals to improve your AI visibility.</p>
             <p style="margin-top: 0.6rem;"><a href="/blog/ai-visibility-audits-for-enterprise-knowledge-graphs" class="read-more">Read the article →</a></p>
         </article>
-        <article class="post-card">
+        <article class="post-card" data-category="ai-visibility-seo">
+            <span class="category-badge" data-cat="ai-visibility-seo">AI Visibility & SEO</span>
             <h2><a href="/blog/geo-for-developers-freelancers-business-owners-the-2025-playbook">GEO for Developers Freelancers Business Owners the 2025 Playbook</a></h2>
             <div class="post-meta">
                 <span class="post-tags"><a href="/blog?tag=geo">geo</a>, <a href="/blog?tag=developers">developers</a>, <a href="/blog?tag=freelancers">freelancers</a>, <a href="/blog?tag=playbook">playbook</a></span>
@@ -477,7 +530,8 @@ html{
             <p class="post-excerpt">Master Generative Engine Optimization with this 2025 playbook for developers, freelancers, and business owners. Learn the exact strategies to get cited by AI engines in your niche.</p>
             <p style="margin-top: 0.6rem;"><a href="/blog/geo-for-developers-freelancers-business-owners-the-2025-playbook" class="read-more">Read the article →</a></p>
         </article>
-        <article class="post-card">
+        <article class="post-card" data-category="ai-visibility-seo">
+            <span class="category-badge" data-cat="ai-visibility-seo">AI Visibility & SEO</span>
             <h2><a href="/blog/geo-llm-visibility-the-developer-s-freelancer-s-and-ceo-s-playbook-for-ai-search">GEO LLM Visibility the Developer's Freelancer's and Ceo's Playbook for AI Search</a></h2>
             <div class="post-meta">
                 <span class="post-tags"><a href="/blog?tag=geo">geo</a>, <a href="/blog?tag=llm-visibility">llm-visibility</a>, <a href="/blog?tag=playbook">playbook</a></span>
@@ -488,7 +542,8 @@ html{
             <p class="post-excerpt">Master Generative Engine Optimization to win LLM citations. This playbook covers the exact strategies developers, freelancers, and CEOs need to get cited by AI search engines.</p>
             <p style="margin-top: 0.6rem;"><a href="/blog/geo-llm-visibility-the-developer-s-freelancer-s-and-ceo-s-playbook-for-ai-search" class="read-more">Read the article →</a></p>
         </article>
-        <article class="post-card">
+        <article class="post-card" data-category="ai-visibility-seo">
+            <span class="category-badge" data-cat="ai-visibility-seo">AI Visibility & SEO</span>
             <h2><a href="/blog/geo-vs-seo-the-definitive-guide-to-winning-generative-engine-rankings">GEO Vs SEO the Definitive Guide to Winning Generative Engine Rankings</a></h2>
             <div class="post-meta">
                 <span class="post-tags"><a href="/blog?tag=geo">geo</a>, <a href="/blog?tag=seo">seo</a>, <a href="/blog?tag=generative-engine">generative-engine</a></span>
@@ -499,7 +554,8 @@ html{
             <p class="post-excerpt">Learn how Generative Engine Optimization differs from traditional SEO, and why optimizing for AI citations requires a fundamentally different approach to content and structured data.</p>
             <p style="margin-top: 0.6rem;"><a href="/blog/geo-vs-seo-the-definitive-guide-to-winning-generative-engine-rankings" class="read-more">Read the article →</a></p>
         </article>
-        <article class="post-card">
+        <article class="post-card" data-category="ai-visibility-seo">
+            <span class="category-badge" data-cat="ai-visibility-seo">AI Visibility & SEO</span>
             <h2><a href="/blog/how-to-rank-for-ai-overviews-a-blogger-s-guide-to-ai-visibility">How to Rank for AI Overviews a Blogger's Guide to AI Visibility</a></h2>
             <div class="post-meta">
                 <span class="post-tags"><a href="/blog?tag=ai-overviews">ai-overviews</a>, <a href="/blog?tag=blogger">blogger</a>, <a href="/blog?tag=ai-visibility">ai-visibility</a></span>
@@ -510,7 +566,8 @@ html{
             <p class="post-excerpt">You've done everything right — written a 2,000-word masterpiece, optimized your title tags — but AI engines still don't cite you. Here's why, and exactly how to fix it.</p>
             <p style="margin-top: 0.6rem;"><a href="/blog/how-to-rank-for-ai-overviews-a-blogger-s-guide-to-ai-visibility" class="read-more">Read the article →</a></p>
         </article>
-        <article class="post-card">
+        <article class="post-card" data-category="ai-visibility-seo">
+            <span class="category-badge" data-cat="ai-visibility-seo">AI Visibility & SEO</span>
             <h2><a href="/blog/how-to-rank-for-ai-overviews-a-blogger-s-guide-to-geo-success">How to Rank for AI Overviews a Blogger's Guide to GEO Success</a></h2>
             <div class="post-meta">
                 <span class="post-tags"><a href="/blog?tag=ai-overviews">ai-overviews</a>, <a href="/blog?tag=blogger">blogger</a>, <a href="/blog?tag=geo">geo</a></span>
@@ -521,7 +578,8 @@ html{
             <p class="post-excerpt">You've written the definitive guide, but AI engines cite your competitors instead. Learn the GEO strategies that get bloggers cited in AI Overviews and answer engines.</p>
             <p style="margin-top: 0.6rem;"><a href="/blog/how-to-rank-for-ai-overviews-a-blogger-s-guide-to-geo-success" class="read-more">Read the article →</a></p>
         </article>
-        <article class="post-card">
+        <article class="post-card" data-category="ai-visibility-seo">
+            <span class="category-badge" data-cat="ai-visibility-seo">AI Visibility & SEO</span>
             <h2><a href="/blog/how-to-rank-in-ai-overviews-the-2025-aeo-playbook-for-bloggers">How to Rank in AI Overviews the 2025 Aeo Playbook for Bloggers</a></h2>
             <div class="post-meta">
                 <span class="post-tags"><a href="/blog?tag=aeo">aeo</a>, <a href="/blog?tag=blogger">blogger</a>, <a href="/blog?tag=playbook">playbook</a></span>
@@ -532,7 +590,8 @@ html{
             <p class="post-excerpt">The clicks are down, the sessions are dropping. AI Overviews are eating your traffic. This 2025 AEO playbook shows bloggers exactly how to adapt and win citations from AI engines.</p>
             <p style="margin-top: 0.6rem;"><a href="/blog/how-to-rank-in-ai-overviews-the-2025-aeo-playbook-for-bloggers" class="read-more">Read the article →</a></p>
         </article>
-        <article class="post-card">
+        <article class="post-card" data-category="ai-visibility-seo">
+            <span class="category-badge" data-cat="ai-visibility-seo">AI Visibility & SEO</span>
             <h2><a href="/blog/how-to-rank-in-ai-overviews-the-2025-geo-playbook-for-bloggers">How to Rank in AI Overviews the 2025 GEO Playbook for Bloggers</a></h2>
             <div class="post-meta">
                 <span class="post-tags"><a href="/blog?tag=geo">geo</a>, <a href="/blog?tag=blogger">blogger</a>, <a href="/blog?tag=playbook">playbook</a></span>
@@ -543,7 +602,8 @@ html{
             <p class="post-excerpt">A terrifying trend for bloggers: AI engines now answer questions without clicking. Learn the GEO playbook for 2025 — the exact strategies to get cited in AI Overviews.</p>
             <p style="margin-top: 0.6rem;"><a href="/blog/how-to-rank-in-ai-overviews-the-2025-geo-playbook-for-bloggers" class="read-more">Read the article →</a></p>
         </article>
-        <article class="post-card">
+        <article class="post-card" data-category="ai-visibility-seo">
+            <span class="category-badge" data-cat="ai-visibility-seo">AI Visibility & SEO</span>
             <h2><a href="/blog/how-to-rank-in-ai-overviews-the-2025-geo-playbook-for-marketers">How to Rank in AI Overviews the 2025 GEO Playbook for Marketers</a></h2>
             <div class="post-meta">
                 <span class="post-tags"><a href="/blog?tag=geo">geo</a>, <a href="/blog?tag=marketer">marketer</a>, <a href="/blog?tag=playbook">playbook</a></span>
@@ -554,7 +614,8 @@ html{
             <p class="post-excerpt">Your blog post ranks #1 but AI engines ignore it. Master the 2025 GEO playbook for marketers — learn to optimize for generative engine citations, not just Google rankings.</p>
             <p style="margin-top: 0.6rem;"><a href="/blog/how-to-rank-in-ai-overviews-the-2025-geo-playbook-for-marketers" class="read-more">Read the article →</a></p>
         </article>
-        <article class="post-card">
+        <article class="post-card" data-category="ai-visibility-seo">
+            <span class="category-badge" data-cat="ai-visibility-seo">AI Visibility & SEO</span>
             <h2><a href="/blog/why-is-my-blog-not-ranking-on-google-7-ai-era-fixes-that-actually-work">Why Is My Blog Not Ranking on Google 7 AI Era Fixes That Actually Work</a></h2>
             <div class="post-meta">
                 <span class="post-tags"><a href="/blog?tag=seo">seo</a>, <a href="/blog?tag=ai-era">ai-era</a>, <a href="/blog?tag=troubleshooting">troubleshooting</a></span>
@@ -565,7 +626,8 @@ html{
             <p class="post-excerpt">Struggling with vanishing rankings? Discover why your blog isn't ranking in 2025 and the 7 AI-era fixes that actually work — from schema markup to entity optimization.</p>
             <p style="margin-top: 0.6rem;"><a href="/blog/why-is-my-blog-not-ranking-on-google-7-ai-era-fixes-that-actually-work" class="read-more">Read the article →</a></p>
         </article>
-        <article class="post-card">
+        <article class="post-card" data-category="ai-visibility-seo">
+            <span class="category-badge" data-cat="ai-visibility-seo">AI Visibility & SEO</span>
             <h2><a href="/blog/why-is-my-blog-not-ranking-on-google-and-how-to-fix-it-in-2025">Why Is My Blog Not Ranking on Google and How to Fix It in 2025</a></h2>
             <div class="post-meta">
                 <span class="post-tags"><a href="/blog?tag=seo">seo</a>, <a href="/blog?tag=troubleshooting">troubleshooting</a>, <a href="/blog?tag=google">google</a></span>
@@ -576,7 +638,8 @@ html{
             <p class="post-excerpt">It's 3 AM. You've just hit publish on what you believe is your best blog post yet. But weeks later, it's still not ranking. Here's why, and exactly how to fix it.</p>
             <p style="margin-top: 0.6rem;"><a href="/blog/why-is-my-blog-not-ranking-on-google-and-how-to-fix-it-in-2025" class="read-more">Read the article →</a></p>
         </article>
-        <section class="post-card">
+        <section class="post-card" data-category="research">
+            <span class="category-badge" data-cat="research">Research & Experiments</span>
             <h2><a href="/blog/ai-readiness-100-saas">We Analyzed the AI Readiness of 100 Top SaaS Websites (Data + Open Source Code)</a></h2>
             <p class="post-excerpt">We scored 90 top SaaS domains with RankFixer's open-source engine. Average score: 62.7/100. Here's the full dataset, methodology, and code.</p>
             <p style="margin-top: 0.75rem;"><a href="/blog/ai-readiness-100-saas" class="read-more">Read the full analysis →</a></p>
@@ -652,6 +715,80 @@ html{
   }
   window.addEventListener('scroll',onScroll,{passive:true});
   updateScrolled();
+})();
+
+// Category filter
+(function(){
+  'use strict';
+  var buttons = document.querySelectorAll('.filter-btn');
+  var cards = document.querySelectorAll('.post-card[data-category]');
+  if(!buttons.length || !cards.length){ return; }
+
+  var isInitial = true;
+
+  function applyFilter(filter){
+    cards.forEach(function(card){
+      if(filter === 'all' || card.dataset.category === filter){
+        card.style.display = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+    buttons.forEach(function(btn){
+      btn.classList.toggle('active', btn.dataset.filter === filter);
+    });
+    var select = document.getElementById('categorySelect');
+    if(select){ select.value = filter; }
+  }
+
+  buttons.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var filter = btn.dataset.filter;
+      applyFilter(filter);
+      if(filter === 'all'){
+        history.replaceState(null, '', '/blog/');
+      } else {
+        history.replaceState(null, '', '/blog/#' + filter);
+      }
+    });
+  });
+
+  var select = document.getElementById('categorySelect');
+  if(select){
+    select.addEventListener('change', function(){
+      var filter = select.value;
+      applyFilter(filter);
+      if(filter === 'all'){
+        history.replaceState(null, '', '/blog/');
+      } else {
+        history.replaceState(null, '', '/blog/#' + filter);
+      }
+    });
+  }
+
+  // Responsive: show select on small screens, buttons on large
+  function updateLayout(){
+    var isMobile = window.innerWidth <= 600;
+    var filters = document.querySelector('.category-filters');
+    if(filters){
+      filters.style.display = isMobile ? 'none' : 'flex';
+    }
+    if(select){
+      select.style.display = isMobile ? 'block' : 'none';
+    }
+  }
+  window.addEventListener('resize', updateLayout);
+  updateLayout();
+
+  // On load: check hash
+  var hash = location.hash.replace('#', '');
+  var validFilters = ['technology','ai-automation','ai-visibility-seo','research','guides'];
+  if(hash && validFilters.indexOf(hash) !== -1){
+    applyFilter(hash);
+  } else {
+    applyFilter('all');
+  }
+  isInitial = false;
 })();
 </script>
     <script src="/js/gtag-events.js" defer></script>
