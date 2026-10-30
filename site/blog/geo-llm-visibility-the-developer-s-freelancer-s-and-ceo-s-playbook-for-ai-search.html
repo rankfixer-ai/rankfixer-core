@@ -177,6 +177,14 @@ html{
     width:100%;
     max-height:0;
     overflow:hidden;
+  /* Dropdown item icon */
+  .nav-links.open a::after {
+    content: '›';
+    margin-left: auto;
+    opacity: 0.4;
+    font-size: 1.2rem;
+    line-height: 1;
+  }
     padding:0;
     opacity:0;
     transform:translateY(-8px);
@@ -237,10 +245,9 @@ html{
     <a href="/" class="nav-logo">Rankfixer</a><button type="button" class="nav-toggle" aria-label="Menu" aria-expanded="false"><span class="nav-toggle-bar" aria-hidden="true"></span><span class="nav-toggle-bar" aria-hidden="true"></span><span class="nav-toggle-bar" aria-hidden="true"></span></button>
     <div class="nav-links">
   <a href="/tools/">Tools</a>
-  <a href="/blog/" aria-current="page">Blog</a>
-  <a href="/skills/">Skills</a>
-  <a href="/portfolio/">Portfolio</a>
   <a href="/research/">Research</a>
+  <a href="/technology/">Technology</a>
+  <a href="/blog/" aria-current="page">Blog</a>
   <a href="/about/">About</a>
   <a href="https://github.com/rankfixer-ai/rankfixer-core" target="_blank" rel="noopener">GitHub</a>
 </div></nav>

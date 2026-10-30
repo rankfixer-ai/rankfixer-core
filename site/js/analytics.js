@@ -249,17 +249,22 @@
      * BOOTSTRAP
      * ================================================================== */
 
-    // Inject Umami script (non-blocking)
-    var script = document.createElement('script');
-    script.defer = true;
-    script.src  = UMAMI_URL;
-    script.setAttribute('data-website-id', UMAMI_ID);
-    script.setAttribute('data-do-not-track', 'true');
-    script.onload = function () {
+    // Inject Umami script (non-blocking) — only on production hosts
+    if (window.location.hostname === 'rankfixer.co' || window.location.hostname === 'www.rankfixer.co') {
+        var script = document.createElement('script');
+        script.defer = true;
+        script.src  = UMAMI_URL;
+        script.setAttribute('data-website-id', UMAMI_ID);
+        script.setAttribute('data-do-not-track', 'true');
+        script.onload = function () {
+            _ready = true;
+            _flush();
+        };
+        document.head.appendChild(script);
+    } else {
+        // Non-production host: mark ready so queued events are dropped silently
         _ready = true;
-        _flush();
-    };
-    document.head.appendChild(script);
+    }
 
     // Fallback: flush every 2s in case onload never fires
     var _poll = setInterval(function () {

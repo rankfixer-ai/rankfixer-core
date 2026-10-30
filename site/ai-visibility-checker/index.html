@@ -12,12 +12,17 @@
     <meta property="og:type" content="website">
 
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YXZVCPBCZN"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-YXZVCPBCZN');
+      if (window.location.hostname === 'rankfixer.co' || window.location.hostname === 'www.rankfixer.co') {
+        var _gaScript = document.createElement('script');
+        _gaScript.async = true;
+        _gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-YXZVCPBCZN';
+        document.head.appendChild(_gaScript);
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-YXZVCPBCZN');
+      }
     </script>
 
     <script type="application/ld+json">
@@ -324,6 +329,14 @@ html{
     width:100%;
     max-height:0;
     overflow:hidden;
+  /* Dropdown item icon */
+  .nav-links.open a::after {
+    content: '›';
+    margin-left: auto;
+    opacity: 0.4;
+    font-size: 1.2rem;
+    line-height: 1;
+  }
     padding:0;
     opacity:0;
     transform:translateY(-8px);
@@ -373,6 +386,7 @@ html{
   }
 }
 </style>
+<link rel="canonical" href="https://rankfixer.co/ai-visibility-checker/" />
 </head>
 <body>
 
@@ -380,10 +394,9 @@ html{
         <a href="/" class="nav-logo">Rankfixer</a><button type="button" class="nav-toggle" aria-label="Menu" aria-expanded="false"><span class="nav-toggle-bar" aria-hidden="true"></span><span class="nav-toggle-bar" aria-hidden="true"></span><span class="nav-toggle-bar" aria-hidden="true"></span></button>
         <div class="nav-links">
   <a href="/tools/" aria-current="page">Tools</a>
-  <a href="/blog/">Blog</a>
-  <a href="/skills/">Skills</a>
-  <a href="/portfolio/">Portfolio</a>
   <a href="/research/">Research</a>
+  <a href="/technology/">Technology</a>
+  <a href="/blog/">Blog</a>
   <a href="/about/">About</a>
   <a href="https://github.com/rankfixer-ai/rankfixer-core" target="_blank" rel="noopener">GitHub</a>
 </div></nav>
