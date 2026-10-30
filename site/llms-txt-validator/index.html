@@ -27,7 +27,7 @@
   "applicationCategory": "DeveloperApplication",
   "operatingSystem": "Any",
   "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
-  "url": "https://rankfixer.co/llms-txt-validator"
+  "url": "https://rankfixer.co/llms-txt-validator/"
 }
 </script>
 
@@ -372,6 +372,76 @@ html{
 ## More
 - [Blog](https://example.com/blog): Product updates</pre>
       </div>
+    </div>
+
+
+    <div class="info-card">
+      <h2>What Does an llms.txt Validator Check?</h2>
+      <p>An llms.txt validator checks whether a domain publishes an <code>/llms.txt</code> file and whether the file is well-formed. This validator performs four checks:</p>
+      <ul class="checks-list" style="display:block;margin-top:0.5rem;">
+        <li><span class="ck pass">&#10003;</span> <strong>Has a title.</strong> The file contains a Markdown heading (H1&ndash;H3) naming the project or site. The llms.txt proposal requires an H1 with the project name.</li>
+        <li><span class="ck pass">&#10003;</span> <strong>Contains markdown links.</strong> The file includes at least one Markdown hyperlink, so agents can follow it to deeper content.</li>
+        <li><span class="ck pass">&#10003;</span> <strong>Served as plain text.</strong> The file is returned as <code>text/plain</code> (or plain text), not HTML, so it can be read directly without parsing.</li>
+        <li><span class="ck pass">&#10003;</span> <strong>Reasonable file size.</strong> The file is below a size threshold. The proposal recommends keeping the file concise.</li>
+      </ul>
+      <p style="margin-top:0.8rem;">The validator also reports the HTTP status code, content type, and file size so you can see exactly what the server returns.</p>
+    </div>
+
+    <div class="info-card">
+      <h2>Common llms.txt Errors</h2>
+      <ul class="checks-list" style="display:block;">
+        <li><span class="ck fail">&#10007;</span> <strong>Missing file.</strong> No <code>/llms.txt</code> is served at the domain root (HTTP 404).</li>
+        <li><span class="ck fail">&#10007;</span> <strong>Wrong location.</strong> The file is served at a subpath or under a different filename instead of <code>/llms.txt</code> at the root.</li>
+        <li><span class="ck fail">&#10007;</span> <strong>Missing heading.</strong> The file has no Markdown heading (H1&ndash;H3) naming the project or site.</li>
+        <li><span class="ck fail">&#10007;</span> <strong>No Markdown links.</strong> The file contains no Markdown hyperlinks for agents to follow. The validator detects the absence of links; it does not check whether linked destinations are reachable.</li>
+        <li><span class="ck fail">&#10007;</span> <strong>Not served as plain text.</strong> The server returns HTML or another content type instead of plain text, so the file cannot be read directly.</li>
+        <li><span class="ck fail">&#10007;</span> <strong>Oversized file.</strong> The file exceeds a reasonable size for an LLM context window.</li>
+      </ul>
+      <p style="margin-top:0.8rem;color:var(--text-muted);font-size:0.9rem;">Note: the validator does not parse or validate Markdown syntax, and it does not check the semantic completeness of the file. Formatting issues are reported as possible problems, not as detected errors.</p>
+    </div>
+
+    <div class="info-card">
+      <h2>How to Create and Fix Your llms.txt File</h2>
+      <p>Create a plain-text file named <code>llms.txt</code> and place it at your domain root so it is available at <code>https://yourdomain/llms.txt</code>. A minimal example following the proposal:</p>
+      <div class="preview" style="margin-top:0.8rem;">
+        <div class="preview-label">Minimal example</div>
+        <pre># Your Project Name
+
+&gt; A short summary of what your project does and who it is for.
+
+## Docs
+
+- [Getting Started](https://yourdomain/docs/start): Quick setup guide
+- [API Reference](https://yourdomain/docs/api): Full endpoint docs
+
+## Optional
+
+- [Blog](https://yourdomain/blog): Product updates</pre>
+      </div>
+      <p style="margin-top:0.8rem;">Steps to fix common issues:</p>
+      <ol style="color:var(--text-muted);font-size:0.95rem;margin:0.5rem 0 0 1.2rem;line-height:1.7;">
+        <li>If the file is missing, create it at the root and redeploy.</li>
+        <li>If the file lacks an H1, add a top-level heading with your project name.</li>
+        <li>If links are broken, update or remove them.</li>
+        <li>If the file is too large, move detail into linked pages and keep the file as an index.</li>
+        <li>Re-run this validator after each change to confirm the checks pass.</li>
+      </ol>
+    </div>
+
+    <div class="info-card">
+      <h2>Frequently Asked Questions</h2>
+      <p><strong>What is llms.txt used for?</strong><br>
+      llms.txt is a proposed file format that gives AI assistants and crawlers a concise, curated overview of a website. It lists key pages and resources so agents can find relevant information without parsing full HTML pages.</p>
+      <p><strong>Is llms.txt an official standard?</strong><br>
+      No. llms.txt is a proposal by Jeremy Howard (llmstxt.org), currently at version 2. It is not an RFC or W3C standard, though adoption is growing among documentation platforms and CMSs.</p>
+      <p><strong>Does llms.txt improve AI search visibility?</strong><br>
+      Publishing an llms.txt file makes your content easier for AI agents to discover and cite, but it does not guarantee higher rankings or citations. It is one signal among many.</p>
+      <p><strong>Where should llms.txt be located?</strong><br>
+      At the domain root, served as plain text at <code>https://yourdomain/llms.txt</code>.</p>
+      <p><strong>Is llms.txt the same as robots.txt?</strong><br>
+      No. robots.txt tells crawlers what they may access. llms.txt tells AI agents what content is available and where to find it. They serve different purposes and can coexist.</p>
+      <p><strong>How do I validate my llms.txt file?</strong><br>
+      Use the validator above. Enter your domain and it will fetch <code>/llms.txt</code>, check for a title, markdown links, plain-text serving, and reasonable file size, and show a content preview.</p>
     </div>
 
     <div class="upgrade-box">
